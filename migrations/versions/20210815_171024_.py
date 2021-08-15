@@ -1,7 +1,7 @@
 """empty message
 
 Revision ID: c25075e4a95f
-Revises: 
+Revises:
 Create Date: 2021-08-15 17:10:24.306770
 
 """
@@ -25,7 +25,7 @@ def upgrade():
     sa.Column('hashedPassword', sa.String(length=255), nullable=False),
     sa.Column('profilePhotoUrl', sa.String(length=500), nullable=False),
     sa.Column('createdAt', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
-    sa.Column('updatedAt', sa.DateTime(timezone=True), nullable=False),
+    sa.Column('updatedAt', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
