@@ -16,7 +16,7 @@ class User(db.Model, UserMixin):
     createdAt = db.Column(db.DateTime(timezone=True),
                           nullable=False, server_default=func.now())
     updatedAt = db.Column(db.DateTime(timezone=True),
-                          nullable=False, onupdate=func.now())
+                          nullable=False, server_default=func.now(), onupdate=func.now())
 
     @property
     def password(self):
