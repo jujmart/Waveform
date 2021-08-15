@@ -1,8 +1,9 @@
 from .db import db
 from sqlalchemy.sql import func
+from .genre import song_genres, Base
 
 
-class Song(db.Model):
+class Song(Base):
     __tablename__ = 'songs'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -19,6 +20,8 @@ class Song(db.Model):
                           nullable=False, server_default=func.now(), onupdate=func.now())
 
     user = db.relationship("User", back_populates="songs")
+    genres = db.relationship("Genre", secondary=song_genres, back_populates="songs")
+
 
     def to_dict(self):
         return {
