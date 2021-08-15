@@ -18,6 +18,8 @@ class Song(db.Model):
     updatedAt = db.Column(db.DateTime(timezone=True),
                           nullable=False, server_default=func.now(), onupdate=func.now())
 
+    user = db.relationship("User", back_populates="songs")
+
     def to_dict(self):
         return {
             'id': self.id,
