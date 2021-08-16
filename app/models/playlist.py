@@ -2,7 +2,7 @@ from .db import db
 from sqlalchemy.sql import func
 
 
-class Playlist(db.Model, Base):
+class Playlist(db.Model):
     __tablename__ = 'playlists'
 
     id = db.Column(db.Integer, primary_key=True)

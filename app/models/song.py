@@ -1,9 +1,9 @@
 from .db import db
 from sqlalchemy.sql import func
-from .genre import song_genres, Base
+from .genre import song_genres
 
 
-class Song(Base):
+class Song(db.Model):
     __tablename__ = 'songs'
 
     id = db.Column(db.Integer, primary_key=True)

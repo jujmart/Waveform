@@ -1,15 +1,14 @@
-from sqlalchemy.ext.declarative import declarative_base
 from .db import db
 from sqlalchemy.sql import func
 
-Base = declarative_base()
 
-song_genres = db.Table('song-genres', Base.metadata,
+
+song_genres = db.Table('song-genres',
     db.Column('genreId', db.ForeignKey('genres.id'), primary_key=True),
     db.Column('songId', db.ForeignKey('songs.id'), primary_key=True)
 )
 
-class Genre(Base):
+class Genre(db.Model):
     __tablename__ = 'genres'
 
     id = db.Column(db.Integer, primary_key=True)
