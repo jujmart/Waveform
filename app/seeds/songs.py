@@ -1,9 +1,9 @@
 from app.models import db, Song
 
+demo = Song(
+    userId=1 , songUrl='url goes here', artist='Artist', album='album', title='coolest title')
 
 def seed_songs():
-    demo = Song(
-        userId=1 , songUrl='url goes here', artist='Artist', album='album', title='coolest title')
 
 
     db.session.add(demo)

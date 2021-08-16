@@ -1,19 +1,15 @@
-from alembic import op
 from app.models import db, Playlist
-from app.models.playlist import playlist_songs
+from .songs import demo as song_demo1
+
 
 def seed_playlists():
     demo = Playlist(
         userId=1 , title='title goes here', description='Description')
 
-
     db.session.add(demo)
-
+    demo.songs.append(song_demo1)
     db.session.commit()
-    # op.bulk_insert(playlist_songs,
-    #                [
-    #                    {'playlistId':1, 'songId':1}
-    #                ])
+
 
 
 

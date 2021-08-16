@@ -1,4 +1,5 @@
 from app.models import db, Genre
+from .songs import demo as song_demo1
 
 
 def seed_genres():
@@ -9,8 +10,12 @@ def seed_genres():
         'R & B', 'Chill', 'Focus'
     ]
 
-    for genre in genre_list:
-        db.session.add(Genre(genreName=genre))
+    genre_dict = {key: Genre(genreName=key) for key in genre_list}
+
+    for genre in genre_dict.values():
+        db.session.add(genre)
+
+    genre_dict['Electronic'].songs.append(song_demo1)
 
     db.session.commit()
 

@@ -7,7 +7,7 @@ Create Date: 2021-08-16 12:45:21.363938
 """
 from alembic import op
 import sqlalchemy as sa
-
+from app.models.playlist import playlist_songs
 
 # revision identifiers, used by Alembic.
 revision = '68fce3098184'
@@ -26,6 +26,7 @@ def upgrade():
     sa.PrimaryKeyConstraint('playlistId', 'songId')
     )
     # ### end Alembic commands ###
+
 
 
 def downgrade():
