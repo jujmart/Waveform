@@ -1,0 +1,12 @@
+Ask about inherit from Base
+    each table needed own instance of Base
+
+do tables need to be in the same file(refrencing)
+    aparently not using import
+
+
+why both are primary keys in join table
+    forces a unique constraint, keeps user1 from being able to follow user1
+
+does " from file import * "   the same as seed_genre and undo_genre
+    yes not encouraged cause bad

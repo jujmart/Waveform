@@ -1,0 +1,3 @@
+add default image to s3 bucket/aws stuff
+change home rout for unloggedin users
+fix signup form to include image
