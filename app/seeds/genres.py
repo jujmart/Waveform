@@ -2,11 +2,15 @@ from app.models import db, Genre
 
 
 def seed_genres():
-    demo = Genre(
-        genreName='Rock')
+    genre_list = [
+        'Rock', 'Rap', 'Hip-Hop',
+        'Electronic', 'Metal',
+        'Americana', 'Alternative Rock',
+        'R & B', 'Chill', 'Focus'
+    ]
 
-
-    db.session.add(demo)
+    for genre in genre_list:
+        db.session.add(Genre(genreName=genre))
 
     db.session.commit()
 

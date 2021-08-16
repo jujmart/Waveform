@@ -1,7 +1,7 @@
 from flask.cli import AppGroup
 from .users import seed_users, undo_users
 from .songs import seed_songs, undo_songs
-from .genres import *
+from .genres import seed_genres, undo_genres
 from .playlists import seed_playlists, undo_playlists
 
 

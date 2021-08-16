@@ -3,3 +3,5 @@ do tabels need to be in the same file(refrencing)
 ERROR [flask_migrate] Error: Target database is not up to date.(when downgrade then migrate)
 how sqlAlchemy creates join tables for many to many reationships
 why both are primary keys in join table
+
+does "from file import *"   the same as seed_genre and undo_genre
