@@ -2,6 +2,11 @@ from .db import db
 from sqlalchemy.sql import func
 
 
+playlist_songs = db.Table('playlist-songs',
+    db.Column('playlistId', db.ForeignKey('playlists.id'), primary_key=True),
+    db.Column('songId', db.ForeignKey('songs.id'), primary_key=True)
+)
+
 class Playlist(db.Model):
     __tablename__ = 'playlists'
 
@@ -15,7 +20,7 @@ class Playlist(db.Model):
                           nullable=False, server_default=func.now(), onupdate=func.now())
 
     user = db.relationship("User", back_populates="playlists")
-    # genres = db.relationship("Genre", secondary=song_genres, back_populates="songs")
+    songs = db.relationship("Song", secondary=playlist_songs, back_populates="playlists")
 
 
     def to_dict(self):

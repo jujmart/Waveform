@@ -12,13 +12,15 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(256), nullable=False, unique=True)
     hashedPassword = db.Column(db.String(255), nullable=False)
     profilePhotoUrl = db.Column(db.String(
-        500), nullable=False, default="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png")  # will add this photo to AWS and update this url to the created AWS url
+        500), nullable=False, default="https://spot-a-cloud.s3.us-east-2.amazonaws.com/AWS-Bucket/Profile-Photos/Seeder1-BlankPhoto.png")
     createdAt = db.Column(db.DateTime(timezone=True),
                           nullable=False, server_default=func.now())
     updatedAt = db.Column(db.DateTime(timezone=True),
                           nullable=False, server_default=func.now(), onupdate=func.now())
 
     songs = db.relationship("Song", back_populates="user")
+    playlists = db.relationship("Playlist", back_populates="user")
+
 
     @property
     def password(self):

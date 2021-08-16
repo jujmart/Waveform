@@ -1,5 +1,6 @@
+from alembic import op
 from app.models import db, Playlist
-
+from app.models.playlist import playlist_songs
 
 def seed_playlists():
     demo = Playlist(
@@ -9,6 +10,11 @@ def seed_playlists():
     db.session.add(demo)
 
     db.session.commit()
+    # op.bulk_insert(playlist_songs,
+    #                [
+    #                    {'playlistId':1, 'songId':1}
+    #                ])
+
 
 
 # Uses a raw SQL query to TRUNCATE the users table.
