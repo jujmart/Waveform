@@ -1,5 +1,5 @@
 from app.models import db, Genre
-from .songs import demo as song_demo1
+from .songs import make_way
 
 
 def seed_genres():
@@ -15,7 +15,7 @@ def seed_genres():
     for genre in genre_dict.values():
         db.session.add(genre)
 
-    genre_dict['Electronic'].songs.append(song_demo1)
+    genre_dict['Rap'].songs.append(make_way)
 
     db.session.commit()
 

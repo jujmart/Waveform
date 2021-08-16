@@ -1,12 +1,12 @@
 from app.models import db, Song
 
-demo = Song(
-    userId=1 , songUrl='url goes here', artist='Artist', album='album', title='coolest title')
+make_way = Song(
+    userId=1, songUrl='https://spot-a-cloud.s3.us-east-2.amazonaws.com/AWS-Bucket/Songs/Make+Way+For+The+King.mp3', artist='Ohana Bam', title='Make Way for the King')
+
 
 def seed_songs():
 
-
-    db.session.add(demo)
+    db.session.add(make_way)
 
     db.session.commit()
 
