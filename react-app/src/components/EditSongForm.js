@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 import { getAllGenresThunk } from "../store/genre";
 import { uploadSongThunk } from "../store/songs";
 
-const SongForm = () => {
+const EditSongForm = () => {
 	const [errors, setErrors] = useState([]);
 	const [songUrl, setSongUrl] = useState("");
 	const [title, setTitle] = useState("");
@@ -15,9 +15,14 @@ const SongForm = () => {
 	const user = useSelector((state) => state.session.user);
 	const genresList = useSelector((state) => state.genres);
 	const dispatch = useDispatch();
+	const { id } = useParams();
 
 	useEffect(() => {
 		dispatch(getAllGenresThunk());
+	}, [dispatch]);
+
+	useEffect(() => {
+		// dispatch(getAllSongsThunk())
 	}, [dispatch]);
 
 	const handleOptionClick = (e) => {
@@ -129,4 +134,4 @@ const SongForm = () => {
 	);
 };
 
-export default SongForm;
+export default EditSongForm;

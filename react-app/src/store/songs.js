@@ -1,35 +1,54 @@
+import { bindActionCreators } from "redux";
+
 // constants
-// const GET_ALL_GENRES = "genres/GET_ALL_GENRES";
+const GET_ALL_SONGS = "songs/GET_ALL_SONGS";
 
-// const getAllGenres = (genres) => ({
-//   type: GET_ALL_GENRES,
-//   payload: genres,
-// });
+const getAllSongs = (songs) => ({
+	type: GET_ALL_SONGS,
+	payload: songs,
+});
 
-export const uploadSongThunk = (payload) => async (dispatch) => {
-  const response = await fetch("/api/songs/", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
-  });
+export const getAllSongsThunk = (payload) => async (dispatch) => {
+	const response = await fetch("/api/songs/");
 
-  if (response.ok) {
-    const data = await response.json();
-    if (data.errors) {
-      return;
-    }
-  }
+	if (response.ok) {
+		const { songs } = await response.json();
+		if (songs.errors) {
+			return;
+		}
+		dispatch(getAllSongs(songs));
+	}
 };
 
-// const initialState = [];
+export const uploadSongThunk = (payload) => async (dispatch) => {
+	const response = await fetch("/api/songs/", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(payload),
+	});
 
-// export default function genresReducer(state = initialState, action) {
-//   switch (action.type) {
-//     case GET_ALL_GENRES:
-//       return action.payload;
-//     default:
-//       return state;
-//   }
-// }
+	if (response.ok) {
+		const data = await response.json();
+		if (data.errors) {
+			return;
+		}
+	}
+};
+
+const initialState = {};
+
+export default function songsReducer(state = initialState, action) {
+	Object.freeze(state);
+	switch (action.type) {
+		case GET_ALL_SONGS:
+			const newState = {};
+			action.payload.forEach((song) => {
+				newState[song.id] = song;
+			});
+			return newState;
+		default:
+			return state;
+	}
+}

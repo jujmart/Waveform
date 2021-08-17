@@ -5,15 +5,6 @@ from wtforms import StringField, SelectMultipleField, FieldList, IntegerField, F
 from wtforms.validators import DataRequired, Length, ValidationError
 
 
-# def check_genre(form, field):
-#     print("===============================")
-#     print("form", form)
-#     print("field", field)
-#     db_genres = Genre.query.all()
-#     genre_choices = [genre.id for genre in db_genres]
-#     if field.data not in genre_choices:
-#         raise ValidationError("No such genre")
-
 class ListField(Field):
     def process_formdata(self, valuelist):
         self.data = valuelist
@@ -27,13 +18,9 @@ class SongForm(FlaskForm):
     songUrl = StringField("songUrl", validators=[
                           DataRequired(), Length(max=500)])
     title = StringField("title", validators=[DataRequired(), Length(max=50)])
-    # genres = SelectMultipleField("Genres", choices=genre_choices)
     genres = ListField()
 
     def validate_genres(self, field):
-        print("===============================")
-        # print("form", self)
-        # print("field", field)
         db_genres = Genre.query.all()
         genre_choices = [genre.id for genre in db_genres]
         print(field.data)
