@@ -1,3 +1,60 @@
+========================================== ITENERARY ================================
+TUESDAY
+
+    [] Backend routes done
+        [] songs
+        [] genre
+        [] playlists
+
+    [] Front end forms
+        [] songs
+        [] playlists
+
+WEDNESDAY
+
+    [] Implement aws
+        [] Profile photo url for users
+
+    [] Setup our redux store schema
+
+    [] Correct website paths
+        [] correct user redirect
+        [] establish frontend routes
+        [] establish imformation needed for redux store
+            on each page
+
+THURSDAY
+    [] Populate information on pages
+
+    [] Implement search
+
+    [] Implement player
+
+    [] Implement live link on Heroku
+
+FRIDAY
+    [] CSS styling
+
+    [] WAVEFORM
+
+SATURDAY
+    [] Finish mvps that are not completed
+
+    [] Bonus features
+
+SUNDAY
+    [] Make sure eveything is smooth for Monday
+
+    [] README
+
+    [] Adjust docs to accuretly reflect project
+
+
+
+
+
+=====================================================================================
+
 [X] add default image to s3 bucket/aws stuff
 [ ] change home route for unloggedin users
 [ ] fix signup form to include image
