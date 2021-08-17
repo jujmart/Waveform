@@ -30,11 +30,11 @@ def get_one_song(id):
 
 @songs_routes.route('/', methods=["POST"])
 def post_song():
-    print("AAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHH", request.data)
     form = SongForm()
     if form.validate_on_submit():
         new_song = Song()
         form.populate_obj(new_song)
+        new_song.userId = 1
         db.session.add(new_song)
         db.session.commit()
         new_song_data = new_song.to_dict()
@@ -42,9 +42,3 @@ def post_song():
         #                            for genre in new_song.genres]
         return new_song_data
     return form.errors
-
-
-# @songs_routes.route("/test")
-# def test_song():
-#     form = SongForm()
-#     return render_template("test.html", form=form)

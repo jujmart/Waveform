@@ -1,3 +1,6 @@
-add default image to s3 bucket/aws stuff
-change home rout for unloggedin users
-fix signup form to include image
+[X] add default image to s3 bucket/aws stuff
+[ ] change home route for unloggedin users
+[ ] fix signup form to include image
+[ ] songs route needs to get session user
+[ ] form needs to connect to backend
+[ ] fix genre to actually populate with correct objects
