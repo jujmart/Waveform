@@ -1,9 +1,10 @@
 from app.forms.song_form import SongForm
 from flask import Blueprint, jsonify, render_template, request
 from sqlalchemy.sql.functions import char_length
-# from flask_login import login_required
+from flask_login import login_required, current_user
 from app.models import Song, db
 from sqlalchemy.orm import joinedload
+import pprint
 
 songs_routes = Blueprint('songs', __name__)
 
@@ -29,12 +30,14 @@ def get_one_song(id):
 
 
 @songs_routes.route('/', methods=["POST"])
+@login_required
 def post_song():
     form = SongForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         new_song = Song()
         form.populate_obj(new_song)
-        new_song.userId = 1
+        new_song.userId = current_user.id
         db.session.add(new_song)
         db.session.commit()
         new_song_data = new_song.to_dict()

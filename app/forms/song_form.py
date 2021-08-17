@@ -1,19 +1,24 @@
+from wtforms.fields.core import IntegerField
 from app.models.genre import Genre
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectMultipleField, SubmitField
-from wtforms.validators import DataRequired, Length
+from wtforms import StringField, SelectMultipleField, FieldList, IntegerField
+from wtforms.validators import DataRequired, Length, ValidationError
 
-# db_genres = Genre.query.all()
-# genre_choices = [(genre, genre.genreName) for genre in db_genres]
+
+def check_genre(form, field):
+    db_genres = Genre.query.all()
+    genre_choices = [genre.id for genre in db_genres]
+    if field.data not in genre_choices:
+        raise ValidationError("No such genre")
 
 
 class SongForm(FlaskForm):
-    album = StringField("Album", validators=[Length(max=50)])
+    album = StringField("album", validators=[Length(max=50)])
     albumImageUrl = StringField(
-        "Album Image Url", validators=[Length(max=500)])
-    artist = StringField("Artist", validators=[Length(max=50)])
-    songUrl = StringField("Song Url", validators=[
+        "albumImageUrl", validators=[Length(max=500)])
+    artist = StringField("artist", validators=[Length(max=50)])
+    songUrl = StringField("songUrl", validators=[
                           DataRequired(), Length(max=500)])
-    title = StringField("Title", validators=[DataRequired(), Length(max=50)])
+    title = StringField("title", validators=[DataRequired(), Length(max=50)])
     # genres = SelectMultipleField("Genres", choices=genre_choices)
-    submit = SubmitField("Upload Song")
+    genres = FieldList(IntegerField('genres', validators =[check_genre]))
