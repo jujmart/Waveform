@@ -2,7 +2,7 @@ from app.forms.song_form import SongForm
 from flask import Blueprint, jsonify, render_template, request
 from sqlalchemy.sql.functions import char_length
 from flask_login import login_required, current_user
-from app.models import Song, db
+from app.models import Song, db, Genre
 from sqlalchemy.orm import joinedload
 import pprint
 
@@ -35,9 +35,23 @@ def post_song():
     form = SongForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        new_song = Song()
-        form.populate_obj(new_song)
-        new_song.userId = current_user.id
+        print("GOTHEREGOTHEREGOTHEREGOTHERE")
+        # new_song = Song()
+        print("**************")
+        print(form.data)
+        # form.populate_obj(new_song)
+        genre_list = [Genre.query.get(genre_id)
+                      for genre_id in form.data["genres"]]
+        new_song = Song(
+            album=form.data["album"],
+            albumImageUrl=form.data["albumImageUrl"],
+            artist=form.data["artist"],
+            songUrl=form.data["songUrl"],
+            title=form.data["title"],
+            genres=genre_list,
+            userId=current_user.id
+        )
+        # print(new_song.genres)
         db.session.add(new_song)
         db.session.commit()
         new_song_data = new_song.to_dict()
