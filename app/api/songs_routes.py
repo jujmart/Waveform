@@ -44,4 +44,5 @@ def post_song():
         # new_song_data["genres"] = [genre.to_dict()
         #                            for genre in new_song.genres]
         return new_song_data
+    print(form.errors)
     return form.errors

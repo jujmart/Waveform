@@ -33,8 +33,10 @@ const SongForm = () => {
       artist,
       album,
       albumImageUrl,
-      //genres: [...genres],
+    //   genres: [40, 30000]
+      genres: [...genres],
     };
+    console.log(data);
     await dispatch(uploadSongThunk(data));
   };
 
@@ -135,6 +137,6 @@ const SongForm = () => {
       <button type="submit">Submit</button>
     </form>
   );
-};
+};;
 
 export default SongForm;
