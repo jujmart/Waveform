@@ -2,27 +2,31 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
 import { getAllGenresThunk } from "../store/genre";
-import { uploadSongThunk } from "../store/songs";
+import { getAllSongsThunk, uploadSongThunk } from "../store/songs";
 
 const EditSongForm = () => {
+	const { id } = useParams();
+	const song = useSelector((state) => state.allSongs[id]);
 	const [errors, setErrors] = useState([]);
-	const [songUrl, setSongUrl] = useState("");
-	const [title, setTitle] = useState("");
-	const [artist, setArtist] = useState("");
-	const [album, setAlbum] = useState("");
-	const [albumImageUrl, setAlbumImageUrl] = useState("");
-	const [genres, setGenres] = useState(new Set());
+	const [songUrl, setSongUrl] = useState(song?.songUrl);
+	const [title, setTitle] = useState(song?.title);
+	const [artist, setArtist] = useState(song?.artist);
+	const [album, setAlbum] = useState(song?.album);
+	const [albumImageUrl, setAlbumImageUrl] = useState(song?.albumImageUrl);
+	const [genres, setGenres] = useState(
+		new Set()
+		// !song ? new Set(...song[id].genres.map((genre) => genre.id)) : new Set()
+	);
 	const user = useSelector((state) => state.session.user);
 	const genresList = useSelector((state) => state.genres);
 	const dispatch = useDispatch();
-	const { id } = useParams();
 
 	useEffect(() => {
 		dispatch(getAllGenresThunk());
 	}, [dispatch]);
 
 	useEffect(() => {
-		// dispatch(getAllSongsThunk())
+		dispatch(getAllSongsThunk());
 	}, [dispatch]);
 
 	const handleOptionClick = (e) => {
@@ -39,7 +43,6 @@ const EditSongForm = () => {
 			albumImageUrl,
 			genres: [...genres],
 		};
-		console.log(data);
 		await dispatch(uploadSongThunk(data));
 	};
 
