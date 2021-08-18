@@ -37,6 +37,24 @@ export const uploadSongThunk = (payload) => async (dispatch) => {
 	}
 };
 
+// If we change edit to modal, we need dispatch to store for update
+export const editSongThunk = (payload, id) => async (dispatch) => {
+	const response = await fetch(`/api/songs/${id}`, {
+		method: "PUT",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(payload)
+	})
+
+	if (response.ok) {
+		const data = await response.json();
+		if (data.errors) {
+			return;
+		}
+	}
+}
+
 const initialState = {};
 
 export default function songsReducer(state = initialState, action) {

@@ -3,19 +3,30 @@ TUESDAY
 
     [] Backend routes done
         [] songs
-        [] genre
+        [X] genre
         [] playlists
 
     [] Front end forms
-        [] songs
+        [X] songs
         [] playlists
 
+    [X] Setup our redux store schema
+    
 WEDNESDAY
+
+    [] Backend routes done
+        [] songs
+            [] PUT
+            [] DELETE
+        [] playlists
+
+     [] Front end forms
+        [] playlists
 
     [] Implement aws
         [] Profile photo url for users
+        [] Change form to file upload instead of url
 
-    [] Setup our redux store schema
 
     [] Correct website paths
         [] correct user redirect

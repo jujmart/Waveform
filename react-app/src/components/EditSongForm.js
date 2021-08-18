@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
 import { getAllGenresThunk } from "../store/genre";
-import { getAllSongsThunk, uploadSongThunk } from "../store/songs";
+import { getAllSongsThunk, editSongThunk} from "../store/songs";
 
 const EditSongForm = () => {
 	const { id } = useParams();
@@ -44,6 +44,7 @@ const EditSongForm = () => {
 	};
 
 	const handleSubmit = async (e) => {
+		console.log(id);
 		e.preventDefault();
 		const data = {
 			songUrl,
@@ -53,7 +54,7 @@ const EditSongForm = () => {
 			albumImageUrl,
 			genres: [...genres],
 		};
-		await dispatch(uploadSongThunk(data));
+		await dispatch(editSongThunk(data, id));
 	};
 
 	return (

@@ -63,16 +63,17 @@ def put_song(id):
     if form.validate_on_submit():
         genre_list = [Genre.query.get_or_404(genre_id)
                       for genre_id in form.data["genres"]]
-        Song.query.get_or_404(id).update({"album": form.data["album"],
-                                          "albumImageUrl": form.data["albumImageUrl"],
-                                          "artist": form.data["artist"],
-                                          "songUrl": form.data["songUrl"],
-                                          "title": form.data["title"],
-                                          "genres": genre_list, })
+        edited_song = Song.query.get_or_404(id)
+        edited_song.album = form.data["album"]
+        edited_song.albumImageUrl = form.data["albumImageUrl"]
+        edited_song.artist = form.data["artist"]
+        edited_song.songUrl = form.data["songUrl"]
+        edited_song.title = form.data["title"]
+        edited_song.genres = genre_list
         db.session.commit()
         # new_song_data = new_song.to_dict()
         # new_song_data["genres"] = [genre.to_dict()
         #                            for genre in new_song.genres]
-        return  # new_song_data
+        return edited_song.to_dict()
     print(form.errors)
     return form.errors
