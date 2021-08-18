@@ -8,9 +8,9 @@ import playlistsReducer from "./playlist";
 const rootReducer = combineReducers({
 	session,
 	genres: genresReducer,
-	allSongs: songsReducer,
-	allPlaylists: playlistsReducer,
-	// userPlaylists: userPlaylistsReducer
+	songs: songsReducer,
+	playlists: playlistsReducer,
+	// user: userReducer
 	//
 });
 
