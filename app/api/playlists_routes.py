@@ -41,7 +41,9 @@ def post_playlist():
         )
         db.session.add(new_playlist)
         db.session.commit()
-        return {}
+        new_playlist_dict = new_playlist.to_dict()
+        new_playlist_dict["songs"] = []
+        return {"playlist": new_playlist_dict}
     print(form.errors)
     return form.errors
 

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { getAllGenresThunk } from "../../store/genre";
-import { uploadSongThunk } from "../../store/songs";
+import { createPlaylistThunk } from "../../store/playlist";
 
 const PlaylistForm = () => {
 	const [errors, setErrors] = useState([]);
@@ -11,14 +9,13 @@ const PlaylistForm = () => {
 	const user = useSelector((state) => state.session.user);
 	const dispatch = useDispatch();
 
-
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const data = {
 			title,
-			description
+			description,
 		};
-		// await dispatch(uploadPlaylistThunk(data));
+		await dispatch(createPlaylistThunk(data));
 	};
 
 	return (

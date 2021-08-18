@@ -1,14 +1,11 @@
-
-
 // constants
 const GET_ALL_SONGS = "songs/GET_ALL_SONGS";
-const DELETE_SONG = "songs/DELETE_SONG"
+const DELETE_SONG = "songs/DELETE_SONG";
 
 const getAllSongs = (songs) => ({
 	type: GET_ALL_SONGS,
 	payload: songs,
 });
-
 
 const deleteSong = (id) => ({
 	type: DELETE_SONG,
@@ -51,8 +48,8 @@ export const editSongThunk = (payload, id) => async (dispatch) => {
 		headers: {
 			"Content-Type": "application/json",
 		},
-		body: JSON.stringify(payload)
-	})
+		body: JSON.stringify(payload),
+	});
 
 	if (response.ok) {
 		const data = await response.json();
@@ -60,13 +57,12 @@ export const editSongThunk = (payload, id) => async (dispatch) => {
 			return;
 		}
 	}
-}
-
+};
 
 export const deleteSongThunk = (id) => async (dispatch) => {
 	const response = await fetch(`/api/songs/${id}`, {
-		method: "DELETE"
-	})
+		method: "DELETE",
+	});
 
 	if (response.ok) {
 		const data = await response.json();
@@ -74,9 +70,9 @@ export const deleteSongThunk = (id) => async (dispatch) => {
 			return;
 		}
 
-		dispatch(deleteSong(id))
+		dispatch(deleteSong(id));
 	}
-}
+};
 
 const initialState = {};
 
@@ -90,9 +86,9 @@ export default function songsReducer(state = initialState, action) {
 			});
 			return newGetState;
 		case DELETE_SONG:
-			const newDeleteState = {...state};
-			delete newDeleteState[action.payload]
-			return newDeleteState
+			const newDeleteState = { ...state };
+			delete newDeleteState[action.payload];
+			return newDeleteState;
 		default:
 			return state;
 	}
