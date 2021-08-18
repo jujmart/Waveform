@@ -50,7 +50,7 @@ def post_song():
         # new_song_data = new_song.to_dict()
         # new_song_data["genres"] = [genre.to_dict()
         #                            for genre in new_song.genres]
-        return  # new_song_data
+        return {}
     print(form.errors)
     return form.errors
 
@@ -74,6 +74,15 @@ def put_song(id):
         # new_song_data = new_song.to_dict()
         # new_song_data["genres"] = [genre.to_dict()
         #                            for genre in new_song.genres]
-        return edited_song.to_dict()
+        return {}
     print(form.errors)
     return form.errors
+
+
+@songs_routes.route('/<int:id>', methods=["DELETE"])
+@login_required
+def delete_song(id):
+    song = Song.query.get_or_404(id)
+    db.session.delete(song)
+    db.session.commit()
+    return {}

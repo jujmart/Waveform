@@ -1,11 +1,18 @@
-import { bindActionCreators } from "redux";
+
 
 // constants
 const GET_ALL_SONGS = "songs/GET_ALL_SONGS";
+const DELETE_SONG = "songs/DELETE_SONG"
 
 const getAllSongs = (songs) => ({
 	type: GET_ALL_SONGS,
 	payload: songs,
+});
+
+
+const deleteSong = (id) => ({
+	type: DELETE_SONG,
+	payload: id,
 });
 
 export const getAllSongsThunk = (payload) => async (dispatch) => {
@@ -55,17 +62,37 @@ export const editSongThunk = (payload, id) => async (dispatch) => {
 	}
 }
 
+
+export const deleteSongThunk = (id) => async (dispatch) => {
+	const response = await fetch(`/api/songs/${id}`, {
+		method: "DELETE"
+	})
+
+	if (response.ok) {
+		const data = await response.json();
+		if (data.errors) {
+			return;
+		}
+
+		dispatch(deleteSong(id))
+	}
+}
+
 const initialState = {};
 
 export default function songsReducer(state = initialState, action) {
 	Object.freeze(state);
 	switch (action.type) {
 		case GET_ALL_SONGS:
-			const newState = {};
+			const newGetState = {};
 			action.payload.forEach((song) => {
-				newState[song.id] = song;
+				newGetState[song.id] = song;
 			});
-			return newState;
+			return newGetState;
+		case DELETE_SONG:
+			const newDeleteState = {...state};
+			delete newDeleteState[action.payload]
+			return newDeleteState
 		default:
 			return state;
 	}
