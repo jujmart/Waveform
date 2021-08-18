@@ -8,15 +8,12 @@ const EditSongForm = () => {
 	const { id } = useParams();
 	const song = useSelector((state) => state.allSongs[id]);
 	const [errors, setErrors] = useState([]);
-	const [songUrl, setSongUrl] = useState(song?.songUrl);
-	const [title, setTitle] = useState(song?.title);
-	const [artist, setArtist] = useState(song?.artist);
-	const [album, setAlbum] = useState(song?.album);
-	const [albumImageUrl, setAlbumImageUrl] = useState(song?.albumImageUrl);
-	const [genres, setGenres] = useState(
-		new Set()
-		// !song ? new Set(...song[id].genres.map((genre) => genre.id)) : new Set()
-	);
+	const [songUrl, setSongUrl] = useState("");
+	const [title, setTitle] = useState("");
+	const [artist, setArtist] = useState("");
+	const [album, setAlbum] = useState("");
+	const [albumImageUrl, setAlbumImageUrl] = useState("");
+	const [genres, setGenres] = useState(new Set());
 	const user = useSelector((state) => state.session.user);
 	const genresList = useSelector((state) => state.genres);
 	const dispatch = useDispatch();
@@ -28,6 +25,19 @@ const EditSongForm = () => {
 	useEffect(() => {
 		dispatch(getAllSongsThunk());
 	}, [dispatch]);
+
+	useEffect(() => {
+		setSongUrl(song?.songUrl);
+		setTitle(song?.title);
+		setArtist(song?.artist);
+		setAlbum(song?.album);
+		setAlbumImageUrl(song?.albumImageUrl);
+		setGenres(
+			song?.genres
+				? new Set(song.genres.map((genre) => genre?.id))
+				: new Set()
+		);
+	}, [song, id]);
 
 	const handleOptionClick = (e) => {
 		setGenres((prevGenres) => prevGenres.add(+e.target.value));
