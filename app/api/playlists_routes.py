@@ -1,9 +1,8 @@
 from app.forms.playlist_form import PlaylistForm
 from flask import Blueprint, jsonify, request
-# from sqlalchemy.sql.functions import char_length
 from flask_login import login_required, current_user
-from app.models import Song, db, Genre, Playlist
-from sqlalchemy.orm import joinedload, load_only
+from app.models import db, Playlist
+from sqlalchemy.orm import joinedload
 
 playlists_routes = Blueprint('playlists', __name__)
 

@@ -9,7 +9,9 @@ const rootReducer = combineReducers({
 	session,
 	genres: genresReducer,
 	allSongs: songsReducer,
-	playlists: playlistsReducer,
+	allPlaylists: playlistsReducer,
+	// userPlaylists: userPlaylistsReducer
+	//
 });
 
 let enhancer;
