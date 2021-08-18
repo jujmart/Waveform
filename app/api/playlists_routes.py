@@ -24,7 +24,7 @@ def get_one_playlist(id):
     playlist = Playlist.query.options(joinedload(Playlist.songs)).get(id)
     playlist_dict = playlist.to_dict()
     playlist_dict["songs"] = [song.id for song in playlist.songs]
-    return playlist_dict
+    return {"playlist": playlist_dict}
 
 
 @playlists_routes.route('/', methods=["POST"])

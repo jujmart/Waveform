@@ -1,5 +1,5 @@
 // constants
-const GET_ALL_PLAYLISTS = "playlists/GET_ALL_PLAYLISTS";
+const GET_ONE_PLAYLIST = "playlists/GET_ONE_PLAYLIST";
 const DELETE_PLAYLIST = "playlists/DELETE_PLAYLIST";
 const CREATE_PLAYLIST = "playlists/CREATE_PLAYLIST";
 
@@ -36,17 +36,17 @@ export const createPlaylistThunk = (payload) => async (dispatch) => {
 	}
 };
 
-// export const getAllSongsThunk = (payload) => async (dispatch) => {
-// 	const response = await fetch("/api/songs/");
+export const getOnePlaylistThunk = (id) => async (dispatch) => {
+	const response = await fetch(`/api/playlists/${id}`);
 
-// 	if (response.ok) {
-// 		const { songs } = await response.json();
-// 		if (songs.errors) {
-// 			return;
-// 		}
-// 		dispatch(getAllSongs(songs));
-// 	}
-// };
+	if (response.ok) {
+		const { playlist } = await response.json();
+		if (playlist.errors) {
+			return;
+		}
+		dispatch(createPlaylist(playlist));
+	}
+};
 
 // export const uploadSongThunk = (payload) => async (dispatch) => {
 // 	const response = await fetch("/api/songs/", {

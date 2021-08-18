@@ -11,7 +11,6 @@ const rootReducer = combineReducers({
 	songs: songsReducer,
 	playlists: playlistsReducer,
 	// user: userReducer
-	//
 });
 
 let enhancer;

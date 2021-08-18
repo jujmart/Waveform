@@ -1,6 +1,7 @@
 // constants
 const GET_ALL_SONGS = "songs/GET_ALL_SONGS";
 const DELETE_SONG = "songs/DELETE_SONG";
+const SET_PLAYLIST_SONGS = "songs/SET_PLAYLIST_SONGS";
 
 const getAllSongs = (songs) => ({
 	type: GET_ALL_SONGS,
@@ -10,6 +11,11 @@ const getAllSongs = (songs) => ({
 const deleteSong = (id) => ({
 	type: DELETE_SONG,
 	payload: id,
+});
+
+const setPlaylistSongs = (songs) => ({
+	type: SET_PLAYLIST_SONGS,
+	payload: songs,
 });
 
 export const getAllSongsThunk = (payload) => async (dispatch) => {
@@ -74,6 +80,22 @@ export const deleteSongThunk = (id) => async (dispatch) => {
 	}
 };
 
+export const setPlaylistSongsThunk = (payload) => async (dispatch) => {
+	const response = await fetch("/api/playlist-songs/", {
+		method: "PATCH",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(payload),
+	});
+
+	if (response.ok) {
+		const { songs } = await response.json();
+		if (songs.errors) {
+			return;
+		}
+		dispatch(setPlaylistSongs(songs));
+	}
+};
+
 const initialState = {};
 
 export default function songsReducer(state = initialState, action) {
@@ -85,6 +107,12 @@ export default function songsReducer(state = initialState, action) {
 				newGetState[song.id] = song;
 			});
 			return newGetState;
+		case SET_PLAYLIST_SONGS:
+			const newSetState = { ...state };
+			action.payload.forEach((song) => {
+				newGetState[song.id] = song;
+			});
+			return newSetState;
 		case DELETE_SONG:
 			const newDeleteState = { ...state };
 			delete newDeleteState[action.payload];

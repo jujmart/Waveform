@@ -1,49 +1,54 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { getAllGenresThunk } from "../store/genre";
-import { uploadSongThunk } from "../store/songs";
+import { Redirect, useParams } from "react-router-dom";
+import { getOnePlaylistThunk } from "../store/playlist";
+import { setPlaylistSongsThunk } from "../store/songs";
 
-const SongForm = () => {
-	const [errors, setErrors] = useState([]);
-	const [songUrl, setSongUrl] = useState("");
-	const [title, setTitle] = useState("");
-	const [artist, setArtist] = useState("");
-	const [album, setAlbum] = useState("");
-	const [albumImageUrl, setAlbumImageUrl] = useState("");
-	const [genres, setGenres] = useState(new Set());
+const DisplayPlaylist = () => {
+	const { id } = useParams();
+	const [songsNotInStore, setSongsNotInStore] = useState(new Set());
+	const [currentPlaylist, setCurrentPlaylist] = useState({});
 	const user = useSelector((state) => state.session.user);
-	const genresList = useSelector((state) => state.genres);
+	const songs = useSelector((state) => state.songs);
+	const playlists = useSelector((state) => state.playlists);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch(getAllGenresThunk());
-	}, [dispatch]);
+		if (!playlists[id]) {
+			dispatch(getOnePlaylistThunk(id));
+		}
+	}, [dispatch, id, playlists]);
 
-	const handleOptionClick = (e) => {
-		setGenres((prevGenres) => prevGenres.add(+e.target.value));
-	};
+	useEffect(() => {
+		if (playlists[id]) {
+			setCurrentPlaylist(playlists[id]);
+		}
+	}, [playlists, id]);
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		const data = {
-			songUrl,
-			title,
-			artist,
-			album,
-			albumImageUrl,
-			genres: [...genres],
-		};
-		console.log(data);
-		await dispatch(uploadSongThunk(data));
-	};
+	useEffect(() => {
+		console.log(currentPlaylist);
+		currentPlaylist?.songs?.forEach((songId) => {
+			console.log(songsNotInStore);
+
+			if (!songs[songId]) {
+				setSongsNotInStore((prevState) => prevState.add(songId));
+			}
+		});
+	}, [dispatch, songs, currentPlaylist, songsNotInStore]);
+
+	useEffect(() => {
+		console.log(songsNotInStore.size);
+		if (songsNotInStore.size) {
+			dispatch(setPlaylistSongsThunk(songsNotInStore));
+		}
+	}, [dispatch, songsNotInStore]);
 
 	return (
 		<div>
-			<h2>Title</h2>
-			<h3>Description</h3>
+			<h2>{currentPlaylist?.title}</h2>
+			<h3>{currentPlaylist?.description}</h3>
 		</div>
 	);
 };
 
-export default SongForm;
+export default DisplayPlaylist;

@@ -10,7 +10,7 @@ import User from "./components/User";
 import { authenticate } from "./store/session";
 import SongForm from "./components/SongForm";
 import EditSongForm from "./components/EditSongForm";
-import PlaylistFormModal from "./components/PlaylistForm";
+import DisplayPlaylist from "./components/Playlist";
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -51,6 +51,9 @@ function App() {
 				</ProtectedRoute>
 				<ProtectedRoute path="/edit-song-form/:id" exact={true}>
 					<EditSongForm />
+				</ProtectedRoute>
+				<ProtectedRoute path="/playlists/:id" exact={true}>
+					<DisplayPlaylist />
 				</ProtectedRoute>
 			</Switch>
 		</BrowserRouter>
