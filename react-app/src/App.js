@@ -10,6 +10,7 @@ import User from "./components/User";
 import { authenticate } from "./store/session";
 import SongForm from "./components/SongForm";
 import EditSongForm from "./components/EditSongForm";
+import PlaylistFormModal from "./components/PlaylistForm";
 
 function App() {
 	const [loaded, setLoaded] = useState(false);

@@ -2,10 +2,14 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
+import PlaylistFormModal from './PlaylistForm';
 
 const NavBar = () => {
   return (
     <nav>
+      <div>
+        <PlaylistFormModal />
+      </div>
       <ul>
         <li>
           <NavLink to='/' exact={true} activeClassName='active'>
