@@ -100,3 +100,9 @@ def get_songs_for_playlist():
         song_list.append(song_dict)
 
     return {'songs': song_list}
+
+
+@songs_routes.route('/users/<int:id>')
+def get_user_songs(id):
+    songs = Song.query.filter(Song.userId == id).all()
+    return {'songs': [song.id for song in songs]}
