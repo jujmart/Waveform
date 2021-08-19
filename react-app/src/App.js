@@ -11,6 +11,8 @@ import { authenticate } from "./store/session";
 import SongForm from "./components/SongForm";
 import EditSongForm from "./components/EditSongForm";
 import DisplayPlaylist from "./components/Playlist";
+import HomePage from "./components/Homepage";
+
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -43,9 +45,9 @@ function App() {
 				<ProtectedRoute path="/users/:userId" exact={true}>
 					<User />
 				</ProtectedRoute>
-				<ProtectedRoute path="/" exact={true}>
-					<h1>My Home Page</h1>
-				</ProtectedRoute>
+				<Route path="/" exact={true}>
+					<HomePage />
+				</Route>
 				<ProtectedRoute path="/song-form" exact={true}>
 					<SongForm />
 				</ProtectedRoute>

@@ -1,42 +1,162 @@
 
-import React from 'react';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import PlaylistFormModal from './PlaylistForm';
 
+import { login } from '../store/session'
+
+
+
+
 const NavBar = () => {
+
+  const [errors, setErrors] = useState([]);
+
+
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.session.user)
+
+  const demoUserLogin = async (e) => {
+    e.preventDefault();
+    const data = await dispatch(login('demo@aa.io', 'password'));
+    if (data) {
+      setErrors(data);
+    }
+  };
+
+
+  if (user) {
+  return (
+    <nav>
+
+{/* UPPER NAV BAR */}
+      <div>
+        <p>{user.username}</p>
+        <img src='' alt='Current user img' />
+        <ul>
+          <li>Profile</li>
+          <LogoutButton />
+        </ul>
+      </div>
+
+
+{/* LEFT SIDE NAV BAR */}
+      <div>
+        <NavLink to='/' exact={true} activeClassName='active'>
+        ⚬ ⚬ ⚬ settings
+        </NavLink>
+        <ul>
+          <li>
+            <NavLink to='/' exact={true} activeClassName='active'>
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to='/' exact={true} activeClassName='active'>
+              Search
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to='/' exact={true} activeClassName='active'>
+              Liked Songs
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to='/song-form' exact={true} activeClassName='active'>
+              Song Form
+            </NavLink>
+          </li>
+          <li>
+            <PlaylistFormModal />
+          </li>
+        </ul>
+      </div>
+<p>=====================SIMPLE DIVIDER PLZ KILL ME</p>
+
+{/* RIGHT SIDE NAV BAR */}
+
+{/* These links only for developement
+    remove before deploying */}
+      <div>
+        <ul>
+          <li>
+            <NavLink to='/users/1' exact={true} activeClassName='active'>
+              Profile Page
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to='/edit-song-form/1' exact={true} activeClassName='active'>
+              Edit Song 1 Form
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to='/login' exact={true} activeClassName='active'>
+              Login
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to='/playlists/1' exact={true} activeClassName='active'>
+              Playlist 1
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to='/users' exact={true} activeClassName='active'>
+              Users
+            </NavLink>
+          </li>
+        </ul>
+      </div>
+
+<p>=====================SIMPLE DIVIDER PLZ KILL ME</p>
+
+{/* MUSIC PLAYER NAVBAR */}
+      <div>
+        <img src='' alt='album img' />
+        <p>Song Name</p>
+        <p>Album Title</p>
+        <button>Skip Back</button>
+        <button>Skip Song</button>
+        <button>Play Pause</button>
+        <button>Show Queue</button>
+        <button>Fullscreen</button>
+        <p>Volume Slider</p>
+        <audio controls={true} />
+      </div>
+
+<p>=====================SIMPLE DIVIDER PLZ KILL ME</p>
+{/* WAVEFORM */}
+    <div>
+      <h2>MOVING WAVEFROM THING</h2>
+    </div>
+    </nav>
+  )}
+
   return (
     <nav>
       <div>
-        <PlaylistFormModal />
+        <img src='' alt='Image logo' />
       </div>
-      <ul>
-        <li>
-          <NavLink to='/' exact={true} activeClassName='active'>
-            Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/login' exact={true} activeClassName='active'>
-            Login
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/sign-up' exact={true} activeClassName='active'>
-            Sign Up
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/users' exact={true} activeClassName='active'>
-            Users
-          </NavLink>
-        </li>
-        <li>
-          <LogoutButton />
-        </li>
-      </ul>
+      <div>
+        <ul>
+          <li>
+              <NavLink to='/login' exact={true} activeClassName='active'>
+                Login
+              </NavLink>
+          </li>
+          <li>
+            <NavLink to="/sign-up" exact={true} activeClassName='active'>
+              Signup
+            </NavLink>
+          </li>
+          <li>
+            <button onClick={demoUserLogin}>DEMO</button>
+          </li>
+        </ul>
+      </div>
     </nav>
-  );
+  )
 }
 
 export default NavBar;
