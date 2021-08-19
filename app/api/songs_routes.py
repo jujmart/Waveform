@@ -34,13 +34,14 @@ def post_song():
     form = SongForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        # aws stuff will need to send the file to AWs and receive back the Url to put into the new song
         genre_list = Genre.query.filter(
             Genre.id.in_(form.data["genres"])).all()
         new_song = Song(
             album=form.data["album"],
             albumImageUrl=form.data["albumImageUrl"],
             artist=form.data["artist"],
-            songUrl=form.data["songUrl"],
+            songUrl="Something",  # we need to change this to accept url from AWS
             title=form.data["title"],
             genres=genre_list,
             userId=current_user.id
@@ -61,14 +62,16 @@ def put_song(id):
     form = SongForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        genre_list = Genre.query.filter(
-            Genre.id.in_(form.data["genres"])).all()
         edited_song = Song.query.get_or_404(id)
         if edited_song.userId == current_user.id:
+            # aws stuff will need to send the file to AWs and receive back the Url to put into the new song
+            genre_list = Genre.query.filter(
+                Genre.id.in_(form.data["genres"])).all()
             edited_song.album = form.data["album"]
             edited_song.albumImageUrl = form.data["albumImageUrl"]
             edited_song.artist = form.data["artist"]
-            edited_song.songUrl = form.data["songUrl"]
+            # we need to change this to accept url from AWS
+            edited_song.songUrl = "something"
             edited_song.title = form.data["title"]
             edited_song.genres = genre_list
             db.session.commit()

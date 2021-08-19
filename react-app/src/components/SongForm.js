@@ -34,7 +34,6 @@ const SongForm = () => {
 			albumImageUrl,
 			genres: [...genres],
 		};
-		console.log(data);
 		await dispatch(uploadSongThunk(data));
 	};
 
@@ -47,8 +46,16 @@ const SongForm = () => {
 			</div>
 			<div>
 				{/* Need to be updated for aws */}
-				<label htmlFor="songUrl">songUrl</label>
+				<label htmlFor="songUrl">Audio File</label>
 				<input
+					type="file"
+					accept=".m4a,.flac,.mp3,.mp4,.wav,.wma,.aac"
+					name="songUrl"
+					onChange={(e) => {
+						setSongUrl(e.target.files[0]);
+					}}
+				/>
+				{/* <input
 					name="songUrl"
 					type="text"
 					placeholder="songUrl"
@@ -57,7 +64,7 @@ const SongForm = () => {
 					onChange={(e) => {
 						setSongUrl(e.target.value);
 					}}
-				/>
+				/> */}
 			</div>
 			<div>
 				<label htmlFor="title">Title</label>

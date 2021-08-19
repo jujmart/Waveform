@@ -15,8 +15,6 @@ class SongForm(FlaskForm):
     albumImageUrl = StringField(
         "albumImageUrl", validators=[Length(max=500)])
     artist = StringField("artist", validators=[Length(max=50)])
-    songUrl = StringField("songUrl", validators=[
-                          DataRequired(), Length(max=500)])
     title = StringField("title", validators=[DataRequired(), Length(max=50)])
     genres = ListField()
 
