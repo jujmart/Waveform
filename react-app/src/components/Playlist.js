@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Redirect, useParams } from "react-router-dom";
-import { getOnePlaylistThunk } from "../store/playlist";
+import { Redirect, useHistory, useParams } from "react-router-dom";
+import { getOnePlaylistThunk, deletePlaylistThunk } from "../store/playlist";
 import { setPlaylistSongsThunk } from "../store/songs";
 import EditPlaylistFormModal from "./EditPlaylistForm";
 
 const DisplayPlaylist = () => {
   const { id } = useParams();
+  const history = useHistory();
   const [songsNotInStore, setSongsNotInStore] = useState([]);
   const [currentPlaylist, setCurrentPlaylist] = useState({});
   const user = useSelector((state) => state.session.user);
@@ -14,10 +15,19 @@ const DisplayPlaylist = () => {
   const playlists = useSelector((state) => state.playlists);
   const dispatch = useDispatch();
 
+  const handleDelete = async () => {
+    await dispatch(deletePlaylistThunk(id));
+  };
+
   useEffect(() => {
-    if (!playlists[id]) {
-      dispatch(getOnePlaylistThunk(id));
-    }
+    (async () => {
+      if (!playlists[id]) {
+        const error = await dispatch(getOnePlaylistThunk(id));
+        if (error) {
+          history.push("/");
+        }
+      }
+    })();
   }, [dispatch, id, playlists]);
 
   useEffect(() => {
@@ -45,6 +55,7 @@ const DisplayPlaylist = () => {
   return (
     <div>
       <EditPlaylistFormModal />
+      <button onClick={handleDelete}>Delete Playlist</button>
       <h2>{currentPlaylist?.title}</h2>
       <h3>{currentPlaylist?.description}</h3>
       {currentPlaylist?.songs?.map((songId) => {

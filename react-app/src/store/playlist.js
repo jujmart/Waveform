@@ -1,9 +1,15 @@
 // constants
 const CREATE_PLAYLIST = "playlists/CREATE_PLAYLIST";
+const DELETE_PLAYLIST = "playlists/DELETE_PLAYLIST";
 
 const createPlaylist = (playlist) => ({
   type: CREATE_PLAYLIST,
   payload: playlist,
+});
+
+const deletePlaylist = (id) => ({
+  type: DELETE_PLAYLIST,
+  payload: id,
 });
 
 export const createPlaylistThunk = (payload) => async (dispatch) => {
@@ -51,6 +57,22 @@ export const getOnePlaylistThunk = (id) => async (dispatch) => {
       return;
     }
     dispatch(createPlaylist(playlist));
+  } else {
+    return response;
+  }
+};
+
+export const deletePlaylistThunk = (id) => async (dispatch) => {
+  const response = await fetch(`/api/playlists/${id}`, {
+    method: "DELETE",
+  });
+
+  if (response.ok) {
+    const { playlistId } = await response.json();
+    if (playlistId.errors) {
+      return;
+    }
+    dispatch(deletePlaylist(playlistId));
   }
 };
 
@@ -63,6 +85,10 @@ export default function playlistsReducer(state = initialState, action) {
       const newCreateState = { ...state };
       newCreateState[action.payload.id] = action.payload;
       return newCreateState;
+    case DELETE_PLAYLIST:
+      const newDeleteState = { ...state };
+      delete newDeleteState[action.payload];
+      return newDeleteState;
     default:
       return state;
   }

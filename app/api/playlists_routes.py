@@ -72,4 +72,4 @@ def delete_playlist(id):
     playlist = Playlist.query.get_or_404(id)
     db.session.delete(playlist)
     db.session.commit()
-    return {}
+    return {'playlistId': playlist.id}
