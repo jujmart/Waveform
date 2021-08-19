@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Redirect, useHistory, useParams } from "react-router-dom";
 import { getOnePlaylistThunk, deletePlaylistThunk } from "../store/playlist";
 import { setPlaylistSongsThunk } from "../store/songs";
-import { getUserSongsThunk } from "../store/userMusicInfo";
+import { deleteUserPlaylist, getUserSongsThunk } from "../store/userMusicInfo";
 import EditPlaylistFormModal from "./EditPlaylistForm";
 
 const DisplayPlaylist = () => {
@@ -16,8 +16,9 @@ const DisplayPlaylist = () => {
 	const playlists = useSelector((state) => state.playlists);
 	const dispatch = useDispatch();
 
-	const handleDelete = async () => {
-		await dispatch(deletePlaylistThunk(id));
+	const handleDelete = () => {
+		dispatch(deletePlaylistThunk(id));
+		dispatch(deleteUserPlaylist(id));
 	};
 
 	useEffect(() => {

@@ -78,3 +78,9 @@ def delete_playlist(id):
         db.session.commit()
         return {'playlistId': playlist.id}
     return {"errors": "Only the creator of this playlist can delete it."}
+
+
+@playlists_routes.route('/users/<int:id>')
+def get_user_playlists(id):
+    playlists = Playlist.query.filter(Playlist.userId == id).all()
+    return {'playlists': [playlist.id for playlist in playlists]}
