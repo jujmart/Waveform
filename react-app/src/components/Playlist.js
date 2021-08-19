@@ -3,46 +3,48 @@ import { useSelector, useDispatch } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
 import { getOnePlaylistThunk } from "../store/playlist";
 import { setPlaylistSongsThunk } from "../store/songs";
+import EditPlaylistFormModal from "./EditPlaylistForm";
 
 const DisplayPlaylist = () => {
-	const { id } = useParams();
-	const [songsNotInStore, setSongsNotInStore] = useState([]);
-	const [currentPlaylist, setCurrentPlaylist] = useState({});
-	const user = useSelector((state) => state.session.user);
-	const songs = useSelector((state) => state.songs);
-	const playlists = useSelector((state) => state.playlists);
-	const dispatch = useDispatch();
+  const { id } = useParams();
+  const [songsNotInStore, setSongsNotInStore] = useState([]);
+  const [currentPlaylist, setCurrentPlaylist] = useState({});
+  const user = useSelector((state) => state.session.user);
+  const songs = useSelector((state) => state.songs);
+  const playlists = useSelector((state) => state.playlists);
+  const dispatch = useDispatch();
 
-	useEffect(() => {
-		if (!playlists[id]) {
-			dispatch(getOnePlaylistThunk(id));
-		}
-	}, [dispatch, id, playlists]);
+  useEffect(() => {
+    if (!playlists[id]) {
+      dispatch(getOnePlaylistThunk(id));
+    }
+  }, [dispatch, id, playlists]);
 
-	useEffect(() => {
-		if (playlists[id]) {
-			setCurrentPlaylist(playlists[id]);
-		}
-	}, [playlists, id]);
+  useEffect(() => {
+    if (playlists[id]) {
+      setCurrentPlaylist(playlists[id]);
+    }
+  }, [playlists, id]);
 
-	useEffect(() => {
-		currentPlaylist?.songs?.forEach((songId) => {
-			if (!songs[songId]) {
-				if (!songsNotInStore.includes(songId)) {
-					setSongsNotInStore((prevState) => [...prevState, songId]);
-				}
-			}
-		});
-	}, [dispatch, songs, currentPlaylist, songsNotInStore]);
+  useEffect(() => {
+    currentPlaylist?.songs?.forEach((songId) => {
+      if (!songs[songId]) {
+        if (!songsNotInStore.includes(songId)) {
+          setSongsNotInStore((prevState) => [...prevState, songId]);
+        }
+      }
+    });
+  }, [dispatch, songs, currentPlaylist, songsNotInStore]);
 
-	useEffect(() => {
-		if (songsNotInStore.length) {
-			dispatch(setPlaylistSongsThunk(songsNotInStore));
-		}
-	}, [dispatch, songsNotInStore]);
+  useEffect(() => {
+    if (songsNotInStore.length) {
+      dispatch(setPlaylistSongsThunk(songsNotInStore));
+    }
+  }, [dispatch, songsNotInStore]);
 
-	return (
+  return (
     <div>
+      <EditPlaylistFormModal />
       <h2>{currentPlaylist?.title}</h2>
       <h3>{currentPlaylist?.description}</h3>
       {currentPlaylist?.songs?.map((songId) => {

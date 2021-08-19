@@ -59,7 +59,9 @@ def put_playlist(id):
         edited_playlist.title = form.data["title"]
         edited_playlist.description = form.data["description"]
         db.session.commit()
-        return {}
+        edited_playlist_dict = edited_playlist.to_dict()
+        edited_playlist_dict["songs"] = [song.id for song in edited_playlist.songs]
+        return {"playlist": edited_playlist_dict}
     print(form.errors)
     return form.errors
 
