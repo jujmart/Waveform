@@ -10,3 +10,5 @@ why both are primary keys in join table
 
 does " from file import * "   the same as seed_genre and undo_genre
     yes not encouraged cause bad
+
+how to integrate flaskwtf forms with react forms??

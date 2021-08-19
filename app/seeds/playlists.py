@@ -1,16 +1,14 @@
 from app.models import db, Playlist
-from .songs import demo as song_demo1
+from .songs import make_way
 
 
 def seed_playlists():
     demo = Playlist(
-        userId=1 , title='title goes here', description='Description')
+        userId=1, title='title goes here', description='Description')
 
     db.session.add(demo)
-    demo.songs.append(song_demo1)
+    demo.songs.append(make_way)
     db.session.commit()
-
-
 
 
 # Uses a raw SQL query to TRUNCATE the users table.

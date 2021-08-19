@@ -1,3 +1,77 @@
-add default image to s3 bucket/aws stuff
-change home rout for unloggedin users
-fix signup form to include image
+========================================== ITENERARY ================================
+TUESDAY
+
+    [] Backend routes done
+        [X] songs
+        [X] genre
+        [] playlists
+
+    [] Front end forms
+        [X] songs
+        [] playlists
+
+    [X] Setup our redux store schema
+
+WEDNESDAY
+
+    [] Backend routes done
+        [X] songs
+            [X] PUT
+            [X] DELETE
+        [] playlists
+
+
+
+
+THURSDAY
+    [] Front end forms
+            [] playlists
+        [] Correct website paths
+        [] correct user redirect
+        [] establish frontend routes
+        [] establish imformation needed for redux store
+            on each page
+
+    [] Implement aws
+        [] Profile photo url for users
+        [] Change form to file upload instead of url
+
+    [] Populate information on pages
+
+    [] Implement search
+
+    [] Implement player
+
+    [] Implement live link on Heroku
+
+FRIDAY
+    [] CSS styling
+
+    [] WAVEFORM
+
+SATURDAY
+    [] Finish mvps that are not completed
+
+    [] Bonus features
+
+SUNDAY
+    [] Make sure eveything is smooth for Monday
+
+    [] README
+
+    [] Adjust docs to accuretly reflect project
+
+
+
+
+
+=====================================================================================
+
+[ ] backend route for /api/playlist-songs
+[ ] change home route for unloggedin users
+[ ] fix signup form to include image
+[X] songs route needs to get session user
+[X] thunk for edit song
+[X] add default image to s3 bucket/aws stuff
+[X] form needs to connect to backend
+[X] fix genre to actually populate with correct objects
