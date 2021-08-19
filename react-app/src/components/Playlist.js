@@ -41,10 +41,51 @@ const DisplayPlaylist = () => {
 		}
 	}, [dispatch, songsNotInStore]);
 
+	console.log(currentPlaylist.songs)
+
 	return (
 		<div>
-			<h2>{currentPlaylist?.title}</h2>
-			<h3>{currentPlaylist?.description}</h3>
+			<div>
+				<img src='' alt='Playlist Image' />
+				<p></p>
+				<h2>{currentPlaylist?.title}</h2>
+				<p>{currentPlaylist?.description}</p>
+				<p>{`Created by${currentPlaylist?.userId} <=== Needs to be updated`}</p>
+				<p>{`Added on ${currentPlaylist?.createdAt?.split(" ").splice(1, 3).join(" ")}`}</p>
+			</div>
+
+{/* PLAY CURRENT PLAYLIST BUTTON */}
+			<div>
+				<button>Play Current Playlist</button>
+			</div>
+
+
+{/* ITERATING TO FIND EACH INDIVIDUAL SONG AND DISPLAY */}
+			<div>
+				<div>
+					<p>Title</p>
+					<p>Album</p>
+					<p>Date Added</p>
+					<p>Length</p>
+				</div>
+				{currentPlaylist && currentPlaylist?.songs?.map(song => (
+					<div>
+						<p>{song.id}</p>
+											<p>{song}</p> {/* REMOVE BEFORE DEPLOYING */}
+						<p>Title</p>
+						<p>Album</p>
+						<p>Date Added</p>
+						<p>Length</p>
+						<audio></audio>
+					</div>
+
+
+				))}
+
+			</div>
+
+
+
 		</div>
 	);
 };

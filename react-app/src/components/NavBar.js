@@ -17,6 +17,7 @@ const NavBar = () => {
 
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user)
+  console.log(user)
 
   const demoUserLogin = async (e) => {
     e.preventDefault();
@@ -36,7 +37,8 @@ const NavBar = () => {
         <p>{user.username}</p>
         <img src='' alt='Current user img' />
         <ul>
-          <li>Profile</li>
+          <li><NavLink to={`/users/${user.id}`}>Profile</NavLink></li>
+          <li><NavLink to={`/users/2`}>Profile</NavLink></li>
           <LogoutButton />
         </ul>
       </div>
@@ -77,15 +79,41 @@ const NavBar = () => {
 
 {/* RIGHT SIDE NAV BAR */}
 
+      <div>
+        <p>Friend Activity</p>
+        <div>
+          <img src='' alt='Friend Img' />
+          <p>Most recent SONG</p>
+          <p>Most recent SONG album name</p>
+          <p>Most recently created Playlist</p>
+        </div>
+        {/* <div>
+          <img src='' alt='Friend Img' />
+          <p>Most recent SONG</p>
+          <p>Most recent SONG album name</p>
+          <p>Most recently created Playlist</p>
+        </div>
+        <div>
+          <img src='' alt='Friend Img' />
+          <p>Most recent SONG</p>
+          <p>Most recent SONG album name</p>
+          <p>Most recently created Playlist</p>
+        </div>
+        <div>
+          <img src='' alt='Friend Img' />
+          <p>Most recent SONG</p>
+          <p>Most recent SONG album name</p>
+          <p>Most recently created Playlist</p>
+        </div> */}
+      </div>
+
+
 {/* These links only for developement
     remove before deploying */}
+
+
       <div>
         <ul>
-          <li>
-            <NavLink to='/users/1' exact={true} activeClassName='active'>
-              Profile Page
-            </NavLink>
-          </li>
           <li>
             <NavLink to='/edit-song-form/1' exact={true} activeClassName='active'>
               Edit Song 1 Form
