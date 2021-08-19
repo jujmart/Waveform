@@ -14,7 +14,7 @@ def get_all_songs():
     song_list = []
     for song in songs:
         song_dict = song.to_dict()
-        song_dict["genres"] = [genre.id for genre in song.genres]
+        song_dict["genres"] = [genre.genreName for genre in song.genres]
         song_list.append(song_dict)
 
     return {'songs': song_list}
@@ -24,7 +24,7 @@ def get_all_songs():
 def get_one_song(id):
     song = Song.query.options(joinedload(Song.genres)).get(id)
     song_dict = song.to_dict()
-    song_dict["genres"] = [genre.id for genre in song.genres]
+    song_dict["genres"] = [genre.genreName for genre in song.genres]
     return {'song': song_dict}
 
 
@@ -96,7 +96,7 @@ def get_songs_for_playlist():
     song_list = []
     for song in songs:
         song_dict = song.to_dict()
-        song_dict["genres"] = [genre.id for genre in song.genres]
+        song_dict["genres"] = [genre.genreName for genre in song.genres]
         song_list.append(song_dict)
 
     return {'songs': song_list}

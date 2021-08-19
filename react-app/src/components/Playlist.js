@@ -42,11 +42,19 @@ const DisplayPlaylist = () => {
 	}, [dispatch, songsNotInStore]);
 
 	return (
-		<div>
-			<h2>{currentPlaylist?.title}</h2>
-			<h3>{currentPlaylist?.description}</h3>
-		</div>
-	);
+    <div>
+      <h2>{currentPlaylist?.title}</h2>
+      <h3>{currentPlaylist?.description}</h3>
+      {currentPlaylist?.songs?.map((songId) => {
+        return (
+          <div>
+            <div>{songs[songId]?.title}</div>
+            <div>{songs[songId]?.album}</div>
+          </div>
+        );
+      })}
+    </div>
+  );
 };
 
 export default DisplayPlaylist;

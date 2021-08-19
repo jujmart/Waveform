@@ -37,7 +37,14 @@ const EditSongForm = () => {
     setAlbum(song?.album);
     setAlbumImageUrl(song?.albumImageUrl);
     setGenres(
-      song?.genres ? new Set(song.genres.map((genre) => genre?.id)) : new Set()
+      song?.genres
+        ? new Set(
+            song.genres.map(
+              (genreName) =>
+                genresList.find((genre) => genre.genreName === genreName).id
+            )
+          )
+        : new Set()
     );
   }, [song, id]);
 
