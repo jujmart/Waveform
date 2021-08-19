@@ -15,9 +15,9 @@ TUESDAY
 WEDNESDAY
 
     [] Backend routes done
-        [] songs
-            [] PUT
-            [] DELETE
+        [X] songs
+            [X] PUT
+            [X] DELETE
         [] playlists
 
      [] Front end forms
@@ -66,10 +66,11 @@ SUNDAY
 
 =====================================================================================
 
+[ ] backend route for /api/playlist-songs
 [ ] change home route for unloggedin users
 [ ] fix signup form to include image
-[ ] songs route needs to get session user
-[ ] thunk for edit song
+[X] songs route needs to get session user
+[X] thunk for edit song
 [X] add default image to s3 bucket/aws stuff
 [X] form needs to connect to backend
 [X] fix genre to actually populate with correct objects

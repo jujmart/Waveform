@@ -6,7 +6,7 @@ import { setPlaylistSongsThunk } from "../store/songs";
 
 const DisplayPlaylist = () => {
 	const { id } = useParams();
-	const [songsNotInStore, setSongsNotInStore] = useState(new Set());
+	const [songsNotInStore, setSongsNotInStore] = useState([]);
 	const [currentPlaylist, setCurrentPlaylist] = useState({});
 	const user = useSelector((state) => state.session.user);
 	const songs = useSelector((state) => state.songs);
@@ -26,19 +26,17 @@ const DisplayPlaylist = () => {
 	}, [playlists, id]);
 
 	useEffect(() => {
-		console.log(currentPlaylist);
 		currentPlaylist?.songs?.forEach((songId) => {
-			console.log(songsNotInStore);
-
 			if (!songs[songId]) {
-				setSongsNotInStore((prevState) => prevState.add(songId));
+				if (!songsNotInStore.includes(songId)) {
+					setSongsNotInStore((prevState) => [...prevState, songId]);
+				}
 			}
 		});
 	}, [dispatch, songs, currentPlaylist, songsNotInStore]);
 
 	useEffect(() => {
-		console.log(songsNotInStore.size);
-		if (songsNotInStore.size) {
+		if (songsNotInStore.length) {
 			dispatch(setPlaylistSongsThunk(songsNotInStore));
 		}
 	}, [dispatch, songsNotInStore]);
