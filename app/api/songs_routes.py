@@ -14,7 +14,7 @@ def get_all_songs():
     song_list = []
     for song in songs:
         song_dict = song.to_dict()
-        song_dict["genres"] = [genre.to_dict() for genre in song.genres]
+        song_dict["genres"] = [genre.id for genre in song.genres]
         song_list.append(song_dict)
 
     return {'songs': song_list}
@@ -24,8 +24,8 @@ def get_all_songs():
 def get_one_song(id):
     song = Song.query.options(joinedload(Song.genres)).get(id)
     song_dict = song.to_dict()
-    song_dict["genres"] = [genre.to_dict() for genre in song.genres]
-    return song_dict
+    song_dict["genres"] = [genre.id for genre in song.genres]
+    return {'song': song_dict}
 
 
 @songs_routes.route('/', methods=["POST"])
@@ -86,3 +86,17 @@ def delete_song(id):
     db.session.delete(song)
     db.session.commit()
     return {}
+
+
+@songs_routes.route('/playlist', methods=['PATCH'])
+@login_required
+def get_songs_for_playlist():
+    songs_to_add = request.get_json()
+    songs = Song.query.filter(Song.id.in_(songs_to_add)).all()
+    song_list = []
+    for song in songs:
+        song_dict = song.to_dict()
+        song_dict["genres"] = [genre.id for genre in song.genres]
+        song_list.append(song_dict)
+
+    return {'songs': song_list}

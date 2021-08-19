@@ -8,6 +8,7 @@ playlists_routes = Blueprint('playlists', __name__)
 
 
 @playlists_routes.route('/')
+@login_required
 def get_all_playlists():
     playlists = Playlist.query.options(joinedload(Playlist.songs)).all()
     playlists_list = []
@@ -20,6 +21,7 @@ def get_all_playlists():
 
 
 @playlists_routes.route('/<int:id>')
+@login_required
 def get_one_playlist(id):
     playlist = Playlist.query.options(joinedload(Playlist.songs)).get(id)
     playlist_dict = playlist.to_dict()
