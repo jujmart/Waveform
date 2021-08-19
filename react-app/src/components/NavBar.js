@@ -1,9 +1,9 @@
-
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom';
-import LogoutButton from './auth/LogoutButton';
-import PlaylistFormModal from './PlaylistForm';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { getUserPlaylistsThunk } from "../store/userMusicInfo";
+import LogoutButton from "./auth/LogoutButton";
+import PlaylistFormModal from "./PlaylistForm";
 
 import { login } from '../store/session'
 
@@ -26,6 +26,11 @@ const NavBar = () => {
       setErrors(data);
     }
   };
+
+
+	useEffect(() => {
+		dispatch(getUserPlaylistsThunk(user?.id));
+	}, [dispatch, user]);
 
 
   if (user) {

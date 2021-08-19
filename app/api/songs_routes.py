@@ -14,7 +14,7 @@ def get_all_songs():
     song_list = []
     for song in songs:
         song_dict = song.to_dict()
-        song_dict["genres"] = [genre.to_dict() for genre in song.genres]
+        song_dict["genres"] = [genre.genreName for genre in song.genres]
         song_list.append(song_dict)
 
     return {'songs': song_list}
@@ -24,8 +24,8 @@ def get_all_songs():
 def get_one_song(id):
     song = Song.query.options(joinedload(Song.genres)).get(id)
     song_dict = song.to_dict()
-    song_dict["genres"] = [genre.to_dict() for genre in song.genres]
-    return song_dict
+    song_dict["genres"] = [genre.genreName for genre in song.genres]
+    return {'song': song_dict}
 
 
 @songs_routes.route('/', methods=["POST"])
@@ -34,8 +34,8 @@ def post_song():
     form = SongForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        genre_list = [Genre.query.get(genre_id)
-                      for genre_id in form.data["genres"]]
+        genre_list = Genre.query.filter(
+            Genre.id.in_(form.data["genres"])).all()
         new_song = Song(
             album=form.data["album"],
             albumImageUrl=form.data["albumImageUrl"],
@@ -61,19 +61,20 @@ def put_song(id):
     form = SongForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        genre_list = [Genre.query.get_or_404(genre_id)
-                      for genre_id in form.data["genres"]]
+        genre_list = Genre.query.filter(
+            Genre.id.in_(form.data["genres"])).all()
         edited_song = Song.query.get_or_404(id)
-        edited_song.album = form.data["album"]
-        edited_song.albumImageUrl = form.data["albumImageUrl"]
-        edited_song.artist = form.data["artist"]
-        edited_song.songUrl = form.data["songUrl"]
-        edited_song.title = form.data["title"]
-        edited_song.genres = genre_list
-        db.session.commit()
-        # new_song_data = new_song.to_dict()
-        # new_song_data["genres"] = [genre.to_dict()
-        #                            for genre in new_song.genres]
+        if edited_song.userId == current_user.id:
+            edited_song.album = form.data["album"]
+            edited_song.albumImageUrl = form.data["albumImageUrl"]
+            edited_song.artist = form.data["artist"]
+            edited_song.songUrl = form.data["songUrl"]
+            edited_song.title = form.data["title"]
+            edited_song.genres = genre_list
+            db.session.commit()
+            # new_song_data = new_song.to_dict()
+            # new_song_data["genres"] = [genre.to_dict()
+            #                            for genre in new_song.genres]
         return {}
     print(form.errors)
     return form.errors
@@ -83,6 +84,27 @@ def put_song(id):
 @login_required
 def delete_song(id):
     song = Song.query.get_or_404(id)
-    db.session.delete(song)
-    db.session.commit()
+    if song.userId == current_user.id:
+        db.session.delete(song)
+        db.session.commit()
     return {}
+
+
+@songs_routes.route('/playlist', methods=['PATCH'])
+@login_required
+def get_songs_for_playlist():
+    songs_to_add = request.get_json()
+    songs = Song.query.filter(Song.id.in_(songs_to_add)).all()
+    song_list = []
+    for song in songs:
+        song_dict = song.to_dict()
+        song_dict["genres"] = [genre.genreName for genre in song.genres]
+        song_list.append(song_dict)
+
+    return {'songs': song_list}
+
+
+@songs_routes.route('/users/<int:id>')
+def get_user_songs(id):
+    songs = Song.query.filter(Song.userId == id).all()
+    return {'songs': [song.id for song in songs]}

@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { createPlaylistThunk } from "../../store/playlist";
+import { useParams } from "react-router-dom";
+import { editPlaylistThunk, getOnePlaylistThunk } from "../../store/playlist";
 
-const PlaylistForm = ({ setShowModal }) => {
+const EditPlaylistForm = ({ setShowModal }) => {
+  const { id } = useParams();
   const [errors, setErrors] = useState([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const user = useSelector((state) => state.session.user);
+  const playlist = useSelector((state) => state.playlists[id]);
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
@@ -15,9 +18,20 @@ const PlaylistForm = ({ setShowModal }) => {
       title,
       description,
     };
-    await dispatch(createPlaylistThunk(data));
+    await dispatch(editPlaylistThunk(data, id));
     setShowModal(false);
   };
+
+  useEffect(() => {
+    if (!playlist) {
+      dispatch(getOnePlaylistThunk(id));
+    }
+  }, [dispatch, playlist]);
+
+  useEffect(() => {
+    setTitle(playlist?.title);
+    setDescription(playlist?.description);
+  }, [playlist]);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -56,4 +70,4 @@ const PlaylistForm = ({ setShowModal }) => {
   );
 };
 
-export default PlaylistForm;
+export default EditPlaylistForm;

@@ -2,11 +2,16 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
 import { getAllGenresThunk } from "../store/genre";
-import { getAllSongsThunk, editSongThunk, deleteSongThunk} from "../store/songs";
+import {
+	getOneSongThunk,
+	editSongThunk,
+	deleteSongThunk,
+} from "../store/songs";
+import { deleteUserSong, getUserSongsThunk } from "../store/userMusicInfo";
 
 const EditSongForm = () => {
 	const { id } = useParams();
-	const song = useSelector((state) => state.allSongs[id]);
+	const song = useSelector((state) => state.songs[id]);
 	const [errors, setErrors] = useState([]);
 	const [songUrl, setSongUrl] = useState("");
 	const [title, setTitle] = useState("");
@@ -23,7 +28,7 @@ const EditSongForm = () => {
 	}, [dispatch]);
 
 	useEffect(() => {
-		dispatch(getAllSongsThunk());
+		if (!song) dispatch(getOneSongThunk(id));
 	}, [dispatch]);
 
 	useEffect(() => {
@@ -34,7 +39,14 @@ const EditSongForm = () => {
 		setAlbumImageUrl(song?.albumImageUrl);
 		setGenres(
 			song?.genres
-				? new Set(song.genres.map((genre) => genre?.id))
+				? new Set(
+						song.genres.map(
+							(genreName) =>
+								genresList.find(
+									(genre) => genre.genreName === genreName
+								).id
+						)
+				  )
 				: new Set()
 		);
 	}, [song, id]);
@@ -44,8 +56,9 @@ const EditSongForm = () => {
 	};
 
 	const deleteSongButton = (e) => {
-		dispatch(deleteSongThunk(id))
-	}
+		dispatch(deleteSongThunk(id));
+		dispatch(deleteUserSong(id));
+	};
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -59,6 +72,11 @@ const EditSongForm = () => {
 		};
 		await dispatch(editSongThunk(data, id));
 	};
+
+	// for testing purposes only
+	useEffect(() => {
+		dispatch(getUserSongsThunk(user.id));
+	}, [dispatch, user]);
 
 	return (
 		<div>
@@ -149,7 +167,9 @@ const EditSongForm = () => {
 				</div>
 				<button type="submit">Submit</button>
 			</form>
-			<button onClick={deleteSongButton}>Delicately caress and MURDER?</button>
+			<button onClick={deleteSongButton}>
+				Delicately caress and MURDER?
+			</button>
 		</div>
 	);
 };
