@@ -54,25 +54,51 @@ const DisplayPlaylist = () => {
 		}
 	}, [dispatch, songsNotInStore]);
 
-	// remove this useEffect - just for testing purposes
-	useEffect(() => {
-		dispatch(getUserSongsThunk(user.id));
-	}, [dispatch, user]);
+	console.log(currentPlaylist.songs)
 
 	return (
 		<div>
-			<EditPlaylistFormModal />
-			<button onClick={handleDelete}>Delete Playlist</button>
-			<h2>{currentPlaylist?.title}</h2>
-			<h3>{currentPlaylist?.description}</h3>
-			{currentPlaylist?.songs?.map((songId) => {
-				return (
+			<div>
+				<img src='' alt='Playlist Image' />
+				<p></p>
+				<h2>{currentPlaylist?.title}</h2>
+				<p>{currentPlaylist?.description}</p>
+				<p>{`Created by${currentPlaylist?.userId} <=== Needs to be updated`}</p>
+				<p>{`Added on ${currentPlaylist?.createdAt?.split(" ").splice(1, 3).join(" ")}`}</p>
+			</div>
+
+{/* PLAY CURRENT PLAYLIST BUTTON */}
+			<div>
+				<button>Play Current Playlist</button>
+			</div>
+
+
+{/* ITERATING TO FIND EACH INDIVIDUAL SONG AND DISPLAY */}
+			<div>
+				<div>
+					<p>Title</p>
+					<p>Album</p>
+					<p>Date Added</p>
+					<p>Length</p>
+				</div>
+				{currentPlaylist && currentPlaylist?.songs?.map(song => (
 					<div>
-						<div>{songs[songId]?.title}</div>
-						<div>{songs[songId]?.album}</div>
+						<p>{song.id}</p>
+											<p>{song}</p> {/* REMOVE BEFORE DEPLOYING */}
+						<p>Title</p>
+						<p>Album</p>
+						<p>Date Added</p>
+						<p>Length</p>
+						<audio></audio>
 					</div>
-				);
-			})}
+
+
+				))}
+
+			</div>
+
+
+
 		</div>
 	);
 };
