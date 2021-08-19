@@ -34,8 +34,8 @@ def post_song():
     form = SongForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        genre_list = [Genre.query.get(genre_id)
-                      for genre_id in form.data["genres"]]
+        genre_list = Genre.query.filter(
+            Genre.id.in_(form.data["genres"])).all()
         new_song = Song(
             album=form.data["album"],
             albumImageUrl=form.data["albumImageUrl"],
@@ -61,8 +61,8 @@ def put_song(id):
     form = SongForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        genre_list = [Genre.query.get_or_404(genre_id)
-                      for genre_id in form.data["genres"]]
+        genre_list = Genre.query.filter(
+            Genre.id.in_(form.data["genres"])).all()
         edited_song = Song.query.get_or_404(id)
         edited_song.album = form.data["album"]
         edited_song.albumImageUrl = form.data["albumImageUrl"]
