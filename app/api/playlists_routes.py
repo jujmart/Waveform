@@ -56,12 +56,15 @@ def put_playlist(id):
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         edited_playlist = Playlist.query.get_or_404(id)
-        edited_playlist.title = form.data["title"]
-        edited_playlist.description = form.data["description"]
-        db.session.commit()
-        edited_playlist_dict = edited_playlist.to_dict()
-        edited_playlist_dict["songs"] = [song.id for song in edited_playlist.songs]
-        return {"playlist": edited_playlist_dict}
+        if edited_playlist.userId == current_user.id:
+            edited_playlist.title = form.data["title"]
+            edited_playlist.description = form.data["description"]
+            db.session.commit()
+            edited_playlist_dict = edited_playlist.to_dict()
+            edited_playlist_dict["songs"] = [
+                song.id for song in edited_playlist.songs]
+            return {"playlist": edited_playlist_dict}
+        return {"errors": "Only the creator of this playlist can edit it."}
     print(form.errors)
     return form.errors
 
@@ -70,6 +73,8 @@ def put_playlist(id):
 @login_required
 def delete_playlist(id):
     playlist = Playlist.query.get_or_404(id)
-    db.session.delete(playlist)
-    db.session.commit()
-    return {'playlistId': playlist.id}
+    if playlist.userId == current_user.id:
+        db.session.delete(playlist)
+        db.session.commit()
+        return {'playlistId': playlist.id}
+    return {"errors": "Only the creator of this playlist can delete it."}

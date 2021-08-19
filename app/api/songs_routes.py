@@ -64,16 +64,17 @@ def put_song(id):
         genre_list = Genre.query.filter(
             Genre.id.in_(form.data["genres"])).all()
         edited_song = Song.query.get_or_404(id)
-        edited_song.album = form.data["album"]
-        edited_song.albumImageUrl = form.data["albumImageUrl"]
-        edited_song.artist = form.data["artist"]
-        edited_song.songUrl = form.data["songUrl"]
-        edited_song.title = form.data["title"]
-        edited_song.genres = genre_list
-        db.session.commit()
-        # new_song_data = new_song.to_dict()
-        # new_song_data["genres"] = [genre.to_dict()
-        #                            for genre in new_song.genres]
+        if edited_song.userId == current_user.id:
+            edited_song.album = form.data["album"]
+            edited_song.albumImageUrl = form.data["albumImageUrl"]
+            edited_song.artist = form.data["artist"]
+            edited_song.songUrl = form.data["songUrl"]
+            edited_song.title = form.data["title"]
+            edited_song.genres = genre_list
+            db.session.commit()
+            # new_song_data = new_song.to_dict()
+            # new_song_data["genres"] = [genre.to_dict()
+            #                            for genre in new_song.genres]
         return {}
     print(form.errors)
     return form.errors
@@ -83,8 +84,9 @@ def put_song(id):
 @login_required
 def delete_song(id):
     song = Song.query.get_or_404(id)
-    db.session.delete(song)
-    db.session.commit()
+    if song.userId == current_user.id:
+        db.session.delete(song)
+        db.session.commit()
     return {}
 
 
