@@ -36,7 +36,6 @@ const NavBar = () => {
 
 
   const userPlaylists = useSelector(state => {
-    console.log(state)
     return state.userMusicInfo.playlists})
 
 

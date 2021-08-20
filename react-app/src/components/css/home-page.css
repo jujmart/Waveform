@@ -33,12 +33,7 @@
     background: rgb(31, 31, 31);
 }
 
-#homepage-lo-info_div{
-    grid-row: 10/ span end;
-    background: firebrick;
-    display: grid;
 
-}
 
 
 
@@ -79,5 +74,20 @@
 }
 
 #homepage-play_btn{
-    
+
 }
+
+#homepage-lo-info_div{
+    grid-row: 10/ span end;
+    grid-column: 1/span end;
+    background: firebrick;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+}
+
+    #homepage-lo-info-disp_div{
+        grid-row: 4/ 9;
+        grid-column: 1/span end;
+        background: blue;
+    }
