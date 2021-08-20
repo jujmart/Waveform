@@ -49,34 +49,36 @@ export const getOneSongThunk = (id) => async (dispatch) => {
 };
 
 export const uploadSongThunk = (payload, songData) => async (dispatch) => {
-  const AWSResponse = await fetch("/api/songs/AWS", {
+  payload["songUrl"] = "test";
+  payload["albumImageUrl"] = null;
+  const SQLResponse = await fetch("/api/songs/", {
     method: "POST",
-    body: songData,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
   });
 
-  if (AWSResponse.ok) {
-    const AWSData = await AWSResponse.json();
-    if (AWSData.errors) {
+  if (SQLResponse.ok) {
+    const SQLData = await SQLResponse.json();
+
+    if (SQLData.errors) {
       return;
     }
-    payload["songUrl"] = AWSData.songUrl;
-    payload["albumImageUrl"] = AWSData.albumImageUrl;
-    const SQLResponse = await fetch("/api/songs/", {
+    const AWSResponse = await fetch(`/api/songs/AWS/${SQLData.songId}`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
+      body: songData,
     });
 
-    if (SQLResponse.ok) {
-      const SQLData = await SQLResponse.json();
-
-      if (SQLData.errors) {
+    if (AWSResponse.ok) {
+      const AWSData = await AWSResponse.json();
+      if (AWSData.errors) {
         return;
       }
     }
   }
+
+
 };
 
 // If we change edit to modal, we need dispatch to store for update
