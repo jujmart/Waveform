@@ -81,8 +81,8 @@ const DisplayPlaylist = () => {
 					<p>Date Added</p>
 					<p>Length</p>
 				</div>
-				{currentPlaylist && currentPlaylist?.songs?.map(song => (
-					<div>
+				{currentPlaylist && currentPlaylist?.songs?.map((song, id) => (
+					<div id={id}>
 						<p>{song.id}</p>
 											<p>{song}</p> {/* REMOVE BEFORE DEPLOYING */}
 						<p>Title</p>

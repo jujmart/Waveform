@@ -1,5 +1,29 @@
 
-
-.user_profile-img{
-    width: 300px;
+#user-profile-container_div{
+    display: grid;
+    height: 100vh;
+    width: 100vw;
+    grid-template-columns: repeat(10, 10%);
+    grid-template-rows: repeat(10, 10%);
+    position: relative;
 }
+
+    #user-profile_div{
+        background-color: gray;
+        grid-column: 2 / 10 ;
+        grid-row: 1 / 10;
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        grid-template-rows: repeat(8, 1fr);
+    }
+
+
+    #user-profile-info_div{
+        grid-row: 1/ span 4;
+        grid-column: 1/ span end;
+    }
+
+
+    .user_profile-img{
+        width: 250px;
+    }

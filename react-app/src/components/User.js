@@ -33,10 +33,10 @@ function User() {
 
 
   return (
-    <div>
-
+    <div id='user-profile-container_div'>
+      <div id='user-profile_div'>
 {/* Simple user display at top of page */}
-      <div>
+      <div id='user-profile-info_div'>
         <img src={user.profilePhotoUrl} className='user_profile-img' alt='User Profile Image' />
           <p>PROFILE</p>
           <h1>{user.username}</h1>
@@ -75,7 +75,7 @@ function User() {
         <p>length of song</p>
       </div>
     </div>
-
+    </div>
     </div>
   );
 }
