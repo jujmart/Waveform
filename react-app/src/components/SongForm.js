@@ -48,6 +48,7 @@ const SongForm = () => {
         ))}
       </div>
       <div>
+        <img src={albumImage ? URL.createObjectURL(albumImage) : ""} />
         <label htmlFor="songUrl">Audio File</label>
         <input
           type="file"
