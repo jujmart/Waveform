@@ -97,7 +97,6 @@ const SongForm = () => {
         />
       </div>
       <div>
-        {/* Need to be updated for aws */}
         <label htmlFor="albumImage">AlbumImage</label>
         <input
           type="file"
