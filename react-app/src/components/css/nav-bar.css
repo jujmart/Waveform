@@ -15,8 +15,10 @@
     position: fixed;
     grid-template-columns: repeat(10, 10%);
     grid-template-rows: repeat(10, 10%);
-    
+
 }
+
+
 
 #upper-nav-bar_div{
     background: transparent;
@@ -197,3 +199,48 @@
 #waveform-nav-bar_div{
     background: turquoise;
 }
+
+
+/* NOT LOGGED IN CSS */
+
+
+#nav-bar-lo_nav{
+    background-color: rgb(24, 24, 24);
+    height: 10vh;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr) ;
+    border-bottom: darkslategray
+}
+
+    .nav-bar-lo_link{
+        font-size: 30px;
+        color: white;
+        justify-self: center;
+        align-self: center;
+        font-family: Oswald;
+        text-decoration: none;
+    }
+
+    #nav-bar-logo_img{
+        width: 80px;
+        border-radius: 50%;
+        justify-self: end;
+        align-self: center;
+    }
+
+    #nav-bar-lo_login{
+        grid-column: 8;
+    }
+
+    #nav-bar-lo_signup{
+
+    }
+
+    #nav-bar-lo_demo-btn{
+        height: 50px;
+        width: 150px;
+        border:none;
+        border-radius: 100px 100px 100px 100px;
+        justify-self: center;
+        align-self: center;
+    }

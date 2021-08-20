@@ -1,2 +1,83 @@
+* {
+    Margin:0;
+    Padding:0;
+    /* Border:0; */
+}
+
+#homepage-container_div{
+    margin: auto;
+    top: 10vh;
+    display: grid;
+    height: 80vh;
+    width: 80vw;
+    grid-template-columns: repeat(10, 10%);
+    grid-template-rows: repeat(10, 10%);
+    position: relative;
+}
+
+#homepage-lo-container_div{
+    height: 190vh;
+    width: 100vw;
+    background: dodgerblue;
+    display: grid;
+    grid-template-rows: repeat(19, 1fr);
+    grid-template-columns: repeat(10, 1fr) ;
+}
+
+#homepage-title-info_div{
+    grid-column: 1 /span end;
+    grid-row: 1 / 10;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(9, 1fr);
+    background: rgb(31, 31, 31);
+}
+
+#homepage-lo-info_div{
+    grid-row: 10/ span end;
+    background: firebrick;
+    display: grid;
+
+}
 
 
+
+#homepage-title_h1{
+    grid-column: 2 /6;
+    grid-row: 3/ 5;
+    font-size: 150px;
+    align-self: center;
+    font-family: Oswald;
+    color: whitesmoke;
+}
+
+#homepage-phrase_h2{
+    grid-row: 5;
+    grid-column: 2 /7;
+    font-family: Montserrat;
+    color: whitesmoke;
+}
+
+#homepage-mvp_h3{
+    grid-row: 5;
+    grid-column: 4 /6;
+    align-self: center;
+    justify-self: center;
+    font-family: Montserrat;
+    color: darkgray;
+}
+
+#homepage-signup_btn{
+    grid-row: 6;
+    grid-column: 5 ;
+    height: 50px;
+    width: 150px;
+    border:none;
+    border-radius: 100px 100px 100px 100px;
+    color: white;
+    background: darkgray;
+}
+
+#homepage-play_btn{
+    
+}

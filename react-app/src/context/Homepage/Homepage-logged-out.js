@@ -1,18 +1,29 @@
 import React from 'react';
+import { useRef, useEffect } from 'react';
 
 const HomePageLoggedOut = () =>{
+
+
+
+
+
+
     return (
-        <div>
-            <div>
-            <h1>WAVEFORM</h1>
-            <h2>A website for music lovers Created by you</h2>
-            <h3>Add your songs, create playlists</h3>
-            <button>Join Waveform for free</button>
+        <div id='homepage-lo-container_div'>
+            <div id='homepage-title-info_div'>
+            <h1 id='homepage-title_h1'>WAVEFORM</h1>
+            <h2 id='homepage-phrase_h2'>A website for audioElement lovers Created by you</h2>
+            <h3 id='homepage-mvp_h3'>Add your songs, create playlists</h3>
+            <button id='homepage-signup_btn'>Join Waveform for free</button>
+            <audio accept={`*/`}></audio>
+            <button  id='homepage-play_btn' data-playing="false" role="switch" aria-checked="false">
+                <span>Play/Pause</span>
+            </button>
         </div>
 
 
     {/* Homepage Click Display for Features */}
-        <div>
+        <div id='homepage-lo-info_div'>
             <button>Scroll left</button>
             <div>
                 <h2>Feature #1</h2>

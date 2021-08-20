@@ -7,9 +7,9 @@ const HomePageLoggedIn = () =>{
 
 
     return (
-        <div>
+        <div id='homepage-container_div'>
     {/* Current Users Playlist divider */}
-            {/* <div>
+            <div>
                 <h2>{user.username} Playlists</h2>
                     <div>
                         <p>Name of playlist</p>
@@ -36,10 +36,10 @@ const HomePageLoggedIn = () =>{
                         <img src='' alt='Album Image' />
                         <button>Stuff</button>
                     </div>
-            </div> */}
+            </div>
 
 {/* Recently Added Songs Divider */}
-            {/* <div>
+            <div>
                 <h2>Recently Added Songs</h2>
                     <div>
                         <p>Name of Song</p>
@@ -71,11 +71,11 @@ const HomePageLoggedIn = () =>{
                         <img src='' alt='Album Image' />
                         <button>Stuff</button>
                     </div>
-            </div> */}
+            </div>
 
 
 {/* Checkout Other Playlists Divider */}
-            {/* <div>
+            <div>
                 <h2> Playlists</h2>
                     <div>
                         <p>Name of playlist</p>
@@ -102,10 +102,10 @@ const HomePageLoggedIn = () =>{
                         <img src='' alt='Album Image' />
                         <button>Stuff</button>
                     </div>
-            </div> */}
+            </div>
 
 
-            
+
         </div>
     )
 }
