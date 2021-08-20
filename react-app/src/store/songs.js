@@ -60,6 +60,7 @@ export const uploadSongThunk = (payload, songData) => async (dispatch) => {
       return;
     }
     payload["songUrl"] = AWSData.songUrl;
+    payload["albumImageUrl"] = AWSData.albumImageUrl;
     const SQLResponse = await fetch("/api/songs/", {
       method: "POST",
       headers: {

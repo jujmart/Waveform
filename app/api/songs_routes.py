@@ -32,6 +32,7 @@ def get_one_song(id):
 @songs_routes.route("/AWS", methods=['POST'])
 @login_required
 def post_song_url():
+    #for song upload
     if "file" not in request.files:
         return {"errors": "song required"}, 400
 
@@ -42,18 +43,32 @@ def post_song_url():
 
     song.filename = get_unique_filename(song.filename)
 
-    upload = upload_file_to_s3(song)
+    songUpload = upload_file_to_s3(song)
 
-    if "url" not in upload:
-        # if the dictionary doesn't have a url key
-        # it means that there was an error when we tried to upload
-        # so we send back that error message
-        print("3nd if", upload)
-        return upload, 400
+    if "url" not in songUpload:
+        return songUpload, 400
 
-    url = upload["url"]
+    songUrl = songUpload["url"]
 
-    return {"songUrl": url}
+    #for Album image upload
+    if "image" not in request.files:
+        return {"errors": "album image required"}, 400
+
+    albumImage = request.files['image']
+
+    if not allowed_file(albumImage.filename):
+        return {"errors": "file type not permitted"}, 400
+
+    albumImage.filename = get_unique_filename(albumImage.filename)
+
+    albumImageUpload = upload_file_to_s3(albumImage)
+
+    if "url" not in albumImageUpload:
+        return albumImageUpload, 400
+
+    albumImageUrl = albumImageUpload["url"]
+
+    return {"songUrl": songUrl, "albumImageUrl": albumImageUrl}
 
 
 @songs_routes.route('/', methods=["POST"])
