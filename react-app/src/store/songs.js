@@ -48,21 +48,34 @@ export const getOneSongThunk = (id) => async (dispatch) => {
 	}
 };
 
-export const uploadSongThunk = (payload) => async (dispatch) => {
-	const response = await fetch("/api/songs/", {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify(payload),
-	});
+export const uploadSongThunk = (payload, songData) => async (dispatch) => {
+  const AWSResponse = await fetch("/api/songs/AWS", {
+    method: "POST",
+    body: songData,
+  });
 
-	if (response.ok) {
-		const data = await response.json();
-		if (data.errors) {
-			return;
-		}
-	}
+  if (AWSResponse.ok) {
+    const AWSData = await AWSResponse.json();
+    if (AWSData.errors) {
+      return;
+    }
+    payload["songUrl"] = AWSData.songUrl;
+    const SQLResponse = await fetch("/api/songs/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (SQLResponse.ok) {
+      const SQLData = await SQLResponse.json();
+
+      if (SQLData.errors) {
+        return;
+      }
+    }
+  }
 };
 
 // If we change edit to modal, we need dispatch to store for update

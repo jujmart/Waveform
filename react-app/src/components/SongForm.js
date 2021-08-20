@@ -6,36 +6,39 @@ import { uploadSongThunk } from "../store/songs";
 
 const SongForm = () => {
 	const [errors, setErrors] = useState([]);
-	const [songUrl, setSongUrl] = useState("");
-	const [title, setTitle] = useState("");
-	const [artist, setArtist] = useState("");
-	const [album, setAlbum] = useState("");
-	const [albumImageUrl, setAlbumImageUrl] = useState("");
-	const [genres, setGenres] = useState(new Set());
-	const user = useSelector((state) => state.session.user);
-	const genresList = useSelector((state) => state.genres);
-	const dispatch = useDispatch();
+	const [songUrl, setSongUrl] = useState(null);
+  const [title, setTitle] = useState("");
+  const [artist, setArtist] = useState("");
+  const [album, setAlbum] = useState("");
+  const [albumImageUrl, setAlbumImageUrl] = useState("");
+  const [genres, setGenres] = useState(new Set());
+  const user = useSelector((state) => state.session.user);
+  const genresList = useSelector((state) => state.genres);
+  const dispatch = useDispatch();
 
-	useEffect(() => {
-		dispatch(getAllGenresThunk());
-	}, [dispatch]);
+  useEffect(() => {
+    dispatch(getAllGenresThunk());
+  }, [dispatch]);
 
-	const handleOptionClick = (e) => {
-		setGenres((prevGenres) => prevGenres.add(+e.target.value));
-	};
+  const handleOptionClick = (e) => {
+    setGenres((prevGenres) => prevGenres.add(+e.target.value));
+  };
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		const data = {
-			songUrl,
-			title,
-			artist,
-			album,
-			albumImageUrl,
-			genres: [...genres],
-		};
-		await dispatch(uploadSongThunk(data));
-	};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    let songData = new FormData();
+    songData.set("file", songUrl);
+
+    const data = {
+      title,
+      artist,
+      album,
+      albumImageUrl,
+      genres: [...genres],
+    };
+
+    await dispatch(uploadSongThunk(data, songData));
+  };
 
 	return (
 		<form onSubmit={handleSubmit}>

@@ -4,6 +4,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import Song, db, Genre
 from sqlalchemy.orm import joinedload
+from app.AWS import allowed_file, get_unique_filename, upload_file_to_s3
 
 songs_routes = Blueprint('songs', __name__)
 
@@ -28,29 +29,52 @@ def get_one_song(id):
     return {'song': song_dict}
 
 
+@songs_routes.route("/AWS", methods=['POST'])
+@login_required
+def post_song_url():
+    if "file" not in request.files:
+        return {"errors": "song required"}, 400
+
+    song = request.files['file']
+
+    if not allowed_file(song.filename):
+        return {"errors": "file type not permitted"}, 400
+
+    song.filename = get_unique_filename(song.filename)
+
+    upload = upload_file_to_s3(song)
+
+    if "url" not in upload:
+        # if the dictionary doesn't have a url key
+        # it means that there was an error when we tried to upload
+        # so we send back that error message
+        print("3nd if", upload)
+        return upload, 400
+
+    url = upload["url"]
+
+    return {"songUrl": url}
+
+
 @songs_routes.route('/', methods=["POST"])
 @login_required
 def post_song():
     form = SongForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        # aws stuff will need to send the file to AWs and receive back the Url to put into the new song
         genre_list = Genre.query.filter(
             Genre.id.in_(form.data["genres"])).all()
         new_song = Song(
             album=form.data["album"],
             albumImageUrl=form.data["albumImageUrl"],
             artist=form.data["artist"],
-            songUrl="Something",  # we need to change this to accept url from AWS
+            songUrl=form.data['songUrl'],
             title=form.data["title"],
             genres=genre_list,
             userId=current_user.id
         )
         db.session.add(new_song)
         db.session.commit()
-        # new_song_data = new_song.to_dict()
-        # new_song_data["genres"] = [genre.to_dict()
-        #                            for genre in new_song.genres]
         return {}
     print(form.errors)
     return form.errors
