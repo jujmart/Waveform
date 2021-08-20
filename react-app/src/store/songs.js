@@ -49,35 +49,36 @@ export const getOneSongThunk = (id) => async (dispatch) => {
 };
 
 export const uploadSongThunk = (payload, songData) => async (dispatch) => {
-  payload["songUrl"] = "test";
-  payload["albumImageUrl"] = null;
-  const SQLResponse = await fetch("/api/songs/", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
-  });
-
-  if (SQLResponse.ok) {
-    const SQLData = await SQLResponse.json();
-
-    if (SQLData.errors) {
-      return;
-    }
-    const AWSResponse = await fetch(`/api/songs/AWS/${SQLData.songId}`, {
+  if (typeof songData.get("file") !== "string") {
+    payload["songUrl"] = "test";
+    payload["albumImageUrl"] = null;
+    const SQLResponse = await fetch("/api/songs/", {
       method: "POST",
-      body: songData,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
     });
 
-    if (AWSResponse.ok) {
-      const AWSData = await AWSResponse.json();
-      if (AWSData.errors) {
+    if (SQLResponse.ok) {
+      const SQLData = await SQLResponse.json();
+
+      if (SQLData.errors) {
         return;
+      }
+      const AWSResponse = await fetch(`/api/songs/AWS/${SQLData.songId}`, {
+        method: "POST",
+        body: songData,
+      });
+
+      if (AWSResponse.ok) {
+        const AWSData = await AWSResponse.json();
+        if (AWSData.errors) {
+          return;
+        }
       }
     }
   }
-
 
 };
 

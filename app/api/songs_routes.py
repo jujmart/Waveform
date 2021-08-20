@@ -33,43 +33,49 @@ def get_one_song(id):
 @login_required
 def post_song_url(id):
     #for song upload
-    # if "file" not in request.files:
-    #     return {"errors": "song required"}, 400
+    if "file" not in request.files:
+        return {"errors": "song required"}, 400
 
-    # song = request.files['file']
+    song = request.files['file']
 
-    # if not allowed_file(song.filename):
-    #     return {"errors": "file type not permitted"}, 400
+    if not allowed_file(song.filename):
+        return {"errors": "file type not permitted"}, 400
 
-    # song.filename = get_unique_filename(song.filename)
+    song.filename = get_unique_filename(song.filename)
 
-    # songUpload = upload_file_to_s3(song)
+    songUpload = upload_file_to_s3(song)
 
-    # if "url" not in songUpload:
-    #     return songUpload, 400
+    if "url" not in songUpload:
+        return songUpload, 400
 
-    # songUrl = songUpload["url"]
+    songUrl = songUpload["url"]
+
+    song_to_update = Song.query.get_or_404(id)
+    song_to_update.songUrl = songUrl
+    db.session.commit()
 
     #for Album image upload
-    print(request.files['image'])
-    # if "image" not in request.files:
-    #     return {"errors": "album image required"}, 400
+    if "image" not in request.files:
+        return {"errors": "album image required"}, 400
 
-    # albumImage = request.files['image']
+    albumImage = request.files['image']
 
-    # if not allowed_file(albumImage.filename):
-    #     return {"errors": "file type not permitted"}, 400
+    if not allowed_file(albumImage.filename):
+        return {"errors": "file type not permitted"}, 400
 
-    # albumImage.filename = get_unique_filename(albumImage.filename)
+    albumImage.filename = get_unique_filename(albumImage.filename)
 
-    # albumImageUpload = upload_file_to_s3(albumImage)
+    albumImageUpload = upload_file_to_s3(albumImage)
 
-    # if "url" not in albumImageUpload:
-    #     return albumImageUpload, 400
+    if "url" not in albumImageUpload:
+        return albumImageUpload, 400
 
-    # albumImageUrl = albumImageUpload["url"]
+    albumImageUrl = albumImageUpload["url"]
 
-    #return {"songUrl": songUrl, "albumImageUrl": albumImageUrl}
+    song_to_update.albumImageUrl = albumImageUrl
+    db.session.commit()
+
+    return {"songUrl": songUrl, "albumImageUrl": albumImageUrl}
 
 
 @songs_routes.route('/', methods=["POST"])
