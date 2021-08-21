@@ -13,11 +13,10 @@ const EditSongForm = () => {
 	const { id } = useParams();
 	const song = useSelector((state) => state.songs[id]);
 	const [errors, setErrors] = useState([]);
-	const [songUrl, setSongUrl] = useState("");
 	const [title, setTitle] = useState("");
 	const [artist, setArtist] = useState("");
 	const [album, setAlbum] = useState("");
-	const [albumImageUrl, setAlbumImageUrl] = useState("");
+	const [albumImage, setAlbumImage] = useState(null);
 	const [genres, setGenres] = useState(new Set());
 	const user = useSelector((state) => state.session.user);
 	const genresList = useSelector((state) => state.genres);
@@ -29,14 +28,12 @@ const EditSongForm = () => {
 
 	useEffect(() => {
 		if (!song) dispatch(getOneSongThunk(id));
-	}, [dispatch]);
+	}, [dispatch, song, id]);
 
 	useEffect(() => {
-		setSongUrl(song?.songUrl);
 		setTitle(song?.title);
 		setArtist(song?.artist);
 		setAlbum(song?.album);
-		setAlbumImageUrl(song?.albumImageUrl);
 		setGenres(
 			song?.genres
 				? new Set(
@@ -49,7 +46,7 @@ const EditSongForm = () => {
 				  )
 				: new Set()
 		);
-	}, [song, id]);
+	}, [song, id, genresList]);
 
 	const handleOptionClick = (e) => {
 		setGenres((prevGenres) => prevGenres.add(+e.target.value));
@@ -62,20 +59,21 @@ const EditSongForm = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		const imageData = new FormData();
+		imageData.set("image", albumImage);
 		const data = {
-			songUrl,
+			songUrl: song.songUrl,
 			title,
 			artist,
 			album,
-			albumImageUrl,
 			genres: [...genres],
 		};
-		await dispatch(editSongThunk(data, id));
+		await dispatch(editSongThunk(data, id, imageData));
 	};
 
 	// for testing purposes only
 	useEffect(() => {
-		dispatch(getUserSongsThunk(user.id));
+		dispatch(getUserSongsThunk(user?.id));
 	}, [dispatch, user]);
 
 	return (
@@ -86,20 +84,14 @@ const EditSongForm = () => {
 						<div key={ind}>{error}</div>
 					))}
 				</div>
-				<div>
-					{/* Need to be updated for aws */}
-					<label htmlFor="songUrl">songUrl</label>
-					<input
-						name="songUrl"
-						type="text"
-						placeholder="songUrl"
-						value={songUrl}
-						required
-						onChange={(e) => {
-							setSongUrl(e.target.value);
-						}}
-					/>
-				</div>
+				<img
+					src={
+						albumImage
+							? URL.createObjectURL(albumImage)
+							: song?.albumImageUrl
+					}
+					alt="Album Cover"
+				/>
 				<div>
 					<label htmlFor="title">Title</label>
 					<input
@@ -138,15 +130,13 @@ const EditSongForm = () => {
 					/>
 				</div>
 				<div>
-					{/* Need to be updated for aws */}
-					<label htmlFor="albumImageUrl">AlbumImageUrl</label>
+					<label htmlFor="albumImage">Album Image</label>
 					<input
-						name="albumImageUrl"
-						type="text"
-						placeholder="albumImageUrl"
-						value={albumImageUrl}
+						type="file"
+						accept=".pdf,.png,.jpg,.jpeg,.gif"
+						name="albumImage"
 						onChange={(e) => {
-							setAlbumImageUrl(e.target.value);
+							setAlbumImage(e.target.files[0]);
 						}}
 					/>
 				</div>

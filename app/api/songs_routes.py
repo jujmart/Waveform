@@ -4,7 +4,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import Song, db, Genre
 from sqlalchemy.orm import joinedload
-from app.AWS import allowed_file, get_unique_filename, upload_file_to_s3
+from app.AWS import allowed_file, get_unique_filename, upload_file_to_s3, delete_file_by_url
 
 songs_routes = Blueprint('songs', __name__)
 
@@ -32,7 +32,7 @@ def get_one_song(id):
 @songs_routes.route("/AWS/<int:id>", methods=['POST'])
 @login_required
 def post_song_url(id):
-    #for song upload
+    # for song upload
     if "file" not in request.files:
         return {"errors": "song required"}, 400
 
@@ -54,7 +54,7 @@ def post_song_url(id):
     song_to_update.songUrl = songUrl
     db.session.commit()
 
-    #for Album image upload
+    # for Album image upload
     if "image" not in request.files:
         return {"errors": "album image required"}, 400
 
@@ -102,6 +102,36 @@ def post_song():
     return form.errors
 
 
+@songs_routes.route("/AWS/<int:id>", methods=['PUT'])
+def put_song_aws(id):
+
+    # for Album image upload
+    if "image" not in request.files:
+        return {"errors": "album image required"}, 400
+
+    albumImage = request.files['image']
+
+    if not allowed_file(albumImage.filename):
+        return {"errors": "file type not permitted"}, 400
+
+    albumImage.filename = get_unique_filename(albumImage.filename)
+
+    song_to_update = Song.query.get_or_404(id)
+    old_album_image_url = song_to_update.albumImageUrl
+    delete_file_by_url(old_album_image_url)
+    albumImageUpload = upload_file_to_s3(albumImage)
+
+    if "url" not in albumImageUpload:
+        return albumImageUpload, 400
+
+    albumImageUrl = albumImageUpload["url"]
+
+    song_to_update.albumImageUrl = albumImageUrl
+    db.session.commit()
+
+    return {"albumImageUrl": albumImageUrl}
+
+
 @songs_routes.route('/<int:id>', methods=["PUT"])
 @login_required
 def put_song(id):
@@ -110,14 +140,10 @@ def put_song(id):
     if form.validate_on_submit():
         edited_song = Song.query.get_or_404(id)
         if edited_song.userId == current_user.id:
-            # aws stuff will need to send the file to AWs and receive back the Url to put into the new song
             genre_list = Genre.query.filter(
                 Genre.id.in_(form.data["genres"])).all()
             edited_song.album = form.data["album"]
-            edited_song.albumImageUrl = form.data["albumImageUrl"]
             edited_song.artist = form.data["artist"]
-            # we need to change this to accept url from AWS
-            edited_song.songUrl = "something"
             edited_song.title = form.data["title"]
             edited_song.genres = genre_list
             db.session.commit()
@@ -129,11 +155,26 @@ def put_song(id):
     return form.errors
 
 
+# @songs_routes.route("/AWS/<int:id>", methods=['DELETE'])
+# def delete_song_aws(id):
+
+#     old_album_image_url = request.data.albumImageUrl
+#     old_song_url = request.data.songUrl
+#     delete_file_by_url(old_album_image_url)
+#     delete_file_by_url(old_song_url)
+
+#     return {}
+
+
 @songs_routes.route('/<int:id>', methods=["DELETE"])
 @login_required
 def delete_song(id):
     song = Song.query.get_or_404(id)
     if song.userId == current_user.id:
+        old_album_image_url = song.albumImageUrl
+        old_song_url = song.songUrl
+        delete_file_by_url(old_album_image_url)
+        delete_file_by_url(old_song_url)
         db.session.delete(song)
         db.session.commit()
     return {}
