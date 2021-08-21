@@ -207,6 +207,7 @@
 #nav-bar-lo_nav{
     background-color: rgb(24, 24, 24);
     height: 10vh;
+    width: 100vw;
     display: grid;
     grid-template-columns: repeat(10, 1fr) ;
     border-bottom: darkslategray

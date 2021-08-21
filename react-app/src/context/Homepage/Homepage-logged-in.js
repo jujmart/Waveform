@@ -6,6 +6,8 @@ const HomePageLoggedIn = () =>{
     const user = useSelector(state => state.session.user)
 
 
+
+    
     return (
         <div id='homepage-container_div'>
     {/* Current Users Playlist divider */}
