@@ -4,11 +4,12 @@ import { useSelector } from 'react-redux';
 const HomePageLoggedIn = () =>{
 
     const user = useSelector(state => state.session.user)
-    console.log(user)
 
 
+
+    
     return (
-        <div>
+        <div id='homepage-container_div'>
     {/* Current Users Playlist divider */}
             <div>
                 <h2>{user.username} Playlists</h2>
@@ -104,6 +105,9 @@ const HomePageLoggedIn = () =>{
                         <button>Stuff</button>
                     </div>
             </div>
+
+
+
         </div>
     )
 }

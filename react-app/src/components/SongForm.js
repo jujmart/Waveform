@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { getAllGenresThunk } from "../store/genre";
 import { uploadSongThunk } from "../store/songs";
+import './css/song-form.css'
 
 const SongForm = () => {
 	const [errors, setErrors] = useState([]);
@@ -41,6 +42,7 @@ const SongForm = () => {
 	};
 
 	return (
+
 		<form onSubmit={handleSubmit}>
 			<div>
 				{errors.map((error, ind) => (
@@ -113,24 +115,6 @@ const SongForm = () => {
 						setAlbumImage(e.target.files[0]);
 					}}
 				/>
-			</div>
-			<div>
-				<label htmlFor="genres">Genres</label>
-				<select
-					name="genres"
-					onChange={(e) => handleOptionClick(e)}
-					defaultValue="Select Genre"
-				>
-					<option disabled>Select Genre</option>
-					{genresList.map((genre) => (
-						<option key={genre.id} value={genre.id}>
-							{genre.genreName}
-						</option>
-					))}
-				</select>
-			</div>
-			<button type="submit">Submit</button>
-		</form>
 	);
 };
 

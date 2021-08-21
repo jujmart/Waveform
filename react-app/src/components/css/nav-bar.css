@@ -1,0 +1,247 @@
+
+
+.nav-bar_nav-links{
+    color: white;
+    text-decoration: none;
+    align-self: center;
+    justify-self: center;
+    font-size: 25px;
+}
+
+#nav-bar_nav{
+    display: grid;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    grid-template-columns: repeat(10, 10%);
+    grid-template-rows: repeat(10, 10%);
+
+}
+
+
+
+#upper-nav-bar_div{
+    background: transparent;
+    grid-column: 2/ 10 ;
+    grid-row: 1;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr) ;
+    grid-template-rows: repeat(1, 1fr) ;
+}
+
+    #upper-nav-bar-button_div{
+
+    }
+
+    #user_div{
+        background: black;
+        color: white;
+        justify-self: center;
+        align-self: center;
+        grid-column: 5;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr) ;
+    }
+
+    #user-drop-down_div{
+        visibility: hidden;
+        opacity: 0;
+        transition: all 0.5s ease;
+        margin-top: 1rem;
+        left: 0;
+        display: none;
+    }
+
+    #user_div:hover #user-drop-down_div{
+        visibility: visible;
+        opacity: 1;
+        display: block;
+        background-color: green;
+    }
+
+        #nav-bar_current-user-img{
+            width: 40px;
+        }
+
+#left-nav-bar_div{
+    background: black;
+    grid-column: 1;
+    grid-row: 1 / 4 ;
+    display: grid;
+    grid-template-rows: repeat(7, 1fr);
+    border-bottom: white .5px solid;
+}
+
+
+
+    #settings-nav-bar_nav-link{
+        color:white;
+        text-decoration: none;
+        padding-left: 10px;
+        font-size: 25px;
+    }
+
+    #create-playlist_div{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        #create-playlist_button{
+            justify-self: center;
+            align-self: center;
+        }
+
+#user-playlists-nav-bar_div{
+    grid-row: 4 /10;
+    background: black;
+    display: grid;
+    grid-template-rows: repeat(14, 1fr);
+}
+
+    .user-playlist{
+        text-decoration: none;
+        color: white;
+        font-size: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+#right-nav-bar_div{
+    background: black;
+    grid-column: 10;
+    grid-row: 1 /span end ;
+    display: grid;
+    grid-template-rows: repeat(10, 1fr);
+    color: rgb(124, 127, 131);
+}
+
+    #friend-activity_h3{
+        color:white
+    }
+
+    .friend-activity_profile-img{
+        width: 60px;
+    }
+
+
+#audio-controls-nav-bar_div{
+    background: rgb(39, 45, 51);
+    grid-column: 1/ span end ;
+    grid-row: 10 ;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+}
+
+    #song-display_div{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr) ;
+        grid-template-rows: repeat(3, 1fr);
+        grid-column: 1/3;
+    }
+
+    #audio-controls_img{
+        grid-row: 1 / 4;
+        width: 75px;
+        padding-left: 8px;
+        align-self: center;
+    }
+
+    #audio-controls_name{
+        grid-row: 1/ 3;
+        grid-column:2 ;
+        align-self: center;
+        font-size: 20px;
+        font-weight: bold;
+        color: white;
+    }
+
+    #audio-controls_album-title{
+        grid-row: 2/ 3;
+        grid-column: 2;
+        align-self: end;
+        font-size: 15px;
+        color: rgb(124, 127, 131);
+    }
+
+    #audio-controls_div{
+        display: grid;
+        grid-column: 3 /span end;
+        grid-template-columns: repeat(8, 1fr);
+    }
+
+        #audio-controls_back{
+
+        }
+
+        #audio-controls_skip{
+
+        }
+
+        #audio-controls_play{
+
+        }
+
+        #audio-controls_queue{
+
+        }
+
+        #audio-control_fullscreen{
+
+        }
+
+        #audio-control_volume{
+
+        }
+
+
+#waveform-nav-bar_div{
+    background: turquoise;
+}
+
+
+/* NOT LOGGED IN CSS */
+
+
+#nav-bar-lo_nav{
+    background-color: rgb(24, 24, 24);
+    height: 10vh;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr) ;
+    border-bottom: darkslategray
+}
+
+    .nav-bar-lo_link{
+        font-size: 30px;
+        color: white;
+        justify-self: center;
+        align-self: center;
+        font-family: Oswald;
+        text-decoration: none;
+    }
+
+    #nav-bar-logo_img{
+        width: 80px;
+        border-radius: 50%;
+        justify-self: end;
+        align-self: center;
+    }
+
+    #nav-bar-lo_login{
+        grid-column: 8;
+    }
+
+    #nav-bar-lo_signup{
+
+    }
+
+    #nav-bar-lo_demo-btn{
+        height: 50px;
+        width: 150px;
+        border:none;
+        border-radius: 100px 100px 100px 100px;
+        justify-self: center;
+        align-self: center;
+    }

@@ -1,0 +1,23 @@
+#song-form-container_div{
+    margin: auto;
+    top: 10vh;
+    display: grid;
+    height: 80vh;
+    width: 80vw;
+    grid-template-columns: repeat(10, 10%);
+    grid-template-rows: repeat(10, 10%);
+    position: relative;
+}
+
+#song-form_form{
+
+    overflow: visible;
+}
+
+.song-form-input_div{
+    overflow: visible;
+}
+
+.song-form_input{
+
+}
