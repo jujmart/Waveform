@@ -84,3 +84,17 @@ def delete_playlist(id):
 def get_user_playlists(id):
     playlists = Playlist.query.filter(Playlist.userId == id).all()
     return {'playlists': [playlist.id for playlist in playlists]}
+
+
+@playlists_routes.route('/', methods=['PATCH'])
+@login_required
+def get_playlists_from_playlist_arr():
+    playlists_to_add = request.get_json()
+    playlists = Playlist.query.filter(Playlist.id.in_(playlists_to_add)).all()
+    playlists_list = []
+    for playlist in playlists:
+        playlists_dict = playlist.to_dict()
+        playlists_dict["songs"] = [song.id for song in playlist.songs]
+        playlists_list.append(playlists_dict)
+
+    return {'playlists': playlists_list}
