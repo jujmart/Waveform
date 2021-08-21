@@ -12,7 +12,7 @@ const SongForm = () => {
 	const [artist, setArtist] = useState("");
 	const [album, setAlbum] = useState("");
 	const [albumImage, setAlbumImage] = useState("");
-	const [genres, setGenres] = useState(new Set());
+	const [genres, setGenres] = useState([]);
 	const user = useSelector((state) => state.session.user);
 	const genresList = useSelector((state) => state.genres);
 	const dispatch = useDispatch();
@@ -22,7 +22,17 @@ const SongForm = () => {
 	}, [dispatch]);
 
 	const handleOptionClick = (e) => {
-		setGenres((prevGenres) => prevGenres.add(+e.target.value));
+		setGenres((prevGenres) => [...prevGenres, +e.target.value]);
+	};
+
+	const deleteGenreOnClick = (e) => {
+		e.preventDefault()
+
+		const idx = genres.indexOf(+e.target.value)
+
+
+		setGenres((prevGenres) => prevGenres.slice(0,idx).concat(prevGenres.slice(idx+1)))
+
 	};
 
 	const handleSubmit = async (e) => {
@@ -35,7 +45,7 @@ const SongForm = () => {
 			title,
 			artist,
 			album,
-			genres: [...genres],
+			genres,
 		};
 
 		await dispatch(uploadSongThunk(data, songData));
@@ -56,9 +66,14 @@ const SongForm = () => {
 				<h2>{title}</h2>
 				<h3>{artist}</h3>
 				<h3>{album}</h3>
-					<ul>
-						<li>stuff</li>
-					</ul>
+
+				{genres.length > 0 && genres.map(genreId =>(
+					<div key={genreId}>
+					<p>{genresList[genreId -1].genreName}</p>
+					<button onClick={deleteGenreOnClick} value={genreId}>x</button>
+					</div>
+				))}
+
 			</div>
 		<form id='song-form_form' onSubmit={handleSubmit}>
 
@@ -132,6 +147,23 @@ const SongForm = () => {
 					}}
 				/>
 			</div>
+			<div>
+				<label htmlFor="genres">Genres</label>
+				<select
+					name="genres"
+					onChange={(e) => handleOptionClick(e)}
+					defaultValue="Select Genre"
+				>
+					<option disabled>Select Genre</option>
+					{genresList.map((genre) => (
+						<option key={genre.id} value={genre.id}>
+							{genre.genreName}
+						</option>
+					))}
+				</select>
+			</div>
+			<button type="submit">Submit</button>
+
 		</form>
 	</div>
 	);
