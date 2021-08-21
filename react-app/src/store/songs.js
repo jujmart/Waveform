@@ -125,17 +125,6 @@ export const deleteSongThunk = (id) => async (dispatch) => {
 			return;
 		}
 		dispatch(deleteSong(id));
-		// const AWSresponse = await fetch(`/api/songs/AWS/${id}`, {
-		// 	method: "DELETE",
-		// 	body: JSON.stringify(SQLdata.song),
-		// });
-
-		// if (AWSresponse.ok) {
-		// 	const AWSdata = await AWSresponse.json();
-		// 	if (AWSdata.errors) {
-		// 		return;
-		// 	}
-		// }
 	}
 };
 

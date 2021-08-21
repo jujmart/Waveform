@@ -155,17 +155,6 @@ def put_song(id):
     return form.errors
 
 
-# @songs_routes.route("/AWS/<int:id>", methods=['DELETE'])
-# def delete_song_aws(id):
-
-#     old_album_image_url = request.data.albumImageUrl
-#     old_song_url = request.data.songUrl
-#     delete_file_by_url(old_album_image_url)
-#     delete_file_by_url(old_song_url)
-
-#     return {}
-
-
 @songs_routes.route('/<int:id>', methods=["DELETE"])
 @login_required
 def delete_song(id):
