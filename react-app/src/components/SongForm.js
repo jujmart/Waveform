@@ -7,11 +7,11 @@ import './css/song-form.css'
 
 const SongForm = () => {
 	const [errors, setErrors] = useState([]);
-	const [songUrl, setSongUrl] = useState("");
+	const [songUrl, setSongUrl] = useState(null);
 	const [title, setTitle] = useState("");
 	const [artist, setArtist] = useState("");
 	const [album, setAlbum] = useState("");
-	const [albumImageUrl, setAlbumImageUrl] = useState("");
+	const [albumImage, setAlbumImage] = useState("");
 	const [genres, setGenres] = useState(new Set());
 	const user = useSelector((state) => state.session.user);
 	const genresList = useSelector((state) => state.genres);
@@ -27,117 +27,94 @@ const SongForm = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		let songData = new FormData();
+		songData.set("file", songUrl);
+		songData.set("image", albumImage);
+
 		const data = {
-			songUrl,
 			title,
 			artist,
 			album,
-			albumImageUrl,
 			genres: [...genres],
 		};
-		console.log(data);
-		await dispatch(uploadSongThunk(data));
+
+		await dispatch(uploadSongThunk(data, songData));
 	};
 
 	return (
-		<div id='song-form-container_div'>
-			<div id='song-display_div'>
-				<p>{title}</p>
-				
 
+		<form onSubmit={handleSubmit}>
+			<div>
+				{errors.map((error, ind) => (
+					<div key={ind}>{error}</div>
+				))}
 			</div>
-			<form id='song-form_form' onSubmit={handleSubmit}>
-				<div>
-					{errors.map((error, ind) => (
-						<div key={ind}>{error}</div>
-					))}
-				</div>
-				<div className='song-form-input_div'>
-					{/* Need to be updated for aws */}
-					<label htmlFor="songUrl">songUrl</label>
-					<input className='song-form_input'
-						name="songUrl"
-						type="text"
-						placeholder="songUrl"
-						value={songUrl}
-						required
-						onChange={(e) => {
-							setSongUrl(e.target.value);
-						}}
-					/>
-				</div>
-				<div className='song-form-input_div'>
-					<label htmlFor="title">Title</label>
-					<input
-						className='song-form_input'
-						name="title"
-						type="text"
-						placeholder="title"
-						value={title}
-						required
-						onChange={(e) => {
-							setTitle(e.target.value);
-						}}
-					/>
-				</div>
-				<div className='song-form-input_div'>
-					<label htmlFor="artist">Artist</label>
-					<input
-						className='song-form_input'
-						name="artist"
-						type="text"
-						placeholder="artist"
-						value={artist}
-						onChange={(e) => {
-							setArtist(e.target.value);
-						}}
-					/>
-				</div>
-				<div className='song-form-input_div'>
-					<label htmlFor="album">Album</label>
-					<input
-						className='song-form_input'
-						name="album"
-						type="text"
-						placeholder="album"
-						value={album}
-						onChange={(e) => {
-							setAlbum(e.target.value);
-						}}
-					/>
-				</div>
-				<div className='song-form-input_div'>
-					{/* Need to be updated for aws */}
-					<label htmlFor="albumImageUrl">AlbumImageUrl</label>
-					<input
-						className='song-form_input'
-						name="albumImageUrl"
-						type="text"
-						placeholder="albumImageUrl"
-						value={albumImageUrl}
-						onChange={(e) => {
-							setAlbumImageUrl(e.target.value);
-						}}
-					/>
-				</div>
-				<div className='song-form-input_div'>
-					<label htmlFor="genres">Genres</label>
-					<select
-						name="genres"
-						onChange={(e) => handleOptionClick(e)}
-						defaultValue="Select Genre"
-					>
-						<option disabled>Select Genre</option>
-						{genresList.map((genre) => (
-							<option key={genre.id} value={genre.id}>
-								{genre.genreName}
-							</option>
-						))}
-					</select>
-				</div>
-				<button type="submit">Submit</button>
-			</form>
-		</div>
+			<div>
+				<img
+					src={
+						albumImage
+							? URL.createObjectURL(albumImage)
+							: "https://spot-a-cloud.s3.us-east-2.amazonaws.com/AWS-Bucket/Album-Images/Seeder1-NoAlbumImage.jpeg"
+					}
+					alt="Album Cover"
+				/>
+				<label htmlFor="songUrl">Audio File</label>
+				<input
+					type="file"
+					accept=".m4a,.flac,.mp3,.mp4,.wav,.wma,.aac"
+					name="songUrl"
+					onChange={(e) => {
+						setSongUrl(e.target.files[0]);
+					}}
+				/>
+			</div>
+			<div>
+				<label htmlFor="title">Title</label>
+				<input
+					name="title"
+					type="text"
+					placeholder="title"
+					value={title}
+					required
+					onChange={(e) => {
+						setTitle(e.target.value);
+					}}
+				/>
+			</div>
+			<div>
+				<label htmlFor="artist">Artist</label>
+				<input
+					name="artist"
+					type="text"
+					placeholder="artist"
+					value={artist}
+					onChange={(e) => {
+						setArtist(e.target.value);
+					}}
+				/>
+			</div>
+			<div>
+				<label htmlFor="album">Album</label>
+				<input
+					name="album"
+					type="text"
+					placeholder="album"
+					value={album}
+					onChange={(e) => {
+						setAlbum(e.target.value);
+					}}
+				/>
+			</div>
+			<div>
+				<label htmlFor="albumImage">Album Image</label>
+				<input
+					type="file"
+					accept=".pdf,.png,.jpg,.jpeg,.gif"
+					name="albumImage"
+					onChange={(e) => {
+						setAlbumImage(e.target.files[0]);
+					}}
+				/>
 	);
 };
 

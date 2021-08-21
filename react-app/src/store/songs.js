@@ -48,26 +48,45 @@ export const getOneSongThunk = (id) => async (dispatch) => {
 	}
 };
 
-export const uploadSongThunk = (payload) => async (dispatch) => {
-	const response = await fetch("/api/songs/", {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify(payload),
-	});
+export const uploadSongThunk = (payload, songData) => async (dispatch) => {
+	if (typeof songData.get("file") !== "string") {
+		payload["songUrl"] = "test";
+		payload["albumImageUrl"] = null;
+		const SQLResponse = await fetch("/api/songs/", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(payload),
+		});
 
-	if (response.ok) {
-		const data = await response.json();
-		if (data.errors) {
-			return;
+		if (SQLResponse.ok) {
+			const SQLData = await SQLResponse.json();
+
+			if (SQLData.errors) {
+				return;
+			}
+			const AWSResponse = await fetch(
+				`/api/songs/AWS/${SQLData.songId}`,
+				{
+					method: "POST",
+					body: songData,
+				}
+			);
+
+			if (AWSResponse.ok) {
+				const AWSData = await AWSResponse.json();
+				if (AWSData.errors) {
+					return;
+				}
+			}
 		}
 	}
 };
 
 // If we change edit to modal, we need dispatch to store for update
-export const editSongThunk = (payload, id) => async (dispatch) => {
-	const response = await fetch(`/api/songs/${id}`, {
+export const editSongThunk = (payload, id, imageData) => async (dispatch) => {
+	const SQLresponse = await fetch(`/api/songs/${id}`, {
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json",
@@ -75,25 +94,36 @@ export const editSongThunk = (payload, id) => async (dispatch) => {
 		body: JSON.stringify(payload),
 	});
 
-	if (response.ok) {
-		const data = await response.json();
-		if (data.errors) {
+	if (SQLresponse.ok) {
+		const SQLdata = await SQLresponse.json();
+		if (SQLdata.errors) {
 			return;
+		}
+		if (typeof imageData.get("image") !== "string") {
+			const AWSresponse = await fetch(`/api/songs/AWS/${id}`, {
+				method: "PUT",
+				body: imageData,
+			});
+
+			if (AWSresponse.ok) {
+				const AWSdata = await AWSresponse.json();
+				if (AWSdata.errors) {
+					return;
+				}
+			}
 		}
 	}
 };
 
 export const deleteSongThunk = (id) => async (dispatch) => {
-	const response = await fetch(`/api/songs/${id}`, {
+	const SQLresponse = await fetch(`/api/songs/${id}`, {
 		method: "DELETE",
 	});
-
-	if (response.ok) {
-		const data = await response.json();
-		if (data.errors) {
+	if (SQLresponse.ok) {
+		const SQLdata = await SQLresponse.json();
+		if (SQLdata.errors) {
 			return;
 		}
-
 		dispatch(deleteSong(id));
 	}
 };

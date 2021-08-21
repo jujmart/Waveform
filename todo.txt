@@ -1,12 +1,12 @@
 ========================================== ITENERARY ================================
 TUESDAY
 
-    [] Backend routes done
+    [X] Backend routes done
         [X] songs
         [X] genre
-        [] playlists
+        [X] playlists
 
-    [] Front end forms
+    [X] Front end forms
         [X] songs
         [] playlists
 
@@ -14,38 +14,38 @@ TUESDAY
 
 WEDNESDAY
 
-    [] Backend routes done
+    [X] Backend routes done
         [X] songs
             [X] PUT
             [X] DELETE
-        [] playlists
-
-
+        [X] playlists
 
 
 THURSDAY
     [] Front end forms
             [] playlists
-        [] Correct website paths
-        [] correct user redirect
-        [] establish frontend routes
-        [] establish imformation needed for redux store
+        [1/2] Correct website paths
+        [1/2] correct user redirect
+        [1/2] establish frontend routes
+        [X] establish imformation needed for redux store
             on each page
 
     [] Implement aws
         [] Profile photo url for users
-        [] Change form to file upload instead of url
+        [X] Change form to file upload instead of url
 
-    [] Populate information on pages
+    [1/2] Populate information on pages
 
+FRIDAY
     [] Implement search
 
     [] Implement player
 
     [] Implement live link on Heroku
+	
+	[] Seeding some songs, playlists
 
-FRIDAY
-    [] CSS styling
+	[] CSS styling
 
     [] WAVEFORM
 
@@ -67,9 +67,10 @@ SUNDAY
 
 =====================================================================================
 
-[ ] backend route for /api/playlist-songs
-[ ] change home route for unloggedin users
+[ ] add limits to amount of songs and playlists returned to front end home page
 [ ] fix signup form to include image
+[X] change home route for unloggedin users
+[X] backend route for /api/playlist-songs
 [X] songs route needs to get session user
 [X] thunk for edit song
 [X] add default image to s3 bucket/aws stuff
