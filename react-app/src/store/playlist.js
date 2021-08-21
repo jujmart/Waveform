@@ -122,7 +122,7 @@ export const addSongToPlaylistThunk =
 			if (data.errors) {
 				return;
 			}
-			dispatch(addSongToPlaylist(songId, playlistId));
+			dispatch(addSongToPlaylist(+songId, playlistId));
 		}
 	};
 

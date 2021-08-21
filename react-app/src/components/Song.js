@@ -19,11 +19,11 @@ const Song = ({ songId }) => {
 
 	return (
 		<div>
-			<img src={song.albumImageUrl} />
-			<div>{song.title}</div>
-			<div>{song.artist}</div>
-			<div>{song.album}</div>
-			<div>{song.createdAt}</div>
+			<img src={song?.albumImageUrl} />
+			<div>{song?.title}</div>
+			<div>{song?.artist}</div>
+			<div>{song?.album}</div>
+			<div>{song?.createdAt}</div>
 			<button
 				onClick={() => setShowPlaylistsDiv((prevState) => !prevState)}
 			>

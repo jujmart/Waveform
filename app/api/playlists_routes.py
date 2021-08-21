@@ -103,8 +103,8 @@ def get_playlists_from_playlist_arr():
 @playlists_routes.route('/addSong', methods=['POST'])
 @login_required
 def add_song_to_playlist():
-    playlistId = request.get_json().playlistId
-    songId = request.get_json().songId
+    playlistId = request.get_json()['playlistId']
+    songId = request.get_json()['songId']
     playlist = Playlist.query.get(playlistId)
     song = Song.query.get(songId)
     playlist.songs.append(song)
