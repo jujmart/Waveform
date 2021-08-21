@@ -29,8 +29,6 @@ const SongForm = () => {
 		e.preventDefault()
 
 		const idx = genres.indexOf(+e.target.value)
-
-
 		setGenres((prevGenres) => prevGenres.slice(0,idx).concat(prevGenres.slice(idx+1)))
 
 	};
@@ -63,27 +61,35 @@ const SongForm = () => {
 					}
 					alt="Album Cover"
 				/>
-				<h2>{title}</h2>
-				<h3>{artist}</h3>
-				<h3>{album}</h3>
-
-				{genres.length > 0 && genres.map(genreId =>(
-					<div key={genreId}>
-					<p>{genresList[genreId -1].genreName}</p>
-					<button onClick={deleteGenreOnClick} value={genreId}>x</button>
+					<div id='display_div'>
+						{/* <h2 id='title-label'>Title</h2> */}
+					<h2 id='dynamic-title'>{title}</h2>
+						{/* <h2 id='artist-label'>Artist</h2> */}
+					<h3 id='dynamic-artist'>{artist}</h3>
+						{/* <h3 id='album-label'>Album</h3> */}
+					<h3 id='dynamic-album'>{album}</h3>
+					{/* <h3 id='genres-label'>Genres:</h3> */}
+					<div id='selected-genre-container_div'>
+						{genres.length > 0 && genres.map(genreId =>(
+							<div class='remove-genre_div'>
+								<p class='remove-genre_p'>{genresList[genreId -1].genreName}</p>
+								<button class='remove-genre_btn' key={genreId} onClick={deleteGenreOnClick} value={genreId}>✖️</button>
+							</div>
+						))}
 					</div>
-				))}
+				</div>
 
 			</div>
+
+
 		<form id='song-form_form' onSubmit={handleSubmit}>
 
-			<div className='song-form-input_div'>
-				{errors.map((error, ind) => (
-					<div key={ind}>{error}</div>
-				))}
-			</div>
 
-			<div className='song-form-input_div'>
+				{errors.map((error, ind) => (
+				<div key={ind}>{error}</div>
+
+				))}
+
 
 				<label htmlFor="songUrl">Audio File</label>
 				<input
@@ -94,9 +100,9 @@ const SongForm = () => {
 						setSongUrl(e.target.files[0]);
 					}}
 				/>
-			</div>
 
-			<div className='song-form-input_div'>
+
+
 				<label htmlFor="title">Title</label>
 				<input
 					name="title"
@@ -108,9 +114,9 @@ const SongForm = () => {
 						setTitle(e.target.value);
 					}}
 				/>
-			</div>
 
-			<div className='song-form-input_div'>
+
+
 				<label htmlFor="artist">Artist</label>
 				<input
 					name="artist"
@@ -121,9 +127,9 @@ const SongForm = () => {
 						setArtist(e.target.value);
 					}}
 				/>
-			</div>
 
-			<div className='song-form-input_div'>
+
+
 				<label htmlFor="album">Album</label>
 				<input
 					name="album"
@@ -134,20 +140,20 @@ const SongForm = () => {
 						setAlbum(e.target.value);
 					}}
 				/>
-			</div>
 
-			<div className='song-form-input_div'>
+
+
 				<label htmlFor="albumImage">Album Image</label>
 				<input
 					type="file"
-					accept=".pdf,.png,.jpg,.jpeg,.gif"
+					accept="image/*"
 					name="albumImage"
 					onChange={(e) => {
 						setAlbumImage(e.target.files[0]);
 					}}
 				/>
-			</div>
-			<div>
+
+
 				<label htmlFor="genres">Genres</label>
 				<select
 					name="genres"
@@ -161,8 +167,8 @@ const SongForm = () => {
 						</option>
 					))}
 				</select>
-			</div>
-			<button type="submit">Submit</button>
+
+			<button id='song-form_submit-btn' type="submit">Submit</button>
 
 		</form>
 	</div>

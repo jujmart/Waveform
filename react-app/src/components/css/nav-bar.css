@@ -21,7 +21,7 @@
 
 
 #upper-nav-bar_div{
-    background: gray;
+    background-image: linear-gradient( rgb(71, 71, 71), rgb(149, 149, 149));
     grid-column: 2/ 10 ;
     grid-row: 1;
     display: grid;

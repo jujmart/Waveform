@@ -13,6 +13,7 @@
     grid-template-columns: repeat(10, 10%);
     grid-template-rows: repeat(10, 10%);
     position: relative;
+    overflow: overlay;
 }
 
 #homepage-lo-container_div{
@@ -171,7 +172,7 @@
         display: grid;
         grid-template-columns: repeat(20, 8.5vw);
         grid-template-rows: repeat(10, 1fr);
-        overflow-x: overflow;
+        overflow-x: auto;
     }
 
     #homepage-lo-info-disp_div::-webkit-scrollbar {
