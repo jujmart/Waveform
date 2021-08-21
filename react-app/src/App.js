@@ -13,7 +13,6 @@ import EditSongForm from "./components/EditSongForm";
 import DisplayPlaylist from "./components/Playlist";
 import HomePage from "./components/Homepage";
 
-
 function App() {
 	const [loaded, setLoaded] = useState(false);
 	const dispatch = useDispatch();

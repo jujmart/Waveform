@@ -5,7 +5,7 @@ import { getUserPlaylistsThunk } from "../store/userMusicInfo";
 import LogoutButton from "./auth/LogoutButton";
 import PlaylistFormModal from "./PlaylistForm";
 
-import { login } from '../store/session'
+import { login } from "../store/session";
 import { populatePlaylistFromArrThunk } from "../store/playlist";
 
 const NavBar = () => {
