@@ -9,10 +9,31 @@
     position: relative;
 }
 
-#song-form_form{
-
+#song-form-dynamic-creation_div{
     overflow: visible;
+    width:70vw;
+    height: 40vh;
+    background: tomato;
+    grid-row: 1/7;
+    grid-column: 1/ span end;
+    justify-self: center;
+    align-self: center;
+    border: indigo solid 1px;
 }
+
+#song-form_form {
+    background: blue;
+    width:70vw;
+    height:30vh;
+    grid-column: ;
+    grid-row: 7/ 10;
+    overflow: visible;
+
+}
+
+    #display-album_img{
+        width: 10vw;
+    }
 
 .song-form-input_div{
     overflow: visible;

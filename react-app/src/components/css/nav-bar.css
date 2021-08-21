@@ -21,7 +21,7 @@
 
 
 #upper-nav-bar_div{
-    background: transparent;
+    background: gray;
     grid-column: 2/ 10 ;
     grid-row: 1;
     display: grid;

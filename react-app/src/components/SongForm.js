@@ -42,15 +42,10 @@ const SongForm = () => {
 	};
 
 	return (
-
-		<form onSubmit={handleSubmit}>
-			<div>
-				{errors.map((error, ind) => (
-					<div key={ind}>{error}</div>
-				))}
-			</div>
-			<div>
-				<img
+		<div id='song-form-container_div' >
+			<div id='song-form-dynamic-creation_div'>
+			<img
+				id='display-album_img'
 					src={
 						albumImage
 							? URL.createObjectURL(albumImage)
@@ -58,6 +53,23 @@ const SongForm = () => {
 					}
 					alt="Album Cover"
 				/>
+				<h2>{title}</h2>
+				<h3>{artist}</h3>
+				<h3>{album}</h3>
+					<ul>
+						<li>stuff</li>
+					</ul>
+			</div>
+		<form id='song-form_form' onSubmit={handleSubmit}>
+
+			<div className='song-form-input_div'>
+				{errors.map((error, ind) => (
+					<div key={ind}>{error}</div>
+				))}
+			</div>
+
+			<div className='song-form-input_div'>
+
 				<label htmlFor="songUrl">Audio File</label>
 				<input
 					type="file"
@@ -68,7 +80,8 @@ const SongForm = () => {
 					}}
 				/>
 			</div>
-			<div>
+
+			<div className='song-form-input_div'>
 				<label htmlFor="title">Title</label>
 				<input
 					name="title"
@@ -81,7 +94,8 @@ const SongForm = () => {
 					}}
 				/>
 			</div>
-			<div>
+
+			<div className='song-form-input_div'>
 				<label htmlFor="artist">Artist</label>
 				<input
 					name="artist"
@@ -93,7 +107,8 @@ const SongForm = () => {
 					}}
 				/>
 			</div>
-			<div>
+
+			<div className='song-form-input_div'>
 				<label htmlFor="album">Album</label>
 				<input
 					name="album"
@@ -105,7 +120,8 @@ const SongForm = () => {
 					}}
 				/>
 			</div>
-			<div>
+
+			<div className='song-form-input_div'>
 				<label htmlFor="albumImage">Album Image</label>
 				<input
 					type="file"
@@ -115,6 +131,9 @@ const SongForm = () => {
 						setAlbumImage(e.target.files[0]);
 					}}
 				/>
+			</div>
+		</form>
+	</div>
 	);
 };
 
