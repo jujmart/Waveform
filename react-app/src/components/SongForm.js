@@ -6,11 +6,11 @@ import { uploadSongThunk } from "../store/songs";
 
 const SongForm = () => {
 	const [errors, setErrors] = useState([]);
-	const [songUrl, setSongUrl] = useState("");
+	const [songUrl, setSongUrl] = useState(null);
 	const [title, setTitle] = useState("");
 	const [artist, setArtist] = useState("");
 	const [album, setAlbum] = useState("");
-	const [albumImageUrl, setAlbumImageUrl] = useState("");
+	const [albumImage, setAlbumImage] = useState("");
 	const [genres, setGenres] = useState(new Set());
 	const user = useSelector((state) => state.session.user);
 	const genresList = useSelector((state) => state.genres);
@@ -26,16 +26,18 @@ const SongForm = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		let songData = new FormData();
+		songData.set("file", songUrl);
+		songData.set("image", albumImage);
+
 		const data = {
-			songUrl,
 			title,
 			artist,
 			album,
-			albumImageUrl,
 			genres: [...genres],
 		};
-		console.log(data);
-		await dispatch(uploadSongThunk(data));
+
+		await dispatch(uploadSongThunk(data, songData));
 	};
 
 	return (
@@ -46,16 +48,21 @@ const SongForm = () => {
 				))}
 			</div>
 			<div>
-				{/* Need to be updated for aws */}
-				<label htmlFor="songUrl">songUrl</label>
+				<img
+					src={
+						albumImage
+							? URL.createObjectURL(albumImage)
+							: "https://spot-a-cloud.s3.us-east-2.amazonaws.com/AWS-Bucket/Album-Images/Seeder1-NoAlbumImage.jpeg"
+					}
+					alt="Album Cover"
+				/>
+				<label htmlFor="songUrl">Audio File</label>
 				<input
+					type="file"
+					accept=".m4a,.flac,.mp3,.mp4,.wav,.wma,.aac"
 					name="songUrl"
-					type="text"
-					placeholder="songUrl"
-					value={songUrl}
-					required
 					onChange={(e) => {
-						setSongUrl(e.target.value);
+						setSongUrl(e.target.files[0]);
 					}}
 				/>
 			</div>
@@ -97,15 +104,13 @@ const SongForm = () => {
 				/>
 			</div>
 			<div>
-				{/* Need to be updated for aws */}
-				<label htmlFor="albumImageUrl">AlbumImageUrl</label>
+				<label htmlFor="albumImage">Album Image</label>
 				<input
-					name="albumImageUrl"
-					type="text"
-					placeholder="albumImageUrl"
-					value={albumImageUrl}
+					type="file"
+					accept=".pdf,.png,.jpg,.jpeg,.gif"
+					name="albumImage"
 					onChange={(e) => {
-						setAlbumImageUrl(e.target.value);
+						setAlbumImage(e.target.files[0]);
 					}}
 				/>
 			</div>

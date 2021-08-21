@@ -3,6 +3,7 @@ from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
+from app.AWS import allowed_file, get_unique_filename, upload_file_to_s3
 
 auth_routes = Blueprint('auth', __name__)
 
@@ -53,6 +54,31 @@ def logout():
     logout_user()
     return {'message': 'User logged out'}
 
+@auth_routes.route('/AWS/<int:id>', methods=['POST'])
+def sign_up_aws_helper(id):
+    if "image" not in request.files:
+        return {"errors": "image required"}, 400
+
+    image = request.files['image']
+
+    if not allowed_file(image.filename):
+        return {"errors": "file type not permitted"}, 400
+
+    image.filename = get_unique_filename(image.filename)
+
+    imageUpload = upload_file_to_s3(image)
+
+    if "url" not in imageUpload:
+        return imageUpload, 400
+
+    imageUrl = imageUpload["url"]
+
+    user = User.query.get_or_404(id)
+    user.profilePhotoUrl = imageUrl
+    db.session.commit()
+
+    return {"profilePhotoUrl": imageUrl}
+
 
 @auth_routes.route('/signup', methods=['POST'])
 def sign_up():
@@ -65,7 +91,8 @@ def sign_up():
         user = User(
             username=form.data['username'],
             email=form.data['email'],
-            password=form.data['password']
+            password=form.data['password'],
+            profilePhotoUrl = form.data['profilePhotoUrl']
         )
         db.session.add(user)
         db.session.commit()
