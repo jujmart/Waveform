@@ -126,6 +126,18 @@ export const addSongToPlaylistThunk =
 		}
 	};
 
+export const getPlaylistUserNameThunk = (playlistId) => async () => {
+	const response = await fetch(`/api/playlists/${playlistId}/users`);
+
+	if (response.ok) {
+		const data = await response.json();
+		if (data.errors) {
+			return;
+		}
+		return data.userName;
+	}
+};
+
 const initialState = {};
 
 export default function playlistsReducer(state = initialState, action) {

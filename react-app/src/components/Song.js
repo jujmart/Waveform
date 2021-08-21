@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { addSongToPlaylistThunk } from "../store/playlist";
 
-const Song = ({ songId }) => {
+const Song = ({ songId, playlistId }) => {
 	//page that renders this song component will put the song in songs slice of state
 	const song = useSelector((state) => state.songs[songId]);
 	const userPlaylistIds = useSelector(
@@ -32,15 +32,17 @@ const Song = ({ songId }) => {
 			{showPlaylistsDiv && (
 				<div>
 					<ul>
-						{userPlaylistIds.map((playlistId) => (
-							<li
-								key={playlistId}
-								value={playlistId}
-								onClick={addToPlaylist}
-							>
-								{playlists[playlistId].title}
-							</li>
-						))}
+						{userPlaylistIds.map((userPlaylistId) =>
+							playlistId !== userPlaylistId ? (
+								<li
+									key={userPlaylistId}
+									value={userPlaylistId}
+									onClick={addToPlaylist}
+								>
+									{playlists[userPlaylistId].title}
+								</li>
+							) : null
+						)}
 					</ul>
 				</div>
 			)}

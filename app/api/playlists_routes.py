@@ -111,3 +111,11 @@ def add_song_to_playlist():
     db.session.commit()
 
     return {}
+
+@playlists_routes.route('/<int:id>/users')
+@login_required
+def get_userName_for_playlist(id):
+    playlist = Playlist.query.get(id)
+    userName = playlist.user.username
+
+    return {'userName': userName}
