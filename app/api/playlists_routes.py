@@ -1,7 +1,7 @@
 from app.forms.playlist_form import PlaylistForm
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import db, Playlist
+from app.models import db, Playlist, Song
 from sqlalchemy.orm import joinedload
 
 playlists_routes = Blueprint('playlists', __name__)
@@ -84,3 +84,38 @@ def delete_playlist(id):
 def get_user_playlists(id):
     playlists = Playlist.query.filter(Playlist.userId == id).all()
     return {'playlists': [playlist.id for playlist in playlists]}
+
+
+@playlists_routes.route('/', methods=['PATCH'])
+@login_required
+def get_playlists_from_playlist_arr():
+    playlists_to_add = request.get_json()
+    playlists = Playlist.query.filter(Playlist.id.in_(playlists_to_add)).all()
+    playlists_list = []
+    for playlist in playlists:
+        playlists_dict = playlist.to_dict()
+        playlists_dict["songs"] = [song.id for song in playlist.songs]
+        playlists_list.append(playlists_dict)
+
+    return {'playlists': playlists_list}
+
+
+@playlists_routes.route('/addSong', methods=['POST'])
+@login_required
+def add_song_to_playlist():
+    playlistId = request.get_json()['playlistId']
+    songId = request.get_json()['songId']
+    playlist = Playlist.query.get(playlistId)
+    song = Song.query.get(songId)
+    playlist.songs.append(song)
+    db.session.commit()
+
+    return {}
+
+@playlists_routes.route('/<int:id>/users')
+@login_required
+def get_userName_for_playlist(id):
+    playlist = Playlist.query.get(id)
+    userName = playlist.user.username
+
+    return {'userName': userName}
