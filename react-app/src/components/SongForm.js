@@ -41,16 +41,21 @@ const SongForm = () => {
 
 	return (
 		<div id='song-form-container_div'>
-			<form onSubmit={handleSubmit}>
+			<div id='song-display_div'>
+				<p>{title}</p>
+				
+
+			</div>
+			<form id='song-form_form' onSubmit={handleSubmit}>
 				<div>
 					{errors.map((error, ind) => (
 						<div key={ind}>{error}</div>
 					))}
 				</div>
-				<div>
+				<div className='song-form-input_div'>
 					{/* Need to be updated for aws */}
 					<label htmlFor="songUrl">songUrl</label>
-					<input
+					<input className='song-form_input'
 						name="songUrl"
 						type="text"
 						placeholder="songUrl"
@@ -61,9 +66,10 @@ const SongForm = () => {
 						}}
 					/>
 				</div>
-				<div>
+				<div className='song-form-input_div'>
 					<label htmlFor="title">Title</label>
 					<input
+						className='song-form_input'
 						name="title"
 						type="text"
 						placeholder="title"
@@ -74,9 +80,10 @@ const SongForm = () => {
 						}}
 					/>
 				</div>
-				<div>
+				<div className='song-form-input_div'>
 					<label htmlFor="artist">Artist</label>
 					<input
+						className='song-form_input'
 						name="artist"
 						type="text"
 						placeholder="artist"
@@ -86,9 +93,10 @@ const SongForm = () => {
 						}}
 					/>
 				</div>
-				<div>
+				<div className='song-form-input_div'>
 					<label htmlFor="album">Album</label>
 					<input
+						className='song-form_input'
 						name="album"
 						type="text"
 						placeholder="album"
@@ -98,10 +106,11 @@ const SongForm = () => {
 						}}
 					/>
 				</div>
-				<div>
+				<div className='song-form-input_div'>
 					{/* Need to be updated for aws */}
 					<label htmlFor="albumImageUrl">AlbumImageUrl</label>
 					<input
+						className='song-form_input'
 						name="albumImageUrl"
 						type="text"
 						placeholder="albumImageUrl"
@@ -111,7 +120,7 @@ const SongForm = () => {
 						}}
 					/>
 				</div>
-				<div>
+				<div className='song-form-input_div'>
 					<label htmlFor="genres">Genres</label>
 					<select
 						name="genres"

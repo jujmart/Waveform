@@ -8,3 +8,16 @@
     grid-template-rows: repeat(10, 10%);
     position: relative;
 }
+
+#song-form_form{
+
+    overflow: visible;
+}
+
+.song-form-input_div{
+    overflow: visible;
+}
+
+.song-form_input{
+
+}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { getUserPlaylistsThunk } from "../store/userMusicInfo";
+import { getOnePlaylistThunk } from "../store/playlist";
 import LogoutButton from "./auth/LogoutButton";
 import PlaylistFormModal from "./PlaylistForm";
 
@@ -34,9 +35,22 @@ const NavBar = () => {
 	}, [dispatch, user]);
 
 
-
   const userPlaylists = useSelector(state => {
-    return state.userMusicInfo.playlists})
+    return state.userMusicInfo.playlists })
+
+  const playlists = useSelector(state => {
+    return state.playlists })
+
+    // useEffect(() => {
+    //   (async() => { userPlaylists?.forEach(playlistId =>{
+    //     if (!playlists[playlistId]) {
+    //       await dispatch(getOnePlaylistThunk(playlistId))
+    //     }
+    //   })})()
+    // }, [dispatch, userPlaylists, playlists])
+
+
+
 
 
 
@@ -91,11 +105,10 @@ const NavBar = () => {
 
       </div>
          <div id='user-playlists-nav-bar_div'>
-          <NavLink to='/' className='user-playlist'>A playlist</NavLink>
-          <NavLink to='/' className='user-playlist'>A playlist</NavLink>
-          <NavLink to='/' className='user-playlist'>A playlist</NavLink>
-          <NavLink to='/' className='user-playlist'>A playlist</NavLink>
-      </div>
+             <NavLink to={`/playlists/1`} className='user-playlist'>Playlist one</NavLink>
+             <NavLink to={`/playlists/2`} className='user-playlist'>Playlist two</NavLink>
+             <NavLink to={`/playlists/3`} className='user-playlist'>Playlist three</NavLink>
+        </div>
 
 
 {/* RIGHT SIDE NAV BAR */}
