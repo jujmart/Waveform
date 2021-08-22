@@ -74,12 +74,13 @@ export const uploadSongThunk = (payload, songData) => async (dispatch) => {
 				}
 			);
 
-			if (AWSResponse.ok) {
-				const AWSData = await AWSResponse.json();
-				if (AWSData.errors) {
-					return;
-				}
-			}
+			// if (AWSResponse.ok) {
+			// 	// const AWSData = await AWSResponse.json();
+			// 	// if (AWSData.errors) {
+			// 	// 	return;
+			// 	// }
+			// }
+			return SQLData.songId;
 		}
 	}
 };

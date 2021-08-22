@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { getAllGenresThunk } from "../store/genre";
 import { uploadSongThunk } from "../store/songs";
+import { postUserSong } from "../store/userMusicInfo";
 import "./css/song-form.css";
 
 const SongForm = () => {
@@ -12,9 +14,11 @@ const SongForm = () => {
 	const [album, setAlbum] = useState("");
 	const [albumImage, setAlbumImage] = useState("");
 	const [genres, setGenres] = useState([]);
+	const [disabledSubmitButton, setDisabledSubmitButton] = useState(false);
 	const user = useSelector((state) => state.session.user);
 	const genresList = useSelector((state) => state.genres);
 	const dispatch = useDispatch();
+	const history = useHistory();
 
 	useEffect(() => {
 		dispatch(getAllGenresThunk());
@@ -35,6 +39,7 @@ const SongForm = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		setDisabledSubmitButton(true);
 		let songData = new FormData();
 		songData.set("file", songUrl);
 		songData.set("image", albumImage);
@@ -46,7 +51,9 @@ const SongForm = () => {
 			genres,
 		};
 
-		await dispatch(uploadSongThunk(data, songData));
+		const songId = await dispatch(uploadSongThunk(data, songData));
+		await dispatch(postUserSong(songId));
+		history.push(`/users/${user.id}`);
 	};
 
 	return (
@@ -162,10 +169,17 @@ const SongForm = () => {
 						</option>
 					))}
 				</select>
-
-				<button id="song-form_submit-btn" type="submit">
-					Submit
-				</button>
+				{!disabledSubmitButton ? (
+					<button
+						id="song-form_submit-btn"
+						type="submit"
+						disabled={disabledSubmitButton}
+					>
+						Submit
+					</button>
+				) : (
+					<p>Loading...</p>
+				)}
 			</form>
 		</div>
 	);

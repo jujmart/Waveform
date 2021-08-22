@@ -59,7 +59,7 @@ def post_song_url(id):
 
     # for Album image upload
     if "image" not in request.files:
-        return {"errors": "album image required"}, 400
+        return {"errors": "album image required"}
 
     albumImage = request.files['image']
 
