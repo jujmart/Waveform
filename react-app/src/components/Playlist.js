@@ -10,7 +10,7 @@ import { setPlaylistSongsThunk } from "../store/songs";
 import { deleteUserPlaylist, getUserSongsThunk } from "../store/userMusicInfo";
 import EditPlaylistFormModal from "./EditPlaylistForm";
 import Song from "./Song";
-import './css/playlists.css'
+import "./css/playlists.css";
 
 const DisplayPlaylist = () => {
 	const { id } = useParams();
@@ -23,9 +23,9 @@ const DisplayPlaylist = () => {
 	const playlists = useSelector((state) => state.playlists);
 	const dispatch = useDispatch();
 
-	const handleDelete = () => {
-		dispatch(deletePlaylistThunk(id));
-		dispatch(deleteUserPlaylist(id));
+	const handleDelete = async () => {
+		await dispatch(deletePlaylistThunk(id));
+		await dispatch(deleteUserPlaylist(id));
 	};
 
 	useEffect(() => {
@@ -37,7 +37,7 @@ const DisplayPlaylist = () => {
 				}
 			}
 		})();
-	}, [dispatch, id, playlists]);
+	}, [dispatch, id, playlists, history]);
 
 	useEffect(() => {
 		if (playlists[id]) {
@@ -69,9 +69,9 @@ const DisplayPlaylist = () => {
 	}, [dispatch, id]);
 
 	return (
-		<div id='playlist-container_div'>
+		<div id="playlist-container_div">
 			<div>
-				<img  src="" alt="Playlist Image" />
+				<img src="" alt="Playlist Image" />
 				<p></p>
 				<h2>{currentPlaylist?.title}</h2>
 				<p>{currentPlaylist?.description}</p>
@@ -80,6 +80,12 @@ const DisplayPlaylist = () => {
 					?.split(" ")
 					.splice(1, 3)
 					.join(" ")}`}</p>
+				{currentPlaylist.userId === user.id && (
+					<>
+						<EditPlaylistFormModal />
+						<button onClick={handleDelete}>Delete Playlist</button>
+					</>
+				)}
 			</div>
 
 			{/* PLAY CURRENT PLAYLIST BUTTON */}

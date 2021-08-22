@@ -24,9 +24,11 @@ def get_all_playlists():
 @login_required
 def get_one_playlist(id):
     playlist = Playlist.query.options(joinedload(Playlist.songs)).get(id)
-    playlist_dict = playlist.to_dict()
-    playlist_dict["songs"] = [song.id for song in playlist.songs]
-    return {"playlist": playlist_dict}
+    if (playlist):
+        playlist_dict = playlist.to_dict()
+        playlist_dict["songs"] = [song.id for song in playlist.songs]
+        return {"playlist": playlist_dict}
+    return {"errors": "Playlist not found"}
 
 
 @playlists_routes.route('/', methods=["POST"])
@@ -111,6 +113,7 @@ def add_song_to_playlist():
     db.session.commit()
 
     return {}
+
 
 @playlists_routes.route('/<int:id>/users')
 @login_required
