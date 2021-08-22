@@ -6,48 +6,49 @@ import { getOnePlaylistThunk } from "../store/playlist";
 import LogoutButton from "./auth/LogoutButton";
 import PlaylistFormModal from "./PlaylistForm";
 
-import { login } from '../store/session'
+import { login } from "../store/session";
+import { populatePlaylistFromArrThunk } from "../store/playlist";
 import './css/nav-bar.css'
 
-
-
-
 const NavBar = () => {
+	const [errors, setErrors] = useState([]);
 
-  const [errors, setErrors] = useState([]);
+	const dispatch = useDispatch();
+	const user = useSelector((state) => state.session.user);
+	const [playlistIdsNotInStore, setPlaylistIdsNotInStore] = useState([]);
+	const userPlaylistsIdArr = useSelector(
+		(state) => state.userMusicInfo.playlists
+	);
+	const playlists = useSelector((state) => state.playlists);
 
-  const dispatch = useDispatch();
-  const user = useSelector(state => state.session.user)
-
-
-
-  const demoUserLogin = async (e) => {
-    e.preventDefault();
-    const data = await dispatch(login('demo@aa.io', 'password'));
-    if (data) {
-      setErrors(data);
-    }
-  };
-
+	const demoUserLogin = async (e) => {
+		e.preventDefault();
+		const data = await dispatch(login("demo@aa.io", "password"));
+		if (data) {
+			setErrors(data);
+		}
+	};
 
 	useEffect(() => {
 		dispatch(getUserPlaylistsThunk(user?.id));
 	}, [dispatch, user]);
 
+	useEffect(() => {
+		userPlaylistsIdArr.forEach((playlistId) => {
+			if (!playlists[playlistId]) {
+				setPlaylistIdsNotInStore((prevState) => [
+					...prevState,
+					playlistId,
+				]);
+			}
+		});
+	}, [userPlaylistsIdArr, playlists]);
 
-  const userPlaylists = useSelector(state => {
-    return state.userMusicInfo.playlists })
-
-  const playlists = useSelector(state => {
-    return state.playlists })
-
-    // useEffect(() => {
-    //   (async() => { userPlaylists?.forEach(playlistId =>{
-    //     if (!playlists[playlistId]) {
-    //       await dispatch(getOnePlaylistThunk(playlistId))
-    //     }
-    //   })})()
-    // }, [dispatch, userPlaylists, playlists])
+useEffect(() => {
+	if (playlistIdsNotInStore.length) {
+		dispatch(populatePlaylistFromArrThunk(playlistIdsNotInStore));
+	}
+}, [playlistIdsNotInStore, dispatch]);
 
 
 
