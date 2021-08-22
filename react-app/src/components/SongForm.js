@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { getAllGenresThunk } from "../store/genre";
 import { uploadSongThunk } from "../store/songs";
+import './css/song-form.css'
 
 const SongForm = () => {
 	const [errors, setErrors] = useState([]);
@@ -11,7 +12,7 @@ const SongForm = () => {
 	const [artist, setArtist] = useState("");
 	const [album, setAlbum] = useState("");
 	const [albumImage, setAlbumImage] = useState("");
-	const [genres, setGenres] = useState(new Set());
+	const [genres, setGenres] = useState([]);
 	const user = useSelector((state) => state.session.user);
 	const genresList = useSelector((state) => state.genres);
 	const dispatch = useDispatch();
@@ -21,7 +22,15 @@ const SongForm = () => {
 	}, [dispatch]);
 
 	const handleOptionClick = (e) => {
-		setGenres((prevGenres) => prevGenres.add(+e.target.value));
+		setGenres((prevGenres) => [...prevGenres, +e.target.value]);
+	};
+
+	const deleteGenreOnClick = (e) => {
+		e.preventDefault()
+
+		const idx = genres.indexOf(+e.target.value)
+		setGenres((prevGenres) => prevGenres.slice(0,idx).concat(prevGenres.slice(idx+1)))
+
 	};
 
 	const handleSubmit = async (e) => {
@@ -34,21 +43,17 @@ const SongForm = () => {
 			title,
 			artist,
 			album,
-			genres: [...genres],
+			genres,
 		};
 
 		await dispatch(uploadSongThunk(data, songData));
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<div>
-				{errors.map((error, ind) => (
-					<div key={ind}>{error}</div>
-				))}
-			</div>
-			<div>
-				<img
+		<div id='song-form-container_div' >
+			<div id='song-form-dynamic-creation_div'>
+			<img
+				id='display-album_img'
 					src={
 						albumImage
 							? URL.createObjectURL(albumImage)
@@ -56,6 +61,36 @@ const SongForm = () => {
 					}
 					alt="Album Cover"
 				/>
+					<div id='display_div'>
+						{/* <h2 id='title-label'>Title</h2> */}
+					<h2 id='dynamic-title'>{title}</h2>
+						{/* <h2 id='artist-label'>Artist</h2> */}
+					<h3 id='dynamic-artist'>{artist}</h3>
+						{/* <h3 id='album-label'>Album</h3> */}
+					<h3 id='dynamic-album'>{album}</h3>
+					{/* <h3 id='genres-label'>Genres:</h3> */}
+					<div id='selected-genre-container_div'>
+						{genres.length > 0 && genres.map(genreId =>(
+							<div class='remove-genre_div'>
+								<p class='remove-genre_p'>{genresList[genreId -1].genreName}</p>
+								<button class='remove-genre_btn' key={genreId} onClick={deleteGenreOnClick} value={genreId}>✖️</button>
+							</div>
+						))}
+					</div>
+				</div>
+
+			</div>
+
+
+		<form id='song-form_form' onSubmit={handleSubmit}>
+
+
+				{errors.map((error, ind) => (
+				<div key={ind}>{error}</div>
+
+				))}
+
+
 				<label htmlFor="songUrl">Audio File</label>
 				<input
 					type="file"
@@ -65,8 +100,9 @@ const SongForm = () => {
 						setSongUrl(e.target.files[0]);
 					}}
 				/>
-			</div>
-			<div>
+
+
+
 				<label htmlFor="title">Title</label>
 				<input
 					name="title"
@@ -78,8 +114,9 @@ const SongForm = () => {
 						setTitle(e.target.value);
 					}}
 				/>
-			</div>
-			<div>
+
+
+
 				<label htmlFor="artist">Artist</label>
 				<input
 					name="artist"
@@ -90,8 +127,9 @@ const SongForm = () => {
 						setArtist(e.target.value);
 					}}
 				/>
-			</div>
-			<div>
+
+
+
 				<label htmlFor="album">Album</label>
 				<input
 					name="album"
@@ -102,19 +140,20 @@ const SongForm = () => {
 						setAlbum(e.target.value);
 					}}
 				/>
-			</div>
-			<div>
+
+
+
 				<label htmlFor="albumImage">Album Image</label>
 				<input
 					type="file"
-					accept=".pdf,.png,.jpg,.jpeg,.gif"
+					accept="image/*"
 					name="albumImage"
 					onChange={(e) => {
 						setAlbumImage(e.target.files[0]);
 					}}
 				/>
-			</div>
-			<div>
+
+
 				<label htmlFor="genres">Genres</label>
 				<select
 					name="genres"
@@ -128,9 +167,11 @@ const SongForm = () => {
 						</option>
 					))}
 				</select>
-			</div>
-			<button type="submit">Submit</button>
+
+			<button id='song-form_submit-btn' type="submit">Submit</button>
+
 		</form>
+	</div>
 	);
 };
 

@@ -1,0 +1,238 @@
+* {
+    Margin:0;
+    Padding:0;
+    /* Border:0; */
+}
+
+#homepage-container_div{
+    margin: auto;
+    top: 10vh;
+    display: grid;
+    height: 80vh;
+    width: 80vw;
+    grid-template-columns: repeat(10, 10%);
+    grid-template-rows: repeat(10, 10%);
+    position: relative;
+    overflow: overlay;
+}
+
+#homepage-lo-container_div{
+    height: 190vh;
+    width: 100vw;
+    background: dodgerblue;
+    display: grid;
+    grid-template-rows: repeat(19, 1fr);
+    grid-template-columns: repeat(10, 1fr) ;
+}
+
+#homepage-title-info_div{
+    grid-column: 1 /span end;
+    grid-row: 1 / 10;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(9, 1fr);
+    background: rgb(31, 31, 31);
+}
+
+
+
+
+#homepage-title_h1{
+    grid-column: 2 /6;
+    grid-row: 3/ 5;
+    font-size: 150px;
+    align-self: center;
+    font-family: Oswald;
+    color: whitesmoke;
+}
+
+#homepage-phrase_h2{
+    grid-row: 5;
+    grid-column: 2 /7;
+    font-family: Montserrat;
+    color: whitesmoke;
+}
+
+#homepage-mvp_h3{
+    grid-row: 5;
+    grid-column: 4 /6;
+    align-self: center;
+    justify-self: center;
+    font-family: Montserrat;
+    color: darkgray;
+}
+
+#homepage-signup_btn{
+    grid-row: 6;
+    grid-column: 5 ;
+    height: 50px;
+    width: 150px;
+    border:none;
+    border-radius: 100px 100px 100px 100px;
+    color: white;
+    background: darkgray;
+}
+
+#homepage-play_btn{
+
+}
+
+#homepage-scroll-left{
+    grid-column: 1;
+    grid-row: 5/7;
+    align-self: center;
+    justify-self: center;
+    width: 75px;
+}
+
+#homepage-scroll-right{
+    grid-row: 5/7;
+    align-self: center;
+    justify-self: center;
+    grid-column: 10;
+    width: 75px;
+}
+
+#lower-links{
+    grid-row: 19;
+    grid-column: 1/span end;
+    background: black;
+    z-index:2;
+    display: grid;
+    grid-template-columns: repeat(20, 5vw);
+    grid-template-rows: repeat(2, 5vh);
+}
+
+    .link-img{
+        width: 3vh;
+        grid-row: 2;
+    }
+
+    .link-font{
+        font-size: 20px;
+        color: white;
+        font-family: Oswald;
+        grid-row: 1;
+    }
+
+    #andru-link{
+        grid-column: 19;
+
+    }
+
+    #andru-p{
+        grid-column: 19;
+        justify-self: center;
+    }
+
+    #justice-link{
+        grid-column: 18;
+
+    }
+
+    #justice-p{
+        grid-column: 18;
+        justify-self: center;
+    }
+
+    #max-link{
+        grid-column: 17;
+    }
+
+    #max-p{
+        grid-column: 17;
+        justify-self: center;
+    }
+
+    #privacy-links{
+        text-decoration: none;
+        font-family: Montserrat;
+        font-size: 20px;
+        grid-column: 2/ 10;
+        grid-row: 1/ span end;
+        align-self: center;
+        color: whitesmoke;
+    }
+
+#homepage-lo-info_div{
+    grid-row: 10/ span end;
+    grid-column: 1/span end;
+    background: rgb(58, 58, 58);
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+}
+
+    #homepage-lo-info-disp_div{
+        grid-row:3/ 9;
+        grid-column: 1/span end;
+        background: transparent;
+        justify-self: center;
+        width: 85vw;
+        display: grid;
+        grid-template-columns: repeat(20, 8.5vw);
+        grid-template-rows: repeat(10, 1fr);
+        overflow-x: auto;
+    }
+
+    #homepage-lo-info-disp_div::-webkit-scrollbar {
+        display: none;
+     }
+
+       .mvp-container_div{
+           grid-row:1/ span end;
+           width: 34vw;
+           height: 54vh;
+           display: grid;
+           grid-template-columns: repeat(10, 1fr);
+           grid-template-rows: repeat(10, 1fr);
+           align-self: center;
+           justify-self: center;
+           border:black solid 2px;
+           border-radius: 8px;
+           background: slategray;
+       }
+
+       .mvp_gif{
+           width:300px;
+           grid-column: 5/span end;
+           grid-row: 2/7;
+           align-self: center;
+           justify-self: center;
+       }
+
+       .mvp_h2{
+           font-size: 40px;
+           overflow:visible;
+           grid-column: 2 /span end;
+           grid-row:1;
+           align-self: end;
+           color: white;
+           font-family: Oswald;
+       }
+
+       .mvp_description{
+           font-size: 25px;
+           grid-row: 8/ span end;
+           overflow:visible;
+           grid-column: 1 / 10;
+           padding-left: 15px;
+           color: white;
+           font-family: Montserrat;
+       }
+
+        #mvp4 {
+            grid-column: 16/ 21;
+        }
+
+        #mvp3 {
+            grid-column: 11/ 16;
+        }
+
+        #mvp2 {
+            grid-column: 6/ 11;
+        }
+
+        #mvp1 {
+            grid-column: 1/ 6;
+        }

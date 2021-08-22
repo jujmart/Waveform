@@ -115,4 +115,5 @@ const HomePageLoggedIn = () => {
 	);
 };
 
-export default HomePageLoggedIn;
+
+export default HomePageLoggedIn
