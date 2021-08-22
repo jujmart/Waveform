@@ -236,3 +236,65 @@
         #mvp1 {
             grid-column: 1/ 6;
         }
+
+
+        audio::-webkit-media-controls-panel{
+            background: gray;
+        }
+
+        audio::-webkit-media-controls-enclosure {
+            border-radius: 5px;
+            background-color: white;
+        }
+
+        audio::-webkit-media-controls-mute-button{
+            color:white;
+        }
+
+        audio::-webkit-media-controls-play-button{
+
+        }
+
+        audio::-webkit-media-controls-timeline-container{
+
+        }
+
+        audio::-webkit-media-controls-current-time-display{
+            color:white;
+        }
+
+        audio::-webkit-media-controls-time-remaining-display{
+            color:white;
+        }
+
+        audio::-webkit-media-controls-timeline{
+        }
+
+        audio::-webkit-media-controls-volume-slider-container{
+            color:white;
+        }
+
+        audio::-webkit-media-controls-volume-slider{
+
+        }
+
+        audio::-webkit-media-controls-seek-back-button{
+
+        }
+
+        audio::-webkit-media-controls-seek-forward-button{
+
+        }
+
+
+        audio::-webkit-media-controls-rewind-button{
+
+        }
+
+        audio::-webkit-media-controls-return-to-realtime-button{
+
+        }
+
+        audio::-webkit-media-controls-toggle-closed-captions-button{
+
+        }
