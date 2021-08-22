@@ -305,7 +305,8 @@
 /* ================================================================================== */
 
 #homepage-LI-container_div{
-    margin: auto;
+    /* margin: auto; */
+    left: 10vw;
     top: 10vh;
     display: grid;
     height: 80vh;
@@ -313,5 +314,6 @@
     grid-template-columns: repeat(10, 10%);
     grid-template-rows: repeat(10, 10%);
     position: relative;
-    overflow: overlay;
+    z-index: 1;
+    /* overflow: overlay; */
 }

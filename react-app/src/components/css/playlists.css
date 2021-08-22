@@ -1,5 +1,5 @@
 #playlist-container_div{
-    margin: auto;
+    left: 10vw;
     top: 10vh;
     display: grid;
     height: 80vh;
@@ -8,7 +8,60 @@
     grid-template-rows: repeat(10, 10%);
     position: relative;
     background: rgb(149, 149, 149);
-    overflow: visible;
+    overflow: scroll;
 }
 
+    #playlist-info_div{
+        grid-row: 1 /5;
+        grid-column:1/ span end ;
+        background-color: rgb(216, 216, 226);
+        display: grid;
+        grid-template-columns: repeat(10, 10%);
+        grid-template-rows: repeat(10, 10%);
+    }
 
+
+        #playlist-info_img{
+            height: 28vh;
+            grid-column: 1/3;
+            justify-self: center;
+        }
+
+        #playlist_p{
+            grid-row: 3;
+            grid-column:3;
+        }
+
+        #playlist_h2{
+            grid-row: 5;
+            grid-column: 3/span end;
+            font-size: 85px;
+        }
+
+        #playlist_creator{
+            grid-row: 9;
+            grid-column: 3/span end;
+            font-size: 18px;
+            text-decoration: none;
+            color: gray;
+        }
+
+        #playlist-controls_div{
+            background-color: honeydew;
+            grid-row: 5/7;
+            grid-column: 1/span end;
+        }
+
+            #play_button{
+                color: rgb(0, 165, 0);
+            }
+
+        #playlist-info-container_div{
+            padding-left: 3vw;
+            padding-right: 3vw;
+        }
+
+        #playlist-songs_div{
+            display: grid;
+            
+        }

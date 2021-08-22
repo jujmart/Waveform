@@ -6,14 +6,14 @@ function PlaylistFormModal() {
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <div id='create-playlist_div'>
-      <button id='create-playlist_button' onClick={() => setShowModal(true)}>Create Playlist</button>
+    <>
+      <p id='create-playlist_button' className="nav-bar_nav-links" onClick={() => setShowModal(true)}><span class="material-icons">add_box&nbsp;&nbsp;</span>   Add Playlist</p>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <PlaylistForm setShowModal={setShowModal} />
         </Modal>
       )}
-    </div>
+    </>
   );
 }
 
