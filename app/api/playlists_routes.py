@@ -24,9 +24,11 @@ def get_all_playlists():
 @login_required
 def get_one_playlist(id):
     playlist = Playlist.query.options(joinedload(Playlist.songs)).get(id)
-    playlist_dict = playlist.to_dict()
-    playlist_dict["songs"] = [song.id for song in playlist.songs]
-    return {"playlist": playlist_dict}
+    if (playlist):
+        playlist_dict = playlist.to_dict()
+        playlist_dict["songs"] = [song.id for song in playlist.songs]
+        return {"playlist": playlist_dict}
+    return {"errors": "Playlist not found"}
 
 
 @playlists_routes.route('/', methods=["POST"])
@@ -112,10 +114,24 @@ def add_song_to_playlist():
 
     return {}
 
+
 @playlists_routes.route('/<int:id>/users')
 @login_required
-def get_userName_for_playlist(id):
+def get_user_for_playlist(id):
     playlist = Playlist.query.get(id)
-    userName = playlist.user.username
+    user = playlist.user
 
-    return {'userName': userName}
+    return {'user': user.to_dict()}
+
+
+@playlists_routes.route('/removeSong', methods=['DELETE'])
+@login_required
+def delete_song_from_playlist():
+    playlistId = request.get_json()['playlistId']
+    songId = request.get_json()['songId']
+    playlist = Playlist.query.get(playlistId)
+    song = Song.query.get(songId)
+    playlist.songs.remove(song)
+    db.session.commit()
+
+    return {}

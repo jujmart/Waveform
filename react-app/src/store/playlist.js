@@ -3,6 +3,7 @@ const CREATE_PLAYLIST = "playlists/CREATE_PLAYLIST";
 const DELETE_PLAYLIST = "playlists/DELETE_PLAYLIST";
 const ADD_PLAYLISTS = "playlists/ADD_PLAYLISTS";
 const ADD_SONG = "playlists/ADD_SONG";
+const REMOVE_SONG = "playlists/REMOVE_SONG";
 
 const createPlaylist = (playlist) => ({
 	type: CREATE_PLAYLIST,
@@ -21,6 +22,12 @@ const addPlaylists = (playlists) => ({
 
 const addSongToPlaylist = (songId, playlistId) => ({
 	type: ADD_SONG,
+	songId,
+	playlistId,
+});
+
+const removeSongFromPlaylist = (songId, playlistId) => ({
+	type: REMOVE_SONG,
 	songId,
 	playlistId,
 });
@@ -58,6 +65,7 @@ export const createPlaylistThunk = (payload) => async (dispatch) => {
 			return;
 		}
 		dispatch(createPlaylist(playlist));
+		return playlist.id;
 	}
 };
 
@@ -83,11 +91,11 @@ export const getOnePlaylistThunk = (id) => async (dispatch) => {
 	const response = await fetch(`/api/playlists/${id}`);
 
 	if (response.ok) {
-		const { playlist } = await response.json();
-		if (playlist.errors) {
-			return;
+		const data = await response.json();
+		if (data.errors) {
+			return data.errors;
 		}
-		dispatch(createPlaylist(playlist));
+		dispatch(createPlaylist(data.playlist));
 	} else {
 		return response;
 	}
@@ -126,7 +134,7 @@ export const addSongToPlaylistThunk =
 		}
 	};
 
-export const getPlaylistUserNameThunk = (playlistId) => async () => {
+export const getPlaylistUserThunk = (playlistId) => async () => {
 	const response = await fetch(`/api/playlists/${playlistId}/users`);
 
 	if (response.ok) {
@@ -134,9 +142,28 @@ export const getPlaylistUserNameThunk = (playlistId) => async () => {
 		if (data.errors) {
 			return;
 		}
-		return data.userName;
+		return data.user;
 	}
 };
+
+export const removeSongFromPlaylistThunk =
+	(playlistId, songId) => async (dispatch) => {
+		const response = await fetch(`/api/playlists/removeSong`, {
+			method: "DELETE",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ songId, playlistId }),
+		});
+
+		if (response.ok) {
+			const data = await response.json();
+			if (data.errors) {
+				return;
+			}
+			dispatch(removeSongFromPlaylist(+songId, playlistId));
+		}
+	};
 
 const initialState = {};
 
@@ -159,11 +186,23 @@ export default function playlistsReducer(state = initialState, action) {
 			return newAddState;
 		case ADD_SONG:
 			const newAddSongState = { ...state };
-			newAddSongState[action.playlistId].songs = [
-				...state[action.playlistId].songs,
-				action.songId,
-			];
+			if (!state[action.playlistId].songs.includes(action.songId)) {
+				newAddSongState[action.playlistId].songs = [
+					...state[action.playlistId].songs,
+					action.songId,
+				];
+			}
 			return newAddSongState;
+		case REMOVE_SONG:
+			const newRemoveSongState = { ...state };
+			newRemoveSongState[action.playlistId].songs = [
+				...state[action.playlistId].songs,
+			];
+			const index = newRemoveSongState[action.playlistId].songs.indexOf(
+				action.songId
+			);
+			newRemoveSongState[action.playlistId].songs.splice(index, 1);
+			return newRemoveSongState;
 		default:
 			return state;
 	}

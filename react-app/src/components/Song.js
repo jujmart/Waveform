@@ -19,7 +19,7 @@ const Song = ({ songId, playlistId }) => {
 
 	return (
 		<div>
-			<img src={song?.albumImageUrl} />
+			<img src={song?.albumImageUrl} alt="Song Album Cover" />
 			<div>{song?.title}</div>
 			<div>{song?.artist}</div>
 			<div>{song?.album}</div>
