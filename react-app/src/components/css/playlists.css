@@ -63,5 +63,9 @@
 
         #playlist-songs_div{
             display: grid;
-            
+
+        }
+
+        .playlist-song_album-img{
+            width: 40px;
         }
