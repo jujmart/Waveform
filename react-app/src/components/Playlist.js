@@ -10,6 +10,7 @@ import { setPlaylistSongsThunk } from "../store/songs";
 import { deleteUserPlaylist, getUserSongsThunk } from "../store/userMusicInfo";
 import EditPlaylistFormModal from "./EditPlaylistForm";
 import Song from "./Song";
+import './css/playlists.css'
 
 const DisplayPlaylist = () => {
 	const { id } = useParams();
@@ -68,9 +69,9 @@ const DisplayPlaylist = () => {
 	}, [dispatch, id]);
 
 	return (
-		<div>
+		<div id='playlist-container_div'>
 			<div>
-				<img src="" alt="Playlist Image" />
+				<img  src="" alt="Playlist Image" />
 				<p></p>
 				<h2>{currentPlaylist?.title}</h2>
 				<p>{currentPlaylist?.description}</p>

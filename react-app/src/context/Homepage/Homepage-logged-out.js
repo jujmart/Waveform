@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useRef, useEffect } from 'react';
 
+import mp3 from '../../components/Songs/Tyler The Creator - JUGGERNAUT (Lyrics) ft. Lil Uzi Vert & Pharrell Williams.mp3'
+
 const HomePageLoggedOut = () =>{
 
 
@@ -15,30 +17,19 @@ const HomePageLoggedOut = () =>{
 
     useEffect(() => {
         if (audio.current) {
-            console.log(audio.current,'audioCurrent')
-            // setAudioContext(new AudioContext())
-            console.log(audioContext, 'Audio Context')
-
             setAudioElement(audio.current)
-            console.log(audioElement, 'Audio Element')
-
             setTrack(audioContext.createMediaElementSource(audio.current))
 
 
-
-            // mediaPlayer.current.src = 'https://spot-a-cloud.s3.us-east-2.amazonaws.com/AWS-Bucket/Songs/Make+Way+For+The+King.mp3'
-            // https://spot-a-cloud.s3.us-east-2.amazonaws.com/5fe301163f5f423c91327d69864a2991.mp3
-
-
         }
-    },[audio, playButton])
+    }, [audio, playButton])
 
     useEffect(() => {
         console.log(track, 'TRACK')
         track?.connect(audioContext.destination);
-    })
+    }, [track])
 
-    const playAudio = () => {audioElement.play()}
+
 
     return (
         <div id='homepage-lo-container_div'>
@@ -47,7 +38,7 @@ const HomePageLoggedOut = () =>{
                 <h2 id='homepage-phrase_h2'>A website for Music lovers Created by you</h2>
                 <h3 id='homepage-mvp_h3'>Add your songs, create playlists</h3>
                 <button id='homepage-signup_btn'>Join Waveform for free</button>
-                <audio ref={audio} crossOrigin='anonymous' src='https://spot-a-cloud.s3.us-east-2.amazonaws.com/AWS-Bucket/Songs/Make+Way+For+The+King.mp3' accept={`*/`}></audio>
+                <audio ref={audio} controls={true} src={mp3} accept={`*/`}></audio>
                 {/* <button onClick={playAudio} data-playing="false" role="switch" aria-checked="false">
                     <span>Play/Pause</span>
                 </button> */}
