@@ -111,8 +111,11 @@ export const editSongThunk = (payload, id, imageData) => async (dispatch) => {
 				if (AWSdata.errors) {
 					return;
 				}
+				dispatch(setPlaylistSongs([AWSdata.song]));
+				return;
 			}
 		}
+		dispatch(setPlaylistSongs([SQLdata.song]));
 	}
 };
 

@@ -133,7 +133,10 @@ def put_song_aws(id):
     song_to_update.albumImageUrl = albumImageUrl
     db.session.commit()
 
-    return {"albumImageUrl": albumImageUrl}
+    song_dict = song_to_update.to_dict()
+    song_dict["genres"] = [genre.genreName for genre in song_to_update.genres]
+
+    return {"albumImageUrl": albumImageUrl, "song": song_dict}
 
 
 @songs_routes.route('/<int:id>', methods=["PUT"])
@@ -151,10 +154,10 @@ def put_song(id):
             edited_song.title = form.data["title"]
             edited_song.genres = genre_list
             db.session.commit()
-            # new_song_data = new_song.to_dict()
-            # new_song_data["genres"] = [genre.to_dict()
-            #                            for genre in new_song.genres]
-        return {}
+            edited_song_data = edited_song.to_dict()
+            edited_song_data["genres"] = [genre.genreName
+                                          for genre in edited_song.genres]
+        return {"song": edited_song_data}
     print(form.errors)
     return form.errors
 
