@@ -4,8 +4,8 @@ from .songs import make_way, acting_up, burning, ddu_ddu, dont_look_back, great_
 
 def seed_genres():
     genre_list = [
-        'Rock', 'Rap', 'Hip-Hop', "K-pop"
-        'Electronic', 'Metal', "Pop"
+        'Rock', 'Rap', 'Hip-Hop', 'K-pop',
+        'Electronic', 'Metal', 'Pop',
         'Americana', 'Alternative Rock',
         'R & B', 'Chill', 'Focus'
     ]
