@@ -81,7 +81,7 @@ SUNDAY
 
     [] Adjust docs to accuretly reflect project
 
-    [] Add 1st song image to playlist page
+    [X] Add 1st song image to playlist page
 
     [] right nav bar to show 50 users
 

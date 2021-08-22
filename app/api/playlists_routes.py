@@ -124,6 +124,19 @@ def get_user_for_playlist(id):
     return {'user': user.to_dict()}
 
 
+@playlists_routes.route('/get/<int:limit>')
+@login_required
+def get_playlists_for_a_limit(limit):
+    playlists = Playlist.query.order_by(Playlist.createdAt.desc()).limit(limit)
+    playlists_dict_list = []
+    for playlist in playlists:
+        playlist_dict = playlist.to_dict()
+        playlist_dict['songs'] = [song.id for song in playlist.songs]
+        playlists_dict_list.append(playlist_dict)
+
+    return {'playlists': playlists_dict_list}
+
+
 @playlists_routes.route('/removeSong', methods=['DELETE'])
 @login_required
 def delete_song_from_playlist():

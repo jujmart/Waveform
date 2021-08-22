@@ -32,6 +32,19 @@ const removeSongFromPlaylist = (songId, playlistId) => ({
 	playlistId,
 });
 
+export const getAllPlaylistsThunk = (limit) => async (dispatch) => {
+	const response = await fetch(`/api/playlists/get/${limit}`);
+
+	if (response.ok) {
+		const data = await response.json();
+		if (data.errors) {
+			return;
+		}
+		dispatch(addPlaylists(data.playlists));
+		return data.playlists;
+	}
+};
+
 export const populatePlaylistFromArrThunk = (payload) => async (dispatch) => {
 	const response = await fetch("/api/playlists/", {
 		method: "PATCH",
