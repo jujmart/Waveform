@@ -4,31 +4,24 @@ import { getOneSongThunk } from "../store/songs";
 
 const PlaylistCard = ({ playlistId }) => {
 	const playlists = useSelector((state) => state.playlists);
-	const playlistSongId = useSelector(
+	const firstSongId = useSelector(
 		(state) => state.playlists[playlistId]?.songs[0]
 	);
 	const songs = useSelector((state) => state.songs);
 	const dispatch = useDispatch();
-	// const [firstSongId, setFirstSongId] = useState(null);
-
-	// useEffect(() => {
-	// 	if (playlists[playlistId]?.songs[0]) {
-	// 		setFirstSongId(playlists[playlistId]?.songs[0]);
-	// 	}
-	// }, [playlists, playlistId, playlistSongId]);
 
 	useEffect(() => {
-		if (playlistSongId && !songs[playlistSongId]) {
-			dispatch(getOneSongThunk(playlistSongId));
+		if (firstSongId && !songs[firstSongId]) {
+			dispatch(getOneSongThunk(firstSongId));
 		}
-	}, [songs, playlistSongId, dispatch]);
+	}, [songs, firstSongId, dispatch]);
 
 	return (
 		<div>
 			<img
 				src={
-					songs[playlistSongId]?.albumImageUrl
-						? songs[playlistSongId]?.albumImageUrl
+					songs[firstSongId]?.albumImageUrl
+						? songs[firstSongId]?.albumImageUrl
 						: "https://spot-a-cloud.s3.us-east-2.amazonaws.com/AWS-Bucket/Album-Images/Seeder1-NoAlbumImage.jpeg"
 				}
 				alt="First Song Album Img"
