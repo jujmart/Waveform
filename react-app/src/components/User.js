@@ -9,7 +9,7 @@ import { getASingleUserThunk } from "../store/session";
 import { setPlaylistSongsThunk } from "../store/songs";
 import { deleteUserPlaylist } from "../store/userMusicInfo";
 import "./css/user-profile-page.css";
-import EditPlaylistFormModal from "./EditPlaylistForm";
+import PlaylistCard from "./PlaylistCard";
 import Song from "./Song";
 
 function User() {
@@ -113,7 +113,7 @@ function User() {
 					{!currentUserProfile
 						? profileUser.playlistIds.map((playlistId) => (
 								<div key={playlistId}>
-									<Song songId={playlistId} />
+									<PlaylistCard playlistId={playlistId} />
 									<button
 										onClick={() =>
 											history.push(
@@ -127,7 +127,7 @@ function User() {
 						  ))
 						: userPlaylists.map((playlistId) => (
 								<div key={playlistId}>
-									<Song songId={playlistId} />
+									<PlaylistCard playlistId={playlistId} />
 									<button
 										onClick={() =>
 											history.push(
