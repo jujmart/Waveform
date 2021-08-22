@@ -13,7 +13,7 @@ const HomePageLoggedIn = () => {
 	}, [dispatch]);
 
 	return (
-		<div>
+		<div id='homepage-LI-container_div'>
 			{Object.keys(songs).length && (
 				<Song songId={Object.keys(songs)[0]} />
 			)}
