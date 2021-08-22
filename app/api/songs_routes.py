@@ -11,7 +11,7 @@ songs_routes = Blueprint('songs', __name__)
 
 @songs_routes.route('/')
 def get_all_songs():
-    songs = Song.query.options(joinedload(Song.genres)).all()
+    songs = Song.query.options(joinedload(Song.genres)).order_by(Song.createdAt.desc()).limit(5)
     song_list = []
     for song in songs:
         song_dict = song.to_dict()

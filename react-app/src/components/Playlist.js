@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect, useHistory, useParams } from "react-router-dom";
-import { getOnePlaylistThunk, deletePlaylistThunk } from "../store/playlist";
+import {
+	getOnePlaylistThunk,
+	deletePlaylistThunk,
+	getPlaylistUserNameThunk,
+} from "../store/playlist";
 import { setPlaylistSongsThunk } from "../store/songs";
 import { deleteUserPlaylist, getUserSongsThunk } from "../store/userMusicInfo";
 import EditPlaylistFormModal from "./EditPlaylistForm";
+import Song from "./Song";
 
 const DisplayPlaylist = () => {
 	const { id } = useParams();
 	const history = useHistory();
 	const [songsNotInStore, setSongsNotInStore] = useState([]);
 	const [currentPlaylist, setCurrentPlaylist] = useState({});
+	const [playlistUserName, setPlaylistUserName] = useState("");
 	const user = useSelector((state) => state.session.user);
 	const songs = useSelector((state) => state.songs);
 	const playlists = useSelector((state) => state.playlists);
@@ -54,51 +60,48 @@ const DisplayPlaylist = () => {
 		}
 	}, [dispatch, songsNotInStore]);
 
-	console.log(currentPlaylist.songs)
+	useEffect(() => {
+		(async () => {
+			const userName = await dispatch(getPlaylistUserNameThunk(id));
+			setPlaylistUserName(userName);
+		})();
+	}, [dispatch, id]);
 
 	return (
 		<div>
 			<div>
-				<img src='' alt='Playlist Image' />
+				<img src="" alt="Playlist Image" />
 				<p></p>
 				<h2>{currentPlaylist?.title}</h2>
 				<p>{currentPlaylist?.description}</p>
-				<p>{`Created by${currentPlaylist?.userId} <=== Needs to be updated`}</p>
-				<p>{`Added on ${currentPlaylist?.createdAt?.split(" ").splice(1, 3).join(" ")}`}</p>
+				<p>{`Created by${playlistUserName} <=== Needs to be updated`}</p>
+				<p>{`Added on ${currentPlaylist?.createdAt
+					?.split(" ")
+					.splice(1, 3)
+					.join(" ")}`}</p>
 			</div>
 
-{/* PLAY CURRENT PLAYLIST BUTTON */}
+			{/* PLAY CURRENT PLAYLIST BUTTON */}
 			<div>
 				<button>Play Current Playlist</button>
 			</div>
 
-
-{/* ITERATING TO FIND EACH INDIVIDUAL SONG AND DISPLAY */}
+			{/* ITERATING TO FIND EACH INDIVIDUAL SONG AND DISPLAY */}
 			<div>
 				<div>
 					<p>Title</p>
 					<p>Album</p>
 					<p>Date Added</p>
-					<p>Length</p>
 				</div>
-				{currentPlaylist && currentPlaylist?.songs?.map(song => (
-					<div>
-						<p>{song.id}</p>
-											<p>{song}</p> {/* REMOVE BEFORE DEPLOYING */}
-						<p>Title</p>
-						<p>Album</p>
-						<p>Date Added</p>
-						<p>Length</p>
-						<audio></audio>
-					</div>
-
-
-				))}
-
+				{currentPlaylist &&
+					currentPlaylist?.songs?.map((songId) => (
+						<Song
+							key={songId}
+							songId={songId}
+							playlistId={currentPlaylist.id}
+						/>
+					))}
 			</div>
-
-
-
 		</div>
 	);
 };
