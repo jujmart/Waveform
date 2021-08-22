@@ -123,15 +123,16 @@ const NavBar = () => {
 					<PlaylistFormModal />
 				</div>
 				<div id="user-playlists-nav-bar_div">
-					<NavLink to={`/playlists/1`} className="user-playlist">
-						Playlist one
-					</NavLink>
-					<NavLink to={`/playlists/2`} className="user-playlist">
-						Playlist two
-					</NavLink>
-					<NavLink to={`/playlists/3`} className="user-playlist">
-						Playlist three
-					</NavLink>
+					{Object.keys(playlists) &&
+						userPlaylistsIdArr.map((playlistId) => (
+							<NavLink
+								key={playlistId}
+								to={`/playlists/${playlistId}`}
+								className="user-playlist"
+							>
+								{playlists[playlistId]?.title}
+							</NavLink>
+						))}
 				</div>
 
 				{/* RIGHT SIDE NAV BAR */}
