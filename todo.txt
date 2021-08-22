@@ -55,9 +55,30 @@ SATURDAY
     [] Bonus features
 
 SUNDAY
-    [] Make sure eveything is smooth for Monday
+	[] render errors, validation
+
+	[] Music player
+		[] queue slice of state
+
+	[] No liked songs, no forward/back button, no friending
+	
+	[] conditional rendering of edit/delete buttons for specific user
+	
+	[] make edit/post song form change state
+
+	[] delete song from profile page
+
+	[] display playlists from profile page
+
+	[] homepage - get 5 playlists, 5 songs
 
     [] README
+
+	[] seed playlists, users, songs, album images
+
+	[] styling
+
+    [] Make sure eveything (HEROKU - NO ERRORS) is smooth for Monday
 
     [] Adjust docs to accuretly reflect project
 
