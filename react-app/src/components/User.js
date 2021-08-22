@@ -1,20 +1,43 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
+import {
+	deletePlaylistThunk,
+	populatePlaylistFromArrThunk,
+} from "../store/playlist";
 import { getASingleUserThunk } from "../store/session";
-import { setPlaylistSongsThunk } from "../store/songs";
+import { deleteSongThunk, setPlaylistSongsThunk } from "../store/songs";
+import { deleteUserPlaylist, deleteUserSong } from "../store/userMusicInfo";
 import "./css/user-profile-page.css";
+import PlaylistCard from "./PlaylistCard";
 import Song from "./Song";
 
 function User() {
 	const [profileUser, setProfileUser] = useState({});
 	const [songIdsNotInState, setSongIdsNotInState] = useState([]);
+	const [playlistIdsNotInState, setPlaylistIdsNotInState] = useState([]);
 	const { userId } = useParams();
 	const [currentUserProfile, setCurrentUserProfile] = useState(false);
 	const dispatch = useDispatch();
 	const currentUser = useSelector((state) => state.session.user);
 	const songs = useSelector((state) => state.songs);
+	const playlists = useSelector((state) => state.playlists);
+	const userPlaylists = useSelector((state) => state.userMusicInfo.playlists);
 	const history = useHistory();
+
+	const handlePlaylistDelete = async (e) => {
+		await dispatch(deletePlaylistThunk(e.target.value));
+		await dispatch(deleteUserPlaylist(e.target.value));
+		const user = await dispatch(getASingleUserThunk(userId));
+		setProfileUser(user);
+	};
+
+	const handleSongDelete = async (songId) => {
+		await dispatch(deleteSongThunk(songId));
+		await dispatch(deleteUserSong(songId));
+		const user = await dispatch(getASingleUserThunk(userId));
+		setProfileUser(user);
+	};
 
 	useEffect(() => {
 		(async () => {
@@ -37,13 +60,27 @@ function User() {
 				}
 			});
 		}
-	}, [profileUser, songs]);
+
+		if (profileUser?.playlistIds) {
+			profileUser.playlistIds.forEach((playlistId) => {
+				if (!playlists[playlistId]) {
+					setPlaylistIdsNotInState((prevState) => [
+						...prevState,
+						playlistId,
+					]);
+				}
+			});
+		}
+	}, [profileUser, songs, playlists]);
 
 	useEffect(() => {
 		if (songIdsNotInState.length) {
 			dispatch(setPlaylistSongsThunk(songIdsNotInState));
 		}
-	}, [dispatch, songIdsNotInState]);
+		if (playlistIdsNotInState.length) {
+			dispatch(populatePlaylistFromArrThunk(playlistIdsNotInState));
+		}
+	}, [dispatch, songIdsNotInState, playlistIdsNotInState]);
 
 	if (!Object.keys(profileUser).length) {
 		return null;
@@ -80,8 +117,41 @@ function User() {
 						: `${profileUser.username}'s playlists`}
 				</h2>
 				<div>
-					<img src="" alt="playlist img" />
-					<h3>Playlist Name</h3>
+					{!currentUserProfile
+						? profileUser.playlistIds.map((playlistId) => (
+								<div key={playlistId}>
+									<PlaylistCard playlistId={playlistId} />
+									<button
+										onClick={() =>
+											history.push(
+												`/playlists/${playlistId}`
+											)
+										}
+									>
+										Go To Playlist
+									</button>
+								</div>
+						  ))
+						: userPlaylists.map((playlistId) => (
+								<div key={playlistId}>
+									<PlaylistCard playlistId={playlistId} />
+									<button
+										onClick={() =>
+											history.push(
+												`/playlists/${playlistId}`
+											)
+										}
+									>
+										Go To Playlist
+									</button>
+									<button
+										onClick={(e) => handlePlaylistDelete(e)}
+										value={playlistId}
+									>
+										Delete Playlist
+									</button>
+								</div>
+						  ))}
 				</div>
 			</div>
 
@@ -108,7 +178,11 @@ function User() {
 									>
 										Edit Song
 									</button>
-									<button>Delete Song</button>
+									<button
+										onClick={() => handleSongDelete(songId)}
+									>
+										Delete Song
+									</button>
 								</>
 							)}
 						</div>
