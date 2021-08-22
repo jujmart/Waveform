@@ -6,8 +6,8 @@ import {
 	populatePlaylistFromArrThunk,
 } from "../store/playlist";
 import { getASingleUserThunk } from "../store/session";
-import { setPlaylistSongsThunk } from "../store/songs";
-import { deleteUserPlaylist } from "../store/userMusicInfo";
+import { deleteSongThunk, setPlaylistSongsThunk } from "../store/songs";
+import { deleteUserPlaylist, deleteUserSong } from "../store/userMusicInfo";
 import "./css/user-profile-page.css";
 import PlaylistCard from "./PlaylistCard";
 import Song from "./Song";
@@ -25,9 +25,16 @@ function User() {
 	const userPlaylists = useSelector((state) => state.userMusicInfo.playlists);
 	const history = useHistory();
 
-	const handleDelete = async (e) => {
+	const handlePlaylistDelete = async (e) => {
 		await dispatch(deletePlaylistThunk(e.target.value));
 		await dispatch(deleteUserPlaylist(e.target.value));
+		const user = await dispatch(getASingleUserThunk(userId));
+		setProfileUser(user);
+	};
+
+	const handleSongDelete = async (songId) => {
+		await dispatch(deleteSongThunk(songId));
+		await dispatch(deleteUserSong(songId));
 		const user = await dispatch(getASingleUserThunk(userId));
 		setProfileUser(user);
 	};
@@ -138,7 +145,7 @@ function User() {
 										Go To Playlist
 									</button>
 									<button
-										onClick={(e) => handleDelete(e)}
+										onClick={(e) => handlePlaylistDelete(e)}
 										value={playlistId}
 									>
 										Delete Playlist
@@ -171,7 +178,11 @@ function User() {
 									>
 										Edit Song
 									</button>
-									<button>Delete Song</button>
+									<button
+										onClick={() => handleSongDelete(songId)}
+									>
+										Delete Song
+									</button>
 								</>
 							)}
 						</div>

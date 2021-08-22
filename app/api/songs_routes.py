@@ -11,7 +11,8 @@ songs_routes = Blueprint('songs', __name__)
 
 @songs_routes.route('/')
 def get_all_songs():
-    songs = Song.query.options(joinedload(Song.genres)).order_by(Song.createdAt.desc()).limit(5)
+    songs = Song.query.options(joinedload(Song.genres)).order_by(
+        Song.createdAt.desc()).limit(5)
     song_list = []
     for song in songs:
         song_dict = song.to_dict()
@@ -24,9 +25,11 @@ def get_all_songs():
 @songs_routes.route('/<int:id>')
 def get_one_song(id):
     song = Song.query.options(joinedload(Song.genres)).get(id)
-    song_dict = song.to_dict()
-    song_dict["genres"] = [genre.genreName for genre in song.genres]
-    return {'song': song_dict}
+    if song:
+        song_dict = song.to_dict()
+        song_dict["genres"] = [genre.genreName for genre in song.genres]
+        return {'song': song_dict}
+    return {"errors": "Song not found"}
 
 
 @songs_routes.route("/AWS/<int:id>", methods=['POST'])
@@ -118,7 +121,8 @@ def put_song_aws(id):
 
     song_to_update = Song.query.get_or_404(id)
     old_album_image_url = song_to_update.albumImageUrl
-    delete_file_by_url(old_album_image_url)
+    if "AWS-Bucket" not in old_album_image_url:
+        delete_file_by_url(old_album_image_url)
     albumImageUpload = upload_file_to_s3(albumImage)
 
     if "url" not in albumImageUpload:
@@ -162,8 +166,10 @@ def delete_song(id):
     if song.userId == current_user.id:
         old_album_image_url = song.albumImageUrl
         old_song_url = song.songUrl
-        delete_file_by_url(old_album_image_url)
-        delete_file_by_url(old_song_url)
+        if "AWS-Bucket" not in old_album_image_url:
+            delete_file_by_url(old_album_image_url)
+        if "AWS-Bucket" not in old_song_url:
+            delete_file_by_url(old_song_url)
         db.session.delete(song)
         db.session.commit()
     return {}

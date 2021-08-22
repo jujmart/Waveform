@@ -40,11 +40,11 @@ export const getOneSongThunk = (id) => async (dispatch) => {
 	const response = await fetch(`/api/songs/${id}`);
 
 	if (response.ok) {
-		const { song } = await response.json();
-		if (song.errors) {
+		const data = await response.json();
+		if (data.errors) {
 			return;
 		}
-		dispatch(getOneSong(song));
+		dispatch(getOneSong(data.song));
 	}
 };
 

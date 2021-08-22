@@ -4,24 +4,33 @@ import { getOneSongThunk } from "../store/songs";
 
 const PlaylistCard = ({ playlistId }) => {
 	const playlists = useSelector((state) => state.playlists);
+	const playlistSongId = useSelector(
+		(state) => state.playlists[playlistId]?.songs[0]
+	);
 	const songs = useSelector((state) => state.songs);
 	const dispatch = useDispatch();
-	const [firstSongId, setFirstSongId] = useState(null);
+	// const [firstSongId, setFirstSongId] = useState(null);
+
+	// useEffect(() => {
+	// 	if (playlists[playlistId]?.songs[0]) {
+	// 		setFirstSongId(playlists[playlistId]?.songs[0]);
+	// 	}
+	// }, [playlists, playlistId, playlistSongId]);
 
 	useEffect(() => {
-		setFirstSongId(playlists[playlistId]?.songs[0]);
-	}, [playlists, playlistId]);
-
-	useEffect(() => {
-		if (firstSongId && !songs[firstSongId]) {
-			dispatch(getOneSongThunk(firstSongId));
+		if (playlistSongId && !songs[playlistSongId]) {
+			dispatch(getOneSongThunk(playlistSongId));
 		}
-	}, [songs, firstSongId, dispatch]);
+	}, [songs, playlistSongId, dispatch]);
 
 	return (
 		<div>
 			<img
-				src={songs[firstSongId]?.albumImageUrl}
+				src={
+					songs[playlistSongId]?.albumImageUrl
+						? songs[playlistSongId]?.albumImageUrl
+						: "https://spot-a-cloud.s3.us-east-2.amazonaws.com/AWS-Bucket/Album-Images/Seeder1-NoAlbumImage.jpeg"
+				}
 				alt="First Song Album Img"
 			/>
 			<h4>{playlists[playlistId]?.title}</h4>

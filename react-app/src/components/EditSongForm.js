@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Redirect, useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { getAllGenresThunk } from "../store/genre";
-import {
-	getOneSongThunk,
-	editSongThunk,
-	deleteSongThunk,
-} from "../store/songs";
-import { deleteUserSong, getUserSongsThunk } from "../store/userMusicInfo";
+import { getOneSongThunk, editSongThunk } from "../store/songs";
+import { getUserSongsThunk } from "../store/userMusicInfo";
 import "./css/edit-song-form.css";
 
 const EditSongForm = () => {
@@ -52,11 +48,6 @@ const EditSongForm = () => {
 
 	const handleOptionClick = (e) => {
 		setGenres((prevGenres) => [...prevGenres, +e.target.value]);
-	};
-
-	const deleteSongButton = (e) => {
-		dispatch(deleteSongThunk(id));
-		dispatch(deleteUserSong(id));
 	};
 
 	const handleSubmit = async (e) => {
@@ -186,9 +177,6 @@ const EditSongForm = () => {
 				</div>
 				<button type="submit">Submit</button>
 			</form>
-			<button onClick={deleteSongButton}>
-				Delicately caress and MURDER?
-			</button>
 		</div>
 	);
 };
