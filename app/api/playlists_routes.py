@@ -122,3 +122,16 @@ def get_userName_for_playlist(id):
     userName = playlist.user.username
 
     return {'userName': userName}
+
+
+@playlists_routes.route('/removeSong', methods=['DELETE'])
+@login_required
+def delete_song_from_playlist():
+    playlistId = request.get_json()['playlistId']
+    songId = request.get_json()['songId']
+    playlist = Playlist.query.get(playlistId)
+    song = Song.query.get(songId)
+    playlist.songs.remove(song)
+    db.session.commit()
+
+    return {}

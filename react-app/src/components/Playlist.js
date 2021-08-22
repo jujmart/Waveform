@@ -5,6 +5,7 @@ import {
 	getOnePlaylistThunk,
 	deletePlaylistThunk,
 	getPlaylistUserNameThunk,
+	removeSongFromPlaylistThunk,
 } from "../store/playlist";
 import { setPlaylistSongsThunk } from "../store/songs";
 import { deleteUserPlaylist, getUserSongsThunk } from "../store/userMusicInfo";
@@ -26,6 +27,10 @@ const DisplayPlaylist = () => {
 	const handleDelete = async () => {
 		await dispatch(deletePlaylistThunk(id));
 		await dispatch(deleteUserPlaylist(id));
+	};
+
+	const handleRemoveSongFromPlaylist = (e) => {
+		dispatch(removeSongFromPlaylistThunk(id, e.target.value));
 	};
 
 	useEffect(() => {
@@ -102,11 +107,18 @@ const DisplayPlaylist = () => {
 				</div>
 				{currentPlaylist &&
 					currentPlaylist?.songs?.map((songId) => (
-						<Song
-							key={songId}
-							songId={songId}
-							playlistId={currentPlaylist.id}
-						/>
+						<div key={songId}>
+							<Song
+								songId={songId}
+								playlistId={currentPlaylist.id}
+							/>
+							<button
+								onClick={(e) => handleRemoveSongFromPlaylist(e)}
+								value={songId}
+							>
+								Delete Song from Playlist
+							</button>
+						</div>
 					))}
 			</div>
 		</div>
