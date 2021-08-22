@@ -18,9 +18,10 @@ const DisplayPlaylist = () => {
 	const history = useHistory();
 	const [songsNotInStore, setSongsNotInStore] = useState([]);
 	const [currentPlaylist, setCurrentPlaylist] = useState({});
-	const [playlistUser, setPlaylistUser] = useState({});
+    const [playlistUser, setPlaylistUser] = useState({});
 	const user = useSelector((state) => state.session.user);
 	const songs = useSelector((state) => state.songs);
+	const firstSongId = useSelector((state) => state.playlists[id]?.songs[0]);
 	const playlists = useSelector((state) => state.playlists);
 	const dispatch = useDispatch();
 
@@ -75,20 +76,35 @@ const DisplayPlaylist = () => {
 
 	return (
 		<div id="playlist-container_div">
-			<div id='playlist-info_div'>
-				<img id='playlist-info_img' src="https://spot-a-cloud.s3.us-east-2.amazonaws.com/AWS-Bucket/Album-Images/Acting-Up_album.jpeg" alt="Playlist Image" />
-				<p id='playlist_p'>PLAYLIST</p>
-				<h2 id='playlist_h2'>{currentPlaylist?.title}</h2>
+			<div id="playlist-info_div">
+				<img
+					id="playlist-info_img"
+					src={
+						firstSongId
+							? songs[firstSongId]?.albumImageUrl
+							: "https://spot-a-cloud.s3.us-east-2.amazonaws.com/AWS-Bucket/Album-Images/Seeder1-NoAlbumImage.jpeg"
+					}
+					alt="Playlist Image"
+				/>
+				<p id="playlist_p">PLAYLIST</p>
+				<h2 id="playlist_h2">{currentPlaylist?.title}</h2>
 				<p>{currentPlaylist?.description}</p>
-				<Link id='playlist_creator' to={`/users/${playlistUser.id}`}>{playlistUser.username}  ·  <span>{currentPlaylist?.createdAt
-						?.split(" ")
-						.splice(1, 3)
-						.join(" ")}</span></Link>
+				<Link id="playlist_creator" to={`/users/${playlistUser.id}`}>
+					{playlistUser.username} ·{" "}
+					<span>
+						{currentPlaylist?.createdAt
+							?.split(" ")
+							.splice(1, 3)
+							.join(" ")}
+					</span>
+				</Link>
 			</div>
 
 			{/* PLAY CURRENT PLAYLIST BUTTON */}
-			<div id='playlist-controls_div'>
-			<span id='play_button' class="material-icons">play_circle_filled</span>
+			<div id="playlist-controls_div">
+				<span id="play_button" class="material-icons">
+					play_circle_filled
+				</span>
 
 				{currentPlaylist.userId === user.id && (
 					<>
@@ -97,37 +113,36 @@ const DisplayPlaylist = () => {
 					</>
 				)}
 			</div>
-		<div id='playlist-info-container_div'>
-
-			{/* ITERATING TO FIND EACH INDIVIDUAL SONG AND DISPLAY */}
-			<div id='playlist-songs_div'>
-				<div>
-					<p>Title</p>
-					<p>Album</p>
-					<p>Date Added</p>
+			<div id="playlist-info-container_div">
+				{/* ITERATING TO FIND EACH INDIVIDUAL SONG AND DISPLAY */}
+				<div id="playlist-songs_div">
+					<div>
+						<p>Title</p>
+						<p>Album</p>
+						<p>Date Added</p>
+					</div>
+					{currentPlaylist &&
+						currentPlaylist?.songs?.map((songId) => (
+							<div key={songId}>
+								<Song
+									songId={songId}
+									playlistId={currentPlaylist.id}
+								/>
+								{currentPlaylist.userId === user.id && (
+									<button
+										onClick={(e) =>
+											handleRemoveSongFromPlaylist(e)
+										}
+										value={songId}
+									>
+										Delete Song from Playlist
+									</button>
+								)}
+							</div>
+						))}
 				</div>
-				{currentPlaylist &&
-					currentPlaylist?.songs?.map((songId) => (
-						<div key={songId}>
-							<Song
-								songId={songId}
-								playlistId={currentPlaylist.id}
-							/>
-							{currentPlaylist.userId === user.id && (
-								<button
-									onClick={(e) =>
-										handleRemoveSongFromPlaylist(e)
-									}
-									value={songId}
-								>
-									Delete Song from Playlist
-								</button>
-							)}
-						</div>
-					))}
 			</div>
 		</div>
-	</div>
 	);
 };
 
