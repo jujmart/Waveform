@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { populatePlaylistFromArrThunk } from "../store/playlist";
+import {
+	deletePlaylistThunk,
+	populatePlaylistFromArrThunk,
+} from "../store/playlist";
 import { getASingleUserThunk } from "../store/session";
 import { setPlaylistSongsThunk } from "../store/songs";
+import { deleteUserPlaylist } from "../store/userMusicInfo";
 import "./css/user-profile-page.css";
 import EditPlaylistFormModal from "./EditPlaylistForm";
 import Song from "./Song";
@@ -18,7 +22,15 @@ function User() {
 	const currentUser = useSelector((state) => state.session.user);
 	const songs = useSelector((state) => state.songs);
 	const playlists = useSelector((state) => state.playlists);
+	const userPlaylists = useSelector((state) => state.userMusicInfo.playlists);
 	const history = useHistory();
+
+	const handleDelete = async (e) => {
+		await dispatch(deletePlaylistThunk(e.target.value));
+		await dispatch(deleteUserPlaylist(e.target.value));
+		const user = await dispatch(getASingleUserThunk(userId));
+		setProfileUser(user);
+	};
 
 	useEffect(() => {
 		(async () => {
@@ -98,17 +110,25 @@ function User() {
 						: `${profileUser.username}'s playlists`}
 				</h2>
 				<div>
-					{profileUser.playlistIds.map((playlistId) => (
-						<div key={playlistId}>
-							<Song songId={playlistId} />
-							{currentUserProfile && (
-								<>
-									<EditPlaylistFormModal />
-									<button>Delete Playlist</button>
-								</>
-							)}
-						</div>
-					))}
+					{!currentUserProfile
+						? profileUser.playlistIds.map((playlistId) => (
+								<div key={playlistId}>
+									<Song songId={playlistId} />
+									<button>Go To Playlist</button>
+								</div>
+						  ))
+						: userPlaylists.map((playlistId) => (
+								<div key={playlistId}>
+									<Song songId={playlistId} />
+									<button>Go To Playlist</button>
+									<button
+										onClick={(e) => handleDelete(e)}
+										value={playlistId}
+									>
+										Delete Playlist
+									</button>
+								</div>
+						  ))}
 				</div>
 			</div>
 
