@@ -56,8 +56,6 @@ const NavBar = () => {
 				{/* UPPER NAV BAR */}
 				<div id="upper-nav-bar_div">
 					<div id="upper-nav-bar-button_div">
-						<button>Back</button>
-						<button>Forward</button>
 					</div>
 					<div id="user_div">
 						<img
@@ -89,8 +87,7 @@ const NavBar = () => {
 						className="nav-bar_nav-links"
 						exact={true}
 						activeClassName="active"
-					>
-						Home
+					><span class="material-icons">home</span>   Home
 					</NavLink>
 
 					<NavLink
@@ -98,9 +95,7 @@ const NavBar = () => {
 						className="nav-bar_nav-links"
 						exact={true}
 						activeClassName="active"
-					>
-						Search
-					</NavLink>
+					><span class="material-icons">search</span>   Search</NavLink>
 
 					<NavLink
 						to="/"
@@ -108,7 +103,6 @@ const NavBar = () => {
 						exact={true}
 						activeClassName="active"
 					>
-						Liked Songs
 					</NavLink>
 
 					<NavLink
@@ -116,22 +110,23 @@ const NavBar = () => {
 						className="nav-bar_nav-links"
 						exact={true}
 						activeClassName="active"
-					>
-						Song Form
-					</NavLink>
+					><span class="material-icons">audiotrack</span>   Song Form</NavLink>
 
 					<PlaylistFormModal />
 				</div>
 				<div id="user-playlists-nav-bar_div">
 					{Object.keys(playlists) &&
 						userPlaylistsIdArr.map((playlistId) => (
-							<NavLink
-								key={playlistId}
-								to={`/playlists/${playlistId}`}
-								className="user-playlist"
-							>
-								{playlists[playlistId]?.title}
-							</NavLink>
+							<div className='user-playlists-nav-bar_div_li' key={playlistId}>
+								<div className ='user-playlists-nav-bar_li'>
+									<NavLink
+										to={`/playlists/${playlistId}`}
+										className="user-playlist"
+									>
+										{playlists[playlistId]?.title}
+									</NavLink>
+								</div>
+							</div>
 						))}
 				</div>
 

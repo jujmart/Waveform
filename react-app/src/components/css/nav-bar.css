@@ -4,7 +4,7 @@
     color: white;
     text-decoration: none;
     align-self: center;
-    justify-self: center;
+    padding-left: 20px;
     font-size: 25px;
 }
 
@@ -70,6 +70,7 @@
     display: grid;
     grid-template-rows: repeat(7, 1fr);
     border-bottom: white .5px solid;
+    padding-left: 2px;
 }
 
 
@@ -82,9 +83,7 @@
     }
 
     #create-playlist_div{
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        padding-left: 20px;
     }
 
         #create-playlist_button{
@@ -97,16 +96,53 @@
     background: black;
     display: grid;
     grid-template-rows: repeat(14, 1fr);
+
+
 }
 
     .user-playlist{
         text-decoration: none;
-        color: white;
-        font-size: 25px;
-        display: flex;
+        color: rgb(185, 183, 183);
+        font-size: 18px;
+        padding-left: 18px;
+
+        cursor: default;
+        margin-top: 15px ;
+        border-left: solid transparent 2px;
+        font-family: 'Mukta', sans-serif;
+        letter-spacing: -1px;
+        overflow: clip;
+        /* display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: center; */
+        /* box-sizing: border-box; */
     }
+
+    .user-playlist:hover{
+        color: white;
+
+    }
+
+    .user-playlists-nav-bar_div_li{
+        display: flex;
+        text-align:start;
+        max-width: 100%;
+        max-height: 100%;
+        overflow: hidden;
+
+    }
+
+    .user-playlists-nav-bar_li{
+        padding-top: 10px;
+        border-left: solid transparent 2px;
+        padding-right: 18px;
+    }
+
+
+        #user-playlists-nav-bar_ul{
+            /* box-sizing: border-box; */
+
+        }
 
 #right-nav-bar_div{
     background: black;
