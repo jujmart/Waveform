@@ -63,6 +63,14 @@ SUNDAY
 	[] No liked songs, no forward/back button, no friending
 	
 	[] conditional rendering of edit/delete buttons for specific user
+	
+	[] make edit/post song form change state
+
+	[] delete song from profile page
+
+	[] display playlists from profile page
+
+	[] homepage - get 5 playlists, 5 songs
 
     [] README
 

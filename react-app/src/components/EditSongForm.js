@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Redirect, useParams } from "react-router-dom";
+import { Redirect, useHistory, useParams } from "react-router-dom";
 import { getAllGenresThunk } from "../store/genre";
 import {
 	getOneSongThunk,
@@ -8,7 +8,7 @@ import {
 	deleteSongThunk,
 } from "../store/songs";
 import { deleteUserSong, getUserSongsThunk } from "../store/userMusicInfo";
-import './css/edit-song-form.css'
+import "./css/edit-song-form.css";
 
 const EditSongForm = () => {
 	const { id } = useParams();
@@ -22,7 +22,7 @@ const EditSongForm = () => {
 	const user = useSelector((state) => state.session.user);
 	const genresList = useSelector((state) => state.genres);
 	const dispatch = useDispatch();
-
+	const history = useHistory();
 
 	useEffect(() => {
 		dispatch(getAllGenresThunk());
@@ -36,18 +36,18 @@ const EditSongForm = () => {
 		setTitle(song?.title);
 		setArtist(song?.artist);
 		setAlbum(song?.album);
-		setGenres(
-			song?.genres
-				?
-						song.genres.map(
+		if (genresList.length) {
+			setGenres(
+				song?.genres
+					? song.genres.map(
 							(genreName) =>
 								genresList.find(
 									(genre) => genre.genreName === genreName
 								).id
-						)
-
-				: []
-		);
+					  )
+					: []
+			);
+		}
 	}, [song, id, genresList]);
 
 	const handleOptionClick = (e) => {
@@ -71,16 +71,17 @@ const EditSongForm = () => {
 			genres: [...genres],
 		};
 		await dispatch(editSongThunk(data, id, imageData));
+		history.push(`/users/${user.id}`);
 	};
 
 	const deleteGenreOnClick = (e) => {
-		e.preventDefault()
+		e.preventDefault();
 
-		const idx = genres.indexOf(+e.target.value)
+		const idx = genres.indexOf(+e.target.value);
 
-
-		setGenres((prevGenres) => prevGenres.slice(0,idx).concat(prevGenres.slice(idx+1)))
-
+		setGenres((prevGenres) =>
+			prevGenres.slice(0, idx).concat(prevGenres.slice(idx + 1))
+		);
 	};
 
 	// for testing purposes only
@@ -89,9 +90,9 @@ const EditSongForm = () => {
 	}, [dispatch, user]);
 
 	return (
-		<div id='edit-song-form-container_div'>
+		<div id="edit-song-form-container_div">
 			<div>
-			<img
+				<img
 					src={
 						albumImage
 							? URL.createObjectURL(albumImage)
@@ -100,13 +101,18 @@ const EditSongForm = () => {
 					alt="Album Cover"
 				/>
 
-				{genres.length > 0 && genres.map(genreId =>(
-					<div key={genreId}>
-						<p>{genresList[genreId -1].genreName}</p>
-						<button onClick={deleteGenreOnClick} value={genreId}>x</button>
-					</div>
-				))}
-
+				{genres.length > 0 &&
+					genres.map((genreId) => (
+						<div key={genreId}>
+							<p>{genresList[genreId - 1].genreName}</p>
+							<button
+								onClick={deleteGenreOnClick}
+								value={genreId}
+							>
+								x
+							</button>
+						</div>
+					))}
 			</div>
 			<form onSubmit={handleSubmit}>
 				<div>
