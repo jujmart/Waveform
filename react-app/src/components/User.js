@@ -114,13 +114,29 @@ function User() {
 						? profileUser.playlistIds.map((playlistId) => (
 								<div key={playlistId}>
 									<Song songId={playlistId} />
-									<button>Go To Playlist</button>
+									<button
+										onClick={() =>
+											history.push(
+												`/playlists/${playlistId}`
+											)
+										}
+									>
+										Go To Playlist
+									</button>
 								</div>
 						  ))
 						: userPlaylists.map((playlistId) => (
 								<div key={playlistId}>
 									<Song songId={playlistId} />
-									<button>Go To Playlist</button>
+									<button
+										onClick={() =>
+											history.push(
+												`/playlists/${playlistId}`
+											)
+										}
+									>
+										Go To Playlist
+									</button>
 									<button
 										onClick={(e) => handleDelete(e)}
 										value={playlistId}
