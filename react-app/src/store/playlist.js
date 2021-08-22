@@ -134,7 +134,7 @@ export const addSongToPlaylistThunk =
 		}
 	};
 
-export const getPlaylistUserNameThunk = (playlistId) => async () => {
+export const getPlaylistUserThunk = (playlistId) => async () => {
 	const response = await fetch(`/api/playlists/${playlistId}/users`);
 
 	if (response.ok) {
@@ -142,7 +142,7 @@ export const getPlaylistUserNameThunk = (playlistId) => async () => {
 		if (data.errors) {
 			return;
 		}
-		return data.userName;
+		return data.user;
 	}
 };
 

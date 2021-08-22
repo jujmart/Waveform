@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Redirect, useHistory, useParams } from "react-router-dom";
+import { Redirect, useHistory, useParams, Link } from "react-router-dom";
 import {
 	getOnePlaylistThunk,
 	deletePlaylistThunk,
-	getPlaylistUserNameThunk,
+	getPlaylistUserThunk,
 	removeSongFromPlaylistThunk,
 } from "../store/playlist";
 import { setPlaylistSongsThunk } from "../store/songs";
@@ -18,7 +18,7 @@ const DisplayPlaylist = () => {
 	const history = useHistory();
 	const [songsNotInStore, setSongsNotInStore] = useState([]);
 	const [currentPlaylist, setCurrentPlaylist] = useState({});
-	const [playlistUserName, setPlaylistUserName] = useState("");
+	const [playlistUser, setPlaylistUser] = useState({});
 	const user = useSelector((state) => state.session.user);
 	const songs = useSelector((state) => state.songs);
 	const playlists = useSelector((state) => state.playlists);
@@ -68,8 +68,8 @@ const DisplayPlaylist = () => {
 
 	useEffect(() => {
 		(async () => {
-			const userName = await dispatch(getPlaylistUserNameThunk(id));
-			setPlaylistUserName(userName);
+			const user = await dispatch(getPlaylistUserThunk(id));
+			setPlaylistUser(user);
 		})();
 	}, [dispatch, id]);
 
@@ -80,11 +80,21 @@ const DisplayPlaylist = () => {
 				<p></p>
 				<h2>{currentPlaylist?.title}</h2>
 				<p>{currentPlaylist?.description}</p>
-				<p>{`Created by${playlistUserName} <=== Needs to be updated`}</p>
-				<p>{`Added on ${currentPlaylist?.createdAt
-					?.split(" ")
-					.splice(1, 3)
-					.join(" ")}`}</p>
+				<p>
+					Created by{" "}
+					{
+						<Link to={`/users/${playlistUser.id}`}>
+							{playlistUser.username}
+						</Link>
+					}
+				</p>
+				<p>
+					Added on{" "}
+					{currentPlaylist?.createdAt
+						?.split(" ")
+						.splice(1, 3)
+						.join(" ")}
+				</p>
 				{currentPlaylist.userId === user.id && (
 					<>
 						<EditPlaylistFormModal />
@@ -112,12 +122,16 @@ const DisplayPlaylist = () => {
 								songId={songId}
 								playlistId={currentPlaylist.id}
 							/>
-							<button
-								onClick={(e) => handleRemoveSongFromPlaylist(e)}
-								value={songId}
-							>
-								Delete Song from Playlist
-							</button>
+							{currentPlaylist.userId === user.id && (
+								<button
+									onClick={(e) =>
+										handleRemoveSongFromPlaylist(e)
+									}
+									value={songId}
+								>
+									Delete Song from Playlist
+								</button>
+							)}
 						</div>
 					))}
 			</div>

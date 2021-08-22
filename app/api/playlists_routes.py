@@ -117,11 +117,11 @@ def add_song_to_playlist():
 
 @playlists_routes.route('/<int:id>/users')
 @login_required
-def get_userName_for_playlist(id):
+def get_user_for_playlist(id):
     playlist = Playlist.query.get(id)
-    userName = playlist.user.username
+    user = playlist.user
 
-    return {'userName': userName}
+    return {'user': user.to_dict()}
 
 
 @playlists_routes.route('/removeSong', methods=['DELETE'])
