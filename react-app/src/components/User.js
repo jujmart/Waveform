@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
+import { populatePlaylistFromArrThunk } from "../store/playlist";
 import { getASingleUserThunk } from "../store/session";
 import { setPlaylistSongsThunk } from "../store/songs";
 import "./css/user-profile-page.css";
+import EditPlaylistFormModal from "./EditPlaylistForm";
 import Song from "./Song";
 
 function User() {
 	const [profileUser, setProfileUser] = useState({});
 	const [songIdsNotInState, setSongIdsNotInState] = useState([]);
+	const [playlistIdsNotInState, setPlaylistIdsNotInState] = useState([]);
 	const { userId } = useParams();
 	const [currentUserProfile, setCurrentUserProfile] = useState(false);
 	const dispatch = useDispatch();
 	const currentUser = useSelector((state) => state.session.user);
 	const songs = useSelector((state) => state.songs);
+	const playlists = useSelector((state) => state.playlists);
 	const history = useHistory();
 
 	useEffect(() => {
@@ -37,13 +41,27 @@ function User() {
 				}
 			});
 		}
-	}, [profileUser, songs]);
+
+		if (profileUser?.playlistIds) {
+			profileUser.playlistIds.forEach((playlistId) => {
+				if (!playlists[playlistId]) {
+					setPlaylistIdsNotInState((prevState) => [
+						...prevState,
+						playlistId,
+					]);
+				}
+			});
+		}
+	}, [profileUser, songs, playlists]);
 
 	useEffect(() => {
 		if (songIdsNotInState.length) {
 			dispatch(setPlaylistSongsThunk(songIdsNotInState));
 		}
-	}, [dispatch, songIdsNotInState]);
+		if (playlistIdsNotInState.length) {
+			dispatch(populatePlaylistFromArrThunk(playlistIdsNotInState));
+		}
+	}, [dispatch, songIdsNotInState, playlistIdsNotInState]);
 
 	if (!Object.keys(profileUser).length) {
 		return null;
@@ -80,8 +98,17 @@ function User() {
 						: `${profileUser.username}'s playlists`}
 				</h2>
 				<div>
-					<img src="" alt="playlist img" />
-					<h3>Playlist Name</h3>
+					{profileUser.playlistIds.map((playlistId) => (
+						<div key={playlistId}>
+							<Song songId={playlistId} />
+							{currentUserProfile && (
+								<>
+									<EditPlaylistFormModal />
+									<button>Delete Playlist</button>
+								</>
+							)}
+						</div>
+					))}
 				</div>
 			</div>
 
