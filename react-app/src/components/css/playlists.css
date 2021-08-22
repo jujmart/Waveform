@@ -1,0 +1,14 @@
+#playlist-container_div{
+    margin: auto;
+    top: 10vh;
+    display: grid;
+    height: 80vh;
+    width: 80vw;
+    grid-template-columns: repeat(10, 10%);
+    grid-template-rows: repeat(10, 10%);
+    position: relative;
+    background: rgb(149, 149, 149);
+    overflow: visible;
+}
+
+
