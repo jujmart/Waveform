@@ -56,19 +56,26 @@ const NavBar = () => {
 				{/* UPPER NAV BAR */}
 				<div id="upper-nav-bar_div">
 					<div id="upper-nav-bar-button_div">
-						<button>Back</button>
-						<button>Forward</button>
 					</div>
-					<div id="user_div">
+					<div id='drop-down-super-container'>
 						<img
-							id="nav-bar_current-user-img"
-							src="data:image/jpeg;base64,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"
-							alt="Current user img"
-						/>
-						<p>{user.username}</p>
-						<div id="user-drop-down_div">
-							<NavLink to={`/users/${user.id}`}>Profile</NavLink>
-							<LogoutButton />
+								id="nav-bar_current-user-img"
+								src={user.profilePhotoUrl}
+								alt="Current user img"
+								/>
+
+						<div class="user-dropdown">
+						<p id='user-dropdown_p'>{user.username} <span class="material-icons">arrow_drop_down</span></p>
+							<div class="user-dropdown-content">
+							<ul id='user-dropdown_ul'>
+								<li>
+							<NavLink id="dropdown-profil_nav" to={`/users/${user.id}`}>Profile</NavLink>
+							</li>
+								<li>
+								<LogoutButton />
+								</li>
+							</ul>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -81,103 +88,120 @@ const NavBar = () => {
 						exact={true}
 						activeClassName="active"
 					>
-						⚬ ⚬ ⚬
+						...
 					</NavLink>
 
 					<NavLink
 						to="/"
 						className="nav-bar_nav-links"
 						exact={true}
-						activeClassName="active"
-					>
-						Home
+						activeClassName="active-upper-navlinks"
+					><span class="material-icons">home&nbsp;&nbsp;</span>Home
 					</NavLink>
+
+					<NavLink
+						to={`/users/${user.id}`}
+						className="nav-bar_nav-links"
+						exact={true}
+						activeClassName="active-upper-navlinks"
+					><span class="material-icons">person&nbsp;&nbsp;</span>Profile</NavLink>
 
 					<NavLink
 						to="/"
 						className="nav-bar_nav-links"
 						exact={true}
-						activeClassName="active"
+						activeClassName="active-upper-navlinks"
 					>
-						Search
-					</NavLink>
-
-					<NavLink
-						to="/"
-						className="nav-bar_nav-links"
-						exact={true}
-						activeClassName="active"
-					>
-						Liked Songs
 					</NavLink>
 
 					<NavLink
 						to="/song-form"
 						className="nav-bar_nav-links"
 						exact={true}
-						activeClassName="active"
-					>
-						Song Form
-					</NavLink>
-
+						activeClassName="active-upper-navlinks"
+					><span class="material-icons">audiotrack&nbsp;&nbsp;</span>Add Song</NavLink>
 					<PlaylistFormModal />
+
+				<hr id='hr'></hr>
 				</div>
+
 				<div id="user-playlists-nav-bar_div">
 					{Object.keys(playlists) &&
 						userPlaylistsIdArr.map((playlistId) => (
-							<NavLink
-								key={playlistId}
-								to={`/playlists/${playlistId}`}
-								className="user-playlist"
-							>
-								{playlists[playlistId]?.title}
-							</NavLink>
+							<div className='user-playlists-nav-bar_div_li' key={playlistId}>
+								<div className ='user-playlists-nav-bar_li'>
+									<NavLink
+										to={`/playlists/${playlistId}`}
+										className="user-playlist"
+									>
+										{playlists[playlistId]?.title}
+									</NavLink>
+								</div>
+							</div>
 						))}
 				</div>
 
 				{/* RIGHT SIDE NAV BAR */}
 
+				<div id='song-activity_h3-container'>
+						<h3 id="song-activity_h3">Newest Songs</h3>
+					</div>
+
 				<div id="right-nav-bar_div">
-					<h3 id="friend-activity_h3">Friend Activity</h3>
-					<div>
+					<div id='shhhhh'><p>if you found this you're awfully nosey</p></div>
+					<div className='newest-song-container_div'>
 						<img
-							className="friend-activity_profile-img"
-							src="https://imgix.ranker.com/user_node_img/50045/1000889229/original/1-photo-u1?auto=format&q=60&fit=crop&fm=pjpg&w=375"
+							className="song-activity-album_img"
+							src="https://spot-a-cloud.s3.us-east-2.amazonaws.com/AWS-Bucket/Album-Images/Make-Way-For-the-King_album.jpg"
 							alt="Friend Img"
 						/>
-						<p>Most recent SONG</p>
-						<p>Most recent SONG album name</p>
-						<p>Most recently created Playlist</p>
+						<p className='song-activity-song_p'>Most recent SONG</p>
+						<p className='song-activity-album_p'> album name</p>
 					</div>
-					<div>
+					<div className='newest-song-container_div'>
 						<img
-							className="friend-activity_profile-img"
-							src=""
+							className="song-activity-album_img"
+							src="https://spot-a-cloud.s3.us-east-2.amazonaws.com/AWS-Bucket/Album-Images/Make-Way-For-the-King_album.jpg"
 							alt="Friend Img"
 						/>
-						<p>Most recent SONG</p>
-						<p>Most recent SONG album name</p>
-						<p>Most recently created Playlist</p>
+						<p className='song-activity-song_p'>Most recent SONG</p>
+						<p className='song-activity-album_p'>album name</p>
 					</div>
-					<div>
+					<div className='newest-song-container_div'>
 						<img
-							className="friend-activity_profile-img"
-							src=""
+							className="song-activity-album_img"
+							src="https://spot-a-cloud.s3.us-east-2.amazonaws.com/AWS-Bucket/Album-Images/Make-Way-For-the-King_album.jpg"
 							alt="Friend Img"
 						/>
-						<p>Most recent SONG</p>
-						<p>Most recent SONG album name</p>
-						<p>Most recently created Playlist</p>
+						<p className='song-activity-song_p'>Most recent SONG</p>
+						<p className='song-activity-album_p'>album name</p>
 					</div>
-					<div>
+					<div className='newest-song-container_div'>
 						<img
-							className="friend-activity_profile-img"
-							src=""
+							className="song-activity-album_img"
+							src="https://spot-a-cloud.s3.us-east-2.amazonaws.com/AWS-Bucket/Album-Images/Make-Way-For-the-King_album.jpg"
 							alt="Friend Img"
 						/>
-						<p>Most recent SONG</p>
-						<p>Most recent SONG album name</p>
-						<p>Most recently created Playlist</p>
+						<p className='song-activity-song_p'>Most recent SONG</p>
+						<p className='song-activity-album_p'>album name</p>
+					</div>
+					<div className='newest-song-container_div'>
+						<img
+							className="song-activity-album_img"
+							src="https://spot-a-cloud.s3.us-east-2.amazonaws.com/AWS-Bucket/Album-Images/Make-Way-For-the-King_album.jpg"
+							alt="Friend Img"
+						/>
+						<p className='song-activity-song_p'>Most recent SONG</p>
+						<p className='song-activity-album_p'>album name</p>
+					</div>
+					<div className='newest-song-container_div'>
+						<img
+							className="song-activity-album_img"
+							src="https://spot-a-cloud.s3.us-east-2.amazonaws.com/AWS-Bucket/Album-Images/Make-Way-For-the-King_album.jpg"
+							alt="Friend Img"
+						/>
+						<p className='song-activity-song_p'>Most recent SONG</p>
+						<p className='song-activity-album_p'>album name</p>
 					</div>
 				</div>
 

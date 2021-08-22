@@ -75,26 +75,21 @@ const DisplayPlaylist = () => {
 
 	return (
 		<div id="playlist-container_div">
-			<div>
-				<img src="" alt="Playlist Image" />
-				<p></p>
-				<h2>{currentPlaylist?.title}</h2>
+			<div id='playlist-info_div'>
+				<img id='playlist-info_img' src="https://spot-a-cloud.s3.us-east-2.amazonaws.com/AWS-Bucket/Album-Images/Acting-Up_album.jpeg" alt="Playlist Image" />
+				<p id='playlist_p'>PLAYLIST</p>
+				<h2 id='playlist_h2'>{currentPlaylist?.title}</h2>
 				<p>{currentPlaylist?.description}</p>
-				<p>
-					Created by{" "}
-					{
-						<Link to={`/users/${playlistUser.id}`}>
-							{playlistUser.username}
-						</Link>
-					}
-				</p>
-				<p>
-					Added on{" "}
-					{currentPlaylist?.createdAt
+				<Link id='playlist_creator' to={`/users/${playlistUser.id}`}>{playlistUser.username}  ·  <span>{currentPlaylist?.createdAt
 						?.split(" ")
 						.splice(1, 3)
-						.join(" ")}
-				</p>
+						.join(" ")}</span></Link>
+			</div>
+
+			{/* PLAY CURRENT PLAYLIST BUTTON */}
+			<div id='playlist-controls_div'>
+			<span id='play_button' class="material-icons">play_circle_filled</span>
+
 				{currentPlaylist.userId === user.id && (
 					<>
 						<EditPlaylistFormModal />
@@ -102,14 +97,10 @@ const DisplayPlaylist = () => {
 					</>
 				)}
 			</div>
-
-			{/* PLAY CURRENT PLAYLIST BUTTON */}
-			<div>
-				<button>Play Current Playlist</button>
-			</div>
+		<div id='playlist-info-container_div'>
 
 			{/* ITERATING TO FIND EACH INDIVIDUAL SONG AND DISPLAY */}
-			<div>
+			<div id='playlist-songs_div'>
 				<div>
 					<p>Title</p>
 					<p>Album</p>
@@ -136,6 +127,7 @@ const DisplayPlaylist = () => {
 					))}
 			</div>
 		</div>
+	</div>
 	);
 };
 
