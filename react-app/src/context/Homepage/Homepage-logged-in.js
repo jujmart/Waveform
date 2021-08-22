@@ -13,73 +13,29 @@ const HomePageLoggedIn = () => {
 	}, [dispatch]);
 
 	return (
-		<div id='homepage-LI-container_div'>
-			{Object.keys(songs).length && (
-				<Song songId={Object.keys(songs)[0]} />
-			)}
-			{/* Current Users Playlist divider */}
-			<div>
-				<h2>{user.username} Playlists</h2>
-				<div>
-					<p>Name of playlist</p>
-					<img src="" alt="Album Image" />
-					<button>Stuff</button>
-				</div>
-				<div>
-					<p>Name of playlist</p>
-					<img src="" alt="Album Image" />
-					<button>Stuff</button>
-				</div>
-				<div>
-					<p>Name of playlist</p>
-					<img src="" alt="Album Image" />
-					<button>Stuff</button>
-				</div>
-				<div>
-					<p>Name of playlist</p>
-					<img src="" alt="Album Image" />
-					<button>Stuff</button>
-				</div>
-				<div>
-					<p>Name of playlist</p>
-					<img src="" alt="Album Image" />
-					<button>Stuff</button>
-				</div>
-			</div>
-
+		<div id="homepage-LI-container_div">
 			{/* Recently Added Songs Divider */}
 			<div>
 				<h2>Recently Added Songs</h2>
-				<div>
-					<p>Name of Song</p>
-					<img src="" alt="Album Image" />
-					<button>Stuff</button>
-				</div>
-				<div>
-					<p>Name of Song</p>
-					<img src="" alt="Album Image" />
-					<button>Stuff</button>
-				</div>
-				<div>
-					<p>Name of Song</p>
-					<img src="" alt="Album Image" />
-					<button>Stuff</button>
-				</div>
-				<div>
-					<p>Name of Song</p>
-					<img src="" alt="Album Image" />
-					<button>Stuff</button>
-				</div>
-				<div>
-					<p>Name of Song</p>
-					<img src="" alt="Album Image" />
-					<button>Stuff</button>
-				</div>
-				<div>
-					<p>Name of Song</p>
-					<img src="" alt="Album Image" />
-					<button>Stuff</button>
-				</div>
+				{Object.keys(songs).length && (
+					<>
+						<div>
+							<Song songId={Object.keys(songs)[0]} />
+						</div>
+						<div>
+							<Song songId={Object.keys(songs)[1]} />
+						</div>
+						<div>
+							<Song songId={Object.keys(songs)[2]} />
+						</div>
+						<div>
+							<Song songId={Object.keys(songs)[3]} />
+						</div>
+						<div>
+							<Song songId={Object.keys(songs)[4]} />
+						</div>
+					</>
+				)}
 			</div>
 
 			{/* Checkout Other Playlists Divider */}
@@ -87,27 +43,27 @@ const HomePageLoggedIn = () => {
 				<h2> Playlists</h2>
 				<div>
 					<p>Name of playlist</p>
-					<img src="" alt="Album Image" />
+					<img src="" alt="Album Img" />
 					<button>Stuff</button>
 				</div>
 				<div>
 					<p>Name of playlist</p>
-					<img src="" alt="Album Image" />
+					<img src="" alt="Album Img" />
 					<button>Stuff</button>
 				</div>
 				<div>
 					<p>Name of playlist</p>
-					<img src="" alt="Album Image" />
+					<img src="" alt="Album Img" />
 					<button>Stuff</button>
 				</div>
 				<div>
 					<p>Name of playlist</p>
-					<img src="" alt="Album Image" />
+					<img src="" alt="Album Img" />
 					<button>Stuff</button>
 				</div>
 				<div>
 					<p>Name of playlist</p>
-					<img src="" alt="Album Image" />
+					<img src="" alt="Album Img" />
 					<button>Stuff</button>
 				</div>
 			</div>
@@ -115,5 +71,4 @@ const HomePageLoggedIn = () => {
 	);
 };
 
-
-export default HomePageLoggedIn
+export default HomePageLoggedIn;

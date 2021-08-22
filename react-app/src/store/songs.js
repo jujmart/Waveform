@@ -40,11 +40,11 @@ export const getOneSongThunk = (id) => async (dispatch) => {
 	const response = await fetch(`/api/songs/${id}`);
 
 	if (response.ok) {
-		const { song } = await response.json();
-		if (song.errors) {
+		const data = await response.json();
+		if (data.errors) {
 			return;
 		}
-		dispatch(getOneSong(song));
+		dispatch(getOneSong(data.song));
 	}
 };
 
@@ -74,12 +74,13 @@ export const uploadSongThunk = (payload, songData) => async (dispatch) => {
 				}
 			);
 
-			if (AWSResponse.ok) {
-				const AWSData = await AWSResponse.json();
-				if (AWSData.errors) {
-					return;
-				}
-			}
+			// if (AWSResponse.ok) {
+			// 	// const AWSData = await AWSResponse.json();
+			// 	// if (AWSData.errors) {
+			// 	// 	return;
+			// 	// }
+			// }
+			return SQLData.songId;
 		}
 	}
 };
@@ -110,8 +111,11 @@ export const editSongThunk = (payload, id, imageData) => async (dispatch) => {
 				if (AWSdata.errors) {
 					return;
 				}
+				dispatch(setPlaylistSongs([AWSdata.song]));
+				return;
 			}
 		}
+		dispatch(setPlaylistSongs([SQLdata.song]));
 	}
 };
 
