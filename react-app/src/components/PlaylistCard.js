@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { getOneSongThunk } from "../store/songs";
 
 const PlaylistCard = ({ playlistId }) => {
@@ -9,6 +10,7 @@ const PlaylistCard = ({ playlistId }) => {
 	);
 	const songs = useSelector((state) => state.songs);
 	const dispatch = useDispatch();
+	const history = useHistory();
 
 	useEffect(() => {
 		if (firstSongId && !songs[firstSongId]) {
@@ -31,6 +33,9 @@ const PlaylistCard = ({ playlistId }) => {
 				{playlists[playlistId]?.description.slice(0, 40).trim()}
 				{playlists[playlistId]?.description.length > 40 && "..."}
 			</p>
+			<button onClick={() => history.push(`/playlists/${playlistId}`)}>
+				Go To Playlist
+			</button>
 		</div>
 	);
 };

@@ -17,3 +17,9 @@ def users():
 def user(id):
     user = User.query.get(id)
     return user.to_dict()
+
+@user_routes.route('/limit/<int:limit>')
+@login_required
+def get_users_by_limit(limit):
+    users = User.query.order_by(User.createdAt.desc()).limit(limit)
+    return {'users': [user.to_dict() for user in users]}

@@ -42,7 +42,6 @@ FRIDAY
     [] Implement player
 
     [] Implement live link on Heroku
-	
 	[] Seeding some songs, playlists
 
 	[] CSS styling
@@ -61,16 +60,16 @@ SUNDAY
 		[] queue slice of state
 
 	[] No liked songs, no forward/back button, no friending
-	
+
 	[X] conditional rendering of edit/delete buttons for specific user
-	
+
 	[X] make edit/post song form change state
 
 	[X] delete song from profile page
 
 	[X] display playlists from profile page
 
-	[] homepage - get 5 playlists, 5 songs
+	[X] homepage -  5 songs
 
     [] README
 
@@ -82,7 +81,11 @@ SUNDAY
 
     [] Adjust docs to accuretly reflect project
 
+    [X] Add 1st song image to playlist page
 
+    [] right nav bar to show 50 users
+
+    [X] home page to show 5 playists
 
 
 
