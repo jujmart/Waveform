@@ -55,7 +55,7 @@ const HomePageLoggedIn = () => {
 								</div>
 							))}
 					</div>
-
+					<h1 id='you-found-me'>shh keep your secrets</h1>
 				</div>
 
 				{/* Checkout Other Playlists Divider */}
