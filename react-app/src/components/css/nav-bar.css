@@ -39,11 +39,20 @@
     grid-template-rows: repeat(1, 1fr) ;
 }
 
+#shadeLogo-logged-in{
+    width: 8vw;
+    border-radius: 50%;
+    position: absolute;
+    top: -1vh;
+    left: 10vw;
+    object-fit: cover;
+}
+
 
 
     #drop-down-super-container{
         justify-self: center;
-        align-self: center;
+        align-self: start;
         grid-column: 5;
         height: 4vh;
         width: 12vw;
@@ -52,6 +61,7 @@
         justify-items: center;
         justify-content: space-between;
         background-color: rgb(41, 41, 41);
+        box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 50%);
         border-radius: 100px 100px 100px 100px;
     }
 
@@ -201,6 +211,10 @@
 
     }
 
+    .user-playlist-active{
+        color: white;
+    }
+
     .user-playlists-nav-bar_div_li{
         display: flex;
         text-align:start;
@@ -262,15 +276,36 @@
         overflow-x: clip;
     }
 
+    .newest-song-container_div > * {
+        padding-left: 2px;
+
+    }
+
+    .newest-song-container_div > p, a{
+        text-decoration: none;
+        color: rgb(185, 183, 183);
+        text-decoration-line:none;
+    }
+
+    .newest-song-container_div:hover{
+        background: #333;
+        border-radius: 5px;
+
+    }
+
     .song-activity-album_img{
         width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 50%;
     }
 
     .song-activity-song_p{
         font-size: 18px;
-        color: rgb(185, 183, 183);
+
         font-family: 'Mukta', sans-serif;
         letter-spacing: -1px;
+
     }
 
     .song-activity-album_p{
@@ -324,27 +359,74 @@
         grid-template-columns: repeat(8, 1fr);
     }
 
-        #audio-controls_back{
+        #navbar-player{
+            width: 40vw;
+            /* height: 25px; */
+            /* grid-row: ; */
+            grid-column: 1/ span 7;
+            justify-self: center;
+            align-self: center;
+        }
+
+        #navbar-player::-webkit-media-controls-panel{
+            background: gray;
 
         }
 
-        #audio-controls_skip{
+        audio::-webkit-media-controls-enclosure {
+            border-radius: 5px;
+            background-color: white;
+        }
+
+        audio::-webkit-media-controls-mute-button{
+            color:white;
+        }
+
+        audio::-webkit-media-controls-play-button{
 
         }
 
-        #audio-controls_play{
+        audio::-webkit-media-controls-timeline-container{
 
         }
 
-        #audio-controls_queue{
+        audio::-webkit-media-controls-current-time-display{
+            color:white;
+        }
+
+        audio::-webkit-media-controls-time-remaining-display{
+            color:white;
+        }
+
+        audio::-webkit-media-controls-timeline{
+        }
+
+        audio::-webkit-media-controls-volume-slider-container{
+            color:white;
+        }
+
+        audio::-webkit-media-controls-volume-slider{
 
         }
 
-        #audio-control_fullscreen{
+        audio::-webkit-media-controls-seek-back-button{
 
         }
 
-        #audio-control_volume{
+        audio::-webkit-media-controls-seek-forward-button{
+
+        }
+
+
+        audio::-webkit-media-controls-rewind-button{
+
+        }
+
+        audio::-webkit-media-controls-return-to-realtime-button{
+
+        }
+
+        audio::-webkit-media-controls-toggle-closed-captions-button{
 
         }
 
@@ -363,7 +445,8 @@
     width: 100vw;
     display: grid;
     grid-template-columns: repeat(10, 1fr) ;
-    border-bottom: darkslategray
+    border-bottom: darkslategray;
+    z-index:5;
 }
 
     .nav-bar-lo_link{
@@ -375,11 +458,13 @@
         text-decoration: none;
     }
 
-    #nav-bar-logo_img{
-        width: 80px;
+    #shadeLogo{
+        width: 8vw;
         border-radius: 50%;
-        justify-self: end;
-        align-self: center;
+        position: absolute;
+        filter: invert(100%);
+        top:-1vh;
+        left:3vw;
     }
 
     #nav-bar-lo_login{
