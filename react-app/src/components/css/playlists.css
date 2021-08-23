@@ -8,7 +8,8 @@
     grid-template-rows: repeat(10, 10%);
     position: relative;
     background: rgb(149, 149, 149);
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: clip;
 }
 
     #playlist-info_div{
@@ -48,7 +49,7 @@
 
         #playlist-controls_div{
             background-color: honeydew;
-            grid-row: 5/7;
+            grid-row: 5/6;
             grid-column: 1/span end;
         }
 
@@ -57,15 +58,39 @@
             }
 
         #playlist-info-container_div{
-            padding-left: 3vw;
+            padding-top: 2vh;
             padding-right: 3vw;
+            padding-left: 3vw;
+            width: 74vw;
+            display: grid;
+            grid-column: repeat(1, 1fr);
         }
 
-        #playlist-songs_div{
+        .playlist-song-container_div{
             display: grid;
-
+            width: 74vw;
+            height: 7vh;
+            grid-template-columns: .2fr .7fr .9fr .9fr .4fr .1fr .2fr;
+            justify-self: center;
+            color: white;
+            font-family: 'Mukta', sans-serif;
         }
 
         .playlist-song_album-img{
-            width: 40px;
+            width: 2.5vw;
+        }
+
+        #song-info_display{
+            justify-self: center;
+            grid-column: 1/span end;
+            display: grid;
+            width: 74vw;
+            grid-template-columns: repeat(4, 1fr);
+            column-gap: 5vw;
+            color: White;
+            font-size: 20px;
+            font-family: Montserrat;
+            align-self: end;
+            border-bottom: white solid 1px;
+            padding-bottom: 6px;
         }

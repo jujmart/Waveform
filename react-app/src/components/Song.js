@@ -19,17 +19,19 @@ const Song = ({ songId, playlistId }) => {
 	};
 
 	return (
-		<div>
+		<>
 			<img className='playlist-song_album-img' src={song?.albumImageUrl} alt="Song Album Cover" />
 			<div>{song?.title}</div>
 			<div>{song?.artist}</div>
 			<div>{song?.album}</div>
-			<div>{song?.createdAt}</div>
-			<button
+			<div>{song?.createdAt?.split(" ")
+						.splice(1, 3)
+						.join(" ")}</div>
+			<p
 				onClick={() => setShowPlaylistsDiv((prevState) => !prevState)}
 			>
-				Add to Playlist
-			</button>
+				<span class="material-icons">playlist_add</span>
+			</p>
 			{showPlaylistsDiv && (
 				<div>
 					<ul>
@@ -47,7 +49,7 @@ const Song = ({ songId, playlistId }) => {
 					</ul>
 				</div>
 			)}
-		</div>
+		</>
 	);
 };
 

@@ -80,7 +80,7 @@ const DisplayPlaylist = () => {
 				<p id='playlist_p'>PLAYLIST</p>
 				<h2 id='playlist_h2'>{currentPlaylist?.title}</h2>
 				<p>{currentPlaylist?.description}</p>
-				<Link id='playlist_creator' to={`/users/${playlistUser.id}`}>{playlistUser.username}  ·  <span>{currentPlaylist?.createdAt
+				<Link id='playlist_creator' to={`/users/${playlistUser.id}`}>{playlistUser.username}  ⚬  <span>{currentPlaylist?.createdAt
 						?.split(" ")
 						.splice(1, 3)
 						.join(" ")}</span></Link>
@@ -97,37 +97,37 @@ const DisplayPlaylist = () => {
 					</>
 				)}
 			</div>
-		<div id='playlist-info-container_div'>
 
-			{/* ITERATING TO FIND EACH INDIVIDUAL SONG AND DISPLAY */}
-			<div id='playlist-songs_div'>
-				<div>
+			<div id="song-info_display">
 					<p>Title</p>
+					<p>Artist</p>
 					<p>Album</p>
 					<p>Date Added</p>
-				</div>
-				{currentPlaylist &&
-					currentPlaylist?.songs?.map((songId) => (
-						<div key={songId}>
-							<Song
-								songId={songId}
-								playlistId={currentPlaylist.id}
-							/>
-							{currentPlaylist.userId === user.id && (
-								<button
-									onClick={(e) =>
-										handleRemoveSongFromPlaylist(e)
-									}
-									value={songId}
-								>
-									Delete Song from Playlist
-								</button>
-							)}
-						</div>
-					))}
 			</div>
+
+			<div id='playlist-info-container_div'>
+		{currentPlaylist &&
+			currentPlaylist?.songs?.map((songId) => (
+				<div className='playlist-song-container_div' key={songId}>
+					<Song
+						songId={songId}
+						playlistId={currentPlaylist.id}
+					/>
+					{currentPlaylist.userId === user.id && (
+						<p
+							onClick={(e) =>
+								handleRemoveSongFromPlaylist(e)
+							}
+							value={songId}
+						>
+							<span class="material-icons">clear</span>
+						</p>
+					)}
+				</div>
+			))}
+</div>
+
 		</div>
-	</div>
 	);
 };
 
