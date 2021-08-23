@@ -8,7 +8,7 @@ import {
 	removeSongFromPlaylistThunk,
 } from "../store/playlist";
 import { setPlaylistSongsThunk } from "../store/songs";
-import { deleteUserPlaylist, getUserSongsThunk } from "../store/userMusicInfo";
+import { deleteUserPlaylist } from "../store/userMusicInfo";
 import EditPlaylistFormModal from "./EditPlaylistForm";
 import Song from "./Song";
 import "./css/playlists.css";
@@ -18,7 +18,7 @@ const DisplayPlaylist = () => {
 	const history = useHistory();
 	const [songsNotInStore, setSongsNotInStore] = useState([]);
 	const [currentPlaylist, setCurrentPlaylist] = useState({});
-    const [playlistUser, setPlaylistUser] = useState({});
+	const [playlistUser, setPlaylistUser] = useState({});
 	const user = useSelector((state) => state.session.user);
 	const songs = useSelector((state) => state.songs);
 	const firstSongId = useSelector((state) => state.playlists[id]?.songs[0]);
@@ -88,7 +88,9 @@ const DisplayPlaylist = () => {
 				/>
 				<p id="playlist_p">PLAYLIST</p>
 				<h2 id="playlist_h2">{currentPlaylist?.title}</h2>
-				<p id='playlist_p-description'>{currentPlaylist?.description}</p>
+				<p id="playlist_p-description">
+					{currentPlaylist?.description}
+				</p>
 				<Link id="playlist_creator" to={`/users/${playlistUser.id}`}>
 					{playlistUser.username} ·{" "}
 					<span>
@@ -102,15 +104,15 @@ const DisplayPlaylist = () => {
 
 			{/* PLAY CURRENT PLAYLIST BUTTON */}
 			<div id="playlist-controls_div">
-				<span id="play_button" class="material-icons">
+				<span id="play_button" className="material-icons">
 					play_circle_filled
 				</span>
 
 				{currentPlaylist.userId === user.id && (
 					<>
-						<div id='user-creation_dropdown-container'>
-							<span id='user-creation_span'>...</span>
-							<div id='user-creation-buttons'>
+						<div id="user-creation_dropdown-container">
+							<span id="user-creation_span">...</span>
+							<div id="user-creation-buttons">
 								<EditPlaylistFormModal />
 								<p onClick={handleDelete}>Delete Playlist</p>
 							</div>
@@ -120,36 +122,37 @@ const DisplayPlaylist = () => {
 			</div>
 
 			<div id="song-info_display">
-					<p>Title</p>
-					<p>Artist</p>
-					<p>Album</p>
-					<p>Date Added</p>
+				<p>Title</p>
+				<p>Artist</p>
+				<p>Album</p>
+				<p>Date Added</p>
 			</div>
 
-			<div id='playlist-info-container_div'>
-		{currentPlaylist &&
-			currentPlaylist?.songs?.map((songId) => (
-				<div className='playlist-song-container_div' key={songId}>
-					<Song
-						songId={songId}
-						playlistId={currentPlaylist.id}
-					/>
-					{currentPlaylist.userId === user.id && (
-						<p
-							onClick={() =>
-								handleRemoveSongFromPlaylist(songId)
-							}
-
+			<div id="playlist-info-container_div">
+				{currentPlaylist &&
+					currentPlaylist?.songs?.map((songId) => (
+						<div
+							className="playlist-song-container_div"
+							key={songId}
 						>
-							<span class="material-icons">clear</span>
-						</p>
-					)}
-				</div>
-			))}
-
-
-</div>
-
+							<Song
+								songId={songId}
+								playlistId={currentPlaylist.id}
+							/>
+							{currentPlaylist.userId === user.id && (
+								<p
+									onClick={() =>
+										handleRemoveSongFromPlaylist(songId)
+									}
+								>
+									<span className="material-icons">
+										clear
+									</span>
+								</p>
+							)}
+						</div>
+					))}
+			</div>
 		</div>
 	);
 };

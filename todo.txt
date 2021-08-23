@@ -83,7 +83,7 @@ SUNDAY
 
     [X] Add 1st song image to playlist page
 
-    [] right nav bar to show 50 users
+    [X] right nav bar to show 50 users
 
     [X] home page to show 5 playists
 

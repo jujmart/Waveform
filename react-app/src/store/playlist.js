@@ -73,12 +73,12 @@ export const createPlaylistThunk = (payload) => async (dispatch) => {
 	});
 
 	if (response.ok) {
-		const { playlist } = await response.json();
-		if (playlist.errors) {
-			return;
+		const data = await response.json();
+		if (data.errors) {
+			return data;
 		}
-		dispatch(createPlaylist(playlist));
-		return playlist.id;
+		dispatch(createPlaylist(data.playlist));
+		return data;
 	}
 };
 
@@ -94,7 +94,7 @@ export const editPlaylistThunk = (payload, id) => async (dispatch) => {
 	if (response.ok) {
 		const data = await response.json();
 		if (data.errors) {
-			return;
+			return data;
 		}
 		dispatch(createPlaylist(data.playlist));
 	}

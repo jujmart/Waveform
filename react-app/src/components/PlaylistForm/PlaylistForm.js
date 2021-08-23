@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createPlaylistThunk } from "../../store/playlist";
 import { postUserPlaylist } from "../../store/userMusicInfo";
@@ -16,9 +16,13 @@ const PlaylistForm = ({ setShowModal }) => {
 			title,
 			description,
 		};
-		const playlistId = await dispatch(createPlaylistThunk(data));
-		await dispatch(postUserPlaylist(playlistId));
-		setShowModal(false);
+		const playlistData = await dispatch(createPlaylistThunk(data));
+		if (playlistData.errors) {
+			setErrors(playlistData.errors);
+		} else {
+			await dispatch(postUserPlaylist(playlistData.playlist.id));
+			setShowModal(false);
+		}
 	};
 
 	return (
@@ -47,7 +51,6 @@ const PlaylistForm = ({ setShowModal }) => {
 					name="description"
 					placeholder="Description"
 					value={description}
-					required
 					onChange={(e) => {
 						setDescription(e.target.value);
 					}}
