@@ -13,7 +13,7 @@
     grid-template-columns: repeat(10, 10%);
     grid-template-rows: repeat(10, 10%);
     position: relative;
-    overflow: overlay;
+    overflow: hidden;
 }
 
 #homepage-lo-container_div{
@@ -23,6 +23,7 @@
     display: grid;
     grid-template-rows: repeat(19, 1fr);
     grid-template-columns: repeat(10, 1fr) ;
+    overflow-x: overlay;
 }
 
 #homepage-title-info_div{
@@ -32,8 +33,25 @@
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(9, 1fr);
     background: rgb(31, 31, 31);
+    overflow: overlay;
 }
 
+#large-logo{
+    width: 65vw;
+    position: absolute;
+    filter: invert(100%);
+    left:30vw;
+    top:10vh;
+    z-index: 0;
+}
+
+#homepage-player{
+    grid-column:2/4 ;
+    grid-row: 7;
+    justify-self: start;
+    align-self: start;
+    box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 80%);
+}
 
 
 
@@ -64,13 +82,15 @@
 
 #homepage-signup_btn{
     grid-row: 6;
-    grid-column: 5 ;
+    grid-column: 3 ;
     height: 50px;
     width: 150px;
     border:none;
     border-radius: 100px 100px 100px 100px;
+    justify-self: center;
     color: white;
     background: darkgray;
+    box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 80%);
 }
 
 #homepage-play_btn{
@@ -317,5 +337,3 @@
     overflow-y: scroll;
     background: rgb(31, 31, 31);
 }
-
-
