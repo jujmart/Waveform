@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { createPlaylistThunk } from "../../store/playlist";
 import { postUserPlaylist } from "../../store/userMusicInfo";
 
@@ -7,7 +7,6 @@ const PlaylistForm = ({ setShowModal }) => {
 	const [errors, setErrors] = useState([]);
 	const [title, setTitle] = useState("");
 	const [description, setDescription] = useState("");
-	const user = useSelector((state) => state.session.user);
 	const dispatch = useDispatch();
 
 	const handleSubmit = async (e) => {

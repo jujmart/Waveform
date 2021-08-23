@@ -58,7 +58,10 @@ const SignUpForm = () => {
 					<div key={ind}>{error}</div>
 				))}
 			</div>
-			<img src={profilePic ? URL.createObjectURL(profilePic) : ""} />
+			<img
+				src={profilePic ? URL.createObjectURL(profilePic) : ""}
+				alt="Profile Pic"
+			/>
 			<div>
 				<label>User Name</label>
 				<input
