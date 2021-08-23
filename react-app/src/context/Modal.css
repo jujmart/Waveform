@@ -6,7 +6,9 @@
 	bottom: 0;
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-start;
+    margin-top: 150px;
+    z-index: 10;
 }
 
 #modal-background {
@@ -21,6 +23,78 @@
 #modal-content {
 	position: absolute;
 	background-color: white;
-	border-radius: 5px;
-	width: 500px;
+	border-radius: 10px;
+	width: 600px;
+    height: 150px;
+}
+
+.modal-form{
+    padding: 20px;
+    background-color: rgb(36, 36, 36);
+    color: white;
+    font-family: Montserrat;
+    display: flex;
+    height: 150px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-form  input,
+.modal-form  textarea {
+    border: none;
+    outline: 0;
+    padding-left: 20px;
+    border-bottom: 1px solid white;
+    background-color: transparent;
+    box-shadow: none;
+    color: whitesmoke;
+    height: 20px;
+    width: 200px;
+}
+
+.modal-form label{
+    justify-content: center;
+}
+
+.modal-form button{
+    background: transparent;
+    box-shadow: 0px 0px 0px transparent;
+    border: 0px solid transparent;
+    text-shadow: 0px 0px 0px transparent;
+    color: whitesmoke;
+    border: white solid 1px;
+    cursor: pointer;
+    width: 80px;
+    justify-self: end;
+    padding-top:3px;
+    padding-bottom: 3px;
+    margin-top: 10px;
+}
+
+.modal-form > div{
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    width: 400px;
+    margin: auto;
+}
+
+.modal-form > div > div {
+    width: 140px;
+    display:flex;
+    justify-content: center;
+}
+
+textarea{
+    resize: none;
+}
+
+.modal-erros-div{
+    text-align: center;
+}
+
+.modal-erros-div  .modal-form_one-error{
+    width: 100%;
+    color: #ff7f7f;
 }

@@ -38,14 +38,20 @@ const EditPlaylistForm = ({ setShowModal }) => {
 	}, [playlist]);
 
 	return (
-		<form onSubmit={handleSubmit}>
+		<form onSubmit={handleSubmit} className="modal-form">
+			{errors.length > 0 && (
+				<div className="modal-erros-div">
+					{errors.map((error, ind) => (
+						<div key={ind} className="modal-form_one-error">
+							{error}
+						</div>
+					))}
+				</div>
+			)}
 			<div>
-				{errors.map((error, ind) => (
-					<div key={ind}>{error}</div>
-				))}
-			</div>
-			<div>
-				<label htmlFor="Title">Title</label>
+				<div>
+					<label htmlFor="Title">Title</label>
+				</div>
 				<input
 					name="Title"
 					type="text"
@@ -58,7 +64,9 @@ const EditPlaylistForm = ({ setShowModal }) => {
 				/>
 			</div>
 			<div>
-				<label htmlFor="description">Description</label>
+				<div>
+					<label htmlFor="description">Description</label>
+				</div>
 				<textarea
 					name="description"
 					placeholder="Description"
