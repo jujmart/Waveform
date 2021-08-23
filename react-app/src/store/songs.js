@@ -64,7 +64,7 @@ export const uploadSongThunk = (payload, songData) => async (dispatch) => {
 			const SQLData = await SQLResponse.json();
 
 			if (SQLData.errors) {
-				return;
+				return SQLData;
 			}
 			const AWSResponse = await fetch(
 				`/api/songs/AWS/${SQLData.songId}`,
@@ -74,13 +74,13 @@ export const uploadSongThunk = (payload, songData) => async (dispatch) => {
 				}
 			);
 
-			// if (AWSResponse.ok) {
-			// 	// const AWSData = await AWSResponse.json();
-			// 	// if (AWSData.errors) {
-			// 	// 	return;
-			// 	// }
-			// }
-			return SQLData.songId;
+			if (AWSResponse.ok) {
+				const AWSData = await AWSResponse.json();
+				if (AWSData.errors) {
+					return AWSData;
+				}
+			}
+			return SQLData;
 		}
 	}
 };

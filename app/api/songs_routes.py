@@ -8,6 +8,16 @@ from app.AWS import allowed_file, get_unique_filename, upload_file_to_s3, delete
 
 songs_routes = Blueprint('songs', __name__)
 
+def validation_errors_to_error_messages(validation_errors):
+    """
+    Simple function that turns the WTForms validation errors into a simple list
+    """
+    errorMessages = []
+    for field in validation_errors:
+        for error in validation_errors[field]:
+            errorMessages.append(f'{field.title()} : {error}')
+    return errorMessages
+
 
 @songs_routes.route('/')
 def get_all_songs():
@@ -59,7 +69,7 @@ def post_song_url(id):
 
     # for Album image upload
     if "image" not in request.files:
-        return {"errors": "album image required"}
+        return {}
 
     albumImage = request.files['image']
 
@@ -101,8 +111,7 @@ def post_song():
         db.session.add(new_song)
         db.session.commit()
         return {"songId": new_song.id}
-    print(form.errors)
-    return form.errors
+    return {'errors': validation_errors_to_error_messages(form.errors)}
 
 
 @songs_routes.route("/AWS/<int:id>", methods=['PUT'])
