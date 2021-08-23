@@ -135,7 +135,7 @@ const EditSongForm = () => {
 						type="text"
 						placeholder="title"
 						value={title}
-						// required
+						required
 						onChange={(e) => {
 							setTitle(e.target.value);
 						}}
