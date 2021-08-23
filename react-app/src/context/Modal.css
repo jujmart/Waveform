@@ -32,7 +32,7 @@
     padding: 20px;
     background-color: rgb(36, 36, 36);
     color: white;
-    font-family: Montserrat;
+    font-family: 'Montserrat', sans-serif;
     display: flex;
     height: 150px;
     flex-direction: column;

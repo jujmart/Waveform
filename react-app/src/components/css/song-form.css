@@ -57,7 +57,7 @@
 
     #dynamic-artist{
         font-size: 30px;
-        font-family: Montserrat;
+        font-family: 'Montserrat', sans-serif;
         grid-row: 3;
         grid-column: 1/end;
         align-self: center;
@@ -71,7 +71,7 @@
         grid-row: 5;
         align-self: center;
        justify-self: center;
-       font-family: Montserrat;
+       font-family: 'Montserrat', sans-serif;
        text-align:center;
     }
 
@@ -118,7 +118,7 @@
     .remove-genre_p{
         font-size: 20px;
         align-self: center;
-        font-family: Montserrat;
+        font-family: 'Montserrat', sans-serif;
         justify-self: center;
         text-align:center;
     }
@@ -138,7 +138,7 @@
         row-gap: 40px;
         grid-template-columns: 1fr;
         font-size: 30px;
-        font-family: Montserrat;
+        font-family: 'Montserrat', sans-serif;
         padding: 20px 50px;
         box-sizing: border-box;
 
@@ -147,7 +147,7 @@
     #song-form_form > label{
         justify-self: center;
         color: white;
-        font-family: Montserrat;
+        font-family: 'Montserrat', sans-serif;
     }
 
     #song-form_form > input {

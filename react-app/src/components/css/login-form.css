@@ -20,7 +20,7 @@
 	row-gap: 40px;
 	grid-template-columns: repeat(2, 1fr);
 	font-size: 30px;
-	font-family: Montserrat;
+	font-family: 'Montserrat', sans-serif;
 	padding: 20px 50px;
 	box-sizing: border-box;
 }
@@ -29,7 +29,7 @@
 	justify-self: center;
 	align-self: center;
 	color: white;
-	font-family: Montserrat;
+	font-family: 'Montserrat', sans-serif;
 }
 
 #login-form_form input {

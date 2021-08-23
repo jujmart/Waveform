@@ -67,7 +67,7 @@
 #homepage-phrase_h2{
     grid-row: 5;
     grid-column: 2 /7;
-    font-family: Montserrat;
+    font-family: 'Montserrat', sans-serif;
     color: whitesmoke;
 }
 
@@ -76,7 +76,7 @@
     grid-column: 4 /6;
     align-self: center;
     justify-self: center;
-    font-family: Montserrat;
+    font-family: 'Montserrat', sans-serif;
     color: darkgray;
 }
 
@@ -166,7 +166,7 @@
 
     #privacy-links{
         text-decoration: none;
-        font-family: Montserrat;
+        font-family: 'Montserrat', sans-serif;
         font-size: 20px;
         grid-column: 2/ 10;
         grid-row: 1/ span end;
@@ -238,7 +238,7 @@
            grid-column: 1 / 10;
            padding-left: 15px;
            color: white;
-           font-family: Montserrat;
+           font-family: 'Montserrat', sans-serif;
        }
 
         #mvp4 {
