@@ -64,7 +64,7 @@ export const uploadSongThunk = (payload, songData) => async (dispatch) => {
 			const SQLData = await SQLResponse.json();
 
 			if (SQLData.errors) {
-				return;
+				return SQLData;
 			}
 			const AWSResponse = await fetch(
 				`/api/songs/AWS/${SQLData.songId}`,
@@ -74,13 +74,13 @@ export const uploadSongThunk = (payload, songData) => async (dispatch) => {
 				}
 			);
 
-			// if (AWSResponse.ok) {
-			// 	// const AWSData = await AWSResponse.json();
-			// 	// if (AWSData.errors) {
-			// 	// 	return;
-			// 	// }
-			// }
-			return SQLData.songId;
+			if (AWSResponse.ok) {
+				const AWSData = await AWSResponse.json();
+				if (AWSData.errors) {
+					return AWSData;
+				}
+			}
+			return SQLData;
 		}
 	}
 };
@@ -98,7 +98,7 @@ export const editSongThunk = (payload, id, imageData) => async (dispatch) => {
 	if (SQLresponse.ok) {
 		const SQLdata = await SQLresponse.json();
 		if (SQLdata.errors) {
-			return;
+			return SQLdata;
 		}
 		if (typeof imageData.get("image") !== "string") {
 			const AWSresponse = await fetch(`/api/songs/AWS/${id}`, {
@@ -109,7 +109,7 @@ export const editSongThunk = (payload, id, imageData) => async (dispatch) => {
 			if (AWSresponse.ok) {
 				const AWSdata = await AWSresponse.json();
 				if (AWSdata.errors) {
-					return;
+					return AWSdata;
 				}
 				dispatch(setPlaylistSongs([AWSdata.song]));
 				return;

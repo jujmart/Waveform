@@ -6,6 +6,16 @@ from sqlalchemy.orm import joinedload
 
 playlists_routes = Blueprint('playlists', __name__)
 
+def validation_errors_to_error_messages(validation_errors):
+    """
+    Simple function that turns the WTForms validation errors into a simple list
+    """
+    errorMessages = []
+    for field in validation_errors:
+        for error in validation_errors[field]:
+            errorMessages.append(f'{field.title()} : {error}')
+    return errorMessages
+
 
 @playlists_routes.route('/')
 @login_required
@@ -47,8 +57,7 @@ def post_playlist():
         new_playlist_dict = new_playlist.to_dict()
         new_playlist_dict["songs"] = []
         return {"playlist": new_playlist_dict}
-    print(form.errors)
-    return form.errors
+    return {'errors': validation_errors_to_error_messages(form.errors)}
 
 
 @playlists_routes.route('/<int:id>', methods=["PUT"])
@@ -66,9 +75,8 @@ def put_playlist(id):
             edited_playlist_dict["songs"] = [
                 song.id for song in edited_playlist.songs]
             return {"playlist": edited_playlist_dict}
-        return {"errors": "Only the creator of this playlist can edit it."}
-    print(form.errors)
-    return form.errors
+        return {"errors": ["Only the creator of this playlist can edit it."]}
+    return {'errors': validation_errors_to_error_messages(form.errors)}
 
 
 @playlists_routes.route('/<int:id>', methods=["DELETE"])
@@ -79,7 +87,7 @@ def delete_playlist(id):
         db.session.delete(playlist)
         db.session.commit()
         return {'playlistId': playlist.id}
-    return {"errors": "Only the creator of this playlist can delete it."}
+    return {"errors": ["Only the creator of this playlist can delete it."]}
 
 
 @playlists_routes.route('/users/<int:id>')

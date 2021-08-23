@@ -10,8 +10,8 @@ const SongForm = () => {
 	const [errors, setErrors] = useState([]);
 	const [songUrl, setSongUrl] = useState(null);
 	const [title, setTitle] = useState("");
-	const [artist, setArtist] = useState("");
-	const [album, setAlbum] = useState("");
+	const [artist, setArtist] = useState(null);
+	const [album, setAlbum] = useState(null);
 	const [albumImage, setAlbumImage] = useState("");
 	const [genres, setGenres] = useState([]);
 	const [disabledSubmitButton, setDisabledSubmitButton] = useState(false);
@@ -19,6 +19,18 @@ const SongForm = () => {
 	const genresList = useSelector((state) => state.genres);
 	const dispatch = useDispatch();
 	const history = useHistory();
+
+	const audioFileEndings = [
+		".m4a",
+		".flac",
+		".mp3",
+		".mp4",
+		".wav",
+		".wma",
+		".aac",
+	];
+
+	const imageFileEndings = ["pdf", "png", "jpg", "jpeg", "gif"];
 
 	useEffect(() => {
 		dispatch(getAllGenresThunk());
@@ -39,7 +51,6 @@ const SongForm = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		setDisabledSubmitButton(true);
 		let songData = new FormData();
 		songData.set("file", songUrl);
 		songData.set("image", albumImage);
@@ -50,10 +61,37 @@ const SongForm = () => {
 			album,
 			genres,
 		};
-
-		const songId = await dispatch(uploadSongThunk(data, songData));
-		await dispatch(postUserSong(songId));
-		history.push(`/users/${user.id}`);
+		if (songUrl) {
+			const songNameSplit = songUrl.name.split(".");
+			const songExt = songNameSplit[songNameSplit.length - 1];
+			if (audioFileEndings.includes("." + songExt)) {
+				const imageNameSplit = albumImage.name.split(".");
+				const imageExt = imageNameSplit[imageNameSplit.length - 1];
+				if (imageFileEndings.includes(imageExt)) {
+					setDisabledSubmitButton(true);
+					const response = await dispatch(
+						uploadSongThunk(data, songData)
+					);
+					if (response.errors) {
+						setErrors(response.errors);
+						setDisabledSubmitButton(false);
+					} else {
+						await dispatch(postUserSong(response.songId));
+						history.push(`/users/${user.id}`);
+					}
+				} else {
+					setErrors([
+						"Album Image: You must upload a valid image file type",
+					]);
+				}
+			} else {
+				setErrors([
+					"Audio File: You must upload a valid song file type",
+				]);
+			}
+		} else {
+			setErrors(["Audio File: You must upload a song"]);
+		}
 	};
 
 	return (
@@ -149,7 +187,7 @@ const SongForm = () => {
 				<label htmlFor="albumImage">Album Image</label>
 				<input
 					type="file"
-					accept="image/*"
+					accept=".pdf,.png,.jpg,.jpeg,.gif"
 					name="albumImage"
 					onChange={(e) => {
 						setAlbumImage(e.target.files[0]);
@@ -169,17 +207,14 @@ const SongForm = () => {
 						</option>
 					))}
 				</select>
-				{!disabledSubmitButton ? (
-					<button
-						id="song-form_submit-btn"
-						type="submit"
-						disabled={disabledSubmitButton}
-					>
-						Submit
-					</button>
-				) : (
-					<p>Loading...</p>
-				)}
+
+				<button
+					id="song-form_submit-btn"
+					type="submit"
+					disabled={disabledSubmitButton}
+				>
+					{!disabledSubmitButton ? "Submit" : "loading..."}
+				</button>
 			</form>
 		</div>
 	);

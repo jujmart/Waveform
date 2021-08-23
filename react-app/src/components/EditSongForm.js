@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, Redirect } from "react-router-dom";
 import { getAllGenresThunk } from "../store/genre";
 import { getOneSongThunk, editSongThunk } from "../store/songs";
-import { getUserSongsThunk } from "../store/userMusicInfo";
+// import { getUserSongsThunk } from "../store/userMusicInfo";
 import "./css/edit-song-form.css";
 
 const EditSongForm = () => {
@@ -19,6 +19,8 @@ const EditSongForm = () => {
 	const genresList = useSelector((state) => state.genres);
 	const dispatch = useDispatch();
 	const history = useHistory();
+
+	const imageFileEndings = ["pdf", "png", "jpg", "jpeg", "gif"];
 
 	useEffect(() => {
 		dispatch(getAllGenresThunk());
@@ -61,8 +63,22 @@ const EditSongForm = () => {
 			album,
 			genres: [...genres],
 		};
-		await dispatch(editSongThunk(data, id, imageData));
-		history.push(`/users/${user.id}`);
+		if (albumImage) {
+			const imageNameSplit = albumImage.name.split(".");
+			const imageExt = imageNameSplit[imageNameSplit.length - 1];
+			if (!imageFileEndings.includes(imageExt)) {
+				setErrors([
+					"Album Image: You must upload a valid image file type",
+				]);
+				return;
+			}
+		}
+		const response = await dispatch(editSongThunk(data, id, imageData));
+		if (response) {
+			setErrors(response.errors);
+		} else {
+			history.push(`/users/${user.id}`);
+		}
 	};
 
 	const deleteGenreOnClick = (e) => {
@@ -75,10 +91,14 @@ const EditSongForm = () => {
 		);
 	};
 
-	// for testing purposes only
-	useEffect(() => {
-		dispatch(getUserSongsThunk(user?.id));
-	}, [dispatch, user]);
+	// // for testing purposes only
+	// useEffect(() => {
+	// 	dispatch(getUserSongsThunk(user?.id));
+	// }, [dispatch, user]);
+
+	if (song && user.id !== song.userId) {
+		return <Redirect to={`/users/${user.id}`} />;
+	}
 
 	return (
 		<div id="edit-song-form-container_div">
