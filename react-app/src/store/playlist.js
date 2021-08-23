@@ -94,7 +94,7 @@ export const editPlaylistThunk = (payload, id) => async (dispatch) => {
 	if (response.ok) {
 		const data = await response.json();
 		if (data.errors) {
-			return;
+			return data;
 		}
 		dispatch(createPlaylist(data.playlist));
 	}

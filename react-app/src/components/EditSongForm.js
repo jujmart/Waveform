@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, Redirect } from "react-router-dom";
 import { getAllGenresThunk } from "../store/genre";
 import { getOneSongThunk, editSongThunk } from "../store/songs";
 import { getUserSongsThunk } from "../store/userMusicInfo";
@@ -18,7 +18,7 @@ const EditSongForm = () => {
 	const user = useSelector((state) => state.session.user);
 	const genresList = useSelector((state) => state.genres);
 	const dispatch = useDispatch();
-    const history = useHistory();
+	const history = useHistory();
 
 	const imageFileEndings = ["pdf", "png", "jpg", "jpeg", "gif"];
 
@@ -91,10 +91,14 @@ const EditSongForm = () => {
 		);
 	};
 
-	// for testing purposes only
-	useEffect(() => {
-		dispatch(getUserSongsThunk(user?.id));
-	}, [dispatch, user]);
+	// // for testing purposes only
+	// useEffect(() => {
+	// 	dispatch(getUserSongsThunk(user?.id));
+	// }, [dispatch, user]);
+
+	if (song && user.id !== song.userId) {
+		return <Redirect to={`/users/${user.id}`} />;
+	}
 
 	return (
 		<div id="edit-song-form-container_div">

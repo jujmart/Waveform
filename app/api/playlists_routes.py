@@ -75,9 +75,8 @@ def put_playlist(id):
             edited_playlist_dict["songs"] = [
                 song.id for song in edited_playlist.songs]
             return {"playlist": edited_playlist_dict}
-        return {"errors": "Only the creator of this playlist can edit it."}
-    print(form.errors)
-    return form.errors
+        return {"errors": ["Only the creator of this playlist can edit it."]}
+    return {'errors': validation_errors_to_error_messages(form.errors)}
 
 
 @playlists_routes.route('/<int:id>', methods=["DELETE"])
@@ -88,7 +87,7 @@ def delete_playlist(id):
         db.session.delete(playlist)
         db.session.commit()
         return {'playlistId': playlist.id}
-    return {"errors": "Only the creator of this playlist can delete it."}
+    return {"errors": ["Only the creator of this playlist can delete it."]}
 
 
 @playlists_routes.route('/users/<int:id>')
