@@ -27,20 +27,21 @@ const Song = ({ songId, playlistId }) => {
 			<div>{song?.createdAt?.split(" ")
 						.splice(1, 3)
 						.join(" ")}</div>
-			<p
+			<div id='HWHEHLWELTHLWE'
 				onClick={() => setShowPlaylistsDiv((prevState) => !prevState)}
 			>
 				<span class="material-icons">playlist_add</span>
-			</p>
+
 			{showPlaylistsDiv && (
-				<div>
-					<ul>
+				<div className='add-to-playlist_dropdown'>
+					<ul className='add-to-playlist_dropdown_ul'>
 						{userPlaylistIds.map((userPlaylistId) =>
 							playlistId !== userPlaylistId ? (
 								<li
 									key={userPlaylistId}
 									value={userPlaylistId}
 									onClick={addToPlaylist}
+									className='add-to-playlist_dropdown_li'
 								>
 									{playlists[userPlaylistId].title}
 								</li>
@@ -49,6 +50,7 @@ const Song = ({ songId, playlistId }) => {
 					</ul>
 				</div>
 			)}
+		</div>
 		</>
 	);
 };

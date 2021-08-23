@@ -29,8 +29,8 @@ const DisplayPlaylist = () => {
 		await dispatch(deleteUserPlaylist(id));
 	};
 
-	const handleRemoveSongFromPlaylist = (e) => {
-		dispatch(removeSongFromPlaylistThunk(id, e.target.value));
+	const handleRemoveSongFromPlaylist = (songId) => {
+		dispatch(removeSongFromPlaylistThunk(id, songId));
 	};
 
 	useEffect(() => {
@@ -79,7 +79,7 @@ const DisplayPlaylist = () => {
 				<img id='playlist-info_img' src="https://spot-a-cloud.s3.us-east-2.amazonaws.com/AWS-Bucket/Album-Images/Acting-Up_album.jpeg" alt="Playlist Image" />
 				<p id='playlist_p'>PLAYLIST</p>
 				<h2 id='playlist_h2'>{currentPlaylist?.title}</h2>
-				<p>{currentPlaylist?.description}</p>
+				<p id='playlist_p-description'>{currentPlaylist?.description}</p>
 				<Link id='playlist_creator' to={`/users/${playlistUser.id}`}>{playlistUser.username}  ⚬  <span>{currentPlaylist?.createdAt
 						?.split(" ")
 						.splice(1, 3)
@@ -92,8 +92,13 @@ const DisplayPlaylist = () => {
 
 				{currentPlaylist.userId === user.id && (
 					<>
-						<EditPlaylistFormModal />
-						<button onClick={handleDelete}>Delete Playlist</button>
+						<div id='user-creation_dropdown-container'>
+							<span id='user-creation_span'>...</span>
+							<div id='user-creation-buttons'>
+								<EditPlaylistFormModal />
+								<p onClick={handleDelete}>Delete Playlist</p>
+							</div>
+						</div>
 					</>
 				)}
 			</div>
@@ -115,16 +120,18 @@ const DisplayPlaylist = () => {
 					/>
 					{currentPlaylist.userId === user.id && (
 						<p
-							onClick={(e) =>
-								handleRemoveSongFromPlaylist(e)
+							onClick={() =>
+								handleRemoveSongFromPlaylist(songId)
 							}
-							value={songId}
+
 						>
 							<span class="material-icons">clear</span>
 						</p>
 					)}
 				</div>
 			))}
+
+
 </div>
 
 		</div>
