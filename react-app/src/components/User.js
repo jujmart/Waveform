@@ -25,9 +25,9 @@ function User() {
 	const userPlaylists = useSelector((state) => state.userMusicInfo.playlists);
 	const history = useHistory();
 
-	const handlePlaylistDelete = async (e) => {
-		await dispatch(deletePlaylistThunk(e.target.value));
-		await dispatch(deleteUserPlaylist(e.target.value));
+	const handlePlaylistDelete = async (playlistId) => {
+		await dispatch(deletePlaylistThunk(playlistId));
+		await dispatch(deleteUserPlaylist(playlistId));
 		const user = await dispatch(getASingleUserThunk(userId));
 		setProfileUser(user);
 	};
@@ -110,66 +110,81 @@ function User() {
 			</div> */}
 
 			{/* List of user created playlists */}
-			<div>
-				<h2>
+				<div id='song-playlist-container_div'>
+				<h2 className='profile-section-title_h2'>
 					{currentUserProfile
 						? "Your playlists"
 						: `${profileUser.username}'s playlists`}
 				</h2>
-				<div>
-					{!currentUserProfile
-						? profileUser.playlistIds.map((playlistId) => (
-								<div key={playlistId}>
-									<PlaylistCard playlistId={playlistId} />
-								</div>
-						  ))
-						: userPlaylists.map((playlistId) => (
-								<div key={playlistId}>
-									<PlaylistCard playlistId={playlistId} />
-									<button
-										onClick={(e) => handlePlaylistDelete(e)}
-										value={playlistId}
-									>
-										Delete Playlist
-									</button>
-								</div>
-						  ))}
+				<div className='user-profile-playlists_div'>
+						{!currentUserProfile
+							? profileUser.playlistIds.map((playlistId) => (
+									<div className='playlist-card_container' key={playlistId}>
+										<PlaylistCard playlistId={playlistId} />
+									</div>
+							))
+							: userPlaylists.map((playlistId) => (
+									<div className='playlist-card_container' key={playlistId}>
+										<PlaylistCard playlistId={playlistId} />
+										{/* <p className='playlist-card_edit_btn'
+											onClick={(e) => handlePlaylistDelete(e)}
+											value={playlistId}
+										> */}
+										<div className="playlist-card_delete"
+											onClick={() => handlePlaylistDelete(playlistId)}>
+										<p className='playlist-card_delete-span'>
+										<span
+											 class="material-icons">clear</span>
+										</p>
+										</div>
+									</div>
+							))}
 				</div>
-			</div>
+
 
 			{/* List of the users most recently added songs */}
 
-			<div>
-				<h2>
+
+				<h2 id='profile-section-title_h2' className='profile-section-title_h2'>
 					{currentUserProfile
 						? "Your most recently added songs"
 						: `${profileUser.username}'s most recently added songs`}
 				</h2>
-				<div>
+
+				<div id="song-info">
+					<p>Title</p>
+					<p>Artist</p>
+					<p>Album</p>
+					<p>Date Added</p>
+				</div>
+				<div id='playlist-info-container_div'>
 					{profileUser.songIds.map((songId) => (
-						<div key={songId}>
+						<div className='playlist-song-container_div' key={songId}>
 							<Song songId={songId} />
 							{currentUserProfile && (
 								<>
-									<button
+									<p
 										onClick={() =>
 											history.push(
 												`/edit-song-form/${songId}`
 											)
 										}
 									>
-										Edit Song
-									</button>
-									<button
+										<span class="material-icons">
+											edit
+											</span>
+									</p>
+									<p
 										onClick={() => handleSongDelete(songId)}
 									>
-										Delete Song
-									</button>
+										<span class="material-icons">clear</span>
+									</p>
 								</>
 							)}
 						</div>
 					))}
 				</div>
+				<h1 id='you-found-me'>still being noesy</h1>
 			</div>
 		</div>
 	);

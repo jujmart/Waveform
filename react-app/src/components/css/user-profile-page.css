@@ -15,6 +15,14 @@
     grid-template-columns: repeat(10, 10%);
     grid-template-rows: repeat(10, 10%);
     position: relative;
+    overflow-x: hidden;
+    background: rgb(31, 31, 31);
+
+}
+
+#you-found-me{
+    color: rgb(31, 31, 31);
+    grid-column: 1;
 }
 
     #user-profile_div{
@@ -30,7 +38,7 @@
     #user-profile-info_div{
         grid-row: 1/ span 4;
         grid-column: 1/ span end;
-        background-color: gray;
+        background: linear-gradient(rgb(97, 97, 97),rgb(39, 39, 39));
         display: grid;
         grid-template-columns: repeat(16, 1fr);
         grid-template-rows: repeat(12, 1fr);
@@ -50,14 +58,16 @@
         grid-row: 3/ span 2;
         grid-column: 4;
         color: white;
+        font-family: 'Mukta', sans-serif;
     }
 
     #user-profile-username_h1{
         grid-row: 4/span 2;
         grid-column: 4/ span 3;
         font-size: 60px;
-        color: white;
+        color: whitesmoke;
         align-self: center;
+        font-family: Oswald;
     }
 
     #user-profile-count_p{
@@ -65,5 +75,154 @@
         grid-column: 4 / span end;
         font-size: 20px;
         align-self: end;
+        color: gray;
+        font-family: 'Mukta', sans-serif;
+    }
+
+
+#song-playlist-container_div{
+ display: grid;
+ grid-template-columns: repeat(1, 1fr);
+
+}
+
+.profile-section-title_h2{
+    font-size: 35px;
+    color: whitesmoke;
+    padding-top: 20px;
+    padding-left:2vw;
+    font-family: 'Mukta', sans-serif;
+    font-weight: bold;
+    letter-spacing: -1px;
+    grid-column: 1/ span end;
+
+}
+
+
+.user-profile-playlists_div
+{
+    margin-left: 2vw;
+    margin-right: 2vw;
+    margin-top:.5vw;
+    width: 76vw;
+    background: rgb(31, 31, 31);
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: auto;
+    column-gap: 2vw;
+    row-gap: 6vh;
+    grid-column: 1;
+}
+
+    #profile-section-title_h2{
+        margin-top:1vh;
+        margin-bottom: 2vh;
+        grid-column: 1;
+    }
+
+
+
+
+    .playlist-card_container,
+    .song-card_container{
+        background: gray;
+        border-radius: 5px;
+        height: 40vh;
+        width: 13.6vw;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(10, 1fr);
+
+    }
+
+    .song-card_container{
+        cursor: default;
+    }
+
+    .playlist-card_img,
+    .song-card_img{
+        width:12vw;
+        height:12vw;
+        grid-row: 1 / span 7;
+        grid-column: 1/ span end;
+        justify-self: center;
+        align-self: center;
+        cursor: pointer;
+    }
+
+    .song-card_img{
+        border-radius: 50%;
+    }
+
+    .playlist-card_h4{
+        grid-row: 8;
+        grid-column: 1/ 5 ;
+        padding-left: 1.5vw;
+        font-size: 20px;
+        color:whitesmoke;
+        font-family: 'Mukta', sans-serif
+    }
+
+    .playlist-card_p{
+        grid-row:9/ span end;
+        grid-column: 1/ span end;
+        padding-left: 1.5vw;
+        color:whitesmoke;
+        font-family: 'Mukta', sans-serif;
+    }
+
+    .playlist-card_playlist_btn{
+        grid-row: 10;
+        grid-column: 3;
+    }
+
+
+
+    .playlist-card_delete{
+        cursor: default;
+        grid-row: 10;
+        grid-column: 5;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 5;
+    }
+
+    .playlist-card_delete-span{
+        font-size: 30px;
         color: white;
+
+    }
+
+    .playlist-card_delete:hover .playlist-card_delete-span{
+        color: #333;
+        transition: .5s;
+    }
+
+    .playlist-card_delete:active .playlist-card_delete-span{
+        color: red;
+        transition: 0s;
+    }
+
+
+
+    #song-info{
+        justify-self: center;
+            grid-column: 1/span end;
+            display: grid;
+            width: 74vw;
+            grid-template-columns: repeat(4, 1fr);
+            column-gap: 5vw;
+            color: White;
+            font-size: 20px;
+            font-family: Montserrat;
+            align-self: end;
+            border-bottom: white solid 1px;
+            padding-bottom: 6px;
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            background: rgb(31, 31, 31);
     }

@@ -24,29 +24,42 @@ const HomePageLoggedIn = () => {
 	}, [dispatch]);
 
 	return (
-		<div id="homepage-LI-container_div">
-			{/* Recently Added Songs Divider */}
-			<div>
-				<h2>Recently Added Songs</h2>
-				{Object.keys(songs).length &&
-					Object.keys(songs).map((songId) => (
-						<div key={songId}>
-							<Song songId={songId} />
-						</div>
-					))}
-			</div>
+		<div id="user-profile-container_div">
 
-			{/* Checkout Other Playlists Divider */}
-			<div>
-				<h2> Recently Added Playlists</h2>
-				<div>
-					{addedSongIds.map((playlistId) => (
-						<div key={playlistId}>
-							<PlaylistCard playlistId={playlistId} />
-						</div>
-					))}
+				<div id='song-playlist-container_div'>
+					<h2 className='profile-section-title_h2'> Recently Added Playlists</h2>
+					<div className='user-profile-playlists_div'>
+							{addedSongIds.map((playlistId) => (
+								<div className='playlist-card_container' key={playlistId}>
+									<PlaylistCard playlistId={playlistId} />
+								</div>
+							))}
+					</div>
+
+
+					<h2 className='profile-section-title_h2'>Recently Added Songs</h2>
+
+					<div id="song-info">
+					<p>Title</p>
+					<p>Artist</p>
+					<p>Album</p>
+					<p>Date Added</p>
+					</div>
+			{/* Recently Added Songs Divider */}
+				<div id='playlist-info-container_div'>
+					{Object.keys(songs).length &&
+						Object.keys(songs).map((songId) => (
+							<div className='playlist-song-container_div' key={songId}>
+								<Song songId={songId} />
+							</div>
+						))}
 				</div>
-			</div>
+				</div>
+
+				{/* Checkout Other Playlists Divider */}
+
+
+
 		</div>
 	);
 };

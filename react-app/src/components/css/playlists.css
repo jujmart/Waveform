@@ -24,6 +24,7 @@
 
         #playlist-info_img{
             height: 28vh;
+            width: 28vh;
             grid-column: 1/3;
             grid-row: 1/ span end;
             justify-self: center;
@@ -100,11 +101,16 @@
             display: grid;
             width: 74vw;
             height: 7vh;
-            grid-template-columns: .2fr .7fr .9fr .9fr .4fr .1fr .2fr;
+            grid-template-columns: .2fr .7fr .9fr .9fr .4fr .1fr .1fr .1fr;
             justify-self: center;
             color: white;
             font-family: 'Mukta', sans-serif;
             cursor: default;
+        }
+
+        .playlist-song-container_div:hover {
+            background-color: rgb(88, 88, 88);
+            border-radius: 5px;
         }
 
         .playlist-song-container_div > p {
@@ -128,6 +134,9 @@
 
         .playlist-song-container_div > img {
             width: 2.5vw;
+            margin-top: auto;
+            margin-bottom: auto;
+            margin-left: 20px;
         }
 
 
