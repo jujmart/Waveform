@@ -65,9 +65,27 @@ const SongForm = () => {
 			const songNameSplit = songUrl.name.split(".");
 			const songExt = songNameSplit[songNameSplit.length - 1];
 			if (audioFileEndings.includes("." + songExt)) {
-				const imageNameSplit = albumImage.name.split(".");
-				const imageExt = imageNameSplit[imageNameSplit.length - 1];
-				if (imageFileEndings.includes(imageExt)) {
+				if (albumImage) {
+					const imageNameSplit = albumImage.name.split(".");
+					const imageExt = imageNameSplit[imageNameSplit.length - 1];
+					if (imageFileEndings.includes(imageExt)) {
+						setDisabledSubmitButton(true);
+						const response = await dispatch(
+							uploadSongThunk(data, songData)
+						);
+						if (response.errors) {
+							setErrors(response.errors);
+							setDisabledSubmitButton(false);
+						} else {
+							await dispatch(postUserSong(response.songId));
+							history.push(`/users/${user.id}`);
+						}
+					} else {
+						setErrors([
+							"Album Image: You must upload a valid image file type",
+						]);
+					}
+				} else {
 					setDisabledSubmitButton(true);
 					const response = await dispatch(
 						uploadSongThunk(data, songData)
@@ -79,10 +97,6 @@ const SongForm = () => {
 						await dispatch(postUserSong(response.songId));
 						history.push(`/users/${user.id}`);
 					}
-				} else {
-					setErrors([
-						"Album Image: You must upload a valid image file type",
-					]);
 				}
 			} else {
 				setErrors([

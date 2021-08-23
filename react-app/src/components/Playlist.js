@@ -84,7 +84,7 @@ const DisplayPlaylist = () => {
 							? songs[firstSongId]?.albumImageUrl
 							: "https://spot-a-cloud.s3.us-east-2.amazonaws.com/AWS-Bucket/Album-Images/Seeder1-NoAlbumImage.jpeg"
 					}
-					alt="Playlist Image"
+					alt="Playlist Img"
 				/>
 				<p id="playlist_p">PLAYLIST</p>
 				<h2 id="playlist_h2">{currentPlaylist?.title}</h2>
