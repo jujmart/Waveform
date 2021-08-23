@@ -28,9 +28,10 @@ const Song = ({ songId, playlistId }) => {
 			<div>{song?.title}</div>
 			<div>{song?.artist}</div>
 			<div>{song?.album}</div>
-			<div>{song?.createdAt?.split(" ").splice(1, 3).join(" ")}</div>
+			<div>{song?.createdAt?.split(" ")
+						.splice(1, 3)
+						.join(" ")}</div>
 			<div
-				id="HWHEHLWELTHLWE"
 				onClick={() => setShowPlaylistsDiv((prevState) => !prevState)}
 			>
 				<span className="material-icons">playlist_add</span>

@@ -19,8 +19,9 @@ const PlaylistCard = ({ playlistId }) => {
 	}, [songs, firstSongId, dispatch]);
 
 	return (
-		<div>
-			<img
+		<>
+			<img className='playlist-card_img'
+				onClick={() => history.push(`/playlists/${playlistId}`)} 
 				src={
 					songs[firstSongId]?.albumImageUrl
 						? songs[firstSongId]?.albumImageUrl
@@ -28,15 +29,12 @@ const PlaylistCard = ({ playlistId }) => {
 				}
 				alt="First Song Album Img"
 			/>
-			<h4>{playlists[playlistId]?.title}</h4>
-			<p>
+			<h4 className='playlist-card_h4'>{playlists[playlistId]?.title}</h4>
+			<p className='playlist-card_p'>
 				{playlists[playlistId]?.description.slice(0, 40).trim()}
 				{playlists[playlistId]?.description.length > 40 && "..."}
 			</p>
-			<button onClick={() => history.push(`/playlists/${playlistId}`)}>
-				Go To Playlist
-			</button>
-		</div>
+		</>
 	);
 };
 export default PlaylistCard;
