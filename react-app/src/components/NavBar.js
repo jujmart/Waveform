@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { getUserPlaylistsThunk } from "../store/userMusicInfo";
-import { getOnePlaylistThunk } from "../store/playlist";
 import LogoutButton from "./auth/LogoutButton";
 import PlaylistFormModal from "./PlaylistForm";
 
 import { login } from "../store/session";
 import { populatePlaylistFromArrThunk } from "../store/playlist";
 import "./css/nav-bar.css";
+import { getAllUsersThunk } from "../store/users";
 
 const NavBar = () => {
 	const [errors, setErrors] = useState([]);
@@ -20,6 +20,7 @@ const NavBar = () => {
 		(state) => state.userMusicInfo.playlists
 	);
 	const playlists = useSelector((state) => state.playlists);
+	const users = useSelector((state) => state.users);
 
 	const demoUserLogin = async (e) => {
 		e.preventDefault();
@@ -30,19 +31,29 @@ const NavBar = () => {
 	};
 
 	useEffect(() => {
-		dispatch(getUserPlaylistsThunk(user?.id));
+		if (user) {
+			dispatch(getUserPlaylistsThunk(user?.id));
+		}
 	}, [dispatch, user]);
 
 	useEffect(() => {
-		userPlaylistsIdArr.forEach((playlistId) => {
-			if (!playlists[playlistId]) {
-				setPlaylistIdsNotInStore((prevState) => [
-					...prevState,
-					playlistId,
-				]);
-			}
-		});
-	}, [userPlaylistsIdArr, playlists]);
+		if (user) {
+			dispatch(getAllUsersThunk(50));
+		}
+	}, [dispatch, user]);
+
+	useEffect(() => {
+		if (user) {
+			userPlaylistsIdArr.forEach((playlistId) => {
+				if (!playlists[playlistId]) {
+					setPlaylistIdsNotInStore((prevState) => [
+						...prevState,
+						playlistId,
+					]);
+				}
+			});
+		}
+	}, [userPlaylistsIdArr, playlists, user]);
 
 	useEffect(() => {
 		if (playlistIdsNotInStore.length) {
@@ -55,26 +66,35 @@ const NavBar = () => {
 			<nav id="nav-bar_nav">
 				{/* UPPER NAV BAR */}
 				<div id="upper-nav-bar_div">
-					<div id="upper-nav-bar-button_div">
-					</div>
-					<div id='drop-down-super-container'>
+					<div id="upper-nav-bar-button_div"></div>
+					<div id="drop-down-super-container">
 						<img
-								id="nav-bar_current-user-img"
-								src={user.profilePhotoUrl}
-								alt="Current user img"
-								/>
+							id="nav-bar_current-user-img"
+							src={user.profilePhotoUrl}
+							alt="Current user img"
+						/>
 
 						<div class="user-dropdown">
-						<p id='user-dropdown_p'>{user.username} <span class="material-icons">arrow_drop_down</span></p>
+							<p id="user-dropdown_p">
+								{user.username}{" "}
+								<span class="material-icons">
+									arrow_drop_down
+								</span>
+							</p>
 							<div class="user-dropdown-content">
-							<ul id='user-dropdown_ul'>
-								<li>
-							<NavLink id="dropdown-profil_nav" to={`/users/${user.id}`}>Profile</NavLink>
-							</li>
-								<li>
-								<LogoutButton />
-								</li>
-							</ul>
+								<ul id="user-dropdown_ul">
+									<li>
+										<NavLink
+											id="dropdown-profil_nav"
+											to={`/users/${user.id}`}
+										>
+											Profile
+										</NavLink>
+									</li>
+									<li>
+										<LogoutButton />
+									</li>
+								</ul>
 							</div>
 						</div>
 					</div>
@@ -96,7 +116,8 @@ const NavBar = () => {
 						className="nav-bar_nav-links"
 						exact={true}
 						activeClassName="active-upper-navlinks"
-					><span class="material-icons">home&nbsp;&nbsp;</span>Home
+					>
+						<span class="material-icons">home&nbsp;&nbsp;</span>Home
 					</NavLink>
 
 					<NavLink
@@ -104,32 +125,42 @@ const NavBar = () => {
 						className="nav-bar_nav-links"
 						exact={true}
 						activeClassName="active-upper-navlinks"
-					><span class="material-icons">person&nbsp;&nbsp;</span>Profile</NavLink>
+					>
+						<span class="material-icons">person&nbsp;&nbsp;</span>
+						Profile
+					</NavLink>
 
 					<NavLink
 						to="/"
 						className="nav-bar_nav-links"
 						exact={true}
 						activeClassName="active-upper-navlinks"
-					>
-					</NavLink>
+					></NavLink>
 
 					<NavLink
 						to="/song-form"
 						className="nav-bar_nav-links"
 						exact={true}
 						activeClassName="active-upper-navlinks"
-					><span class="material-icons">audiotrack&nbsp;&nbsp;</span>Add Song</NavLink>
+					>
+						<span class="material-icons">
+							audiotrack&nbsp;&nbsp;
+						</span>
+						Add Song
+					</NavLink>
 					<PlaylistFormModal />
 
-				<hr id='hr'></hr>
+					<hr id="hr"></hr>
 				</div>
 
 				<div id="user-playlists-nav-bar_div">
 					{Object.keys(playlists) &&
 						userPlaylistsIdArr.map((playlistId) => (
-							<div className='user-playlists-nav-bar_div_li' key={playlistId}>
-								<div className ='user-playlists-nav-bar_li'>
+							<div
+								className="user-playlists-nav-bar_div_li"
+								key={playlistId}
+							>
+								<div className="user-playlists-nav-bar_li">
 									<NavLink
 										to={`/playlists/${playlistId}`}
 										className="user-playlist"
@@ -143,66 +174,38 @@ const NavBar = () => {
 
 				{/* RIGHT SIDE NAV BAR */}
 
-				<div id='song-activity_h3-container'>
-						<h3 id="song-activity_h3">Newest Songs</h3>
-					</div>
+				<div id="song-activity_h3-container">
+					<h3 id="song-activity_h3">Newest Users</h3>
+				</div>
 
 				<div id="right-nav-bar_div">
-					<div id='shhhhh'><p>if you found this you're awfully nosey</p></div>
-					<div className='newest-song-container_div'>
-						<img
-							className="song-activity-album_img"
-							src="https://spot-a-cloud.s3.us-east-2.amazonaws.com/AWS-Bucket/Album-Images/Make-Way-For-the-King_album.jpg"
-							alt="Friend Img"
-						/>
-						<p className='song-activity-song_p'>Most recent SONG</p>
-						<p className='song-activity-album_p'> album name</p>
+					<div id="shhhhh">
+						<p>if you found this you're awfully nosey</p>
 					</div>
-					<div className='newest-song-container_div'>
-						<img
-							className="song-activity-album_img"
-							src="https://spot-a-cloud.s3.us-east-2.amazonaws.com/AWS-Bucket/Album-Images/Make-Way-For-the-King_album.jpg"
-							alt="Friend Img"
-						/>
-						<p className='song-activity-song_p'>Most recent SONG</p>
-						<p className='song-activity-album_p'>album name</p>
-					</div>
-					<div className='newest-song-container_div'>
-						<img
-							className="song-activity-album_img"
-							src="https://spot-a-cloud.s3.us-east-2.amazonaws.com/AWS-Bucket/Album-Images/Make-Way-For-the-King_album.jpg"
-							alt="Friend Img"
-						/>
-						<p className='song-activity-song_p'>Most recent SONG</p>
-						<p className='song-activity-album_p'>album name</p>
-					</div>
-					<div className='newest-song-container_div'>
-						<img
-							className="song-activity-album_img"
-							src="https://spot-a-cloud.s3.us-east-2.amazonaws.com/AWS-Bucket/Album-Images/Make-Way-For-the-King_album.jpg"
-							alt="Friend Img"
-						/>
-						<p className='song-activity-song_p'>Most recent SONG</p>
-						<p className='song-activity-album_p'>album name</p>
-					</div>
-					<div className='newest-song-container_div'>
-						<img
-							className="song-activity-album_img"
-							src="https://spot-a-cloud.s3.us-east-2.amazonaws.com/AWS-Bucket/Album-Images/Make-Way-For-the-King_album.jpg"
-							alt="Friend Img"
-						/>
-						<p className='song-activity-song_p'>Most recent SONG</p>
-						<p className='song-activity-album_p'>album name</p>
-					</div>
-					<div className='newest-song-container_div'>
-						<img
-							className="song-activity-album_img"
-							src="https://spot-a-cloud.s3.us-east-2.amazonaws.com/AWS-Bucket/Album-Images/Make-Way-For-the-King_album.jpg"
-							alt="Friend Img"
-						/>
-						<p className='song-activity-song_p'>Most recent SONG</p>
-						<p className='song-activity-album_p'>album name</p>
-					</div>
+					{users.map((user) => (
+						<div
+							key={user.id}
+							className="newest-song-container_div"
+						>
+							<img
+								className="song-activity-album_img"
+								src={user.profilePhotoUrl}
+								alt="Friend Img"
+							/>
+							<p className="song-activity-song_p">
+								<Link to={`/users/${user.id}`}>
+									{user.username}
+								</Link>
+							</p>
+							<p className="song-activity-album_p">
+								Joined On:{" "}
+								{user.createdAt
+									?.split(" ")
+									.splice(1, 3)
+									.join(" ")}
+							</p>
+						</div>
+					))}
 				</div>
 
 				{/* MUSIC PLAYER NAVBAR */}

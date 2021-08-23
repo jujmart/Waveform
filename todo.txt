@@ -85,7 +85,7 @@ SUNDAY
 
     [] right nav bar to show 50 users
 
-    [] home page to show 5 playists
+    [X] home page to show 5 playists
 
 
 
