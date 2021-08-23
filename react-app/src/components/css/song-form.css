@@ -39,7 +39,7 @@
         grid-column: 6/ end;
         background-color: black;
         color: white;
-        z-index: 2;
+        z-index: 0;
         display: grid;
         grid-template-columns: repeat(5, 1fr) ;
         grid-template-rows: repeat(10, 10%);

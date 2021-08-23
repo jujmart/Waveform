@@ -102,10 +102,10 @@ SUNDAY
 [X] fix genre to actually populate with correct objects
 
 ANDRU
-[] Logout doropdown
-[] logo
-[] song player
-[] touchups
+[x] Logout doropdown
+[x] logo
+[x] song player
+[x] touchups
 
 Max
 [] remove warnings
