@@ -30,8 +30,8 @@ const DisplayPlaylist = () => {
 		await dispatch(deleteUserPlaylist(id));
 	};
 
-	const handleRemoveSongFromPlaylist = (e) => {
-		dispatch(removeSongFromPlaylistThunk(id, e.target.value));
+	const handleRemoveSongFromPlaylist = (songId) => {
+		dispatch(removeSongFromPlaylistThunk(id, songId));
 	};
 
 	useEffect(() => {
@@ -88,7 +88,7 @@ const DisplayPlaylist = () => {
 				/>
 				<p id="playlist_p">PLAYLIST</p>
 				<h2 id="playlist_h2">{currentPlaylist?.title}</h2>
-				<p>{currentPlaylist?.description}</p>
+				<p id='playlist_p-description'>{currentPlaylist?.description}</p>
 				<Link id="playlist_creator" to={`/users/${playlistUser.id}`}>
 					{playlistUser.username} ·{" "}
 					<span>
@@ -108,40 +108,48 @@ const DisplayPlaylist = () => {
 
 				{currentPlaylist.userId === user.id && (
 					<>
-						<EditPlaylistFormModal />
-						<button onClick={handleDelete}>Delete Playlist</button>
+						<div id='user-creation_dropdown-container'>
+							<span id='user-creation_span'>...</span>
+							<div id='user-creation-buttons'>
+								<EditPlaylistFormModal />
+								<p onClick={handleDelete}>Delete Playlist</p>
+							</div>
+						</div>
 					</>
 				)}
 			</div>
-			<div id="playlist-info-container_div">
-				{/* ITERATING TO FIND EACH INDIVIDUAL SONG AND DISPLAY */}
-				<div id="playlist-songs_div">
-					<div>
-						<p>Title</p>
-						<p>Album</p>
-						<p>Date Added</p>
-					</div>
-					{currentPlaylist &&
-						currentPlaylist?.songs?.map((songId) => (
-							<div key={songId}>
-								<Song
-									songId={songId}
-									playlistId={currentPlaylist.id}
-								/>
-								{currentPlaylist.userId === user.id && (
-									<button
-										onClick={(e) =>
-											handleRemoveSongFromPlaylist(e)
-										}
-										value={songId}
-									>
-										Delete Song from Playlist
-									</button>
-								)}
-							</div>
-						))}
-				</div>
+
+			<div id="song-info_display">
+					<p>Title</p>
+					<p>Artist</p>
+					<p>Album</p>
+					<p>Date Added</p>
 			</div>
+
+			<div id='playlist-info-container_div'>
+		{currentPlaylist &&
+			currentPlaylist?.songs?.map((songId) => (
+				<div className='playlist-song-container_div' key={songId}>
+					<Song
+						songId={songId}
+						playlistId={currentPlaylist.id}
+					/>
+					{currentPlaylist.userId === user.id && (
+						<p
+							onClick={() =>
+								handleRemoveSongFromPlaylist(songId)
+							}
+
+						>
+							<span class="material-icons">clear</span>
+						</p>
+					)}
+				</div>
+			))}
+
+
+</div>
+
 		</div>
 	);
 };

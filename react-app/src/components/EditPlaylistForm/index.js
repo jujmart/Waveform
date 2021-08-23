@@ -7,7 +7,7 @@ function EditPlaylistFormModal() {
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Edit Playlist</button>
+      <p onClick={() => setShowModal(true)}>Edit Playlist</p>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <EditPlaylistForm setShowModal={setShowModal} />

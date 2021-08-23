@@ -7,7 +7,7 @@
 
 
 #user-profile-container_div{
-    margin: auto;
+    left: 10vw;
     top: 10vh;
     display: grid;
     height: 80vh;
