@@ -18,7 +18,9 @@ const EditSongForm = () => {
 	const user = useSelector((state) => state.session.user);
 	const genresList = useSelector((state) => state.genres);
 	const dispatch = useDispatch();
-	const history = useHistory();
+    const history = useHistory();
+
+	const imageFileEndings = ["pdf", "png", "jpg", "jpeg", "gif"];
 
 	useEffect(() => {
 		dispatch(getAllGenresThunk());
@@ -61,8 +63,22 @@ const EditSongForm = () => {
 			album,
 			genres: [...genres],
 		};
-		await dispatch(editSongThunk(data, id, imageData));
-		history.push(`/users/${user.id}`);
+		if (albumImage) {
+			const imageNameSplit = albumImage.name.split(".");
+			const imageExt = imageNameSplit[imageNameSplit.length - 1];
+			if (!imageFileEndings.includes(imageExt)) {
+				setErrors([
+					"Album Image: You must upload a valid image file type",
+				]);
+				return;
+			}
+		}
+		const response = await dispatch(editSongThunk(data, id, imageData));
+		if (response) {
+			setErrors(response.errors);
+		} else {
+			history.push(`/users/${user.id}`);
+		}
 	};
 
 	const deleteGenreOnClick = (e) => {
@@ -119,7 +135,7 @@ const EditSongForm = () => {
 						type="text"
 						placeholder="title"
 						value={title}
-						required
+						// required
 						onChange={(e) => {
 							setTitle(e.target.value);
 						}}

@@ -47,19 +47,19 @@ def get_one_song(id):
 def post_song_url(id):
     # for song upload
     if "file" not in request.files:
-        return {"errors": "song required"}, 400
+        return {"errors": "song required"}#, 400
 
     song = request.files['file']
 
     if not allowed_file(song.filename):
-        return {"errors": "file type not permitted"}, 400
+        return {"errors": "file type not permitted"}#, 400
 
     song.filename = get_unique_filename(song.filename)
 
     songUpload = upload_file_to_s3(song)
 
     if "url" not in songUpload:
-        return songUpload, 400
+        return songUpload#, 400
 
     songUrl = songUpload["url"]
 
@@ -74,14 +74,14 @@ def post_song_url(id):
     albumImage = request.files['image']
 
     if not allowed_file(albumImage.filename):
-        return {"errors": "file type not permitted"}, 400
+        return {"errors": "file type not permitted"} #, 400
 
     albumImage.filename = get_unique_filename(albumImage.filename)
 
     albumImageUpload = upload_file_to_s3(albumImage)
 
     if "url" not in albumImageUpload:
-        return albumImageUpload, 400
+        return albumImageUpload #, 400
 
     albumImageUrl = albumImageUpload["url"]
 
@@ -119,12 +119,12 @@ def put_song_aws(id):
 
     # for Album image upload
     if "image" not in request.files:
-        return {"errors": "album image required"}, 400
+        return {"errors": "album image required"}#, 400
 
     albumImage = request.files['image']
 
     if not allowed_file(albumImage.filename):
-        return {"errors": "file type not permitted"}, 400
+        return {"errors": "file type not permitted"}#, 400
 
     albumImage.filename = get_unique_filename(albumImage.filename)
 
@@ -135,7 +135,7 @@ def put_song_aws(id):
     albumImageUpload = upload_file_to_s3(albumImage)
 
     if "url" not in albumImageUpload:
-        return albumImageUpload, 400
+        return albumImageUpload#, 400
 
     albumImageUrl = albumImageUpload["url"]
 
@@ -167,8 +167,7 @@ def put_song(id):
             edited_song_data["genres"] = [genre.genreName
                                           for genre in edited_song.genres]
         return {"song": edited_song_data}
-    print(form.errors)
-    return form.errors
+    return {'errors': validation_errors_to_error_messages(form.errors)}
 
 
 @songs_routes.route('/<int:id>', methods=["DELETE"])
