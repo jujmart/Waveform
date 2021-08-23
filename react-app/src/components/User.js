@@ -110,42 +110,54 @@ function User() {
 			</div> */}
 
 			{/* List of user created playlists */}
-				<div id='song-playlist-container_div'>
-				<h2 className='profile-section-title_h2'>
+			<div id="song-playlist-container_div">
+				<h2 className="profile-section-title_h2">
 					{currentUserProfile
 						? "Your playlists"
 						: `${profileUser.username}'s playlists`}
 				</h2>
-				<div className='user-profile-playlists_div'>
-						{!currentUserProfile
-							? profileUser.playlistIds.map((playlistId) => (
-									<div className='playlist-card_container' key={playlistId}>
-										<PlaylistCard playlistId={playlistId} />
-									</div>
-							))
-							: userPlaylists.map((playlistId) => (
-									<div className='playlist-card_container' key={playlistId}>
-										<PlaylistCard playlistId={playlistId} />
-										{/* <p className='playlist-card_edit_btn'
+				<div className="user-profile-playlists_div">
+					{!currentUserProfile
+						? profileUser.playlistIds.map((playlistId) => (
+								<div
+									className="playlist-card_container"
+									key={playlistId}
+								>
+									<PlaylistCard playlistId={playlistId} />
+								</div>
+						  ))
+						: userPlaylists.map((playlistId) => (
+								<div
+									className="playlist-card_container"
+									key={playlistId}
+								>
+									<PlaylistCard playlistId={playlistId} />
+									{/* <p className='playlist-card_edit_btn'
 											onClick={(e) => handlePlaylistDelete(e)}
 											value={playlistId}
 										> */}
-										<div className="playlist-card_delete"
-											onClick={() => handlePlaylistDelete(playlistId)}>
-										<p className='playlist-card_delete-span'>
-										<span
-											 class="material-icons">clear</span>
+									<div
+										className="playlist-card_delete"
+										onClick={() =>
+											handlePlaylistDelete(playlistId)
+										}
+									>
+										<p className="playlist-card_delete-span">
+											<span className="material-icons">
+												clear
+											</span>
 										</p>
-										</div>
 									</div>
-							))}
+								</div>
+						  ))}
 				</div>
 
+				{/* List of the users most recently added songs */}
 
-			{/* List of the users most recently added songs */}
-
-
-				<h2 id='profile-section-title_h2' className='profile-section-title_h2'>
+				<h2
+					id="profile-section-title_h2"
+					className="profile-section-title_h2"
+				>
 					{currentUserProfile
 						? "Your most recently added songs"
 						: `${profileUser.username}'s most recently added songs`}
@@ -157,9 +169,12 @@ function User() {
 					<p>Album</p>
 					<p>Date Added</p>
 				</div>
-				<div id='playlist-info-container_div'>
+				<div id="playlist-info-container_div">
 					{profileUser.songIds.map((songId) => (
-						<div className='playlist-song-container_div' key={songId}>
+						<div
+							className="playlist-song-container_div"
+							key={songId}
+						>
 							<Song songId={songId} />
 							{currentUserProfile && (
 								<>
@@ -170,21 +185,21 @@ function User() {
 											)
 										}
 									>
-										<span class="material-icons">
+										<span className="material-icons">
 											edit
-											</span>
+										</span>
 									</p>
-									<p
-										onClick={() => handleSongDelete(songId)}
-									>
-										<span class="material-icons">clear</span>
+									<p onClick={() => handleSongDelete(songId)}>
+										<span className="material-icons">
+											clear
+										</span>
 									</p>
 								</>
 							)}
 						</div>
 					))}
 				</div>
-				<h1 id='you-found-me'>still being noesy</h1>
+				<h1 id="you-found-me">still being noesy</h1>
 			</div>
 		</div>
 	);

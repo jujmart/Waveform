@@ -5,8 +5,8 @@ import { getUserPlaylistsThunk } from "../store/userMusicInfo";
 import LogoutButton from "./auth/LogoutButton";
 import PlaylistFormModal from "./PlaylistForm";
 
-import mp3 from '../components/Songs/Tyler The Creator - JUGGERNAUT (Lyrics) ft. Lil Uzi Vert & Pharrell Williams.mp3'
-import shadeLogo from './WAVE OUTLINE.png'
+import mp3 from "../components/Songs/Tyler The Creator - JUGGERNAUT (Lyrics) ft. Lil Uzi Vert & Pharrell Williams.mp3";
+import shadeLogo from "./WAVE OUTLINE.png";
 
 import { login } from "../store/session";
 import { populatePlaylistFromArrThunk } from "../store/playlist";
@@ -64,14 +64,13 @@ const NavBar = () => {
 			<nav id="nav-bar_nav">
 				{/* UPPER NAV BAR */}
 				<div id="upper-nav-bar_div">
-					<NavLink to='/'
-					exact={true}>
-					<img
-						id='shadeLogo-logged-in'
-						src={shadeLogo}
-						alt="Img logo"
-					/>
-			</NavLink>
+					<NavLink to="/" exact={true}>
+						<img
+							id="shadeLogo-logged-in"
+							src={shadeLogo}
+							alt="Img logo"
+						/>
+					</NavLink>
 					<div id="upper-nav-bar-button_div"></div>
 					<div id="drop-down-super-container">
 						<img
@@ -193,28 +192,28 @@ const NavBar = () => {
 						<p>if you found this you're awfully nosey</p>
 					</div>
 					{users.map((user) => (
-						<Link to={`/users/${user.id}`}>
-						<div
-							key={user.id}
-							className="newest-song-container_div"
-						>
-							<img
-								className="song-activity-album_img"
-								src={user.profilePhotoUrl}
-								alt="Friend Img"
-							/>
-							<p className="song-activity-song_p">
+						<Link to={`/users/${user.id}`} key={user.id}>
+							<div
+								key={user.id}
+								className="newest-song-container_div"
+							>
+								<img
+									className="song-activity-album_img"
+									src={user.profilePhotoUrl}
+									alt="Friend Img"
+								/>
+								<p className="song-activity-song_p">
 									{user.username}
-							</p>
-							<p className="song-activity-album_p">
-								Joined On:{" "}
-								{user.createdAt
-									?.split(" ")
-									.splice(1, 3)
-									.join(" ")}
-							</p>
-						</div>
-									</Link>
+								</p>
+								<p className="song-activity-album_p">
+									Joined On:{" "}
+									{user.createdAt
+										?.split(" ")
+										.splice(1, 3)
+										.join(" ")}
+								</p>
+							</div>
+						</Link>
 					))}
 				</div>
 
@@ -231,7 +230,12 @@ const NavBar = () => {
 					</div>
 
 					<div id="audio-controls_div">
-					<audio id='navbar-player' controls={true} src={mp3} accept={`*/`}></audio>
+						<audio
+							id="navbar-player"
+							controls={true}
+							src={mp3}
+							accept={`*/`}
+						></audio>
 					</div>
 				</div>
 
@@ -245,13 +249,8 @@ const NavBar = () => {
 
 	return (
 		<nav id="nav-bar-lo_nav">
-			<NavLink to='/'
-				exact={true}>
-				<img
-					id='shadeLogo'
-					src={shadeLogo}
-					alt="Img logo"
-				/>
+			<NavLink to="/" exact={true}>
+				<img id="shadeLogo" src={shadeLogo} alt="Img logo" />
 			</NavLink>
 			<NavLink
 				id="nav-bar-lo_login"

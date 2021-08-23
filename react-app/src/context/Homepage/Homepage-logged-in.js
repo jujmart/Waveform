@@ -7,7 +7,6 @@ import { getAllPlaylistsThunk } from "../../store/playlist";
 
 const HomePageLoggedIn = () => {
 	const dispatch = useDispatch();
-	const user = useSelector((state) => state.session.user);
 	const songs = useSelector((state) => state.songs);
 	const [addedSongIds, setAddedSongIds] = useState([]);
 
