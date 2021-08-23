@@ -27,14 +27,7 @@ const HomePageLoggedIn = () => {
 		<div id="user-profile-container_div">
 
 				<div id='song-playlist-container_div'>
-					<h2 className='profile-section-title_h2'> Recently Added Playlists</h2>
-					<div className='user-profile-playlists_div'>
-							{addedSongIds.map((playlistId) => (
-								<div className='playlist-card_container' key={playlistId}>
-									<PlaylistCard playlistId={playlistId} />
-								</div>
-							))}
-					</div>
+
 
 
 					<h2 className='profile-section-title_h2'>Recently Added Songs</h2>
@@ -54,6 +47,15 @@ const HomePageLoggedIn = () => {
 							</div>
 						))}
 				</div>
+				<h2 className='profile-section-title_h2'> Recently Added Playlists</h2>
+					<div className='user-profile-playlists_div'>
+							{addedSongIds.map((playlistId) => (
+								<div className='playlist-card_container' key={playlistId}>
+									<PlaylistCard playlistId={playlistId} />
+								</div>
+							))}
+					</div>
+
 				</div>
 
 				{/* Checkout Other Playlists Divider */}
