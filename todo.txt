@@ -54,7 +54,7 @@ SATURDAY
     [] Bonus features
 
 SUNDAY
-	[] render errors, validation
+	[X] render errors, validation
 
 	[] Music player
 		[] queue slice of state
@@ -91,8 +91,8 @@ SUNDAY
 
 =====================================================================================
 
-[ ] add limits to amount of songs and playlists returned to front end home page
-[ ] fix signup form to include image
+[X] add limits to amount of songs and playlists returned to front end home page
+[X] fix signup form to include image
 [X] change home route for unloggedin users
 [X] backend route for /api/playlist-songs
 [X] songs route needs to get session user
@@ -100,3 +100,17 @@ SUNDAY
 [X] add default image to s3 bucket/aws stuff
 [X] form needs to connect to backend
 [X] fix genre to actually populate with correct objects
+
+ANDRU
+[] Logout doropdown
+[] logo
+[] song player
+[] touchups
+
+Max
+[] remove warnings
+[] create playlist and edit playlist modals
+
+Justice
+[] edit song page
+[] singup/login
