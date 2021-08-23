@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Redirect, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { editPlaylistThunk, getOnePlaylistThunk } from "../../store/playlist";
 
 const EditPlaylistForm = ({ setShowModal }) => {
@@ -30,7 +30,7 @@ const EditPlaylistForm = ({ setShowModal }) => {
 		if (!playlist) {
 			dispatch(getOnePlaylistThunk(id));
 		}
-	}, [dispatch, playlist]);
+	}, [dispatch, playlist, id]);
 
 	useEffect(() => {
 		setTitle(playlist?.title);
