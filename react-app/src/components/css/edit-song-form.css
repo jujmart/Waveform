@@ -6,7 +6,84 @@
     display: grid;
     height: 80vh;
     width: 80vw;
-    grid-template-columns: repeat(10, 10%);
+    grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(10, 10%);
     position: relative;
+    background: rgb(31, 31, 31);
+}
+
+#current-info-div{
+    background:hsl(0, 0%, 33%);
+ width: 37vw;
+ margin-top: 2vh;
+ margin-left: 2vw;
+ height: 76vh;
+ border-radius: 5px;
+ display: grid;
+ grid-template-columns: repeat(1, 1fr);
+
+}
+
+#edit-song-form{
+    margin-top: 2vh;
+    background: hsl(0, 0%, 33%);
+    width: 37vw;
+    margin-left: 1vw;
+    height:76vh;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    font-size: 30px;
+        font-family: Montserrat;
+}
+
+
+#edit-song-img{
+    width: 300px;
+    height: 300px;
+    justify-self: center;
+
+}
+
+
+.edit-form-input{
+    width: 75%;
+    height: 25%;
+    justify-self:center;
+    align-self: center;
+    border: none;
+      outline: 0;
+      padding-left: 20px;
+      border-bottom: 1px solid white;
+      background-color: transparent;
+      box-shadow: none;
+      color: black;
+}
+
+.edit-form-label{
+    color:white;
+    font-size: 30px;
+    justify-self: center;
+    align-self: center;
+}
+
+#edit-form-submit{
+    width: 35%;
+    height: 25%;
+    justify-self:center;
+    align-self: center;
+}
+
+#errors{
+    color: red;
+    font-size: 20px;
+}
+
+
+#edit-song-h2{
+    justify-self: center;
+    font-size: 30px;
+        font-family: Montserrat;
+        color:white;
+
 }

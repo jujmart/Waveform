@@ -102,8 +102,10 @@ const EditSongForm = () => {
 
 	return (
 		<div id="edit-song-form-container_div">
-			<div>
+			<div id ='current-info-div'>
+				<h2 id='edit-song-h2'>Edit Song</h2>
 				<img
+				id='edit-song-img'
 					src={
 						albumImage
 							? URL.createObjectURL(albumImage)
@@ -115,8 +117,8 @@ const EditSongForm = () => {
 				{genres.length > 0 &&
 					genres.map((genreId) => (
 						<div key={genreId}>
-							<p>{genresList[genreId - 1].genreName}</p>
-							<button
+							<p className='remove-genre_p'>{genresList[genreId - 1].genreName}</p>
+							<button class='remove-genre_btn'
 								onClick={deleteGenreOnClick}
 								value={genreId}
 							>
@@ -125,16 +127,13 @@ const EditSongForm = () => {
 						</div>
 					))}
 			</div>
-			<form onSubmit={handleSubmit}>
-				<div>
-					{errors.map((error, ind) => (
-						<div key={ind}>{error}</div>
-					))}
-				</div>
+			<form id='edit-song-form' onSubmit={handleSubmit}>
 
-				<div>
-					<label htmlFor="title">Title</label>
+
+
+					<label className='edit-form-label' htmlFor="title">Title</label>
 					<input
+						className='edit-form-input'
 						name="title"
 						type="text"
 						placeholder="title"
@@ -144,10 +143,11 @@ const EditSongForm = () => {
 							setTitle(e.target.value);
 						}}
 					/>
-				</div>
-				<div>
-					<label htmlFor="artist">Artist</label>
+
+
+					<label className='edit-form-label' htmlFor="artist">Artist</label>
 					<input
+						className='edit-form-input'
 						name="artist"
 						type="text"
 						placeholder="artist"
@@ -156,10 +156,11 @@ const EditSongForm = () => {
 							setArtist(e.target.value);
 						}}
 					/>
-				</div>
-				<div>
-					<label htmlFor="album">Album</label>
+
+
+					<label className='edit-form-label' htmlFor="album">Album</label>
 					<input
+						className='edit-form-input'
 						name="album"
 						type="text"
 						placeholder="album"
@@ -168,10 +169,10 @@ const EditSongForm = () => {
 							setAlbum(e.target.value);
 						}}
 					/>
-				</div>
-				<div>
-					<label htmlFor="albumImage">Album Image</label>
+
+					<label className='edit-form-label' htmlFor="albumImage">Album Image</label>
 					<input
+						className='edit-form-input'
 						type="file"
 						accept=".pdf,.png,.jpg,.jpeg,.gif"
 						name="albumImage"
@@ -179,23 +180,29 @@ const EditSongForm = () => {
 							setAlbumImage(e.target.files[0]);
 						}}
 					/>
-				</div>
-				<div>
-					<label htmlFor="genres">Genres</label>
+
+					<label className='edit-form-label' htmlFor="genres">Genres</label>
 					<select
+						className='edit-form-input'
 						name="genres"
 						onChange={(e) => handleOptionClick(e)}
 						defaultValue="Select Genre"
 					>
-						<option disabled>Select Genre</option>
+						<option  disabled>Select Genre</option>
 						{genresList.map((genre) => (
 							<option key={genre.id} value={genre.id}>
 								{genre.genreName}
 							</option>
 						))}
 					</select>
+
+					<div id='errors'>
+					{errors.map((error, ind) => (
+						<div key={ind}>{error}</div>
+					))}
 				</div>
-				<button type="submit">Submit</button>
+
+				<button id='edit-form-submit' type="submit">Submit</button>
 			</form>
 		</div>
 	);
