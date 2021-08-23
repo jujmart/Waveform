@@ -37,6 +37,7 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'username': self.username,
             'email': self.email,
+            'createdAt': self.createdAt,
             'profilePhotoUrl': self.profilePhotoUrl,
             "songIds": [song.id for song in self.songs],
             "playlistIds": [playlist.id for playlist in self.playlists]

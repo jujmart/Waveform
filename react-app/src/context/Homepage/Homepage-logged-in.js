@@ -1,15 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllSongsThunk } from "../../store/songs";
 import Song from "../../components/Song";
+import PlaylistCard from "../../components/PlaylistCard";
+import { getAllPlaylistsThunk } from "../../store/playlist";
 
 const HomePageLoggedIn = () => {
 	const dispatch = useDispatch();
 	const user = useSelector((state) => state.session.user);
 	const songs = useSelector((state) => state.songs);
+	const [addedSongIds, setAddedSongIds] = useState([]);
 
 	useEffect(() => {
 		dispatch(getAllSongsThunk());
+	}, [dispatch]);
+
+	useEffect(() => {
+		(async () => {
+			const playlistList = await dispatch(getAllPlaylistsThunk(5));
+			const idArr = playlistList.map((playlist) => playlist.id);
+			setAddedSongIds(idArr);
+		})();
 	}, [dispatch]);
 
 	return (
@@ -17,54 +28,23 @@ const HomePageLoggedIn = () => {
 			{/* Recently Added Songs Divider */}
 			<div>
 				<h2>Recently Added Songs</h2>
-				{Object.keys(songs).length && (
-					<>
-						<div>
-							<Song songId={Object.keys(songs)[0]} />
+				{Object.keys(songs).length &&
+					Object.keys(songs).map((songId) => (
+						<div key={songId}>
+							<Song songId={songId} />
 						</div>
-						<div>
-							<Song songId={Object.keys(songs)[1]} />
-						</div>
-						<div>
-							<Song songId={Object.keys(songs)[2]} />
-						</div>
-						<div>
-							<Song songId={Object.keys(songs)[3]} />
-						</div>
-						<div>
-							<Song songId={Object.keys(songs)[4]} />
-						</div>
-					</>
-				)}
+					))}
 			</div>
 
 			{/* Checkout Other Playlists Divider */}
 			<div>
-				<h2> Playlists</h2>
+				<h2> Recently Added Playlists</h2>
 				<div>
-					<p>Name of playlist</p>
-					<img src="" alt="Album Img" />
-					<button>Stuff</button>
-				</div>
-				<div>
-					<p>Name of playlist</p>
-					<img src="" alt="Album Img" />
-					<button>Stuff</button>
-				</div>
-				<div>
-					<p>Name of playlist</p>
-					<img src="" alt="Album Img" />
-					<button>Stuff</button>
-				</div>
-				<div>
-					<p>Name of playlist</p>
-					<img src="" alt="Album Img" />
-					<button>Stuff</button>
-				</div>
-				<div>
-					<p>Name of playlist</p>
-					<img src="" alt="Album Img" />
-					<button>Stuff</button>
+					{addedSongIds.map((playlistId) => (
+						<div key={playlistId}>
+							<PlaylistCard playlistId={playlistId} />
+						</div>
+					))}
 				</div>
 			</div>
 		</div>
