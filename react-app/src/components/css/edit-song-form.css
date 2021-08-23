@@ -34,7 +34,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     font-size: 30px;
-        font-family: Montserrat;
+        font-family: 'Montserrat', sans-serif;
 }
 
 
@@ -83,7 +83,7 @@
 #edit-song-h2{
     justify-self: center;
     font-size: 30px;
-        font-family: Montserrat;
+        font-family: 'Montserrat', sans-serif;
         color:white;
 
 }

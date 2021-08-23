@@ -21,7 +21,7 @@
 	row-gap: 30px;
 	grid-template-columns: repeat(2, 1fr);
 	font-size: 30px;
-	font-family: Montserrat;
+	font-family: 'Montserrat', sans-serif;
 	padding: 20px 50px;
 	box-sizing: border-box;
 }
@@ -29,7 +29,7 @@
 #signup-form_form label {
 	justify-self: center;
 	color: white;
-	font-family: Montserrat;
+	font-family: 'Montserrat', sans-serif;
 	font-size: 25px;
 }
 
