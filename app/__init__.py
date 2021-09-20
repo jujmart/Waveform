@@ -43,7 +43,11 @@ Migrate(app, db, compare_type=True)
 
 # Application Security
 CORS(app)
-
+cors = CORS(app, resources={
+    r"/*": {
+        "origins": "*"
+    }
+})
 
 # Since we are deploying with Docker and Flask,
 # we won't be using a buildpack when we deploy to Heroku.
