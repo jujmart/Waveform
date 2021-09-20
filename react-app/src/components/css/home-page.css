@@ -122,7 +122,7 @@
 
 .link-img {
 	width: 3vh;
-	grid-row: 2;
+	/* grid-row: 2; */
 }
 
 .link-font {
@@ -135,8 +135,8 @@
 #andru-links {
 	grid-column: 19;
 	align-self: center;
-	display: flex;
 	justify-self: center;
+	display: flex;
 }
 
 #andru-p {
@@ -163,7 +163,6 @@
 	align-self: center;
 	justify-self: center;
 	display: flex;
-	align-content: center;
 }
 
 #max-p {
