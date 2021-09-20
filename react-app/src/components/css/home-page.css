@@ -122,7 +122,11 @@
 
 .link-img {
 	width: 3vh;
-	/* grid-row: 2; */
+	margin: 0.5vh;
+}
+
+.linkedin-logo {
+	margin-top: 0.75vh;
 }
 
 .link-font {
