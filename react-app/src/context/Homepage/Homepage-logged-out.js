@@ -45,8 +45,8 @@ const HomePageLoggedOut = () => {
 				<audio
 					id="homepage-player"
 					controls={true}
-					src={mp3}
-					accept={`*/`}
+					src='https://spot-a-cloud.s3.us-east-2.amazonaws.com/AWS-Bucket/Songs/Make+Way+For+The+King.mp3'
+					// accept={`*/`}
 				></audio>
 				<img id="large-logo" src={homePageLogo} alt="logo" />
 			</div>
