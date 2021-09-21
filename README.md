@@ -4,7 +4,7 @@ Waveform is a Spotify clone where users can come to listen, share, and socialize
 
 -   View the <a href='https://spot-a-cloud.herokuapp.com/'>Waveform</a> App Live
 
--   Reference to the Waveform <a href='https://www.github.com/jujmart/waveform/wiki'>Wiki Docs</a>
+-   Reference to the Waveform <a href='https://www.github.com/jujmart/Waveform/wiki'>Wiki Docs</a>
 
 | Table of Contents                                                        |
 | ------------------------------------------------------------------------ |
@@ -30,36 +30,63 @@ Waveform is a Spotify clone where users can come to listen, share, and socialize
 
 ## Features
 
-### Sign In and Sign Up
+### Log In and Sign Up
 
 ![Sign Up](./readme-assets/images/signup.jpg)
-![Login](./readme-assets/images/login.jpg)
+![Log In](./readme-assets/images/login.jpg)
 
 ### Feed Page
 
-{app-name} feed displays all {resource-1-plural}
-Discover and search for new {resource-1-plural}
+Waveform feed displays most recent songs and playlists
+Discover and search for new songs and playlists
 ![Feed Page](./readme-assets/images/feed.jpg)
 
-### View {resource-1}
+### Add Songs
 
-Single {resource-1} of name, photos, {resource-2-plural}
-![{resource-1} Page](./readme-assets/images/{resource-1}-page.jpg)
+Add a new song to the database
+![Add Song](./readme-assets/images/song-add.jpg)
+Cancel adding song
+![Cancel Add Song](./readme-assets/images/song-add-cancel.jpg)
 
-### Add {resource-1}
+### Edit Songs
 
-Add a new {resource-1} to the database
-![Add {resource-1}](./readme-assets/images/{resource-1}-add.jpg)
-Cancel adding {resource-1}
-![Cancel Add {resource-1}](./readme-assets/images/{resource-1}-add-cancel.jpg)
+Edit a song in the database
+![Edit Song](./readme-assets/images/song-edit.jpg)
+Cancel editing song
+![Cancel Edit Song](./readme-assets/images/song-edit-cancel.jpg)
 
-### Create, Read, Update, Delete {resource-1} {resource-2-plural}
+### View and Delete Songs
 
-View {resource-2-plural}
-![{resource-2-plural}](./readme-assets/images/{resource-2-plural}.png)
-Edit and Add {resource-2-plural} in the database
-![Edit {resource-2-plural}](./readme-assets/images/{resource-2-plural}-edit.png)
-![Add {resource-2-plural}](./readme-assets/images/{resource-2-plural}-add.png)
+Delete a song from the database
+![Delete Song](./readme-assets/images/song-delete.jpg)
+Cancel deleting song
+![Cancel Delete Song](./readme-assets/images/song-delete-cancel.jpg)
+
+### View Playlist
+
+Single playlist and the songs within it
+![Playlist Page](./readme-assets/images/playlist-page.jpg)
+
+### Add Playlists
+
+Add a new playlist to the database
+![Add Playlist](./readme-assets/images/playlist-add.jpg)
+Cancel adding playlist
+![Cancel Add Playlist](./readme-assets/images/playlist-add-cancel.jpg)
+
+### Edit Playlists
+
+Edit a playlist in the database
+![Edit Playlist](./readme-assets/images/playlist-edit.jpg)
+Cancel adding playlist
+![Cancel Edit Playlist](./readme-assets/images/playlist-edit-cancel.jpg)
+
+### Delete Playlists
+
+Delete a playlist from the database
+![Edit Playlist](./readme-assets/images/playlist-delete.jpg)
+Cancel deleting playlist
+![Cancel Edit Playlist](./readme-assets/images/playlist-delete-cancel.jpg)
 
 -   Add any more features here
 
@@ -70,7 +97,7 @@ To build/run project locally, please follow these steps:
 1. Clone this repository
 
 ```shell
-git clone https://github.com/jujmart/TechKnowBuild.git
+git clone https://github.com/jujmart/Waveform.git
 ```
 
 2. Install Pipfile dependencies and create the virtual environment
@@ -96,16 +123,10 @@ npm install
 pipenv shell
 ```
 
-5. In the root folder, create the database by running in the terminal:
-
-```shell
-flask db init
-```
-
 6. In the root folder, migrate tables to the database by running in the terminal:
 
 ```shell
-flask db migrate
+flask db upgrade head
 ```
 
 7. In the root folder, seed the database by running in the terminal:
@@ -122,7 +143,7 @@ flask run
 
 9. Start the frontend in the `/react-app` directory
 
-```javascript
+```shell
 npm start
 ```
 
@@ -158,19 +179,38 @@ print("add code snippet 1 here");
 
 1. **Search** - search {resource-1-plural}
 
-2. **Second Feature** - second feature details
+2. **Music Shuffle** - ability to shuffle songs randomly
+
+3. **Order Playlist Songs** - ability to order songs within playlist
 
 ## Contact
 
-### {Your Name}
+### Justice Martin
 
-<a href="https://www.linkedin.com/in/{linkedin-handle}/"><img src="./readme-assets/logos/linkedin-logo.png" height="28" align="middle" /></a>
-<a href="https://angel.co/u/{angel-list-handle}"><img src="./readme-assets/logos/angellist-logo.png" height="28" align="middle" /></a>
-<a href="https://github.com/{github-handle}"><img src="./readme-assets/logos/github-logo.png" height="38" align="middle" /></a>
+<a href="https://www.linkedin.com/in/justice-martin-34043340/"><img src="./readme-assets/logos/linkedin-logo.png" height="28" align="middle" /></a>
 
-{email}
+<!-- <a href="https://angel.co/u/{angel-list-handle}"><img src="./readme-assets/logos/angellist-logo.png" height="28" align="middle" /></a> -->
 
-## Special Thanks
+<a href="https://github.com/jujmart"><img src="./readme-assets/logos/github-logo.png" height="38" align="middle" /></a>
 
--   Fellow peers who have given me support and community: [Andrew](https://github.com/andru17urdna), [Henry](https://github.com/hnrywltn), [Pierre](https://github.com/TheGuilbotine), [Lema](https://github.com/lemlooma), [Meagan](https://github.com/meagan13), [Simon](https://github.com/Simonvargas), [Michelle](https://github.com/michellekontoff), [Nico](https://github.com/nicopierson), [John](https://github.com/Jomix-13), [Manna](https://github.com/makon57), [Monte](https://github.com/theflaggship), [Kagen](https://github.com/KagenLH), [Jubin](https://github.com/Jubintgh), [Torrell](https://github.com/tkenned2020), [Irina](https://github.com/IrinaAmzashvili), [Joe](https://github.com/joejunkim), [Diana](https://github.com/dianabeatriztinoco), and [Justice](https://github.com/jujmart)
--   Mentors who have given me their time and effort: [Zach](https://github.com/zdwatts), [Olivia](https://github.com/OByrnes), [Ed](https://github.com/edherm), and [Javier](https://github.com/javiermortiz)
+jujmart12@gmail.com
+
+### Maxwell Wehner
+
+<a href="https://www.linkedin.com/in/maxwell-wehner-7a2066220/"><img src="./readme-assets/logos/linkedin-logo.png" height="28" align="middle" /></a>
+
+<!-- <a href="https://angel.co/u/{angel-list-handle}"><img src="./readme-assets/logos/angellist-logo.png" height="28" align="middle" /></a> -->
+
+<a href="https://github.com/MaxwellWehner"><img src="./readme-assets/logos/github-logo.png" height="38" align="middle" /></a>
+
+maxwehnerwork@gmail.com
+
+### Andrew Watkins
+
+<a href="https://www.linkedin.com/in/andrew-watkins-533280173/"><img src="./readme-assets/logos/linkedin-logo.png" height="28" align="middle" /></a>
+
+<!-- <a href="https://angel.co/u/{angel-list-handle}"><img src="./readme-assets/logos/angellist-logo.png" height="28" align="middle" /></a> -->
+
+<a href="https://github.com/andru17urdna"><img src="./readme-assets/logos/github-logo.png" height="38" align="middle" /></a>
+
+dr3wwatkins@gmail.com
