@@ -11,6 +11,7 @@ import SongForm from "./components/SongForm";
 import EditSongForm from "./components/EditSongForm";
 import DisplayPlaylist from "./components/Playlist";
 import HomePage from "./components/Homepage";
+import Search from "./components/Search/Search";
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -40,6 +41,9 @@ function App() {
 				<ProtectedRoute path="/users/:userId" exact={true}>
 					<User />
 				</ProtectedRoute>
+				<ProtectedRoute path="/search" exact={true}>
+					<Search />
+				</ProtectedRoute>
 				<Route path="/" exact={true}>
 					<HomePage />
 				</Route>
@@ -52,6 +56,9 @@ function App() {
 				<ProtectedRoute path="/playlists/:id" exact={true}>
 					<DisplayPlaylist />
 				</ProtectedRoute>
+				<Route>
+					<h1>Page Not Found! Sorry!</h1>
+				</Route>
 			</Switch>
 		</BrowserRouter>
 	);

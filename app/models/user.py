@@ -42,3 +42,10 @@ class User(db.Model, UserMixin):
             "songIds": [song.id for song in self.songs],
             "playlistIds": [playlist.id for playlist in self.playlists]
         }
+
+    def to_dict_short(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'profilePhotoUrl': self.profilePhotoUrl,
+        }
