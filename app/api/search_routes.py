@@ -32,6 +32,6 @@ def get_all_searches():
     return {
         'songs': {song.id: song.to_dict() for song in songs},
         'playlists': {playlist.id: playlist.to_dict() for playlist in playlists},
-        'users': {user.id: user.to_dict() for user in users},
+        'users': {user.id: user.to_dict_short() for user in users},
         'genres': {genre.id: genre.to_dict() for genre in genres},
     }
