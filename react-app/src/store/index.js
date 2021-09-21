@@ -6,6 +6,7 @@ import songsReducer from "./songs";
 import playlistsReducer from "./playlist";
 import userMusicInfoReducer from "./userMusicInfo";
 import usersReducer from "./users";
+import searchReducer from "./search";
 
 const rootReducer = combineReducers({
 	session,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
 	playlists: playlistsReducer,
 	userMusicInfo: userMusicInfoReducer,
 	users: usersReducer,
+	search: searchReducer,
 });
 
 let enhancer;

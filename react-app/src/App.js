@@ -11,7 +11,7 @@ import SongForm from "./components/SongForm";
 import EditSongForm from "./components/EditSongForm";
 import DisplayPlaylist from "./components/Playlist";
 import HomePage from "./components/Homepage";
-import Search from "./components/Search";
+import Search from "./components/Search/Search";
 
 function App() {
 	const [loaded, setLoaded] = useState(false);

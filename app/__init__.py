@@ -11,6 +11,7 @@ from .api.auth_routes import auth_routes
 from .api.songs_routes import songs_routes
 from .api.genre_routes import genre_routes
 from .api.playlists_routes import playlists_routes
+from .api.search_routes import search_routes
 
 from .seeds import seed_commands
 
@@ -38,6 +39,7 @@ app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(songs_routes, url_prefix='/api/songs')
 app.register_blueprint(genre_routes, url_prefix='/api/genres')
 app.register_blueprint(playlists_routes, url_prefix='/api/playlists')
+app.register_blueprint(search_routes, url_prefix='/api/search')
 db.init_app(app)
 Migrate(app, db, compare_type=True)
 
@@ -54,6 +56,8 @@ cors = CORS(app, resources={
 # Therefore, we need to make sure that in production any
 # request made over http is redirected to https.
 # Well.........
+
+
 @app.before_request
 def https_redirect():
     if os.environ.get('FLASK_ENV') == 'production':
