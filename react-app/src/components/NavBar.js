@@ -139,11 +139,16 @@ const NavBar = () => {
 					</NavLink>
 
 					<NavLink
-						to="/"
+						to="/search"
 						className="nav-bar_nav-links"
 						exact={true}
 						activeClassName="active-upper-navlinks"
-					></NavLink>
+					>
+						<span className="material-icons">
+							search&nbsp;&nbsp;
+						</span>
+						Search
+					</NavLink>
 
 					<NavLink
 						to="/song-form"
