@@ -1,11 +1,14 @@
+import { addPlaylists } from "./playlist";
+import { setPlaylistSongs } from "./songs";
+import { addSomeUsers } from "./users";
+
 const ADD_SEARCH_OUTPUT = "search/ADD_SEARCH_OUTPUT";
 
-const addSearchOutput = (songs, playlists, users, genres) => ({
+const addSearchOutput = (songs, playlists, users) => ({
 	type: ADD_SEARCH_OUTPUT,
 	songs,
 	playlists,
 	users,
-	genres,
 });
 
 export const searchThunk = (searchInput) => async (dispatch) => {
@@ -22,8 +25,12 @@ export const searchThunk = (searchInput) => async (dispatch) => {
 		if (searchOutput.errors) {
 			return;
 		}
-		const { songs, playlists, users, genres } = searchOutput;
-		dispatch(addSearchOutput(songs, playlists, users, genres));
+		const { songs, playlists, users, songObjs, playlistObjs, userObjs } =
+			searchOutput;
+		dispatch(addSearchOutput(songs, playlists, users));
+		dispatch(setPlaylistSongs(songObjs));
+		dispatch(addPlaylists(playlistObjs));
+		dispatch(addSomeUsers(userObjs));
 	}
 };
 
@@ -31,7 +38,6 @@ const initialState = {
 	songs: [],
 	playlists: [],
 	users: [],
-	genres: [],
 };
 
 export default function searchReducer(state = initialState, action) {
@@ -42,7 +48,6 @@ export default function searchReducer(state = initialState, action) {
 				songs: [...action.songs],
 				playlists: [...action.playlists],
 				users: [...action.users],
-				genres: [...action.genres],
 			};
 
 		default:

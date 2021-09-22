@@ -19,7 +19,7 @@ const deleteSong = (id) => ({
 	payload: id,
 });
 
-const setPlaylistSongs = (songs) => ({
+export const setPlaylistSongs = (songs) => ({
 	type: SET_PLAYLIST_SONGS,
 	payload: songs,
 });
