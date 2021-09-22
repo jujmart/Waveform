@@ -30,8 +30,8 @@ def get_all_searches():
         genres = Genre.query.filter(
             func.lower(Genre.genreName).startswith(search_input.lower())).limit(10)
     return {
-        'songs': {song.id: song.to_dict() for song in songs},
-        'playlists': {playlist.id: playlist.to_dict() for playlist in playlists},
-        'users': {user.id: user.to_dict_short() for user in users},
-        'genres': {genre.id: genre.to_dict() for genre in genres},
+        'songs': [song.id for song in songs],
+        'playlists': [playlist.id for playlist in playlists],
+        'users': [user.id for user in users],
+        'genres': [genre.id for genre in genres],
     }

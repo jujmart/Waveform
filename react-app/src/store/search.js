@@ -28,27 +28,23 @@ export const searchThunk = (searchInput) => async (dispatch) => {
 };
 
 const initialState = {
-	songs: {},
-	playlists: {},
-	users: {},
-	genres: {},
+	songs: [],
+	playlists: [],
+	users: [],
+	genres: [],
 };
 
 export default function searchReducer(state = initialState, action) {
 	Object.freeze(state);
 	switch (action.type) {
 		case ADD_SEARCH_OUTPUT:
-			const newAddState = {
-				songs: {},
-				playlists: {},
-				users: {},
-				genres: {},
+			return {
+				songs: [...action.songs],
+				playlists: [...action.playlists],
+				users: [...action.users],
+				genres: [...action.genres],
 			};
-			newAddState.songs = action.songs;
-			newAddState.playlists = action.playlists;
-			newAddState.users = action.users;
-			newAddState.genres = action.genres;
-			return newAddState;
+
 		default:
 			return state;
 	}

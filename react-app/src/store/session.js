@@ -157,13 +157,8 @@ export default function reducer(state = initialState, action) {
 			return { user: null };
 		case ADD_FOLLOW:
 			return { user: {
-
-				email: state.user.email,
+				...state.user,
 				follows: [...state.user.follows, action.payload],
-				id: state.user.id,
-				profilePhotoUrl: state.user.profilePhotoUrl,
-				username: state.user.username
-
 			}}
 		default:
 			return state;
