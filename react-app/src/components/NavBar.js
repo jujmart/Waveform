@@ -24,17 +24,24 @@ const NavBar = () => {
 	const playlists = useSelector((state) => state.playlists);
     const users = useSelector((state) => state.users);
 
-    const [mp3, setMp3] = useState("#########")
+    const [mp3, setMp3] = useState("");
 
-    const songQueue = useSelector((state) => state.songQueue)
-    const songs = useSelector((state) => state.songs);
+	const songQueue = useSelector((state) => state.songQueue);
+	const songs = useSelector((state) => state.songs);
 
-    useEffect(() => {
-        if (songQueue.length) {
-            console.log(songs[songQueue[0]]);
-            setMp3(songs[songQueue[0]]?.songUrl);
-        }
-    }, [songQueue, songs])
+	useEffect(() => {
+		if (songQueue.length) {
+			setMp3(songs[songQueue[0]]?.songUrl);
+		}
+	}, [songQueue, songs]);
+
+	useEffect(() => {
+		// console.log("nex Song should play here");
+		if (songs[songQueue[0]]?.songUrl) {
+			let music = document.querySelector("audio");
+			music.play();
+		}
+	}, [mp3]); //needs to habe react warning or will get errors (either way it still functions the same)
 
 	const demoUserLogin = async (e) => {
 		e.preventDefault();
@@ -70,11 +77,11 @@ const NavBar = () => {
 		if (playlistIdsNotInStore.length) {
 			dispatch(populatePlaylistFromArrThunk(playlistIdsNotInStore));
 		}
-    }, [playlistIdsNotInStore, dispatch]);
+	}, [playlistIdsNotInStore, dispatch]);
 
-    const updateQueueHead = () => {
-        dispatch(moveToNextSong())
-    }
+	const updateQueueHead = () => {
+		dispatch(moveToNextSong());
+	};
 
 	if (user) {
 		return (
@@ -86,8 +93,8 @@ const NavBar = () => {
 							id="shadeLogo-logged-in"
 							src={shadeLogo}
 							alt="Img logo"
-                        />
-                        <div>%%%%%%%%{ mp3}%%%%%%%</div>
+						/>
+						<div>{mp3}</div>
 					</NavLink>
 					<div id="upper-nav-bar-button_div"></div>
 					<div id="drop-down-super-container">
@@ -254,11 +261,15 @@ const NavBar = () => {
 
 					<div id="audio-controls_div">
 						<audio
+							// controls
+							// autoplay
 							id="navbar-player"
 							controls={true}
 							src={mp3}
-                            accept={`*/`}
-                            onEnded={updateQueueHead}
+							accept={`*/`}
+							onEnded={updateQueueHead}
+							// onPlay={() => setIsPlaying(true)}
+							// onPause={() => setIsPlaying(false)}
 						></audio>
 					</div>
 				</div>
