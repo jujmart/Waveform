@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import LoginForm from "./components/auth/LoginForm";
@@ -12,10 +12,14 @@ import EditSongForm from "./components/EditSongForm";
 import DisplayPlaylist from "./components/Playlist";
 import HomePage from "./components/Homepage";
 import Search from "./components/Search/Search";
+import Menu from "./context/ContextMenu/Menu";
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
 	const dispatch = useDispatch();
+
+	const outerRef = useRef(null);
+	
 
 	useEffect(() => {
 		(async () => {
@@ -30,6 +34,8 @@ function App() {
 
 	return (
 		<BrowserRouter>
+		
+
 			<NavBar />
 			<Switch>
 				<Route path="/login" exact={true}>
@@ -60,6 +66,7 @@ function App() {
 					<h1>Page Not Found! Sorry!</h1>
 				</Route>
 			</Switch>
+			
 		</BrowserRouter>
 	);
 }
