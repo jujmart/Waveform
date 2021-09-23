@@ -40,7 +40,14 @@ const NavBar = () => {
 		// console.log("nex Song should play here");
 		if (songs[songQueue[0]]?.songUrl) {
 			let music = document.querySelector("audio");
-			music.play();
+			music
+				.play()
+				.then(() => {
+					// console.log("working");
+				})
+				.catch((e) => {
+					// console.log("error");
+				});
 		}
 	}, [mp3]); //needs to have react warning or will get errors (either way it still functions the same)
 
@@ -81,7 +88,9 @@ const NavBar = () => {
 	}, [playlistIdsNotInStore, dispatch]);
 
 	const bufferFunc = () => {
-		setMp3("###");
+		setMp3(
+			"https://spot-a-cloud.s3.us-east-2.amazonaws.com/AWS-Bucket/Songs/500-milliseconds-of-silence.mp3"
+		);
 		setBuffer(true);
 	};
 
