@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createPlaylistThunk } from "../../store/playlist";
+import { addPlaylist } from "../../store/recent";
 import { postUserPlaylist } from "../../store/userMusicInfo";
 
 const PlaylistForm = ({ setShowModal }) => {
@@ -20,6 +21,7 @@ const PlaylistForm = ({ setShowModal }) => {
 			setErrors(playlistData.errors);
 		} else {
 			await dispatch(postUserPlaylist(playlistData.playlist.id));
+			await dispatch(addPlaylist(playlistData.playlist.id));
 			setShowModal(false);
 		}
 	};

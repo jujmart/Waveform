@@ -20,8 +20,9 @@ const PlaylistCard = ({ playlistId }) => {
 
 	return (
 		<>
-			<img className='playlist-card_img'
-				onClick={() => history.push(`/playlists/${playlistId}`)} 
+			<img
+				className="playlist-card_img"
+				onClick={() => history.push(`/playlists/${playlistId}`)}
 				src={
 					songs[firstSongId]?.albumImageUrl
 						? songs[firstSongId]?.albumImageUrl
@@ -29,8 +30,8 @@ const PlaylistCard = ({ playlistId }) => {
 				}
 				alt="First Song Album Img"
 			/>
-			<h4 className='playlist-card_h4'>{playlists[playlistId]?.title}</h4>
-			<p className='playlist-card_p'>
+			<h4 className="playlist-card_h4">{playlists[playlistId]?.title}</h4>
+			<p className="playlist-card_p">
 				{playlists[playlistId]?.description.slice(0, 40).trim()}
 				{playlists[playlistId]?.description.length > 40 && "..."}
 			</p>

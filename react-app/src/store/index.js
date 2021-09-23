@@ -8,6 +8,7 @@ import userMusicInfoReducer from "./userMusicInfo";
 import usersReducer from "./users";
 import searchReducer from "./search";
 import queueReducer from "./songQueue";
+import recentReducer from "./recent";
 
 const rootReducer = combineReducers({
 	session,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
 	users: usersReducer,
 	search: searchReducer,
 	songQueue: queueReducer,
+	recent: recentReducer,
 });
 
 let enhancer;
