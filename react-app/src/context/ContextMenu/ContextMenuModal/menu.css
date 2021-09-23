@@ -1,8 +1,8 @@
 .app {
     min-height: 100vh;
     width: 100%;
-    background-color: #a00c0c;
-    z-index: 20;
+    background-color: transparent;
+    /* z-index: 20; */
   }
 
 .menu {
@@ -12,6 +12,7 @@
     margin: 0;
     position: absolute;
     list-style: none;
+    z-index: 40;
   }
 
   .menu li {
@@ -22,4 +23,13 @@
 
   .menu li:hover {
     background-color: #f2f2f2;
+  }
+
+
+  .playlist-dropdown-ul{
+    transform: translate(150px, -20px);
+    position: absolute;
+    background-color: #fff;
+    width: 100px;
+    list-style-type: none;
   }

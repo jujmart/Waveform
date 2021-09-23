@@ -32,6 +32,7 @@ const Song = ({ songId, playlistId }) => {
 						.splice(1, 3)
 						.join(" ")}</div>
 			<div
+				className='allow-pointer-events'
 				onClick={() => setShowPlaylistsDiv((prevState) => !prevState)}
 			>
 				<span className="material-icons">playlist_add</span>

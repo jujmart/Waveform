@@ -12,14 +12,14 @@ import EditSongForm from "./components/EditSongForm";
 import DisplayPlaylist from "./components/Playlist";
 import HomePage from "./components/Homepage";
 import Search from "./components/Search/Search";
-import Menu from "./context/ContextMenu/Menu";
+import Menu from "./context/ContextMenu/ContextMenuModal/Menu";
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
 	const dispatch = useDispatch();
 
 	const outerRef = useRef(null);
-	
+
 
 	useEffect(() => {
 		(async () => {
@@ -34,7 +34,8 @@ function App() {
 
 	return (
 		<BrowserRouter>
-		
+			{/* <div ref={outerRef} className="app">
+				<Menu outerRef={outerRef} /> */}
 
 			<NavBar />
 			<Switch>
@@ -66,7 +67,8 @@ function App() {
 					<h1>Page Not Found! Sorry!</h1>
 				</Route>
 			</Switch>
-			
+			{/* </div> */}
+
 		</BrowserRouter>
 	);
 }

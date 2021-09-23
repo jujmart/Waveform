@@ -1,12 +1,11 @@
 import React from "react";
 
-import useContextMenu from "./ContextMenu.js";
+import useContextMenu from "../ContextMenu.js";
 import "./menu.css"
 
 const Menu = ({ outerRef }) => {
   const { xPos, yPos, menu } = useContextMenu(outerRef);
   console.log(outerRef)
-  console.log(xPos, yPos, menu)
   if (menu) {
     return (
       <ul className="menu" style={{ top: yPos, left: xPos }}>

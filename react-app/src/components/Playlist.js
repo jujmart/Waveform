@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useCallback, useEffect, createRef, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams, Link } from "react-router-dom";
 import {
@@ -68,11 +68,16 @@ const DisplayPlaylist = () => {
 	}, [dispatch, songsNotInStore]);
 
 	useEffect(() => {
+
 		(async () => {
 			const user = await dispatch(getPlaylistUserThunk(id));
 			setPlaylistUser(user);
 		})();
 	}, [dispatch, id]);
+
+
+
+
 
 	return (
 		<div id="playlist-container_div">
@@ -134,6 +139,7 @@ const DisplayPlaylist = () => {
 						<div
 							className="playlist-song-container_div"
 							key={songId}
+							data-tag={JSON.stringify({song:songId, playlistId: +id, createdById: currentPlaylist.userId})}
 						>
 							<Song
 								songId={songId}
@@ -141,6 +147,7 @@ const DisplayPlaylist = () => {
 							/>
 							{currentPlaylist.userId === user.id && (
 								<p
+									className='allow-pointer-events'
 									onClick={() =>
 										handleRemoveSongFromPlaylist(songId)
 									}
