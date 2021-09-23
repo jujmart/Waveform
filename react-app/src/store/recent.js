@@ -3,6 +3,7 @@ import { setPlaylistSongs } from "./songs";
 
 const ADD_RECENT_SONGS = "recent/ADD_RECENT_SONGS";
 const ADD_RECENT_PLAYLISTS = "recent/ADD_RECENT_PLAYLISTS";
+const ADD_PLAYLIST = "recent/ADD_PLAYLIST";
 
 const addRecentSongs = (songIds) => ({
 	type: ADD_RECENT_SONGS,
@@ -12,6 +13,11 @@ const addRecentSongs = (songIds) => ({
 const addRecentPlaylists = (playlistIds) => ({
 	type: ADD_RECENT_PLAYLISTS,
 	playlistIds,
+});
+
+export const addPlaylist = (playlistId) => ({
+	type: ADD_PLAYLIST,
+	playlistId,
 });
 
 export const getRecentSongsThunk = () => async (dispatch) => {
@@ -59,6 +65,14 @@ export default function recentReducer(state = initialState, action) {
 			return {
 				...state,
 				playlists: [...action.playlistIds],
+			};
+		case ADD_PLAYLIST:
+			return {
+				...state,
+				playlists: [
+					action.playlistId,
+					...state.playlists.slice(0, state.playlists.length - 1),
+				],
 			};
 		default:
 			return state;
