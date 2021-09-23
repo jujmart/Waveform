@@ -17,8 +17,6 @@ const Song = ({ songId, playlistId }) => {
 		setShowPlaylistsDiv(false);
 	};
 
-	const handleLike = async () => {};
-
 	return (
 		<>
 			<img
@@ -30,7 +28,6 @@ const Song = ({ songId, playlistId }) => {
 			<div>{song?.artist}</div>
 			<div>{song?.album}</div>
 			<div>{song?.createdAt?.split(" ").splice(1, 3).join(" ")}</div>
-			<button onClick={handleLike}>Like</button>
 			<div onClick={() => setShowPlaylistsDiv((prevState) => !prevState)}>
 				<span className="material-icons">playlist_add</span>
 

@@ -111,7 +111,13 @@ function User() {
 				<h1 id="user-profile-username_h1">{profileUser.username}</h1>
 				{/* <h3>{user.id}</h3> */}
 				<p id="user-profile-count_p">
-					# of created playlists ⚬ # of added songs
+					{!currentUserProfile
+						? profileUser.playlistIds.length
+						: userPlaylists.length}{" "}
+					created playlists ⚬ {profileUser.songIds.length} added songs
+					{currentUserProfile
+						? ` ⚬ ${currentUserFollows.length} users followed`
+						: ""}
 				</p>
 			</div>
 
