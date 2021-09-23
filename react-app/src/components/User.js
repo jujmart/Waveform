@@ -8,6 +8,7 @@ import {
 import { getASingleUserThunk } from "../store/session";
 import { deleteSongThunk, setPlaylistSongsThunk } from "../store/songs";
 import { deleteUserPlaylist, deleteUserSong } from "../store/userMusicInfo";
+import { addFollowThunk } from "../store/session";
 import "./css/user-profile-page.css";
 import PlaylistCard from "./PlaylistCard";
 import Song from "./Song";
@@ -82,6 +83,17 @@ function User() {
 		}
 	}, [dispatch, songIdsNotInState, playlistIdsNotInState]);
 
+
+	const handleFollow = async() =>{
+        await dispatch(addFollowThunk(+userId))
+
+    }
+
+
+
+
+
+
 	if (!Object.keys(profileUser).length) {
 		return null;
 	}
@@ -105,9 +117,9 @@ function User() {
 
 			{/* follow button */}
 
-			{/* <div>
-				<button>FOLLOW</button>
-			</div> */}
+			<div>
+				<button onClick={handleFollow}>FOLLOW</button>
+			</div>
 
 			{/* List of user created playlists */}
 			<div id="song-playlist-container_div">

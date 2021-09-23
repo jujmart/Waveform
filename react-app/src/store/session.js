@@ -1,6 +1,7 @@
 // constants
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
+const ADD_FOLLOW = "session/ADD_FOLLOW"
 
 const setUser = (user) => ({
 	type: SET_USER,
@@ -10,6 +11,12 @@ const setUser = (user) => ({
 const removeUser = () => ({
 	type: REMOVE_USER,
 });
+
+
+const addFollow = (id) => ({
+	type: ADD_FOLLOW,
+	payload: id
+  })
 
 export const authenticate = () => async (dispatch) => {
 	const response = await fetch("/api/auth/", {
@@ -120,6 +127,26 @@ export const getASingleUserThunk = (userId) => async () => {
 	}
 };
 
+
+export const addFollowThunk = (id) => async (dispatch) => {
+	const response = await fetch(`/api/users/add-follower`, {
+		method: 'POST',
+		headers: {
+			'Content-type': 'application/json',
+		},
+		body: JSON.stringify({id})
+	})
+	  const data = await response.json()
+
+	  if (data.success) {
+		await dispatch(addFollow(id))
+
+	  }
+	  if (data.error)
+	  return data
+  }
+
+
 const initialState = { user: null };
 
 export default function reducer(state = initialState, action) {
@@ -128,6 +155,11 @@ export default function reducer(state = initialState, action) {
 			return { user: action.payload };
 		case REMOVE_USER:
 			return { user: null };
+		case ADD_FOLLOW:
+			return { user: {
+				...state.user,
+				follows: [...state.user.follows, action.payload],
+			}}
 		default:
 			return state;
 	}

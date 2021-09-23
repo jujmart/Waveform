@@ -54,11 +54,11 @@ const NavBar = () => {
 		}
 	}, [dispatch, user]);
 
-	useEffect(() => {
-		if (user) {
-			dispatch(getAllUsersThunk(50));
-		}
-	}, [dispatch, user]);
+	// useEffect(() => {
+	// 	if (user) {
+	// 		dispatch(getAllUsersThunk(50));
+	// 	}
+	// }, [dispatch, user]);
 
 	useEffect(() => {
 		if (user) {
@@ -221,7 +221,7 @@ const NavBar = () => {
 					<div id="shhhhh">
 						<p>if you found this you're awfully nosey</p>
 					</div>
-					{users.map((user) => (
+					{/* {users.map((user) => (
 						<Link to={`/users/${user.id}`} key={user.id}>
 							<div
 								key={user.id}
@@ -244,7 +244,7 @@ const NavBar = () => {
 								</p>
 							</div>
 						</Link>
-					))}
+					))} */}
 				</div>
 
 				{/* MUSIC PLAYER NAVBAR */}
