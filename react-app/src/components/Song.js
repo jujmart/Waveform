@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { addSongToPlaylistThunk } from "../store/playlist";
-import { addSongPriority } from "../store/songQueue";
+import { addSong, addSongPriority } from "../store/songQueue";
 
 const Song = ({ songId, playlistId }) => {
 	//page that renders this song component will put the song in songs slice of state
@@ -11,6 +11,7 @@ const Song = ({ songId, playlistId }) => {
 	);
 	const playlists = useSelector((state) => state.playlists);
 	const [showPlaylistsDiv, setShowPlaylistsDiv] = useState(false);
+	const [showQueueBox, setShowQueueBox] = useState(false);
 	const dispatch = useDispatch();
 
 	const addToPlaylist = async (e) => {
@@ -22,9 +23,34 @@ const Song = ({ songId, playlistId }) => {
 		dispatch(addSongPriority(songId));
 	};
 
+	const handleAddToQueue = () => {
+		dispatch(addSong(songId));
+		setShowQueueBox(true);
+	};
+
+	useEffect(() => {
+		if (setShowQueueBox) {
+			setTimeout(() => setShowQueueBox(false), 1500);
+		}
+	}, [showQueueBox]);
+
 	return (
 		<>
+			{showQueueBox && (
+				<div
+					id="queuebox"
+					style={{
+						position: "fixed",
+						backgroundColor: "red",
+						top: "0px",
+						right: "50%",
+					}}
+				>
+					Song added to queue
+				</div>
+			)}
 			<button onClick={handleSongPlay}>play</button>
+			<button onClick={handleAddToQueue}>Add to Queue</button>
 			<img
 				className="playlist-song_album-img"
 				src={song?.albumImageUrl}

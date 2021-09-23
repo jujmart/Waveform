@@ -25,6 +25,7 @@ const NavBar = () => {
     const users = useSelector((state) => state.users);
 
     const [mp3, setMp3] = useState("");
+    const [buffer, setBuffer] = useState(false);
 
 	const songQueue = useSelector((state) => state.songQueue);
 	const songs = useSelector((state) => state.songs);
@@ -41,7 +42,7 @@ const NavBar = () => {
 			let music = document.querySelector("audio");
 			music.play();
 		}
-	}, [mp3]); //needs to habe react warning or will get errors (either way it still functions the same)
+	}, [mp3]); //needs to have react warning or will get errors (either way it still functions the same)
 
 	const demoUserLogin = async (e) => {
 		e.preventDefault();
@@ -79,9 +80,21 @@ const NavBar = () => {
 		}
 	}, [playlistIdsNotInStore, dispatch]);
 
-	const updateQueueHead = () => {
-		dispatch(moveToNextSong());
+	const bufferFunc = () => {
+		setMp3("###");
+		setBuffer(true);
 	};
+
+	// const updateQueueHead = () => {
+	// 	dispatch(moveToNextSong());
+	// };
+
+	useEffect(() => {
+		if (buffer) {
+			dispatch(moveToNextSong());
+			setBuffer(false);
+		}
+	}, [buffer]);
 
 	if (user) {
 		return (
@@ -266,7 +279,7 @@ const NavBar = () => {
 							controls={true}
 							src={mp3}
 							accept={`*/`}
-							onEnded={updateQueueHead}
+							onEnded={bufferFunc}
 							// onPlay={() => setIsPlaying(true)}
 							// onPause={() => setIsPlaying(false)}
 						></audio>
