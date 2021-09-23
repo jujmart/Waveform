@@ -94,7 +94,6 @@ const NavBar = () => {
 							src={shadeLogo}
 							alt="Img logo"
 						/>
-						<div>{mp3}</div>
 					</NavLink>
 					<div id="upper-nav-bar-button_div"></div>
 					<div id="drop-down-super-container">
