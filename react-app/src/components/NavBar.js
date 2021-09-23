@@ -5,13 +5,14 @@ import { getUserPlaylistsThunk } from "../store/userMusicInfo";
 import LogoutButton from "./auth/LogoutButton";
 import PlaylistFormModal from "./PlaylistForm";
 
-import mp3 from "../components/Songs/Tyler The Creator - JUGGERNAUT (Lyrics) ft. Lil Uzi Vert & Pharrell Williams.mp3";
+// import mp3 from "../components/Songs/Tyler The Creator - JUGGERNAUT (Lyrics) ft. Lil Uzi Vert & Pharrell Williams.mp3";
 import shadeLogo from "./WAVE OUTLINE.png";
 
 import { login } from "../store/session";
 import { populatePlaylistFromArrThunk } from "../store/playlist";
 import "./css/nav-bar.css";
 import { getAllUsersThunk } from "../store/users";
+import { moveToNextSong } from "../store/songQueue";
 
 const NavBar = () => {
 	const dispatch = useDispatch();
@@ -21,7 +22,26 @@ const NavBar = () => {
 		(state) => state.userMusicInfo.playlists
 	);
 	const playlists = useSelector((state) => state.playlists);
-	const users = useSelector((state) => state.users);
+    const users = useSelector((state) => state.users);
+
+    const [mp3, setMp3] = useState("");
+
+	const songQueue = useSelector((state) => state.songQueue);
+	const songs = useSelector((state) => state.songs);
+
+	useEffect(() => {
+		if (songQueue.length) {
+			setMp3(songs[songQueue[0]]?.songUrl);
+		}
+	}, [songQueue, songs]);
+
+	useEffect(() => {
+		// console.log("nex Song should play here");
+		if (songs[songQueue[0]]?.songUrl) {
+			let music = document.querySelector("audio");
+			music.play();
+		}
+	}, [mp3]); //needs to habe react warning or will get errors (either way it still functions the same)
 
 	const demoUserLogin = async (e) => {
 		e.preventDefault();
@@ -59,6 +79,10 @@ const NavBar = () => {
 		}
 	}, [playlistIdsNotInStore, dispatch]);
 
+	const updateQueueHead = () => {
+		dispatch(moveToNextSong());
+	};
+
 	if (user) {
 		return (
 			<nav id="nav-bar_nav">
@@ -70,6 +94,7 @@ const NavBar = () => {
 							src={shadeLogo}
 							alt="Img logo"
 						/>
+						<div>{mp3}</div>
 					</NavLink>
 					<div id="upper-nav-bar-button_div"></div>
 					<div id="drop-down-super-container">
@@ -236,10 +261,15 @@ const NavBar = () => {
 
 					<div id="audio-controls_div">
 						<audio
+							// controls
+							// autoplay
 							id="navbar-player"
 							controls={true}
 							src={mp3}
 							accept={`*/`}
+							onEnded={updateQueueHead}
+							// onPlay={() => setIsPlaying(true)}
+							// onPause={() => setIsPlaying(false)}
 						></audio>
 					</div>
 				</div>

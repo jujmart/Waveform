@@ -12,6 +12,7 @@ import { deleteUserPlaylist } from "../store/userMusicInfo";
 import EditPlaylistFormModal from "./EditPlaylistForm";
 import Song from "./Song";
 import "./css/playlists.css";
+import { addPlaylist } from "../store/songQueue";
 
 const DisplayPlaylist = () => {
 	const { id } = useParams();
@@ -74,6 +75,12 @@ const DisplayPlaylist = () => {
 		})();
 	}, [dispatch, id]);
 
+	const playPlaylist = () => {
+		if (currentPlaylist.songs.length) {
+			dispatch(addPlaylist(currentPlaylist.songs));
+		}
+	};
+
 	return (
 		<div id="playlist-container_div">
 			<div id="playlist-info_div">
@@ -104,7 +111,11 @@ const DisplayPlaylist = () => {
 
 			{/* PLAY CURRENT PLAYLIST BUTTON */}
 			<div id="playlist-controls_div">
-				<span id="play_button" className="material-icons">
+				<span
+					id="play_button"
+					className="material-icons"
+					onClick={playPlaylist}
+				>
 					play_circle_filled
 				</span>
 
