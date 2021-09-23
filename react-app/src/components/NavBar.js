@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useHistory } from "react-router-dom";
 import { getUserPlaylistsThunk } from "../store/userMusicInfo";
 import LogoutButton from "./auth/LogoutButton";
 import PlaylistFormModal from "./PlaylistForm";
@@ -16,16 +16,17 @@ import { moveToNextSong } from "../store/songQueue";
 
 const NavBar = () => {
 	const dispatch = useDispatch();
+	const history = useHistory();
 	const user = useSelector((state) => state.session.user);
 	const [playlistIdsNotInStore, setPlaylistIdsNotInStore] = useState([]);
 	const userPlaylistsIdArr = useSelector(
 		(state) => state.userMusicInfo.playlists
 	);
 	const playlists = useSelector((state) => state.playlists);
-    const users = useSelector((state) => state.users);
+	const users = useSelector((state) => state.users);
 
-    const [mp3, setMp3] = useState("");
-    const [buffer, setBuffer] = useState(false);
+	const [mp3, setMp3] = useState("");
+	const [buffer, setBuffer] = useState(false);
 
 	const songQueue = useSelector((state) => state.songQueue);
 	const songs = useSelector((state) => state.songs);
@@ -312,6 +313,13 @@ const NavBar = () => {
 							// onPlay={() => setIsPlaying(true)}
 							// onPause={() => setIsPlaying(false)}
 						></audio>
+						<div
+							onClick={() => {
+								history.push("/queue");
+							}}
+						>
+							Queue
+						</div>
 					</div>
 				</div>
 
