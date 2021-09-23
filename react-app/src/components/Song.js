@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { addSongToPlaylistThunk } from "../store/playlist";
 
-
 const Song = ({ songId, playlistId }) => {
 	//page that renders this song component will put the song in songs slice of state
 	const song = useSelector((state) => state.songs[songId]);
@@ -18,6 +17,8 @@ const Song = ({ songId, playlistId }) => {
 		setShowPlaylistsDiv(false);
 	};
 
+	const handleLike = async () => {};
+
 	return (
 		<>
 			<img
@@ -28,12 +29,9 @@ const Song = ({ songId, playlistId }) => {
 			<div>{song?.title}</div>
 			<div>{song?.artist}</div>
 			<div>{song?.album}</div>
-			<div>{song?.createdAt?.split(" ")
-						.splice(1, 3)
-						.join(" ")}</div>
-			<div
-				onClick={() => setShowPlaylistsDiv((prevState) => !prevState)}
-			>
+			<div>{song?.createdAt?.split(" ").splice(1, 3).join(" ")}</div>
+			<button onClick={handleLike}>Like</button>
+			<div onClick={() => setShowPlaylistsDiv((prevState) => !prevState)}>
 				<span className="material-icons">playlist_add</span>
 
 				{showPlaylistsDiv && (
