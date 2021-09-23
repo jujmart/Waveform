@@ -123,9 +123,7 @@ function User() {
 				  ) ? (
 					<button onClick={handleFollow}>FOLLOW</button>
 				) : (
-					<button button onClick={handleUnfollow}>
-						UNFOLLOW
-					</button>
+					<button onClick={handleUnfollow}>UNFOLLOW</button>
 				)}
 			</div>
 
