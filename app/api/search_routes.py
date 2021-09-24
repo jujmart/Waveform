@@ -20,12 +20,7 @@ def get_all_searches():
             User.username.ilike(f'%{search_input}%')).limit(10)
         genres = Genre.query.filter(
             Genre.genreName.ilike(f'%{search_input}%')).limit(10)
-        genre_songs = []
-        for genre in genres:
-            genre_songs.extend(genre.songs)
-        while len(songs) < 10 and len(genre_songs) > 0:
-            songs.append(genre_songs[0])
-            genre_songs.shift()
+
     else:
         songs = Song.query.filter(
             or_(func.lower(Song.title).startswith(search_input.lower()), func.lower(Song.artist).startswith(search_input.lower()), func.lower(Song.album).startswith(search_input.lower()))).limit(10)
@@ -33,6 +28,17 @@ def get_all_searches():
             func.lower(Playlist.title).startswith(search_input.lower())).limit(10)
         users = User.query.filter(
             func.lower(User.username).startswith(search_input.lower())).limit(10)
+        genres = Genre.query.filter(
+            func.lower(Genre.genreName).startswith(search_input.lower())).limit(10)
+
+    songs = list(songs)
+    genre_songs = []
+    for genre in genres:
+        genre_songs.extend(genre.songs)
+    while len(songs) < 10 and len(genre_songs) > 0:
+        if genre_songs[0] not in songs:
+            songs.append(genre_songs[0])
+        genre_songs.pop(0)
 
     playlistObjs = []
     for playlist in playlists:
