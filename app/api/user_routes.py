@@ -27,6 +27,14 @@ def get_users_by_limit(limit):
     return {'users': [user.to_dict() for user in users]}
 
 
+@user_routes.route('/', methods=["PATCH"])
+@login_required
+def get_some_users():
+    userIds = request.json["userIds"]
+    users = User.query.filter(User.id.in_(userIds)).all()
+    return {'users': [user.to_dict() for user in users]}
+
+
 @user_routes.route('/add-follower', methods=['POST'])
 def add_follower():
     follower_id = request.get_json()['id']

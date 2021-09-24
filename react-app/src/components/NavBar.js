@@ -11,13 +11,15 @@ import shadeLogo from "./WAVE OUTLINE.png";
 import { login } from "../store/session";
 import { populatePlaylistFromArrThunk } from "../store/playlist";
 import "./css/nav-bar.css";
-import { getAllUsersThunk } from "../store/users";
+// import { getAllUsersThunk } from "../store/users";
 import { moveToNextSong } from "../store/songQueue";
+import { getSomeUsersThunk } from "../store/users";
 
 const NavBar = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const user = useSelector((state) => state.session.user);
+	const follows = useSelector((state) => state.session.user.follows);
 	const [playlistIdsNotInStore, setPlaylistIdsNotInStore] = useState([]);
 	const userPlaylistsIdArr = useSelector(
 		(state) => state.userMusicInfo.playlists
@@ -104,7 +106,18 @@ const NavBar = () => {
 			dispatch(moveToNextSong());
 			setBuffer(false);
 		}
-	}, [buffer]);
+	}, [buffer, dispatch]);
+
+	useEffect(() => {
+		if (follows.length) {
+			const filteredFollows = follows.filter(
+				(followId) => !users[followId]
+			);
+			if (filteredFollows.length) {
+				dispatch(getSomeUsersThunk(filteredFollows));
+			}
+		}
+	}, [follows, dispatch, users]);
 
 	if (user) {
 		return (
@@ -236,37 +249,34 @@ const NavBar = () => {
 				{/* RIGHT SIDE NAV BAR */}
 
 				<div id="song-activity_h3-container">
-					<h3 id="song-activity_h3">Newest Users</h3>
+					<h3 id="song-activity_h3">Followed Users</h3>
 				</div>
 
 				<div id="right-nav-bar_div">
 					<div id="shhhhh">
 						<p>if you found this you're awfully nosey</p>
 					</div>
-					{/* {users.map((user) => (
-						<Link to={`/users/${user.id}`} key={user.id}>
-							<div
-								key={user.id}
-								className="newest-song-container_div"
-							>
+					{follows.map((followId) => (
+						<Link to={`/users/${followId}`} key={followId}>
+							<div className="newest-song-container_div">
 								<img
 									className="song-activity-album_img"
-									src={user.profilePhotoUrl}
+									src={users[followId]?.profilePhotoUrl}
 									alt="Friend Img"
 								/>
 								<p className="song-activity-song_p">
-									{user.username}
+									{users[followId]?.username}
 								</p>
 								<p className="song-activity-album_p">
 									Joined On:{" "}
-									{user.createdAt
+									{users[followId]?.createdAt
 										?.split(" ")
 										.splice(1, 3)
 										.join(" ")}
 								</p>
 							</div>
 						</Link>
-					))} */}
+					))}
 				</div>
 
 				{/* MUSIC PLAYER NAVBAR */}
