@@ -1,5 +1,7 @@
 import React, { useContext, useCallback, useRef, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
+
+import { addSong, addSongPriority } from '../../../store/songQueue';
 import './menu.css'
 
 
@@ -15,13 +17,25 @@ export function ContextMenuProvider({ children }) {
   const [dynamic, setDynamic] = useState({});
   const [playlistDropDown, setPlaylistDropDown] =useState(false);
 
+  const dispatch = useDispatch();
+
   const user = useSelector((state) => state.session.user);
 
   const userPlaylistIds = useSelector(
 		(state) => state.userMusicInfo.playlists
 	);
   const playlists = useSelector((state) => state.playlists);
-  console.log(user)
+
+  const handleSongPlay = () => {
+		dispatch(addSongPriority(dynamic.song));
+	};
+
+	const handleAddToQueue = () => {
+		dispatch(addSong(dynamic.song));
+	};
+
+  console.log(dynamic)
+
 
   const handleContextMenu = useCallback(
     event => {
@@ -42,7 +56,7 @@ export function ContextMenuProvider({ children }) {
 			  showMenu(false);
 		  }
 
-    }, [showMenu, setXPos, setYPos]
+    }, [showMenu, setXPos, setYPos, dynamic]
 	);
 
 
@@ -80,8 +94,8 @@ export function ContextMenuProvider({ children }) {
         <div>
           {dynamic?.hasOwnProperty('song') ?
           <ul className="menu" style={{ top: yPos, left: xPos }}>
-            <li onMouseEnter={() => setPlaylistDropDown(false)}>Play Song</li>
-            <li onMouseEnter={() => setPlaylistDropDown(false)}>Add song to Queue</li>
+            <li onClick={handleSongPlay} onMouseEnter={() => setPlaylistDropDown(false)}>Play Song</li>
+            <li onClick={handleAddToQueue} onMouseEnter={() => setPlaylistDropDown(false)}>Add song to Queue</li>
 
             {user.id === dynamic.createdById ?
             <>
