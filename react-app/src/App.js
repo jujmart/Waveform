@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import LoginForm from "./components/auth/LoginForm";
@@ -18,6 +18,9 @@ function App() {
 	const [loaded, setLoaded] = useState(false);
 	const dispatch = useDispatch();
 
+	const outerRef = useRef(null);
+
+
 	useEffect(() => {
 		(async () => {
 			await dispatch(authenticate());
@@ -31,6 +34,9 @@ function App() {
 
 	return (
 		<BrowserRouter>
+			{/* <div ref={outerRef} className="app">
+				<Menu outerRef={outerRef} /> */}
+
 			<NavBar />
 			<Switch>
 				<Route path="/login" exact={true}>
@@ -64,6 +70,8 @@ function App() {
 					<h1>Page Not Found! Sorry!</h1>
 				</Route>
 			</Switch>
+			{/* </div> */}
+
 		</BrowserRouter>
 	);
 }

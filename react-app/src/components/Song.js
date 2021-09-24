@@ -49,8 +49,8 @@ const Song = ({ songId, playlistId }) => {
 					Song added to queue
 				</div>
 			)}
-			<button onClick={handleSongPlay}>play</button>
-			<button onClick={handleAddToQueue}>Add to Queue</button>
+			<button className='allow-pointer-events' onClick={handleSongPlay}>play</button>
+			<button className='allow-pointer-events' onClick={handleAddToQueue}>Add to Queue</button>
 			<img
 				className="playlist-song_album-img"
 				src={song?.albumImageUrl}
@@ -59,8 +59,13 @@ const Song = ({ songId, playlistId }) => {
 			<div>{song?.title}</div>
 			<div>{song?.artist}</div>
 			<div>{song?.album}</div>
-			<div>{song?.createdAt?.split(" ").splice(1, 3).join(" ")}</div>
-			<div onClick={() => setShowPlaylistsDiv((prevState) => !prevState)}>
+			<div>{song?.createdAt?.split(" ")
+						.splice(1, 3)
+						.join(" ")}</div>
+			<div
+				className='allow-pointer-events'
+				onClick={() => setShowPlaylistsDiv((prevState) => !prevState)}
+			>
 				<span className="material-icons">playlist_add</span>
 
 				{showPlaylistsDiv && (

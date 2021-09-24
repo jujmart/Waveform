@@ -110,6 +110,16 @@
             font-family: 'Mukta', sans-serif;
             cursor: default;
         }
+        .playlist-song-container_div * {
+            pointer-events: none;
+        }
+
+
+
+        .allow-pointer-events {
+            pointer-events:all;
+        }
+
 
         .playlist-song-container_div:hover {
             background-color: rgb(88, 88, 88);
