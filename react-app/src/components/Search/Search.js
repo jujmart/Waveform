@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import HomePageLoggedIn from "../../context/Homepage/Homepage-logged-in";
 import { searchThunk } from "../../store/search";
 import SearchEmpty from "./SearchEmpty";
 import SearchPopulated from "./SearchPopulated";
@@ -25,7 +24,15 @@ const Search = () => {
 					handleChange(e.target.value);
 				}}
 			/>
-			{!searchInput.length ? <HomePageLoggedIn /> : <SearchPopulated />}
+			<div onClick={() => setSearchInput("")}>X</div>
+			{!searchInput.length ? (
+				<SearchEmpty
+					setSearchInput={setSearchInput}
+					handleChange={handleChange}
+				/>
+			) : (
+				<SearchPopulated />
+			)}
 		</div>
 	);
 };
