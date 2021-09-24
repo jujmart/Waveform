@@ -16,9 +16,12 @@ export function ContextMenuProvider({ children }) {
   const [playlistDropDown, setPlaylistDropDown] =useState(false);
 
   const user = useSelector((state) => state.session.user);
+
   const userPlaylistIds = useSelector(
 		(state) => state.userMusicInfo.playlists
 	);
+  const playlists = useSelector((state) => state.playlists);
+  console.log(user)
 
   const handleContextMenu = useCallback(
     event => {
@@ -79,6 +82,7 @@ export function ContextMenuProvider({ children }) {
           <ul className="menu" style={{ top: yPos, left: xPos }}>
             <li onMouseEnter={() => setPlaylistDropDown(false)}>Play Song</li>
             <li onMouseEnter={() => setPlaylistDropDown(false)}>Add song to Queue</li>
+
             {user.id === dynamic.createdById ?
             <>
               <li>Remove from Playlist</li>
@@ -92,11 +96,18 @@ export function ContextMenuProvider({ children }) {
 
                       {playlistDropDown?
                       <ul className='playlist-dropdown-ul'>
-                        <li>Playlist 1</li>
-                        <li>Playlist 2</li>
-                        <li>Playlist 3</li>
-                        <li>Playlist 4</li>
-                        <li>Playlist 5</li>
+                        {userPlaylistIds.map((userPlaylistId) =>
+                         userPlaylistId ? (
+                          <li
+                            key={userPlaylistId}
+                            value={userPlaylistId}
+                            // onClick={addToPlaylist}
+                            className="add-to-playlist_dropdown_li"
+                          >
+                          {playlists[userPlaylistId].title}
+                        </li>
+                      ) : null
+                    )}
                       </ul> :
                        <></> }
                 </li>
