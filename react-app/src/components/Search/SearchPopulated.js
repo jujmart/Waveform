@@ -11,25 +11,27 @@ const SearchPopulated = () => {
 		<div>
 			<h1>POPULATED</h1>
 			{search.songs.map((songId) => (
-				<Song songId={songId} />
+				<div className="playlist-song-container_div" key={songId}>
+					<Song songId={songId} />
+				</div>
 			))}
 			{search.playlists.map((playlistId) => (
-				<PlaylistCard playlistId={playlistId} />
+				<PlaylistCard playlistId={playlistId} key={playlistId} />
 			))}
 			{search.users.map((userId) => (
 				<Link to={`/users/${userId}`} key={userId}>
 					<div key={userId} className="newest-song-container_div">
 						<img
 							className="song-activity-album_img"
-							src={users[userId].profilePhotoUrl}
+							src={users[userId]?.profilePhotoUrl}
 							alt="Friend Img"
 						/>
 						<p className="song-activity-song_p">
-							{users[userId].username}
+							{users[userId]?.username}
 						</p>
 						<p className="song-activity-album_p">
 							Joined On:{" "}
-							{users[userId].createdAt
+							{users[userId]?.createdAt
 								?.split(" ")
 								.splice(1, 3)
 								.join(" ")}

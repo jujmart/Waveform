@@ -5,7 +5,7 @@ import {
 	deletePlaylistThunk,
 	populatePlaylistFromArrThunk,
 } from "../store/playlist";
-import { getASingleUserThunk } from "../store/session";
+import { getASingleUserThunk, unfollowThunk } from "../store/session";
 import { deleteSongThunk, setPlaylistSongsThunk } from "../store/songs";
 import { deleteUserPlaylist, deleteUserSong } from "../store/userMusicInfo";
 import { addFollowThunk } from "../store/session";
@@ -21,6 +21,9 @@ function User() {
 	const [currentUserProfile, setCurrentUserProfile] = useState(false);
 	const dispatch = useDispatch();
 	const currentUser = useSelector((state) => state.session.user);
+	const currentUserFollows = useSelector(
+		(state) => state.session.user.follows
+	);
 	const songs = useSelector((state) => state.songs);
 	const playlists = useSelector((state) => state.playlists);
 	const userPlaylists = useSelector((state) => state.userMusicInfo.playlists);
@@ -38,6 +41,14 @@ function User() {
 		await dispatch(deleteUserSong(songId));
 		const user = await dispatch(getASingleUserThunk(userId));
 		setProfileUser(user);
+	};
+
+	const handleFollow = async () => {
+		await dispatch(addFollowThunk(+userId));
+	};
+
+	const handleUnfollow = async () => {
+		await dispatch(unfollowThunk(+userId));
 	};
 
 	useEffect(() => {
@@ -83,17 +94,6 @@ function User() {
 		}
 	}, [dispatch, songIdsNotInState, playlistIdsNotInState]);
 
-
-	const handleFollow = async() =>{
-        await dispatch(addFollowThunk(+userId))
-
-    }
-
-
-
-
-
-
 	if (!Object.keys(profileUser).length) {
 		return null;
 	}
@@ -111,14 +111,26 @@ function User() {
 				<h1 id="user-profile-username_h1">{profileUser.username}</h1>
 				{/* <h3>{user.id}</h3> */}
 				<p id="user-profile-count_p">
-					# of created playlists ⚬ # of added songs
+					{!currentUserProfile
+						? profileUser.playlistIds.length
+						: userPlaylists.length}{" "}
+					created playlists ⚬ {profileUser.songIds.length} added songs
+					{currentUserProfile
+						? ` ⚬ ${currentUserFollows.length} users followed`
+						: ""}
 				</p>
 			</div>
 
 			{/* follow button */}
 
 			<div>
-				<button onClick={handleFollow}>FOLLOW</button>
+				{currentUserProfile ? null : !currentUserFollows.includes(
+						+userId
+				  ) ? (
+					<button onClick={handleFollow}>FOLLOW</button>
+				) : (
+					<button onClick={handleUnfollow}>UNFOLLOW</button>
+				)}
 			</div>
 
 			{/* List of user created playlists */}
