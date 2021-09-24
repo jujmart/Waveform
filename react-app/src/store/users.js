@@ -24,6 +24,22 @@ export const getAllUsersThunk = (limit) => async (dispatch) => {
 	}
 };
 
+export const getSomeUsersThunk = (userIds) => async (dispatch) => {
+	const response = await fetch(`/api/users/`, {
+		method: "PATCH",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify({ userIds }),
+	});
+
+	if (response.ok) {
+		const data = await response.json();
+		if (data.errors) {
+			return;
+		}
+		dispatch(addSomeUsers(data.users));
+	}
+};
+
 const initialState = {};
 
 export default function usersReducer(state = initialState, action) {
