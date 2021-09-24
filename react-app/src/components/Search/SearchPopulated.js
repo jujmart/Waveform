@@ -1,27 +1,44 @@
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import PlaylistCard from "../PlaylistCard";
+import Song from "../Song";
 
 const SearchPopulated = () => {
 	const search = useSelector((state) => state.search);
+	const users = useSelector((state) => state.users);
 
 	return (
 		<div>
 			<h1>POPULATED</h1>
-			{search.songs &&
-				Object.values(search.songs).map((song) => (
-					<div key={song.id}>{song.title}</div>
-				))}
-			{search.playlists &&
-				Object.values(search.playlists).map((playlist) => (
-					<div key={playlist.id}>{playlist.title}</div>
-				))}
-			{search.users &&
-				Object.values(search.users).map((user) => (
-					<div key={user.id}>{user.username}</div>
-				))}
-			{search.genres &&
-				Object.values(search.genres).map((genre) => (
-					<div key={genre.id}>{genre.genreName}</div>
-				))}
+			{search.songs.map((songId) => (
+				<div className="playlist-song-container_div" key={songId}>
+					<Song songId={songId} />
+				</div>
+			))}
+			{search.playlists.map((playlistId) => (
+				<PlaylistCard playlistId={playlistId} key={playlistId} />
+			))}
+			{search.users.map((userId) => (
+				<Link to={`/users/${userId}`} key={userId}>
+					<div key={userId} className="newest-song-container_div">
+						<img
+							className="song-activity-album_img"
+							src={users[userId]?.profilePhotoUrl}
+							alt="Friend Img"
+						/>
+						<p className="song-activity-song_p">
+							{users[userId]?.username}
+						</p>
+						<p className="song-activity-album_p">
+							Joined On:{" "}
+							{users[userId]?.createdAt
+								?.split(" ")
+								.splice(1, 3)
+								.join(" ")}
+						</p>
+					</div>
+				</Link>
+			))}
 		</div>
 	);
 };

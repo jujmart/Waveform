@@ -15,7 +15,7 @@ const deletePlaylist = (id) => ({
 	payload: id,
 });
 
-const addPlaylists = (playlists) => ({
+export const addPlaylists = (playlists) => ({
 	type: ADD_PLAYLISTS,
 	payload: playlists,
 });

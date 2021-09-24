@@ -12,7 +12,7 @@ import EditSongForm from "./components/EditSongForm";
 import DisplayPlaylist from "./components/Playlist";
 import HomePage from "./components/Homepage";
 import Search from "./components/Search/Search";
-import Menu from "./context/ContextMenu/ContextMenuModal/Menu";
+import SongQueue from "./components/SongQueue";
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -63,6 +63,9 @@ function App() {
 				<ProtectedRoute path="/playlists/:id" exact={true}>
 					<DisplayPlaylist />
 				</ProtectedRoute>
+				<Route path="/queue" exact={true}>
+					<SongQueue />
+				</Route>
 				<Route>
 					<h1>Page Not Found! Sorry!</h1>
 				</Route>

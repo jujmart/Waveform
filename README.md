@@ -2,7 +2,7 @@
 
 Waveform is a Spotify clone where users can come to listen, share, and socialize about music. It is a fullstack React App made with a Redux state manager and a backend using Python, Flask, SQL-Alchemy, PostgresSQL and other technologies.
 
--   View the <a href='https://spot-a-cloud.herokuapp.com/'>Waveform</a> App Live
+-   View the <a href='https://waveform-app.herokuapp.com/'>Waveform</a> App Live
 
 -   Reference to the Waveform <a href='https://www.github.com/jujmart/Waveform/wiki'>Wiki Docs</a>
 

@@ -1,8 +1,14 @@
 // constants
 const GET_ALL_USERS = "users/GET_ALL_USERS";
+const ADD_SOME_USERS = "users/ADD_SOME_USERS";
 
 const getAllUsers = (users) => ({
 	type: GET_ALL_USERS,
+	payload: users,
+});
+
+export const addSomeUsers = (users) => ({
+	type: ADD_SOME_USERS,
 	payload: users,
 });
 
@@ -18,13 +24,23 @@ export const getAllUsersThunk = (limit) => async (dispatch) => {
 	}
 };
 
-const initialState = [];
+const initialState = {};
 
 export default function usersReducer(state = initialState, action) {
 	Object.freeze(state);
 	switch (action.type) {
 		case GET_ALL_USERS:
-			return action.payload;
+			const newGetAllState = {};
+			action.payload.forEach((user) => {
+				newGetAllState[user.id] = user;
+			});
+			return newGetAllState;
+		case ADD_SOME_USERS:
+			const newAddState = { ...state };
+			action.payload.forEach((user) => {
+				newAddState[user.id] = user;
+			});
+			return newAddState;
 		default:
 			return state;
 	}
