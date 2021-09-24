@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import db, Playlist, Song, User
+from app.models import db, Playlist, Song, User, Genre
 from sqlalchemy import func, or_
 
 search_routes = Blueprint('search', __name__)
@@ -18,6 +18,14 @@ def get_all_searches():
             Playlist.title.ilike(f'%{search_input}%')).limit(10)
         users = User.query.filter(
             User.username.ilike(f'%{search_input}%')).limit(10)
+        genres = Genre.query.filter(
+            Genre.genreName.ilike(f'%{search_input}%')).limit(10)
+        genre_songs = []
+        for genre in genres:
+            genre_songs.extend(genre.songs)
+        while len(songs) < 10 and len(genre_songs) > 0:
+            songs.append(genre_songs[0])
+            genre_songs.shift()
     else:
         songs = Song.query.filter(
             or_(func.lower(Song.title).startswith(search_input.lower()), func.lower(Song.artist).startswith(search_input.lower()), func.lower(Song.album).startswith(search_input.lower()))).limit(10)
