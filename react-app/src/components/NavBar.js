@@ -19,7 +19,7 @@ const NavBar = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const user = useSelector((state) => state.session.user);
-	const follows = useSelector((state) => state.session.user.follows);
+	const follows = useSelector((state) => state.session.user?.follows);
 	const [playlistIdsNotInStore, setPlaylistIdsNotInStore] = useState([]);
 	const userPlaylistsIdArr = useSelector(
 		(state) => state.userMusicInfo.playlists
@@ -109,7 +109,7 @@ const NavBar = () => {
 	}, [buffer, dispatch]);
 
 	useEffect(() => {
-		if (follows.length) {
+		if (follows?.length) {
 			const filteredFollows = follows.filter(
 				(followId) => !users[followId]
 			);
