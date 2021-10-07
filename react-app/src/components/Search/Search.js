@@ -4,6 +4,8 @@ import { searchThunk } from "../../store/search";
 import SearchEmpty from "./SearchEmpty";
 import SearchPopulated from "./SearchPopulated";
 
+import "./Search.css";
+
 const Search = () => {
 	const dispatch = useDispatch();
 	const [searchInput, setSearchInput] = useState("");
@@ -18,6 +20,7 @@ const Search = () => {
 		<div id="search-container-div">
 			<input
 				type="text"
+				className="search-input"
 				value={searchInput}
 				onChange={(e) => {
 					setSearchInput(e.target.value);

@@ -334,14 +334,3 @@ audio::-webkit-media-controls-toggle-closed-captions-button {
 	overflow-y: scroll;
 	background: rgb(31, 31, 31);
 }
-#search-container-div {
-	margin: auto;
-	top: 10vh;
-	display: grid;
-	height: 80vh;
-	width: 80vw;
-	grid-template-columns: repeat(10, 10%);
-	grid-template-rows: repeat(10, 10%);
-	position: relative;
-	overflow: hidden;
-}

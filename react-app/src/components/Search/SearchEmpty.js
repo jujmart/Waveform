@@ -9,12 +9,13 @@ const SearchEmpty = ({ setSearchInput, handleChange }) => {
 
 	useEffect(() => {
 		dispatch(getAllGenresThunk());
-	}, []);
+	}, [dispatch]);
 
 	return (
 		<>
 			{genres.map((genre) => (
 				<GenreCard
+					key={genre.id}
 					handleChange={handleChange}
 					genreName={genre.genreName}
 					setSearchInput={setSearchInput}
