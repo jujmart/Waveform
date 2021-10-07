@@ -12,7 +12,7 @@ const SearchEmpty = ({ setSearchInput, handleChange }) => {
 	}, [dispatch]);
 
 	return (
-		<>
+		<div id="search-empty-container">
 			{genres.map((genre) => (
 				<GenreCard
 					key={genre.id}
@@ -21,7 +21,7 @@ const SearchEmpty = ({ setSearchInput, handleChange }) => {
 					setSearchInput={setSearchInput}
 				/>
 			))}
-		</>
+		</div>
 	);
 };
 

@@ -18,16 +18,25 @@ const Search = () => {
 
 	return (
 		<div id="search-container-div">
-			<input
-				type="text"
-				className="search-input"
-				value={searchInput}
-				onChange={(e) => {
-					setSearchInput(e.target.value);
-					handleChange(e.target.value);
-				}}
-			/>
-			<div onClick={() => setSearchInput("")}>X</div>
+			<div id="search-input-container-div">
+				<input
+					type="text"
+					id="search-input"
+					value={searchInput}
+					onChange={(e) => {
+						setSearchInput(e.target.value);
+						handleChange(e.target.value);
+					}}
+				/>
+				{searchInput ? (
+					<div
+						id="search-input-clear"
+						onClick={() => setSearchInput("")}
+					>
+						X
+					</div>
+				) : null}
+			</div>
 			{!searchInput.length ? (
 				<SearchEmpty
 					setSearchInput={setSearchInput}

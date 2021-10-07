@@ -8,4 +8,26 @@
 	grid-template-rows: repeat(10, 10%);
 	position: relative;
 	overflow: hidden;
+	font-family: Mukta, sans-serif;
+}
+
+#search-input {
+	height: 2em;
+}
+
+#search-input-container-div {
+	grid-row: 1;
+	grid-column: 2;
+	align-self: center;
+	display: flex;
+	align-items: center;
+}
+
+#search-empty-container {
+	grid-row: 2;
+}
+
+#search-input-clear {
+	padding: 0px 5px;
+	cursor: pointer;
 }
