@@ -120,6 +120,10 @@
             pointer-events:all;
         }
 
+        .stuff{
+           
+        }
+
 
         .playlist-song-container_div:hover {
             background-color: rgb(88, 88, 88);

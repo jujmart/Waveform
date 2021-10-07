@@ -49,8 +49,8 @@ const Song = ({ songId, playlistId }) => {
 					Song added to queue
 				</div>
 			)}
-			<button className='allow-pointer-events' onClick={handleSongPlay}>play</button>
-			<button className='allow-pointer-events' onClick={handleAddToQueue}>Add to Queue</button>
+			<span className='allow-pointer-events material-icons' onClick={handleSongPlay}>play_arrow</span>
+			<span className='allow-pointer-events material-icons' onClick={handleAddToQueue}>playlist_play</span>
 			<img
 				className="playlist-song_album-img"
 				src={song?.albumImageUrl}

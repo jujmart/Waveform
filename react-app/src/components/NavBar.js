@@ -19,7 +19,7 @@ const NavBar = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const user = useSelector((state) => state.session.user);
-	const follows = useSelector((state) => state.session.user.follows);
+	const follows = useSelector((state) => state.session.user?.follows);
 	const [playlistIdsNotInStore, setPlaylistIdsNotInStore] = useState([]);
 	const userPlaylistsIdArr = useSelector(
 		(state) => state.userMusicInfo.playlists
@@ -109,7 +109,7 @@ const NavBar = () => {
 	}, [buffer, dispatch]);
 
 	useEffect(() => {
-		if (follows.length) {
+		if (follows?.length) {
 			const filteredFollows = follows.filter(
 				(followId) => !users[followId]
 			);
@@ -323,20 +323,19 @@ const NavBar = () => {
 							// onPlay={() => setIsPlaying(true)}
 							// onPause={() => setIsPlaying(false)}
 						></audio>
-						<div
-							onClick={() => {
-								history.push("/queue");
-							}}
-						>
-							Queue
-						</div>
+						<NavLink to="/queue"
+						  className='queue-link'
+						  activeClassName='queue-link-active'><span className='material-icons queue-btn'>
+							playlist_play
+						</span></NavLink>
+
 					</div>
 				</div>
 
 				{/* WAVEFORM */}
 				{/* <div id='waveform-nav-bar_div'>
-      <h2>MOVING WAVEFROM THING</h2>
-    </div> */}
+				<h2>MOVING WAVEFROM THING</h2>
+				</div> */}
 			</nav>
 		);
 	}

@@ -362,7 +362,7 @@
         #navbar-player{
             width: 40vw;
             /* height: 25px; */
-            /* grid-row: ; */
+            grid-row: 1;
             grid-column: 1/ span 7;
             justify-self: center;
             align-self: center;
@@ -429,6 +429,36 @@
         audio::-webkit-media-controls-toggle-closed-captions-button{
 
         }
+
+        .queue-btn{
+            font-size: 50px;
+            color:lightgray;
+        }
+
+        .queue-btn:hover{
+            color: white;
+            cursor: pointer;
+        }
+
+        .queue-btn:active{
+            color:darkslategray;
+            font-size: 48px;
+        }
+
+        .queue-link{
+            grid-column: 6 ;
+            grid-row: 1;
+            align-self: center;
+            justify-self: end;
+        }
+
+        .queue-link-active > span{
+            color:red;
+            font-size: 50px;
+            cursor: default;
+        }
+
+
 
 
 #waveform-nav-bar_div{
