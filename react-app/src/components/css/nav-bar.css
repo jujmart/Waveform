@@ -456,6 +456,8 @@
         align-self: center;
         font-family: Oswald;
         text-decoration: none;
+        cursor: pointer;
+        padding: 5%;
     }
 
     #shadeLogo{

@@ -364,9 +364,9 @@ const NavBar = () => {
 			>
 				Signup
 			</NavLink>
-			<button id="nav-bar-lo_demo-btn" onClick={demoUserLogin}>
-				DEMO
-			</button>
+			<a className="nav-bar-lo_link" onClick={demoUserLogin}>
+				Demo
+			</a>
 		</nav>
 	);
 };
