@@ -119,18 +119,21 @@ function User() {
 						? ` ⚬ ${currentUserFollows.length} users followed`
 						: ""}
 				</p>
-			</div>
+				{/* follow button */}
 
-			{/* follow button */}
-
-			<div>
-				{currentUserProfile ? null : !currentUserFollows.includes(
-						+userId
-				  ) ? (
-					<button onClick={handleFollow}>FOLLOW</button>
-				) : (
-					<button onClick={handleUnfollow}>UNFOLLOW</button>
-				)}
+				<div className="follow_btn_contianer">
+					{currentUserProfile ? null : !currentUserFollows.includes(
+							+userId
+					  ) ? (
+						<button onClick={handleFollow} className="follow_btn">
+							FOLLOW
+						</button>
+					) : (
+						<button onClick={handleUnfollow} className="follow_btn">
+							UNFOLLOW
+						</button>
+					)}
+				</div>
 			</div>
 
 			{/* List of user created playlists */}
