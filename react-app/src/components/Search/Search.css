@@ -9,25 +9,58 @@
 	position: relative;
 	overflow: hidden;
 	font-family: Mukta, sans-serif;
+	background-color: rgb(31, 31, 31);
 }
 
 #search-input {
-	height: 2em;
+	height: 1.75em;
+	width: 250px;
+	padding: 0px 5px;
 }
 
 #search-input-container-div {
 	grid-row: 1;
-	grid-column: 2;
 	align-self: center;
 	display: flex;
 	align-items: center;
+	margin-left: 60px;
+	margin-top: 10px;
+	width: 450px;
 }
 
 #search-empty-container {
 	grid-row: 2;
+	display: flex;
+	width: 80vw;
+	flex-wrap: wrap;
+	padding: 15px;
+	box-sizing: border-box;
+	justify-content: center;
 }
 
 #search-input-clear {
-	padding: 0px 5px;
+	padding: 0px 12px;
 	cursor: pointer;
+	color: white;
+}
+
+.genre-card-div {
+	width: 10vw;
+	height: 16vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 7px;
+	margin: 12px;
+	cursor: pointer;
+}
+
+.genre-card-name {
+	width: 12vw;
+	text-align: center;
+}
+
+.search-input-icon {
+	color: #888;
+	width: 30px;
 }

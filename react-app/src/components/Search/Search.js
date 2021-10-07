@@ -19,9 +19,13 @@ const Search = () => {
 	return (
 		<div id="search-container-div">
 			<div id="search-input-container-div">
+				<span className="material-icons search-input-icon">
+					search&nbsp;&nbsp;
+				</span>
 				<input
 					type="text"
 					id="search-input"
+					placeholder="Artist, song, genre, user..."
 					value={searchInput}
 					onChange={(e) => {
 						setSearchInput(e.target.value);
