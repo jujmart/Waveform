@@ -55,11 +55,15 @@ function User() {
 		(async () => {
 			const user = await dispatch(getASingleUserThunk(userId));
 			setProfileUser(user);
+			if (user === undefined) {
+				history.push(`/users/${currentUser.id}`);
+			}
+			// console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%", user);
 		})();
 	}, [userId, dispatch]);
 
 	useEffect(() => {
-		currentUser.id === profileUser.id
+		currentUser.id === profileUser?.id
 			? setCurrentUserProfile(true)
 			: setCurrentUserProfile(false);
 	}, [profileUser, currentUser]);
@@ -94,7 +98,7 @@ function User() {
 		}
 	}, [dispatch, songIdsNotInState, playlistIdsNotInState]);
 
-	if (!Object.keys(profileUser).length) {
+	if (profileUser === undefined || !Object.keys(profileUser).length) {
 		return null;
 	}
 
@@ -119,18 +123,21 @@ function User() {
 						? ` ⚬ ${currentUserFollows.length} users followed`
 						: ""}
 				</p>
-			</div>
+				{/* follow button */}
 
-			{/* follow button */}
-
-			<div>
-				{currentUserProfile ? null : !currentUserFollows.includes(
-						+userId
-				  ) ? (
-					<button onClick={handleFollow}>FOLLOW</button>
-				) : (
-					<button onClick={handleUnfollow}>UNFOLLOW</button>
-				)}
+				<div className="follow_btn_contianer">
+					{currentUserProfile ? null : !currentUserFollows.includes(
+							+userId
+					  ) ? (
+						<button onClick={handleFollow} className="follow_btn">
+							FOLLOW
+						</button>
+					) : (
+						<button onClick={handleUnfollow} className="follow_btn">
+							UNFOLLOW
+						</button>
+					)}
+				</div>
 			</div>
 
 			{/* List of user created playlists */}

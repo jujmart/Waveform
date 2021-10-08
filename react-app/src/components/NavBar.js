@@ -248,33 +248,32 @@ const NavBar = () => {
 
 				{/* RIGHT SIDE NAV BAR */}
 
-				<div id="song-activity_h3-container">
-					<h3 id="song-activity_h3">Followed Users</h3>
-				</div>
+				{/* <div id="song-activity_h3-container"> */}
 
+				{/* </div> */}
+				<h3 id="song-activity_h3">Followed Users</h3>
 				<div id="right-nav-bar_div">
-					<div id="shhhhh">
-						<p>if you found this you're awfully nosey</p>
-					</div>
 					{follows.map((followId) => (
-						<Link to={`/users/${followId}`} key={followId}>
-							<div className="newest-song-container_div">
-								<img
-									className="song-activity-album_img"
-									src={users[followId]?.profilePhotoUrl}
-									alt="Friend Img"
-								/>
-								<p className="song-activity-song_p">
-									{users[followId]?.username}
-								</p>
-								<p className="song-activity-album_p">
-									Joined On:{" "}
-									{users[followId]?.createdAt
-										?.split(" ")
-										.splice(1, 3)
-										.join(" ")}
-								</p>
-							</div>
+						<Link
+							to={`/users/${followId}`}
+							key={followId}
+							className="newest-song-container_div"
+						>
+							<img
+								className="song-activity-album_img"
+								src={users[followId]?.profilePhotoUrl}
+								alt="Friend Img"
+							/>
+							<p className="song-activity-song_p">
+								{users[followId]?.username}
+							</p>
+							<p className="song-activity-album_p">
+								Joined On:{" "}
+								{users[followId]?.createdAt
+									?.split(" ")
+									.splice(1, 3)
+									.join(" ")}
+							</p>
 						</Link>
 					))}
 				</div>
@@ -377,9 +376,9 @@ const NavBar = () => {
 			>
 				Signup
 			</NavLink>
-			<button id="nav-bar-lo_demo-btn" onClick={demoUserLogin}>
-				DEMO
-			</button>
+			<a className="nav-bar-lo_link" onClick={demoUserLogin}>
+				Demo
+			</a>
 		</nav>
 	);
 };

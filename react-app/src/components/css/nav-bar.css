@@ -240,19 +240,16 @@
 #right-nav-bar_div{
     background: black;
     grid-column: 10;
-    grid-row: 1 /span 9 ;
-    display: grid;
-    grid-template-rows: 10vh repeat(auto, minmax(12vh, 12vh));
+    grid-row: 2 /span 8 ;
+    /* display: grid; */
+    display: flex;
+    flex-direction: column;
+    /* grid-template-rows: 10vh repeat(auto, minmax(12vh, 12vh)); */
     color: rgb(124, 127, 131);
     padding-left: 15px;
     padding-right: 15px;
-    overflow: scroll;
+    overflow-y: scroll;
 }
-
-    #shhhhh{
-        color: black;
-        height: 10vh;
-    }
 
     #song-activity_h3-container{
         background-color:black;
@@ -264,23 +261,33 @@
     }
 
     #song-activity_h3{
+        background-color:black;
+        grid-column: 10;
+        grid-row: 1;
+        z-index: 3;
         color:white;
         font-family: 'Mukta', sans-serif;
         letter-spacing: 0px;
-        padding-top: 5vh;
-        padding-left: 15px;
+        padding-top: 3vh;
+        text-align: center;
+        /* padding-left: 15px; */
     }
 
     .newest-song-container_div{
         height: 12vh;
-        padding-top: 25px;
+        padding-top: 10px;
+        padding-bottom: 8px;
         overflow-x: clip;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
-    .newest-song-container_div > * {
+    /* .newest-song-container_div > * {
         padding-left: 2px;
 
-    }
+    } */
 
     .newest-song-container_div > p, a{
         text-decoration: none;
@@ -499,6 +506,8 @@
         align-self: center;
         font-family: Oswald;
         text-decoration: none;
+        cursor: pointer;
+        padding: 5%;
     }
 
     #shadeLogo{

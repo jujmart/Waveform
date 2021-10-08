@@ -41,13 +41,13 @@ const HomePageLoggedOut = () => {
 					A website for Music lovers Created by you
 				</h2>
 				<h3 id="homepage-mvp_h3">Add your songs, create playlists</h3>
-				<button id="homepage-signup_btn">Join Waveform for free</button>
-				<audio
+				{/* <button id="homepage-signup_btn">Join Waveform for free</button> */}
+				{/* <audio
 					id="homepage-player"
 					controls={true}
 					src="https://spot-a-cloud.s3.us-east-2.amazonaws.com/AWS-Bucket/Songs/G-Eazy+-+Acting+Up+ft+Devon+Baldwin.mp3"
-					// accept={`*/`}
-				></audio>
+					accept={`/`}
+				></audio> */}
 				<img id="large-logo" src={homePageLogo} alt="logo" />
 			</div>
 
@@ -151,7 +151,7 @@ const HomePageLoggedOut = () => {
 			</div>
 
 			{/* Homepage Click Display for Features */}
-			<div id="homepage-lo-info_div">
+			{/* <div id="homepage-lo-info_div">
 				<button id="homepage-scroll-left">Left</button>
 				<div id="homepage-lo-info-disp_div">
 					<div className="mvp-container_div" id="mvp1">
@@ -205,7 +205,7 @@ const HomePageLoggedOut = () => {
 					<div id="spacer_div"></div>
 				</div>
 				<button id="homepage-scroll-right">Right</button>
-			</div>
+			</div> */}
 		</div>
 	);
 };
