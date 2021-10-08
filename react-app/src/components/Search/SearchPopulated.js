@@ -35,12 +35,14 @@ const SearchPopulated = () => {
 			{search.playlists.length ? (
 				<div className="search-populated_subcontainer-div">
 					<h1 className="search-populated_header">Playlists</h1>
-					{search.playlists.map((playlistId) => (
-						<PlaylistCard
-							playlistId={playlistId}
-							key={playlistId}
-						/>
-					))}
+					<div className="playlist-card_container">
+						{search.playlists.map((playlistId) => (
+							<PlaylistCard
+								playlistId={playlistId}
+								key={playlistId}
+							/>
+						))}
+					</div>
 				</div>
 			) : null}
 			{search.users.length ? (
