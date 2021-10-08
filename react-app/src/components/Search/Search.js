@@ -25,7 +25,7 @@ const Search = () => {
 				<input
 					type="text"
 					id="search-input"
-					placeholder="Artist, song, genre, user..."
+					placeholder="Artist, song, playlist, genre, user..."
 					value={searchInput}
 					onChange={(e) => {
 						setSearchInput(e.target.value);

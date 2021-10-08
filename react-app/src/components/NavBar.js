@@ -257,8 +257,12 @@ const NavBar = () => {
 						<p>if you found this you're awfully nosey</p>
 					</div>
 					{follows.map((followId) => (
-						<Link to={`/users/${followId}`} key={followId}>
-							<div className="newest-song-container_div">
+						<Link
+							to={`/users/${followId}`}
+							key={followId}
+							className="follow-user-link"
+						>
+							<div className="follow-user-container_div">
 								<img
 									className="song-activity-album_img"
 									src={users[followId]?.profilePhotoUrl}
