@@ -8,15 +8,15 @@ const SongQueue = () => {
 	const dispatch = useDispatch();
 	const songIds = useSelector((state) => state.songQueue);
 
-	const removeSongFromQueue = (songId) => {
-		dispatch(removeSong(songId));
+	const removeSongFromQueue = (songId, idx) => {
+		dispatch(removeSong(songId, idx));
 	};
 
 	return (
 		<div className="song_queue_container">
 			<div className="Queue_title">Queue</div>
 			{songIds.length ? (
-				songIds.map((songId) => (
+				songIds.map((songId, idx) => (
 					<div
 						className="playlist-song-container_div_queue-page"
 						key={uuidv4()}
@@ -25,7 +25,7 @@ const SongQueue = () => {
 
 						<span
 							className="allow-pointer-events material-icons removeFromQueue"
-							onClick={() => removeSongFromQueue(songId)}
+							onClick={() => removeSongFromQueue(songId, idx)}
 						>
 							clear
 						</span>
