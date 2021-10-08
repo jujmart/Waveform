@@ -10,8 +10,8 @@ const SongForm = () => {
 	const [errors, setErrors] = useState([]);
 	const [songUrl, setSongUrl] = useState(null);
 	const [title, setTitle] = useState("");
-	const [artist, setArtist] = useState(null);
-	const [album, setAlbum] = useState(null);
+	const [artist, setArtist] = useState("");
+	const [album, setAlbum] = useState("");
 	const [albumImage, setAlbumImage] = useState("");
 	const [genres, setGenres] = useState([]);
 	const [disabledSubmitButton, setDisabledSubmitButton] = useState(false);
@@ -151,7 +151,9 @@ const SongForm = () => {
 
 			<form id="song-form_form" onSubmit={handleSubmit}>
 				{errors.map((error, ind) => (
-					<div className='songform-errors' key={ind}>{error}</div>
+					<div className="songform-errors" key={ind}>
+						{error}
+					</div>
 				))}
 
 				<label htmlFor="songUrl">Audio File</label>
