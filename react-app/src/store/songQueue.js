@@ -4,10 +4,15 @@ const REMOVE_SONG_FROM_QUEUE = "queue/REMOVE_SONG_FROM_QUEUE";
 const ADD_PLAYLIST_TO_QUEUE = "queue/ADD_PLAYLIST_TO_QUEUE"; //will remove all songs form current queue and set new playlist as queue
 const ADD_SONG_PRIORITY = "queue/ADD_SONG_PRIORITY"; // will add a song to the from of the queue and maintain original queue structure
 const MOVE_TO_NEXT_SONG = "queue/MOVE_TO_NEXT_SONG";
+const REMOVE_QUEUE = "queue/REMOVE_QUEUE";
 
 export const addSong = (songId) => ({
 	type: ADD_SONG_TO_QUEUE,
 	songId,
+});
+
+export const removeAllQueue = () => ({
+	type: REMOVE_QUEUE,
 });
 
 export const moveToNextSong = () => ({
@@ -50,6 +55,8 @@ export default function songsReducer(state = initialState, action) {
 			const newState = [...state];
 			newState.shift();
 			return newState;
+		case REMOVE_QUEUE:
+			return [];
 		default:
 			return state;
 	}
