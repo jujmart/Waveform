@@ -72,3 +72,7 @@
 	box-sizing: border-box;
 	justify-content: center;
 }
+
+.search-populated_header {
+	color: white;
+}
