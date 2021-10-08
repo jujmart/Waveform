@@ -22,9 +22,13 @@ const SongQueue = () => {
 						key={uuidv4()}
 					>
 						<Song songId={songId} />
-						<button onClick={() => removeSongFromQueue(songId)}>
-							Remove from Queue
-						</button>
+
+						<span
+							className="allow-pointer-events material-icons removeFromQueue"
+							onClick={() => removeSongFromQueue(songId)}
+						>
+							clear
+						</span>
 					</div>
 				))
 			) : (
