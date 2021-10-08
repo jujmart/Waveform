@@ -329,6 +329,19 @@ const NavBar = () => {
 							playlist_play
 						</span></NavLink>
 
+
+					<div className="creator-info_div">
+
+				<a target="_blank" href='https://andru17urdna.github.io/'  className="link-font portfolio-link">
+					Andru
+				</a>
+				<a target="_blank" href='https://jujmart.github.io/' className="link-font portfolio-link">
+					Justice
+				</a>
+				<a target="_blank" href='https://maxwellwehner.github.io/' className="link-font portfolio-link">
+					Maxwell
+				</a>
+				</div>
 					</div>
 				</div>
 

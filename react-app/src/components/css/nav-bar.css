@@ -525,3 +525,29 @@
         justify-self: center;
         align-self: center;
     }
+
+
+    .creator-info_div{
+        display: grid;
+        width: 20vw;
+        grid-column: 7 / end;
+        grid-row: 1;
+    }
+
+    .portfolio-link{
+        justify-self: center;
+        align-self: center;
+        opacity: .1;
+        transition: .5s;
+        cursor: pointer;
+    }
+
+
+    .portfolio-link:hover{
+        opacity: 1;
+    }
+
+    .portfolio-link:active{
+        transition: 0s;
+        color:grey;
+    }
