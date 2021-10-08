@@ -317,6 +317,7 @@ const NavBar = () => {
 							// autoplay
 							id="navbar-player"
 							controls={true}
+							controlsList="nodownload"
 							src={mp3}
 							accept={`*/`}
 							onEnded={bufferFunc}
