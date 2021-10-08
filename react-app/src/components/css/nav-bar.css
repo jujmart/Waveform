@@ -247,13 +247,8 @@
     color: rgb(124, 127, 131);
     padding-left: 15px;
     padding-right: 15px;
-    /* overflow: scroll; */
+    overflow-y: scroll;
 }
-
-    #shhhhh{
-        color: black;
-        height: 10vh;
-    }
 
     #song-activity_h3-container{
         background-color:black;
