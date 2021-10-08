@@ -13,13 +13,13 @@ import DisplayPlaylist from "./components/Playlist";
 import HomePage from "./components/Homepage";
 import Search from "./components/Search/Search";
 import SongQueue from "./components/SongQueue";
+import PageNotFound from "./components/PageNotFound";
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
 	const dispatch = useDispatch();
 
 	const outerRef = useRef(null);
-
 
 	useEffect(() => {
 		(async () => {
@@ -67,11 +67,10 @@ function App() {
 					<SongQueue />
 				</Route>
 				<Route>
-					<h1>Page Not Found! Sorry!</h1>
+					<PageNotFound />
 				</Route>
 			</Switch>
 			{/* </div> */}
-
 		</BrowserRouter>
 	);
 }
