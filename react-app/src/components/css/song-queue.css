@@ -34,7 +34,7 @@
 
 .playlist-song-container_div_queue-page{
     width: 74vw;
-    height: 7vh;
+    min-height: 7vh;
     font-family: 'Mukta', sans-serif;
     display: grid;
     grid-template-columns: .2fr .2fr .2fr .7fr .9fr .9fr .4fr .1fr .1fr .1fr;
