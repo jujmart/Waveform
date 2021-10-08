@@ -113,23 +113,22 @@ const EditSongForm = () => {
 					}
 					alt="Album Cover"
 				/>
-
+			<div id="selected-genre-container_div">
 				{genres.length > 0 &&
 					genres.map((genreId) => (
-						<div key={genreId}>
+						<div className="remove-genre_div" key={genreId}>
 							<p className='remove-genre_p'>{genresList[genreId - 1].genreName}</p>
 							<button class='remove-genre_btn'
 								onClick={deleteGenreOnClick}
 								value={genreId}
 							>
-								x
+								✖️
 							</button>
 						</div>
 					))}
+				</div>
 			</div>
 			<form id='edit-song-form' onSubmit={handleSubmit}>
-
-
 
 					<label className='edit-form-label' htmlFor="title">Title</label>
 					<input

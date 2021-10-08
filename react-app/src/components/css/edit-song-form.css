@@ -14,13 +14,13 @@
 
 #current-info-div{
     background:hsl(0, 0%, 33%);
- width: 37vw;
- margin-top: 2vh;
- margin-left: 2vw;
- height: 76vh;
- border-radius: 5px;
- display: grid;
- grid-template-columns: repeat(1, 1fr);
+    width: 37vw;
+    margin-top: 2vh;
+    margin-left: 2vw;
+    height: 76vh;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
 
 }
 
@@ -34,7 +34,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     font-size: 30px;
-        font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 
@@ -42,7 +42,8 @@
     width: 300px;
     height: 300px;
     justify-self: center;
-
+    grid-row: 2;
+    grid-column: ;
 }
 
 
@@ -87,3 +88,4 @@
         color:white;
 
 }
+
