@@ -4,13 +4,14 @@ from flask_login import UserMixin
 from sqlalchemy.sql import func
 
 
-
 follow = db.Table('follows',
-    db.Column('user_a_id', db.Integer, db.ForeignKey('users.id'), primary_key=True),
-    db.Column('user_b_id', db.Integer, db.ForeignKey('users.id'), primary_key=True),
-    db.UniqueConstraint('user_a_id', 'user_b_id', name='unique_follows')
-)
-
+                  db.Column('user_a_id', db.Integer, db.ForeignKey(
+                      'users.id'), primary_key=True),
+                  db.Column('user_b_id', db.Integer, db.ForeignKey(
+                      'users.id'), primary_key=True),
+                  db.UniqueConstraint(
+                      'user_a_id', 'user_b_id', name='unique_follows')
+                  )
 
 
 class User(db.Model, UserMixin):
@@ -28,9 +29,9 @@ class User(db.Model, UserMixin):
                           nullable=False, server_default=func.now(), onupdate=func.now())
 
     followers = db.relationship("User", secondary=follow,
-                              primaryjoin = id==follow.c.user_a_id,
-                              secondaryjoin = id==follow.c.user_b_id
-    )
+                                primaryjoin=id == follow.c.user_a_id,
+                                secondaryjoin=id == follow.c.user_b_id
+                                )
 
     songs = db.relationship("Song", back_populates="user")
     playlists = db.relationship("Playlist", back_populates="user")

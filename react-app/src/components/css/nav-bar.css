@@ -221,7 +221,8 @@
 	grid-column: 10;
 	grid-row: 1 / span 9;
 	display: grid;
-	grid-template-rows: 15vh repeat(auto-fill, 140px);
+	/* grid-template-rows: 15vh repeat(auto-fill, 140px); */
+	grid-auto-rows: 140px;
 	color: rgb(124, 127, 131);
 	padding-left: 15px;
 	padding-right: 15px;
