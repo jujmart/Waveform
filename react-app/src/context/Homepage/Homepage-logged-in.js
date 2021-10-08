@@ -27,10 +27,10 @@ const HomePageLoggedIn = () => {
 				</h2>
 
 				<div id="song-info">
-					<p>Title</p>
-					<p>Artist</p>
-					<p>Album</p>
-					<p>Date Added</p>
+				<p className='playlist-title'>Title</p>
+					<p className='playlist-artist'>Artist</p>
+					<p className='playlist-album'>Album</p>
+					<p className='playlist-date'>Date Added</p>
 				</div>
 				{/* Recently Added Songs Divider */}
 				<div id="playlist-info-container_div">

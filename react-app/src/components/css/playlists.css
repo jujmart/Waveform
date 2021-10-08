@@ -104,25 +104,29 @@
             display: grid;
             width: 74vw;
             height: 7vh;
-            grid-template-columns: .2fr .7fr .9fr .9fr .4fr .1fr .1fr .1fr;
+            grid-template-columns: .25fr .25fr .5fr 1.5fr 1.75fr 1.5fr .5fr .25fr .25fr .25fr;
             justify-self: center;
             color: white;
             font-family: 'Mukta', sans-serif;
             cursor: default;
         }
+
+
         .playlist-song-container_div * {
             pointer-events: none;
         }
 
+        .song-icon{
+            font-size: 25px;
+            align-self: center;
+            justify-self: center;
+        }
 
 
         .allow-pointer-events {
             pointer-events:all;
         }
 
-        .stuff{
-           
-        }
 
 
         .playlist-song-container_div:hover {
@@ -135,12 +139,26 @@
             transition: .7s;
         }
 
+        .playlist-song-container_div > span {
+            align-self: center;
+            transition: .7s;
+        }
+
         .playlist-song-container_div > p:hover {
             color:gray;
             transform: scale(1.2);
         }
 
+        .playlist-song-container_div > span:hover {
+            color:gray;
+            transform: scale(1.2);
+        }
+
         .playlist-song-container_div > p:active {
+            color: white;
+        }
+
+        .playlist-song-container_div > span:active {
             color: white;
         }
 
@@ -155,7 +173,7 @@
             object-fit: cover;
             margin-top: auto;
             margin-bottom: auto;
-            margin-left: 20px;
+            justify-self: center;
             box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 80%);
         }
 
@@ -166,7 +184,7 @@
             display: grid;
             width: 74vw;
             grid-template-columns: repeat(4, 1fr);
-            column-gap: 5vw;
+            column-gap: 4vw;
             color: White;
             font-size: 20px;
             font-family: 'Montserrat', sans-serif;
@@ -177,6 +195,24 @@
             position: sticky;
             top: 0;
             background: rgb(31, 31, 31);
+        }
+
+        .playlist-title{
+            /* padding-left: 5vw; */
+            justify-self: end;
+            padding-right: 2vw;
+        }
+        .playlist-artist{
+            justify-self: end;
+            padding-right: 5vw;
+        }
+        .playlist-album{
+            justify-self: end;
+            padding-right: 5vw;
+        }
+        .playlist-date{
+            justify-self: end;
+            padding-right: 6vw;
         }
 
 
