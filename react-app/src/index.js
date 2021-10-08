@@ -5,7 +5,7 @@ import "./index.css";
 import App from "./App";
 import configureStore from "./store";
 import { ModalProvider } from "./context/Modal";
-// import { ContextMenuProvider } from "./context/ContextMenu/ContextMenuModal/ContextMenu";
+// import { ContextMenuProvider } from './context/ContextMenu/ContextMenuModal/ContextMenu';
 
 const store = configureStore();
 

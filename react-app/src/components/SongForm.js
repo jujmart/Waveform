@@ -151,7 +151,7 @@ const SongForm = () => {
 
 			<form id="song-form_form" onSubmit={handleSubmit}>
 				{errors.map((error, ind) => (
-					<div key={ind}>{error}</div>
+					<div className='songform-errors' key={ind}>{error}</div>
 				))}
 
 				<label htmlFor="songUrl">Audio File</label>
