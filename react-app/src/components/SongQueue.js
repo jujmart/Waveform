@@ -16,6 +16,15 @@ const SongQueue = () => {
 		<div className="song_queue_container">
 			<div className="Queue_title">Queue</div>
 			{songIds.length ? (
+				<div id="song-info_display_queue">
+					<p id="song-info_display_queue_title">Title</p>
+					<p id="song-info_display_queue_artist">Artist</p>
+					<p id="song-info_display_queue_album">Album</p>
+					<p id="song-info_display_queue_date">Date Added</p>
+				</div>
+			) : null}
+
+			{songIds.length ? (
 				songIds.map((songId, idx) => (
 					<div
 						className="playlist-song-container_div_queue-page"
