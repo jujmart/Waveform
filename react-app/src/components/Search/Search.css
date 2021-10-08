@@ -83,3 +83,40 @@
 .search-populated_subcontainer-div {
 	margin-bottom: 20px;
 }
+
+#search-populated_song-info {
+	justify-self: center;
+	display: grid;
+	/* width: 74vw; */
+	grid-template-columns: repeat(4, 1fr);
+	column-gap: 5vw;
+	color: white;
+	font-size: 20px;
+	font-family: "Montserrat", sans-serif;
+	align-self: end;
+	border-bottom: white solid 1px;
+	padding-bottom: 6px;
+	margin-bottom: 3px;
+	background: rgb(31, 31, 31);
+}
+
+.search-populated_playlist-title {
+	/* padding-left: 5vw; */
+	justify-self: end;
+	padding-right: 2.5vw;
+}
+
+.search-populated_playlist-artist {
+	justify-self: end;
+	padding-right: 6vw;
+}
+
+.search-populated_playlist-album {
+	justify-self: end;
+	padding-right: 6.5vw;
+}
+
+.search-populated_playlist-date {
+	justify-self: baseline;
+	padding-left: 0.5vw;
+}

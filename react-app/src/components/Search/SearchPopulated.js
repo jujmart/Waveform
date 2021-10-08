@@ -12,6 +12,16 @@ const SearchPopulated = () => {
 			{search.songs.length ? (
 				<div className="search-populated_subcontainer-div">
 					<h2 className="search-populated_header">Songs</h2>
+					<div id="search-populated_song-info">
+						<p className="search-populated_playlist-title">Title</p>
+						<p className="search-populated_playlist-artist">
+							Artist
+						</p>
+						<p className="search-populated_playlist-album">Album</p>
+						<p className="search-populated_playlist-date">
+							Date Added
+						</p>
+					</div>
 					{search.songs.map((songId) => (
 						<div
 							className="playlist-song-container_div"
