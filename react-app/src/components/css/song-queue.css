@@ -1,0 +1,91 @@
+.No_songs_queue{
+    color:whitesmoke;
+    text-align: center;
+    font-family: 'Mukta', sans-serif;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.Queue_title{
+    color:whitesmoke;
+    font-family: 'Mukta', sans-serif;
+    font-size: 35px;
+    font-weight: bold;
+    margin-left:3vw;
+}
+
+.song-info_queue{
+    justify-self: center;
+    grid-column: 1/span end;
+    display: grid;
+    width: 74vw;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 5vw;
+    color: White;
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    align-self: end;
+    border-bottom: white solid 1px;
+    padding-bottom: 6px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background: rgb(31, 31, 31);
+}
+
+.song_queue_container{
+    width: 80vw;
+    height: 80vh;
+    position: relative;
+    top:10vh;
+    left: 10vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background: rgb(31, 31, 31);
+    /* padding-top: 1%; */
+}
+
+.playlist-song-container_div_queue-page{
+    width: 74vw;
+    height: 7vh;
+    font-family: 'Mukta', sans-serif;
+    display: grid;
+    grid-template-columns: .2fr .2fr .2fr .7fr .9fr .9fr .4fr .1fr .1fr .1fr;
+    color:white;
+    margin-left:3vw;
+    /* justify-content: space-around; */
+}
+
+.playlist-song-container_div_queue-page:hover {
+    background-color: rgb(88, 88, 88);
+    border-radius: 5px;
+}
+.playlist-song-container_div_queue-page > p {
+    align-self: center;
+    transition: .7s;
+}
+
+.playlist-song-container_div_queue-page > p:hover {
+    color:gray;
+    transform: scale(1.2);
+}
+
+.playlist-song-container_div_queue-page > p {
+    color: white;
+}
+
+.playlist-song-container_div_queue-page > div {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.playlist-song-container_div_queue-page > img {
+    width: 2.5vw;
+    height: 2.5vw;
+    object-fit: cover;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 20px;
+    box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 80%);
+}
