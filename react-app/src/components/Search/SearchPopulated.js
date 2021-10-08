@@ -10,7 +10,7 @@ const SearchPopulated = () => {
 	return (
 		<div id="search-populated-container">
 			{search.songs.length ? (
-				<div>
+				<div className="search-populated_subcontainer-div">
 					<h2 className="search-populated_header">Songs</h2>
 					{search.songs.map((songId) => (
 						<div
@@ -23,7 +23,7 @@ const SearchPopulated = () => {
 				</div>
 			) : null}
 			{search.playlists.length ? (
-				<div>
+				<div className="search-populated_subcontainer-div">
 					<h2 className="search-populated_header">Playlists</h2>
 					{search.playlists.map((playlistId) => (
 						<PlaylistCard
@@ -34,7 +34,7 @@ const SearchPopulated = () => {
 				</div>
 			) : null}
 			{search.users.length ? (
-				<div>
+				<div className="search-populated_subcontainer-div">
 					<h2 className="search-populated_header">Users</h2>
 					{search.users.map((userId) => (
 						<Link to={`/users/${userId}`} key={userId}>
@@ -65,7 +65,11 @@ const SearchPopulated = () => {
 			{!search.songs.length &&
 			!search.playlists.length &&
 			!search.users.length ? (
-				<h2 className="search-populated_header">No results found</h2>
+				<div className="search-populated_subcontainer-div">
+					<h2 className="search-populated_header">
+						No results found
+					</h2>
+				</div>
 			) : null}
 		</div>
 	);
