@@ -55,11 +55,15 @@ function User() {
 		(async () => {
 			const user = await dispatch(getASingleUserThunk(userId));
 			setProfileUser(user);
+			if (user === undefined) {
+				history.push(`/users/${currentUser.id}`);
+			}
+			// console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%", user);
 		})();
 	}, [userId, dispatch]);
 
 	useEffect(() => {
-		currentUser.id === profileUser.id
+		currentUser.id === profileUser?.id
 			? setCurrentUserProfile(true)
 			: setCurrentUserProfile(false);
 	}, [profileUser, currentUser]);
@@ -94,7 +98,7 @@ function User() {
 		}
 	}, [dispatch, songIdsNotInState, playlistIdsNotInState]);
 
-	if (!Object.keys(profileUser).length) {
+	if (profileUser === undefined || !Object.keys(profileUser).length) {
 		return null;
 	}
 
