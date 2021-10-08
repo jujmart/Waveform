@@ -57,6 +57,7 @@ const SignUpForm = () => {
 			<div id="signup-form_profile-pic_container">
 				<img
 					src={profilePic ? URL.createObjectURL(profilePic) : ""}
+					onError={(e)=>{e.target.onerror = null; e.target.src="https://spot-a-cloud.s3.us-east-2.amazonaws.com/AWS-Bucket/Profile-Photos/Seeder1-BlankPhoto.png"}}
 					alt="Profile Pic"
 					id="signup-form_profile-pic"
 				/>

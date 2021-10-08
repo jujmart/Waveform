@@ -10,14 +10,14 @@ import { ModalProvider } from './context/Modal';
 const store = configureStore();
 
 ReactDOM.render(
-	<React.StrictMode>
-		<Provider store={store}>
-			{/* <ContextMenuProvider> */}
-			<ModalProvider>
-				<App />
-			</ModalProvider>
-			{/* </ContextMenuProvider> */}
-		</Provider>
-	</React.StrictMode>,
-	document.getElementById("root")
+  <React.StrictMode>
+    <Provider store={store}>
+      {/* <ContextMenuProvider> */}
+        <ModalProvider>
+          <App />
+        </ModalProvider>
+      {/* </ContextMenuProvider> */}
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById('root')
 );

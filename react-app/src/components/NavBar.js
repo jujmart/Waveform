@@ -316,26 +316,39 @@ const NavBar = () => {
 							// autoplay
 							id="navbar-player"
 							controls={true}
+							controlsList="nodownload"
 							src={mp3}
 							accept={`*/`}
 							onEnded={bufferFunc}
 							// onPlay={() => setIsPlaying(true)}
 							// onPause={() => setIsPlaying(false)}
 						></audio>
-						<div
-							onClick={() => {
-								history.push("/queue");
-							}}
-						>
-							Queue
-						</div>
+						<NavLink to="/queue"
+						  className='queue-link'
+						  activeClassName='queue-link-active'><span className='material-icons queue-btn'>
+							playlist_play
+						</span></NavLink>
+
+
+					<div className="creator-info_div">
+
+				<a target="_blank" href='https://andru17urdna.github.io/'  className="link-font portfolio-link">
+					Andru
+				</a>
+				<a target="_blank" href='https://jujmart.github.io/' className="link-font portfolio-link">
+					Justice
+				</a>
+				<a target="_blank" href='https://maxwellwehner.github.io/' className="link-font portfolio-link">
+					Maxwell
+				</a>
+				</div>
 					</div>
 				</div>
 
 				{/* WAVEFORM */}
 				{/* <div id='waveform-nav-bar_div'>
-      <h2>MOVING WAVEFROM THING</h2>
-    </div> */}
+				<h2>MOVING WAVEFROM THING</h2>
+				</div> */}
 			</nav>
 		);
 	}

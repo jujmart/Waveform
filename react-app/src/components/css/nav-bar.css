@@ -22,7 +22,7 @@
     display: grid;
     height: 100vh;
     width: 100vw;
-    position: fixed;
+    position: absolute;
     grid-template-columns: repeat(10, 10%);
     grid-template-rows: repeat(10, 10%);
 
@@ -52,7 +52,7 @@
 
     #drop-down-super-container{
         justify-self: center;
-        align-self: start;
+        align-self: center;
         grid-column: 5;
         height: 4vh;
         width: 12vw;
@@ -68,7 +68,6 @@
     .user-dropdown {
         position: relative;
         display: inline-block;
-        z-index: 4;
 
       }
 
@@ -82,11 +81,13 @@
         padding: 12px 4px;
         border-radius: 5px;
         z-index: 4;
+
+
       }
 
       #drop-down-super-container:hover .user-dropdown-content {
         display: block;
-
+        z-index: 4;
       }
 
       .user-dropdown:hover .user-dropdown-content {
@@ -339,25 +340,37 @@
     #audio-controls_img{
         grid-row: 1 / 4;
         width: 75px;
+        height: 75px;
         padding-left: 8px;
         align-self: center;
+        object-fit: cover;
     }
 
     #audio-controls_name{
         grid-row: 1/ 3;
-        grid-column:2 ;
+        grid-column:2 / end ;
         align-self: center;
         font-size: 20px;
         font-weight: bold;
         color: white;
+        font-family: 'Mukta', sans-serif;
+        width: 10vw;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     #audio-controls_album-title{
         grid-row: 2/ 3;
-        grid-column: 2;
+        grid-column: 2 / end;
         align-self: end;
         font-size: 15px;
         color: rgb(124, 127, 131);
+        font-family: 'Mukta', sans-serif;
+        width: 10vw;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     #audio-controls_div{
@@ -369,7 +382,7 @@
         #navbar-player{
             width: 40vw;
             /* height: 25px; */
-            /* grid-row: ; */
+            grid-row: 1;
             grid-column: 1/ span 7;
             justify-self: center;
             align-self: center;
@@ -437,6 +450,36 @@
 
         }
 
+        .queue-btn{
+            font-size: 50px;
+            color:lightgray;
+        }
+
+        .queue-btn:hover{
+            color: white;
+            cursor: pointer;
+        }
+
+        .queue-btn:active{
+            color:darkslategray;
+            font-size: 48px;
+        }
+
+        .queue-link{
+            grid-column: 6 ;
+            grid-row: 1;
+            align-self: center;
+            justify-self: end;
+        }
+
+        .queue-link-active > span{
+            color: white;
+            font-size: 50px;
+            cursor: default;
+        }
+
+
+
 
 #waveform-nav-bar_div{
     background: turquoise;
@@ -491,4 +534,30 @@
         border-radius: 100px 100px 100px 100px;
         justify-self: center;
         align-self: center;
+    }
+
+
+    .creator-info_div{
+        display: grid;
+        width: 20vw;
+        grid-column: 7 / end;
+        grid-row: 1;
+    }
+
+    .portfolio-link{
+        justify-self: center;
+        align-self: center;
+        opacity: .1;
+        transition: .5s;
+        cursor: pointer;
+    }
+
+
+    .portfolio-link:hover{
+        opacity: 1;
+    }
+
+    .portfolio-link:active{
+        transition: 0s;
+        color:grey;
     }

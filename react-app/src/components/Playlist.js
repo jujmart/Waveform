@@ -134,10 +134,10 @@ const DisplayPlaylist = () => {
 			</div>
 
 			<div id="song-info_display">
-				<p>Title</p>
-				<p>Artist</p>
-				<p>Album</p>
-				<p>Date Added</p>
+			<p className='playlist-title'>Title</p>
+			<p className='playlist-artist'>Artist</p>
+			<p className='playlist-album'>Album</p>
+			<p className='playlist-date'>Date Added</p>
 			</div>
 
 			<div id="playlist-info-container_div">

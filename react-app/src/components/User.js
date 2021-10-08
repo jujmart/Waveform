@@ -174,7 +174,7 @@ function User() {
 										}
 									>
 										<p className="playlist-card_delete-span">
-											<span className="material-icons">
+											<span className="allow-pointer-events material-icons">
 												clear
 											</span>
 										</p>
@@ -195,10 +195,10 @@ function User() {
 				</h2>
 
 				<div id="song-info">
-					<p>Title</p>
-					<p>Artist</p>
-					<p>Album</p>
-					<p>Date Added</p>
+					<p className='playlist-title'>Title</p>
+					<p className='playlist-artist'>Artist</p>
+					<p className='playlist-album'>Album</p>
+					<p className='playlist-date'>Date Added</p>
 				</div>
 				<div id="playlist-info-container_div">
 					{profileUser.songIds.map((songId) => (
@@ -216,12 +216,12 @@ function User() {
 											)
 										}
 									>
-										<span className="material-icons">
+										<span className="material-icons allow-pointer-events">
 											edit
 										</span>
 									</p>
 									<p onClick={() => handleSongDelete(songId)}>
-										<span className="material-icons">
+										<span className="material-icons allow-pointer-events">
 											clear
 										</span>
 									</p>
