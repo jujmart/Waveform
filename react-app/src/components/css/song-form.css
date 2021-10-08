@@ -134,8 +134,8 @@
         border-radius: 5px;
         overflow: visible;
         display: grid;
-        grid-template-rows: repeat(8, 1fr);
-        row-gap: 40px;
+        grid-template-rows: repeat(6, 1fr) 2fr 1fr;
+        row-gap: 20px;
         grid-template-columns: 1fr;
         font-size: 30px;
         font-family: 'Montserrat', sans-serif;
@@ -186,6 +186,7 @@
     select > option {
         background: rgb(36, 36, 36);
     }
+
     #song-form_song-file{
         grid-column: 2;
         grid-row: 1;
@@ -215,3 +216,11 @@
         grid-column: 2;
         grid-row: 8;
     }
+
+.songform-errors{
+    grid-column: 1/2;
+    grid-row: 7;
+    color: red;
+    font-size: 20px;
+    font-weight: bold;
+}
