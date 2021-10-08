@@ -9,7 +9,7 @@
 	position: relative;
 	overflow: hidden;
 	font-family: Mukta, sans-serif;
-	background-color: rgb(31, 31, 31);
+	/* background-color: rgb(31, 31, 31); */
 }
 
 #search-input {
@@ -63,4 +63,13 @@
 .search-input-icon {
 	color: #888;
 	width: 30px;
+}
+
+#search-populated-container {
+	/* overflow-x: hidden; */
+	grid-row: 2;
+	width: 80vw;
+	padding: 15px;
+	box-sizing: border-box;
+	justify-content: center;
 }
