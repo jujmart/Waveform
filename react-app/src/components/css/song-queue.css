@@ -14,25 +14,6 @@
     margin-left:3vw;
 }
 
-.song-info_queue{
-    justify-self: center;
-    grid-column: 1/span end;
-    display: grid;
-    width: 74vw;
-    grid-template-columns: repeat(4, 1fr);
-    column-gap: 5vw;
-    color: White;
-    font-size: 20px;
-    font-family: 'Montserrat', sans-serif;
-    align-self: end;
-    border-bottom: white solid 1px;
-    padding-bottom: 6px;
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    background: rgb(31, 31, 31);
-}
-
 .song_queue_container{
     width: 80vw;
     height: 80vh;
@@ -43,7 +24,7 @@
     flex-direction: column;
     justify-content: flex-start;
     background: rgb(31, 31, 31);
-    /* padding-top: 1%; */
+    overflow-y: scroll;
 }
 
 .playlist-song-container_div_queue-page{
