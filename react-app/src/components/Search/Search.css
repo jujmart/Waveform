@@ -73,6 +73,7 @@
 	box-sizing: border-box;
 	justify-content: center;
 	overflow: scroll;
+	overflow-x: hidden;
 }
 
 .search-populated_header {
@@ -87,7 +88,7 @@
 #search-populated_song-info {
 	justify-self: center;
 	display: grid;
-	/* width: 74vw; */
+	width: 74vw;
 	grid-template-columns: repeat(4, 1fr);
 	column-gap: 5vw;
 	color: white;
@@ -103,20 +104,20 @@
 .search-populated_playlist-title {
 	/* padding-left: 5vw; */
 	justify-self: end;
-	padding-right: 2.5vw;
+	padding-right: 2vw;
 }
 
 .search-populated_playlist-artist {
 	justify-self: end;
-	padding-right: 6vw;
+	padding-right: 5.5vw;
 }
 
 .search-populated_playlist-album {
 	justify-self: end;
-	padding-right: 6.5vw;
+	padding-right: 6vw;
 }
 
 .search-populated_playlist-date {
 	justify-self: baseline;
-	padding-left: 0.5vw;
+	padding-left: 1.5vw;
 }

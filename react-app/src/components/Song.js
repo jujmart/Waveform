@@ -70,6 +70,7 @@ const Song = ({ songId, playlistId }) => {
 			<div>{song?.artist}</div>
 			<div>{song?.album}</div>
 			<div>{song?.createdAt?.split(" ").splice(1, 3).join(" ")}</div>
+			{/* Can we make this a div instead of a p tag? this is causing problems for React */}
 			<p className="allow-pointer-events">
 				<span
 					onClick={() =>
