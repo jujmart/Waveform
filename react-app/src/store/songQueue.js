@@ -14,9 +14,10 @@ export const moveToNextSong = () => ({
 	type: MOVE_TO_NEXT_SONG,
 });
 
-export const removeSong = (songId) => ({
+export const removeSong = (songId, idx) => ({
 	type: REMOVE_SONG_FROM_QUEUE,
 	songId,
+	idx,
 });
 
 export const addSongPriority = (songId) => ({
@@ -38,7 +39,7 @@ export default function songsReducer(state = initialState, action) {
 			return [...state, action.songId];
 		case REMOVE_SONG_FROM_QUEUE:
 			const newRemoveState = [...state];
-			const removeIdx = newRemoveState.indexOf(action.songId);
+			const removeIdx = action.idx;
 			newRemoveState.splice(removeIdx, 1);
 			return newRemoveState;
 		case ADD_SONG_PRIORITY:

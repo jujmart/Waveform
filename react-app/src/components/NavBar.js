@@ -248,37 +248,32 @@ const NavBar = () => {
 
 				{/* RIGHT SIDE NAV BAR */}
 
-				<div id="song-activity_h3-container">
-					<h3 id="song-activity_h3">Followed Users</h3>
-				</div>
+				{/* <div id="song-activity_h3-container"> */}
 
+				{/* </div> */}
+				<h3 id="song-activity_h3">Followed Users</h3>
 				<div id="right-nav-bar_div">
-					<div id="shhhhh">
-						<p>if you found this you're awfully nosey</p>
-					</div>
 					{follows.map((followId) => (
 						<Link
 							to={`/users/${followId}`}
 							key={followId}
-							className="follow-user-link"
+							className="newest-song-container_div"
 						>
-							<div className="follow-user-container_div">
-								<img
-									className="song-activity-album_img"
-									src={users[followId]?.profilePhotoUrl}
-									alt="Friend Img"
-								/>
-								<p className="song-activity-song_p">
-									{users[followId]?.username}
-								</p>
-								<p className="song-activity-album_p">
-									Joined On:{" "}
-									{users[followId]?.createdAt
-										?.split(" ")
-										.splice(1, 3)
-										.join(" ")}
-								</p>
-							</div>
+							<img
+								className="song-activity-album_img"
+								src={users[followId]?.profilePhotoUrl}
+								alt="Friend Img"
+							/>
+							<p className="song-activity-song_p">
+								{users[followId]?.username}
+							</p>
+							<p className="song-activity-album_p">
+								Joined On:{" "}
+								{users[followId]?.createdAt
+									?.split(" ")
+									.splice(1, 3)
+									.join(" ")}
+							</p>
 						</Link>
 					))}
 				</div>
@@ -328,25 +323,39 @@ const NavBar = () => {
 							// onPlay={() => setIsPlaying(true)}
 							// onPause={() => setIsPlaying(false)}
 						></audio>
-						<NavLink to="/queue"
-						  className='queue-link'
-						  activeClassName='queue-link-active'><span className='material-icons queue-btn'>
-							playlist_play
-						</span></NavLink>
+						<NavLink
+							to="/queue"
+							className="queue-link"
+							activeClassName="queue-link-active"
+						>
+							<span className="material-icons queue-btn">
+								playlist_play
+							</span>
+						</NavLink>
 
-
-					<div className="creator-info_div">
-
-				<a target="_blank" href='https://andru17urdna.github.io/'  className="link-font portfolio-link">
-					Andru
-				</a>
-				<a target="_blank" href='https://jujmart.github.io/' className="link-font portfolio-link">
-					Justice
-				</a>
-				<a target="_blank" href='https://maxwellwehner.github.io/' className="link-font portfolio-link">
-					Maxwell
-				</a>
-				</div>
+						<div className="creator-info_div">
+							<a
+								target="_blank"
+								href="https://andru17urdna.github.io/"
+								className="link-font portfolio-link"
+							>
+								Andru
+							</a>
+							<a
+								target="_blank"
+								href="https://jujmart.github.io/"
+								className="link-font portfolio-link"
+							>
+								Justice
+							</a>
+							<a
+								target="_blank"
+								href="https://maxwellwehner.github.io/"
+								className="link-font portfolio-link"
+							>
+								Maxwell
+							</a>
+						</div>
 					</div>
 				</div>
 
@@ -381,9 +390,9 @@ const NavBar = () => {
 			>
 				Signup
 			</NavLink>
-			<button id="nav-bar-lo_demo-btn" onClick={demoUserLogin}>
-				DEMO
-			</button>
+			<a className="nav-bar-lo_link" onClick={demoUserLogin}>
+				Demo
+			</a>
 		</nav>
 	);
 };

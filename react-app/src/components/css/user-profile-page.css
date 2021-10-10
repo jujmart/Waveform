@@ -233,3 +233,22 @@
             top: 0;
             background: rgb(31, 31, 31);
     }
+
+.follow_btn{
+    background: transparent;
+    color: whitesmoke;
+    border: white solid 1px;
+    cursor: pointer;
+    width: 100px;
+    padding: 3px;
+    margin-top: 10px;
+    opacity: .7
+}
+
+.follow_btn:hover{
+    opacity: 2;
+}
+
+.follow_btn_contianer{
+    grid-row-start: 8;
+}
