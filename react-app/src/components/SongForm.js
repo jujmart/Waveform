@@ -57,8 +57,8 @@ const SongForm = () => {
 
 		const data = {
 			title,
-			artist,
-			album,
+			artist: artist || null,
+			album: album || null,
 			genres,
 		};
 		if (songUrl) {
