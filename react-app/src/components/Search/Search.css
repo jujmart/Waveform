@@ -121,3 +121,24 @@
 	justify-self: baseline;
 	padding-left: 1.5vw;
 }
+
+.search-populated_users-container {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.search-populated_user-div {
+	width: 8vw;
+}
+
+.search-populated_user-link {
+	margin-right: 15px;
+	margin-bottom: 15px;
+}
+
+.search-populated_playlists-info {
+	overflow-x: auto;
+	overflow-y: hidden;
+	margin-left: 0;
+}
