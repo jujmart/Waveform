@@ -172,15 +172,15 @@ const NavBar = () => {
 
 				{/* LEFT SIDE NAV BAR */}
 				<div id="left-nav-bar_div">
-					<NavLink
+					{/* <NavLink
 						to="/"
 						id="settings-nav-bar_nav-link"
 						exact={true}
 						activeClassName="active"
 					>
 						...
-					</NavLink>
-
+					</NavLink> */}
+					<div>...</div>
 					<NavLink
 						to="/"
 						className="nav-bar_nav-links"
