@@ -21,15 +21,7 @@ const SongForm = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
-	const audioFileEndings = [
-		".m4a",
-		".flac",
-		".mp3",
-		".mp4",
-		".wav",
-		".wma",
-		".aac",
-	];
+	const audioFileEndings = [".m4a", ".flac", ".mp3", ".mp4", ".wav", ".aac"];
 
 	const imageFileEndings = ["png", "jpg", "jpeg"];
 
@@ -180,7 +172,7 @@ const SongForm = () => {
 				<label htmlFor="songUrl">Audio File</label>
 				<input
 					type="file"
-					accept=".m4a,.flac,.mp3,.mp4,.wav,.wma,.aac"
+					accept=".m4a,.flac,.mp3,.mp4,.wav,.aac"
 					name="songUrl"
 					onChange={(e) => {
 						setSongUrl(e.target.files[0]);
