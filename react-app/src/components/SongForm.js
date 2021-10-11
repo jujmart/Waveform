@@ -64,6 +64,10 @@ const SongForm = () => {
 		setGenres((prevGenres) =>
 			prevGenres.slice(0, idx).concat(prevGenres.slice(idx + 1))
 		);
+		setGenresListLocalCopy((prevState) => [
+			...prevState,
+			genresList[+e.target.value - 1],
+		]);
 	};
 
 	const handleSubmit = async (e) => {
