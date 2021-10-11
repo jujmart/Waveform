@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import homePageLogo from "../Homepage/WAVEFORM OUTLINE NO BACKGROUND.png";
 import linkedIn from "./linkedin-logo.png";
 
-import mp3 from "../../components/Songs/Tyler The Creator - JUGGERNAUT (Lyrics) ft. Lil Uzi Vert & Pharrell Williams.mp3";
+// import mp3 from "../../components/Songs/Tyler The Creator - JUGGERNAUT (Lyrics) ft. Lil Uzi Vert & Pharrell Williams.mp3";
 
 const HomePageLoggedOut = () => {
 	// let [audioElement, setAudioElement] = useState(null);

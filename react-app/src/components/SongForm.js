@@ -30,7 +30,7 @@ const SongForm = () => {
 		".aac",
 	];
 
-	const imageFileEndings = ["pdf", "png", "jpg", "jpeg", "gif"];
+	const imageFileEndings = ["png", "jpg", "jpeg"];
 
 	useEffect(() => {
 		dispatch(getAllGenresThunk());
@@ -203,7 +203,7 @@ const SongForm = () => {
 				<label htmlFor="albumImage">Album Image</label>
 				<input
 					type="file"
-					accept=".pdf,.png,.jpg,.jpeg,.gif"
+					accept=".png,.jpg,.jpeg"
 					name="albumImage"
 					onChange={(e) => {
 						setAlbumImage(e.target.files[0]);
