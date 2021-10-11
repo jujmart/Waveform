@@ -103,7 +103,7 @@
         .playlist-song-container_div{
             display: grid;
             width: 74vw;
-            height: 7vh;
+            min-height: 7vh;
             grid-template-columns: .25fr .25fr .5fr 1.5fr 1.75fr 1.5fr .5fr .25fr .25fr .25fr;
             justify-self: center;
             color: white;
