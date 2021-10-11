@@ -25,7 +25,8 @@ const Song = ({ songId, playlistId }) => {
 
 	useEffect(() => {
 		if (setShowQueueBox) {
-			setTimeout(() => setShowQueueBox(false), 1500);
+			const timeout = setTimeout(() => setShowQueueBox(false), 1500);
+			return () => clearTimeout(timeout);
 		}
 	}, [showQueueBox]);
 
