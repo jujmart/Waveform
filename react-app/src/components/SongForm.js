@@ -16,7 +16,8 @@ const SongForm = () => {
 	const [genres, setGenres] = useState([]);
 	const [disabledSubmitButton, setDisabledSubmitButton] = useState(false);
 	const user = useSelector((state) => state.session.user);
-	const genresList = useSelector((state) => state.genres);
+    const genresList = useSelector((state) => state.genres);
+	const [genresListLocalCopy, setGenresListLocalCopy] = useState([]);
 	const dispatch = useDispatch();
 	const history = useHistory();
 
@@ -36,9 +37,23 @@ const SongForm = () => {
 		dispatch(getAllGenresThunk());
 	}, [dispatch]);
 
-    const handleOptionClick = (e) => {
+	useEffect(() => {
+		if (genresList.length) {
+			setGenresListLocalCopy([...genresList]);
+		}
+	}, [genresList]);
+
+	const handleOptionClick = (e) => {
 		if (genres.indexOf(+e.target.value) === -1) {
 			setGenres((prevGenres) => [...prevGenres, +e.target.value]);
+			let temp = genresListLocalCopy.filter((genre) => {
+				if (genre.id === +e.target.value) {
+					return false;
+				} else {
+					return true;
+				}
+			});
+			setGenresListLocalCopy(temp);
 		}
 	};
 
@@ -218,8 +233,8 @@ const SongForm = () => {
 					onChange={(e) => handleOptionClick(e)}
 					defaultValue="Select Genre"
 				>
-					<option disabled>Select Genre</option>
-					{genresList.map((genre) => (
+					<option>Select Genre</option>
+					{genresListLocalCopy.map((genre) => (
 						<option key={genre.id} value={genre.id}>
 							{genre.genreName}
 						</option>
