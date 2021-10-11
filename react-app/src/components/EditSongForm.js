@@ -16,7 +16,8 @@ const EditSongForm = () => {
 	const [albumImage, setAlbumImage] = useState(null);
 	const [genres, setGenres] = useState([]);
 	const user = useSelector((state) => state.session.user);
-	const genresList = useSelector((state) => state.genres);
+    const genresList = useSelector((state) => state.genres);
+	const [genresListLocalCopy, setGenresListLocalCopy] = useState([]);
 	const dispatch = useDispatch();
 	const history = useHistory();
 
@@ -25,6 +26,28 @@ const EditSongForm = () => {
 	useEffect(() => {
 		dispatch(getAllGenresThunk());
 	}, [dispatch]);
+
+	useEffect(() => {
+		if (genresList.length) {
+			setGenresListLocalCopy([...genresList]);
+			if (genres.length > 0) {
+				// let temp = [...genresList];
+				// genres.forEach((genre) => {
+				// 	temp = temp.filter((genreObj) => {
+				// 		if (genreObj.id === genre) {
+				// 			return false;
+				// 		} else {
+				// 			return true;
+				// 		}
+				// 	});
+				// });
+				let temp = genresList.filter((genre) => {
+					return !genres.includes(genre.id);
+				});
+				setGenresListLocalCopy(temp);
+			}
+		}
+	}, [genresList, genres]);
 
 	useEffect(() => {
 		if (!song) dispatch(getOneSongThunk(id));
@@ -49,7 +72,17 @@ const EditSongForm = () => {
 	}, [song, id, genresList]);
 
 	const handleOptionClick = (e) => {
-		setGenres((prevGenres) => [...prevGenres, +e.target.value]);
+		if (genres.indexOf(+e.target.value) === -1) {
+			setGenres((prevGenres) => [...prevGenres, +e.target.value]);
+			let temp = genresListLocalCopy.filter((genre) => {
+				if (genre.id === +e.target.value) {
+					return false;
+				} else {
+					return true;
+				}
+			});
+			setGenresListLocalCopy(temp);
+		}
 	};
 
 	const handleSubmit = async (e) => {
@@ -89,6 +122,10 @@ const EditSongForm = () => {
 		setGenres((prevGenres) =>
 			prevGenres.slice(0, idx).concat(prevGenres.slice(idx + 1))
 		);
+		setGenresListLocalCopy((prevState) => [
+			...prevState,
+			genresList[+e.target.value - 1],
+		]);
 	};
 
 	// // for testing purposes only
@@ -121,7 +158,7 @@ const EditSongForm = () => {
 									{genresList[genreId - 1].genreName}
 								</p>
 								<button
-									class="remove-genre_btn"
+									className="remove-genre_btn"
 									onClick={deleteGenreOnClick}
 									value={genreId}
 								>
@@ -197,8 +234,8 @@ const EditSongForm = () => {
 					onChange={(e) => handleOptionClick(e)}
 					defaultValue="Select Genre"
 				>
-					<option disabled>Select Genre</option>
-					{genresList.map((genre) => (
+					<option>Select Genre</option>
+					{genresListLocalCopy.map((genre) => (
 						<option key={genre.id} value={genre.id}>
 							{genre.genreName}
 						</option>

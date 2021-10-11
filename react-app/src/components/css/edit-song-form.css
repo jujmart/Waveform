@@ -58,7 +58,7 @@
       border-bottom: 1px solid white;
       background-color: transparent;
       box-shadow: none;
-      color: black;
+      color: white;
 }
 
 .edit-form-label{
@@ -70,9 +70,16 @@
 
 #edit-form-submit{
     width: 35%;
-    height: 25%;
-    justify-self:center;
+    height: 50%;
+    justify-self: flex-end;
+    margin-right:10%;
     align-self: center;
+    background-color: transparent;
+    border-style: none;
+    border: 1px solid white;
+    color:white;
+    padding: 10px 2px;
+    cursor: pointer;
 }
 
 #errors{
@@ -88,4 +95,3 @@
         color:white;
 
 }
-
