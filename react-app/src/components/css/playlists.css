@@ -147,12 +147,12 @@
 
         .playlist-song-container_div > p:hover {
             color:gray;
-            transform: scale(1.2);
+            /* transform: scale(1.2); */
         }
 
         .playlist-song-container_div > span:hover {
             color:gray;
-            transform: scale(1.2);
+            /* transform: scale(1.2); */
         }
 
         .playlist-song-container_div > p:active {
@@ -276,6 +276,7 @@
     z-index: 1;
     display: block;
     border-radius: 5px;
+    color: white;
 }
 
 .add-to-playlist_dropdown_li{
@@ -286,6 +287,7 @@
 .add-to-playlist_dropdown_li:hover {
     background: #333;
     border: 5px;
+    color:white;
 }
 
 .add-to-playlist_dropdown_ul{
