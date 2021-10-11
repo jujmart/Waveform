@@ -1,0 +1,144 @@
+#search-container-div {
+	margin: auto;
+	top: 10vh;
+	display: grid;
+	height: 80vh;
+	width: 80vw;
+	grid-template-columns: repeat(10, 10%);
+	grid-template-rows: repeat(10, 10%);
+	position: relative;
+	overflow: hidden;
+	font-family: Mukta, sans-serif;
+	background-color: rgb(31, 31, 31);
+}
+
+#search-input {
+	height: 1.75em;
+	width: 250px;
+	padding: 0px 5px;
+}
+
+#search-input-container-div {
+	grid-row: 1;
+	align-self: center;
+	display: flex;
+	align-items: center;
+	margin-left: 60px;
+	margin-top: 5px;
+	width: 450px;
+}
+
+#search-empty-container {
+	grid-row: 3;
+	display: flex;
+	width: 80vw;
+	flex-wrap: wrap;
+	padding: 15px;
+	box-sizing: border-box;
+	justify-content: center;
+}
+
+#search-input-clear {
+	padding: 0px 12px;
+	cursor: pointer;
+	color: white;
+}
+
+.genre-card-div {
+	width: 10vw;
+	height: 16vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 7px;
+	margin: 12px;
+	cursor: pointer;
+}
+
+.genre-card-name {
+	width: 12vw;
+	text-align: center;
+}
+
+.search-input-icon {
+	color: #888;
+	width: 30px;
+}
+
+#search-populated-container {
+	grid-row: 2 / 11;
+	width: 80vw;
+	padding: 15px;
+	padding-left: 65px;
+	box-sizing: border-box;
+	justify-content: center;
+	overflow: scroll;
+	overflow-x: hidden;
+}
+
+.search-populated_header {
+	color: white;
+	margin-bottom: 10px;
+}
+
+.search-populated_subcontainer-div {
+	margin-bottom: 20px;
+}
+
+#search-populated_song-info {
+	justify-self: center;
+	display: grid;
+	width: 74vw;
+	grid-template-columns: repeat(4, 1fr);
+	column-gap: 5vw;
+	color: white;
+	font-size: 20px;
+	font-family: "Montserrat", sans-serif;
+	align-self: end;
+	border-bottom: white solid 1px;
+	padding-bottom: 6px;
+	margin-bottom: 3px;
+	background: rgb(31, 31, 31);
+}
+
+.search-populated_playlist-title {
+	/* padding-left: 5vw; */
+	justify-self: end;
+	padding-right: 2vw;
+}
+
+.search-populated_playlist-artist {
+	justify-self: end;
+	padding-right: 5.5vw;
+}
+
+.search-populated_playlist-album {
+	justify-self: end;
+	padding-right: 6vw;
+}
+
+.search-populated_playlist-date {
+	justify-self: baseline;
+	padding-left: 1.5vw;
+}
+
+.search-populated_users-container {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.search-populated_user-div {
+	width: 8vw;
+}
+
+.search-populated_user-link {
+	margin-right: 15px;
+	margin-bottom: 15px;
+}
+
+.search-populated_playlists-info {
+	overflow-x: auto;
+	overflow-y: hidden;
+	margin-left: 0;
+}

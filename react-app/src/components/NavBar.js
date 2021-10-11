@@ -323,25 +323,39 @@ const NavBar = () => {
 							// onPlay={() => setIsPlaying(true)}
 							// onPause={() => setIsPlaying(false)}
 						></audio>
-						<NavLink to="/queue"
-						  className='queue-link'
-						  activeClassName='queue-link-active'><span className='material-icons queue-btn'>
-							playlist_play
-						</span></NavLink>
+						<NavLink
+							to="/queue"
+							className="queue-link"
+							activeClassName="queue-link-active"
+						>
+							<span className="material-icons queue-btn">
+								playlist_play
+							</span>
+						</NavLink>
 
-
-					<div className="creator-info_div">
-
-				<a target="_blank" href='https://andru17urdna.github.io/'  className="link-font portfolio-link">
-					Andru
-				</a>
-				<a target="_blank" href='https://jujmart.github.io/' className="link-font portfolio-link">
-					Justice
-				</a>
-				<a target="_blank" href='https://maxwellwehner.github.io/' className="link-font portfolio-link">
-					Maxwell
-				</a>
-				</div>
+						<div className="creator-info_div">
+							<a
+								target="_blank"
+								href="https://andru17urdna.github.io/"
+								className="link-font portfolio-link"
+							>
+								Andru
+							</a>
+							<a
+								target="_blank"
+								href="https://jujmart.github.io/"
+								className="link-font portfolio-link"
+							>
+								Justice
+							</a>
+							<a
+								target="_blank"
+								href="https://maxwellwehner.github.io/"
+								className="link-font portfolio-link"
+							>
+								Maxwell
+							</a>
+						</div>
 					</div>
 				</div>
 

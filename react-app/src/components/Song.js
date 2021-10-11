@@ -9,13 +9,10 @@ const Song = ({ songId, playlistId }) => {
 	const userPlaylistIds = useSelector(
 		(state) => state.userMusicInfo.playlists
 	);
-	
 
 	const playlists = useSelector((state) => state.playlists);
 	const [showQueueBox, setShowQueueBox] = useState(false);
 	const dispatch = useDispatch();
-
-
 
 	const handleSongPlay = () => {
 		dispatch(addSongPriority(songId));
@@ -69,12 +66,11 @@ const Song = ({ songId, playlistId }) => {
 			<div>{song?.album}</div>
 			<div>{song?.createdAt?.split(" ").splice(1, 3).join(" ")}</div>
 			<PlaylistDropDown
-			songId={songId}
-			userPlaylistIds={userPlaylistIds}
-			playlists={playlists}
-			playlistId={playlistId}
+				songId={songId}
+				userPlaylistIds={userPlaylistIds}
+				playlists={playlists}
+				playlistId={playlistId}
 			/>
-
 		</>
 	);
 };
