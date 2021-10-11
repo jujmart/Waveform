@@ -63,9 +63,9 @@ function App() {
 				<ProtectedRoute path="/playlists/:id" exact={true}>
 					<DisplayPlaylist />
 				</ProtectedRoute>
-				<Route path="/queue" exact={true}>
+				<ProtectedRoute path="/queue" exact={true}>
 					<SongQueue />
-				</Route>
+				</ProtectedRoute>
 				<Route>
 					<PageNotFound />
 				</Route>

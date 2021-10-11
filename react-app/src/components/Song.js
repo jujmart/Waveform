@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { addSongToPlaylistThunk } from "../store/playlist";
 import { addSong, addSongPriority } from "../store/songQueue";
+import PlaylistDropDown from "./PlaylistAddDropDown";
 
 const Song = ({ songId, playlistId }) => {
 	//page that renders this song component will put the song in songs slice of state
@@ -9,15 +9,10 @@ const Song = ({ songId, playlistId }) => {
 	const userPlaylistIds = useSelector(
 		(state) => state.userMusicInfo.playlists
 	);
+
 	const playlists = useSelector((state) => state.playlists);
-	const [showPlaylistsDiv, setShowPlaylistsDiv] = useState(false);
 	const [showQueueBox, setShowQueueBox] = useState(false);
 	const dispatch = useDispatch();
-
-	const addToPlaylist = async (e) => {
-		await dispatch(addSongToPlaylistThunk(songId, e.target.value));
-		setShowPlaylistsDiv(false);
-	};
 
 	const handleSongPlay = () => {
 		dispatch(addSongPriority(songId));
@@ -70,36 +65,12 @@ const Song = ({ songId, playlistId }) => {
 			<div>{song?.artist}</div>
 			<div>{song?.album}</div>
 			<div>{song?.createdAt?.split(" ").splice(1, 3).join(" ")}</div>
-			{/* Can we make this a div instead of a p tag? this is causing problems for React */}
-			<p className="allow-pointer-events">
-				<span
-					onClick={() =>
-						setShowPlaylistsDiv((prevState) => !prevState)
-					}
-					className="allow-pointer-events material-icons"
-				>
-					playlist_add
-				</span>
-
-				{showPlaylistsDiv && (
-					<div className="add-to-playlist_dropdown">
-						<ul className="add-to-playlist_dropdown_ul">
-							{userPlaylistIds.map((userPlaylistId) =>
-								playlistId !== userPlaylistId ? (
-									<li
-										key={userPlaylistId}
-										value={userPlaylistId}
-										onClick={addToPlaylist}
-										className="add-to-playlist_dropdown_li"
-									>
-										{playlists[userPlaylistId].title}
-									</li>
-								) : null
-							)}
-						</ul>
-					</div>
-				)}
-			</p>
+			<PlaylistDropDown
+				songId={songId}
+				userPlaylistIds={userPlaylistIds}
+				playlists={playlists}
+				playlistId={playlistId}
+			/>
 		</>
 	);
 };
