@@ -30,8 +30,24 @@ const EditSongForm = () => {
 	useEffect(() => {
 		if (genresList.length) {
 			setGenresListLocalCopy([...genresList]);
+			if (genres.length > 0) {
+				// let temp = [...genresList];
+				// genres.forEach((genre) => {
+				// 	temp = temp.filter((genreObj) => {
+				// 		if (genreObj.id === genre) {
+				// 			return false;
+				// 		} else {
+				// 			return true;
+				// 		}
+				// 	});
+				// });
+				let temp = genresList.filter((genre) => {
+					return !genres.includes(genre.id);
+				});
+				setGenresListLocalCopy(temp);
+			}
 		}
-	}, [genresList]);
+	}, [genresList, genres]);
 
 	useEffect(() => {
 		if (!song) dispatch(getOneSongThunk(id));
