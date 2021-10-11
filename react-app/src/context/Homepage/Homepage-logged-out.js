@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 // import { useRef, useEffect } from "react";
 import homePageLogo from "../Homepage/WAVEFORM OUTLINE NO BACKGROUND.png";
+import linkedIn from "./linkedin-logo.png";
 
 import mp3 from "../../components/Songs/Tyler The Creator - JUGGERNAUT (Lyrics) ft. Lil Uzi Vert & Pharrell Williams.mp3";
 
@@ -82,7 +83,7 @@ const HomePageLoggedOut = () => {
 						<img
 							id="andru-linkedin-link"
 							className="link-img linkedin-logo"
-							src="/linkedin-logo.png"
+							src={linkedIn}
 							alt="LinkedIn"
 						/>
 					</a>
@@ -111,7 +112,7 @@ const HomePageLoggedOut = () => {
 						<img
 							id="justice-linkedin-link"
 							className="link-img linkedin-logo"
-							src="/linkedin-logo.png"
+							src={linkedIn}
 							alt="LinkedIn"
 						/>
 					</a>
@@ -140,7 +141,7 @@ const HomePageLoggedOut = () => {
 						<img
 							id="max-linkedin-link"
 							className="link-img linkedin-logo"
-							src="/linkedin-logo.png"
+							src={linkedIn}
 							alt="LinkedIn"
 						/>
 					</a>
