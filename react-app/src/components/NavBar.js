@@ -140,8 +140,13 @@ const NavBar = () => {
 						/>
 
 						<div className="user-dropdown">
-							<p id="user-dropdown_p">
-								{user.username}{" "}
+							<p
+								id="user-dropdown_p"
+								style={{ fontFamily: "monospace" }}
+							>
+								{user.username.length > 9
+									? `${user.username.slice(0, 9)}...`
+									: user.username}{" "}
 								<span className="material-icons">
 									arrow_drop_down
 								</span>
