@@ -36,8 +36,10 @@ const SongForm = () => {
 		dispatch(getAllGenresThunk());
 	}, [dispatch]);
 
-	const handleOptionClick = (e) => {
-		setGenres((prevGenres) => [...prevGenres, +e.target.value]);
+    const handleOptionClick = (e) => {
+		if (genres.indexOf(+e.target.value) === -1) {
+			setGenres((prevGenres) => [...prevGenres, +e.target.value]);
+		}
 	};
 
 	const deleteGenreOnClick = (e) => {
