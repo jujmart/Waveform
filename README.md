@@ -36,13 +36,13 @@ Waveform is a Spotify clone where users can come to listen, share, and socialize
 <br/><br/>
 Login
 <!-- ![Sign Up](./readme-assets/images/signup.jpg) -->
-<img src="./readme-assets/images/signup.jpg" width="800" align="middle" />
+<img src="./readme-assets/images/login.jpg" width="500" align="middle" />
 <!-- ![Log In](./readme-assets/images/login.jpg) -->
 
 <br/><br/>
 Sign Up
 <!--  -->
-<img src="./readme-assets/images/login.jpg" width="500" align="middle" />
+<img src="./readme-assets/images/signup.jpg" width="800" align="middle" />
 
 <br/><br/>
 
@@ -55,6 +55,8 @@ Waveform feed displays most recent songs and playlists
 <!-- ![Feed Page](./readme-assets/images/feed.jpg) -->
 <img src="./readme-assets/images/feed.jpg" width="800" align="middle" />
 <br/><br/>
+
+
 
 ### Add Songs
 Add a new song to the database
@@ -96,7 +98,7 @@ Single playlist and the songs within it
 
 <br/><br/>
 
-### Add Playlists
+### Add Playlist
 Add a new playlist to the database
 
 ---
@@ -126,6 +128,18 @@ Delete a playlist from the database
 
 <br/><br/>
 
+
+### Add Song to Playlist
+Add a song to a playlist in the database
+
+---
+<br/><br/>
+<!-- ![Add Playlist](./readme-assets/images/playlist-add.jpg) -->
+<img src="./readme-assets/images/playlist-song.jpg" width="800" align="middle" />
+
+<br/><br/>
+
+
 ### Follow Users & Followed Users Tower
 The "Followed Users" feed displays other users that you have followed
 
@@ -146,8 +160,26 @@ Discover and search for new Songs, Playlists & Users
 <img src="./readme-assets/images/search-top.jpg" width="800" align="middle" />
 <br/><br/>
 <img src="./readme-assets/images/search-bottom.jpg" width="800" align="middle" />
-
 <br/><br/>
+
+Genre Playlists show when the Search is empty
+<!--  -->
+<img src="./readme-assets/images/search-empty.jpg" width="800" align="middle" />
+
+<br><br/>
+
+### Queue
+Add songs to the Queue and view the queue
+
+---
+<br/><br/>
+<!-- ![Edit Playlist](./readme-assets/images/playlist-delete.jpg) -->
+<img src="./readme-assets/images/Queue-Song.jpg" width="800" align="middle" />
+
+<br><br/>
+
+
+
 
 ## Installation
 
