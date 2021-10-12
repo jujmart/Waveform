@@ -150,7 +150,7 @@ npm start
 
 ### AWS S3 Image and Song Upload
 
-One challenge that we faced was finding a way to have a user select a song on the frontend and for our app to pass it to the backend and store it. We started off attempting to pass the file directly from the input field as JSON to our Flask backend, but we soon realized that the information Flask received was not in an appropriate form to be handled and stored. After some research, we were able to find that the file could be stored into FormData in a manner that would allow us to pass it to the backend in a recognizable form. From there, we were able to utilize Boto3 to programatically store the songs and album images into AWS S3.
+One challenge that we faced was finding a way to have a user select an audio file on the frontend and for our app to pass it to the backend and store it. We started off attempting to pass the file directly from the input field as JSON to our Flask backend, but we soon realized that the information Flask received was not in an appropriate form to be handled and stored. After some research, we were able to find that the file could be stored into FormData in a manner that would allow us to pass it to the backend in a Flask readable form. From there, we were able to utilize Boto3 to programatically store the songs and album images into AWS S3.
 
 In our React frontend song creation form, we create a new FormData instance and set the song and album image files to properties on it.
 
@@ -173,7 +173,7 @@ Here, we send our FormData and other song data to our Redux thunk.
 const response = await dispatch(uploadSongThunk(data, songData));
 ```
 
-Our thunk will make a post request to our Flask backend sending the song data as a file rather than JSON.
+Our thunk will make a post request to our Flask backend, sending the song data as a file rather than JSON.
 
 ```javascript
 export const uploadSongThunk = (payload, songData) => async (dispatch) => {
@@ -198,7 +198,7 @@ export const uploadSongThunk = (payload, songData) => async (dispatch) => {
 };
 ```
 
-Once our data reaches the Flask backend, we verify the file, its type, we upload it to AWS and receive back a url to store in our database.
+Once our data reaches the Flask backend, we verify the file, we verify its type, we upload it to AWS and we receive a url to the AWS stored file to put in our database.
 
 ```python
 @songs_routes.route("/AWS/<int:id>", methods=['POST'])
@@ -227,7 +227,7 @@ def post_song_url(id):
     db.session.commit()
 ```
 
-This same process is repeated for the album image, but we only show the song upload for brevity.
+The process above is repeated for the album image as well, but we only show the song upload snippet for brevity.
 
 ## Future Features
 
