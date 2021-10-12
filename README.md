@@ -13,7 +13,6 @@ Waveform is a Spotify clone where users can come to listen, share, and socialize
 | 3. [Technical Implementation Details](#technical-implementation-details) |
 | 4. [Future Features](#future-features)                                   |
 | 5. [Contact](#contact)                                                   |
-| 6. [Special Thanks](#special-thanks)                                     |
 
 ## Technologies
 
@@ -149,39 +148,96 @@ npm start
 
 ## Technical Implementation Details
 
-### {Detail 1}
+### AWS S3 Image and Song Upload
 
-Description 1
+One challenge that we faced was finding a way to have a user select a song on the frontend and for our app to pass it to the backend and store it. We started off attempting to pass the file directly from the input field as JSON to our Flask backend, but we soon realized that the information Flask received was not in an appropriate form to be handled and stored. After some research, we were able to find that the file could be stored into FormData in a manner that would allow us to pass it to the backend in a recognizable form. From there, we were able to utilize Boto3 to programatically store the songs and album images into AWS S3.
 
-Part of code is shown below:
+In our React frontend song creation form, we create a new FormData instance and set the song and album image files to properties on it.
+
+```javascript
+let songData = new FormData();
+songData.set("file", songUrl);
+songData.set("image", albumImage);
+
+const data = {
+	title,
+	artist: artist || null,
+	album: album || null,
+	genres,
+};
+```
+
+Here, we send our FormData and other song data to our Redux thunk.
+
+```javascript
+const response = await dispatch(uploadSongThunk(data, songData));
+```
+
+Our thunk will make a post request to our Flask backend sending the song data as a file rather than JSON.
+
+```javascript
+export const uploadSongThunk = (payload, songData) => async (dispatch) => {
+	// Additional code excluded for brevity
+			const AWSResponse = await fetch(
+				`/api/songs/AWS/${SQLData.songId}`,
+				{
+					method: "POST",
+					body: songData,
+				}
+			);
+
+			if (AWSResponse.ok) {
+				const AWSData = await AWSResponse.json();
+				if (AWSData.errors) {
+					return AWSData;
+				}
+			}
+			return SQLData;
+		}
+	}
+};
+```
+
+Once our data reaches the Flask backend, we verify the file, its type, we upload it to AWS and receive back a url to store in our database.
 
 ```python
-print('add code snippet 1 here')
+@songs_routes.route("/AWS/<int:id>", methods=['POST'])
+@login_required
+def post_song_url(id):
+    # for song upload
+    if "file" not in request.files:
+        return {"errors": "song required"}#, 400
+
+    song = request.files['file']
+
+    if not allowed_file(song.filename):
+        return {"errors": "file type not permitted"}#, 400
+
+    song.filename = get_unique_filename(song.filename)
+
+    songUpload = upload_file_to_s3(song)
+
+    if "url" not in songUpload:
+        return songUpload#, 400
+
+    songUrl = songUpload["url"]
+
+    song_to_update = Song.query.get_or_404(id)
+    song_to_update.songUrl = songUrl
+    db.session.commit()
 ```
 
-Description 2
-
-```javascript
-print("add code snippet 2 here");
-```
-
-### {Detail 2}
-
-Description 1
-
-Code snippet is shown here:
-
-```javascript
-print("add code snippet 1 here");
-```
+This same process is repeated for the album image, but we only show the song upload for brevity.
 
 ## Future Features
 
-1. **Search** - search {resource-1-plural}
+1. **Waveform** - background waveform that moves along with the song being played
 
-2. **Music Shuffle** - ability to shuffle songs randomly
+2. **Liked Songs Playlist** - playlist composed of songs liked by the user
 
-3. **Order Playlist Songs** - ability to order songs within playlist
+3. **Music Shuffle** - ability to shuffle songs randomly
+
+4. **Order Playlist Songs** - ability to order songs within playlist
 
 ## Contact
 
@@ -191,7 +247,7 @@ print("add code snippet 1 here");
 
 <!-- <a href="https://angel.co/u/{angel-list-handle}"><img src="./readme-assets/logos/angellist-logo.png" height="28" align="middle" /></a> -->
 
-<a href="https://github.com/jujmart"><img src="./readme-assets/logos/github-logo.png" height="38" align="middle" /></a>
+<a href="https://github.com/jujmart"><img src="./readme-assets/logos/github-logo.png" height="38" align="middle"/></a>
 
 jujmart12@gmail.com
 
