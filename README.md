@@ -30,65 +30,124 @@ Waveform is a Spotify clone where users can come to listen, share, and socialize
 
 ## Features
 
-### Log In and Sign Up
+### Login and Sign Up
+---
 
-![Sign Up](./readme-assets/images/signup.jpg)
-![Log In](./readme-assets/images/login.jpg)
+<br/><br/>
+Login
+<!-- ![Sign Up](./readme-assets/images/signup.jpg) -->
+<img src="./readme-assets/images/signup.jpg" width="800" align="middle" />
+<!-- ![Log In](./readme-assets/images/login.jpg) -->
+
+<br/><br/>
+Sign Up
+<!--  -->
+<img src="./readme-assets/images/login.jpg" width="500" align="middle" />
+
+<br/><br/>
 
 ### Feed Page
-
 Waveform feed displays most recent songs and playlists
-Discover and search for new songs and playlists
-![Feed Page](./readme-assets/images/feed.jpg)
+
+
+---
+<br/><br/>
+<!-- ![Feed Page](./readme-assets/images/feed.jpg) -->
+<img src="./readme-assets/images/feed.jpg" width="800" align="middle" />
+<br/><br/>
 
 ### Add Songs
-
 Add a new song to the database
-![Add Song](./readme-assets/images/song-add.jpg)
-Cancel adding song
-![Cancel Add Song](./readme-assets/images/song-add-cancel.jpg)
+
+---
+<br/><br/>
+<!-- ![Add Song](./readme-assets/images/song-add.jpg) -->
+<img src="./readme-assets/images/song-add.jpg" width="800" align="middle" />
+
+<br/><br/>
 
 ### Edit Songs
-
 Edit a song in the database
-![Edit Song](./readme-assets/images/song-edit.jpg)
-Cancel editing song
-![Cancel Edit Song](./readme-assets/images/song-edit-cancel.jpg)
+
+---
+<br/><br/>
+<!-- ![Edit Song](./readme-assets/images/song-edit.jpg)6 -->
+<img src="./readme-assets/images/song-edit.jpg" width="800" align="middle" />
+
+<br/><br/>
 
 ### View and Delete Songs
-
 Delete a song from the database
-![Delete Song](./readme-assets/images/song-delete.jpg)
-Cancel deleting song
-![Cancel Delete Song](./readme-assets/images/song-delete-cancel.jpg)
+
+---
+<br/><br/>
+<!-- ![Delete Song](./readme-assets/images/song-delete.jpg) -->
+<img src="./readme-assets/images/song-delete.jpg" width="800" align="middle" />
+
+<br/><br/>
 
 ### View Playlist
-
 Single playlist and the songs within it
-![Playlist Page](./readme-assets/images/playlist-page.jpg)
+
+---
+<br/><br/>
+<!-- ![Playlist Page](./readme-assets/images/playlist-page.jpg) -->
+<img src="./readme-assets/images/playlist-page.jpg" width="800" align="middle" />
+
+<br/><br/>
 
 ### Add Playlists
-
 Add a new playlist to the database
-![Add Playlist](./readme-assets/images/playlist-add.jpg)
-Cancel adding playlist
-![Cancel Add Playlist](./readme-assets/images/playlist-add-cancel.jpg)
+
+---
+<br/><br/>
+<!-- ![Add Playlist](./readme-assets/images/playlist-add.jpg) -->
+<img src="./readme-assets/images/playlist-add.jpg" width="800" align="middle" />
+
+<br/><br/>
 
 ### Edit Playlists
-
 Edit a playlist in the database
-![Edit Playlist](./readme-assets/images/playlist-edit.jpg)
-Cancel adding playlist
-![Cancel Edit Playlist](./readme-assets/images/playlist-edit-cancel.jpg)
+
+---
+<br/><br/>
+<!-- ![Edit Playlist](./readme-assets/images/playlist-edit.jpg) -->
+<img src="./readme-assets/images/playlist-edit.jpg" width="800" align="middle" />
+
+<br/><br/>
 
 ### Delete Playlists
-
 Delete a playlist from the database
-![Edit Playlist](./readme-assets/images/playlist-delete.jpg)
-Cancel deleting playlist
-![Cancel Edit Playlist](./readme-assets/images/playlist-delete-cancel.jpg)
 
--   Add any more features here
+---
+<br/><br/>
+<!-- ![Edit Playlist](./readme-assets/images/playlist-delete.jpg) -->
+<img src="./readme-assets/images/playlist-delete.jpg" width="800" align="middle" />
+
+<br/><br/>
+
+### Follow Users & Followed Users Tower
+The "Followed Users" feed displays other users that you have followed
+
+
+---
+<br/><br/>
+<!-- ![Edit Playlist](./readme-assets/images/playlist-delete.jpg) -->
+<img src="./readme-assets/images/follows.jpg" width="1500" align="middle" />
+
+<br/><br/>
+
+### Search
+Discover and search for new Songs, Playlists & Users
+
+---
+<br/><br/>
+<!-- ![Edit Playlist](./readme-assets/images/playlist-delete.jpg) -->
+<img src="./readme-assets/images/search-top.jpg" width="800" align="middle" />
+<br/><br/>
+<img src="./readme-assets/images/search-bottom.jpg" width="800" align="middle" />
+
+<br/><br/>
 
 ## Installation
 
