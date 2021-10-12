@@ -243,30 +243,24 @@ The process above is repeated for the album image as well, but we only show the 
 
 ### Justice Martin
 
-<a href="https://www.linkedin.com/in/justice-martin-34043340/"><img src="./readme-assets/logos/linkedin-logo.png" height="28" align="middle" /></a>
+<a href="https://www.linkedin.com/in/justice-martin-34043340/"><img src="./readme-assets/logos/linkedin-logo.png" height="28" align="middle" /></a><a href="https://github.com/jujmart"><img src="./readme-assets/logos/github-logo.png" height="38" align="middle" /></a>
 
 <!-- <a href="https://angel.co/u/{angel-list-handle}"><img src="./readme-assets/logos/angellist-logo.png" height="28" align="middle" /></a> -->
-
-<a href="https://github.com/jujmart"><img src="./readme-assets/logos/github-logo.png" height="38" align="middle"/></a>
 
 jujmart12@gmail.com
 
 ### Maxwell Wehner
 
-<a href="https://www.linkedin.com/in/maxwell-wehner-7a2066220/"><img src="./readme-assets/logos/linkedin-logo.png" height="28" align="middle" /></a>
+<a href="https://www.linkedin.com/in/maxwell-wehner-7a2066220/"><img src="./readme-assets/logos/linkedin-logo.png" height="28" align="middle" /></a><a href="https://github.com/MaxwellWehner"><img src="./readme-assets/logos/github-logo.png" height="38" align="middle" /></a>
 
 <!-- <a href="https://angel.co/u/{angel-list-handle}"><img src="./readme-assets/logos/angellist-logo.png" height="28" align="middle" /></a> -->
-
-<a href="https://github.com/MaxwellWehner"><img src="./readme-assets/logos/github-logo.png" height="38" align="middle" /></a>
 
 maxwehnerwork@gmail.com
 
 ### Andrew Watkins
 
-<a href="https://www.linkedin.com/in/andrew-watkins-533280173/"><img src="./readme-assets/logos/linkedin-logo.png" height="28" align="middle" /></a>
+<a href="https://www.linkedin.com/in/andrew-watkins-533280173/"><img src="./readme-assets/logos/linkedin-logo.png" height="28" align="middle" /></a><a href="https://github.com/andru17urdna"><img src="./readme-assets/logos/github-logo.png" height="38" align="middle" /></a>
 
 <!-- <a href="https://angel.co/u/{angel-list-handle}"><img src="./readme-assets/logos/angellist-logo.png" height="28" align="middle" /></a> -->
-
-<a href="https://github.com/andru17urdna"><img src="./readme-assets/logos/github-logo.png" height="38" align="middle" /></a>
 
 dr3wwatkins@gmail.com
