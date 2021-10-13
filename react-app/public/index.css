@@ -2,8 +2,8 @@
     Margin:0;
     Padding:0;
     /* overflow: overlay; */
+    scrollbar-width: thin;
 }
-
 
 ::-webkit-scrollbar {
     width: 10px;
