@@ -23,6 +23,7 @@
 	position: absolute;
 	grid-template-columns: repeat(10, 10%);
 	grid-template-rows: repeat(10, 10%);
+    overflow: hidden;
 }
 
 #upper-nav-bar_div {
@@ -353,11 +354,12 @@ a {
 	display: grid;
 	grid-column: 3 / span end;
 	grid-template-columns: repeat(8, 1fr);
+    max-height: 10vh;
 }
 
 #navbar-player {
 	width: 40vw;
-	/* height: 25px; */
+	height: 50%;
 	grid-row: 1;
 	grid-column: 1 / span 7;
 	justify-self: center;
